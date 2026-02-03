@@ -1,3 +1,53 @@
+### Filmvisarna
+
+## Technology stack
+- TypeScript
+- Node.js
+- React Vite
+- MySQL
+- Postman (testing)
+- Session-based authentication
+
+## Requirements
+### **System Requirements**
+
+- Node.js v24.x
+- Git
+- A REST client (Ex. Bruno, Postman or Thunderclient)
+- Local MySQL server version 9.2.0
+- Configured connection string
+
+### **Functional Requirements**
+
+- [] Login authorization (User account)
+
+## 🚀 How to Run
+
+```
+git clone git@github.com:hkmp1303/filmvisarna.git
+
+cd filmvisarna
+
+dotnet run
+```
+
+## Configuration
+Configure the database connection string in
+
+## Database Design
+### EER Diagram
+![EER Diagram](docs/Diagram75.png)
+
+### Database Setup
+While in MySQLWorkbench, open the setup.sql, data.ddl and data.sql files from the project folder. Select "View all file types" to ensure the data.ddl file is visible. Run the SQL scripts in the aforementioned order: [setup.sql](setup.sql), [data.ddl](data.ddl), [data.sql](data.sql). The setup.sql file creates the database and user while the tables are created by the data.ddl file. Finally, running the SQL queries in the data.sql file will populate the tables with mock data. The data can also be populated through Postman by reseting the database through `delete /db` once the API is running.
+
+## API Overview
+
+The API will be available via HTTP protocal at
+
+### Key Endpoints
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -71,3 +121,12 @@ export default defineConfig([
   },
 ])
 ```
+## Authors
+This project was developed as a group asssignment.
+
+- Timoty Bengtsson
+- Oscar Kock
+- Heather Payne
+- Mikael Renberg
+
+README authored by: Heather Payne
