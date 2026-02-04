@@ -18,3 +18,10 @@ export default function Header() {
         </nav>
     </header>
 }
+
+/*
+Need to add the logo image when
+
+header-nav goes throw every element in routes.tsx and displayes them
+
+*/

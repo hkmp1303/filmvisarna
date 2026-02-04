@@ -27,8 +27,8 @@ export default App
 This is how I did my old routing. 
 Add Header and Footer as they are created
 
-import Header from './partials/Header'
-import Main from './partials/Main'
+import Header from './partials/Header'           - Done
+import Main from './partials/Main'               -Done
 import Footer from './partials/Footer'
 function App() {
 
