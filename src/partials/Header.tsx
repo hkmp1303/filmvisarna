@@ -6,7 +6,7 @@ export default function Header() {
     return <header>
 
         <Link to="/" className='header-logo'>
-            <img src="" alt="Logotyp of Filmvisarna" />
+            <img src="/public/Loga.svg" alt="Logotyp of Filmvisarna" />
         </Link>
 
         <h1>Film Visarna</h1>

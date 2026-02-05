@@ -2,7 +2,6 @@
 import Main from './partials/Main'
 import Header from './partials/Header'
 
-
 import './App.css'
 
 function App() {
