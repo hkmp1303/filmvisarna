@@ -51,4 +51,18 @@ INSERT IGNORE INTO booking (bookingid, total_cost, date, guid, screeningid, user
 (11,240,'2026-02-05 18:00:00','e1b4a7d6-8293-4c09-9d11-011ee1111111',7,NULL),
 (12,140,'2026-02-05 16:15:00','f2c5b8e7-9394-4d10-8e22-012ff2222222',8,NULL);
 
+INSERT IGNORE INTO reservation (reservationid, seat_number, `row_number`, bookingid) VALUES
+(1, 1, 1, 1),
+(2, 2, 2, 2),
+(3, 3, 3, 3),
+(4, 4, 4, 4),
+(5, 5, 5, 5),
+(6, 6, 6, 6),
+(7, 7, 7, 7),
+(8, 8, 8, 8),
+(9, 9, 1, 9),
+(10, 10, 2, 10),
+(11, 11, 3, 11),
+(12, 12, 4, 12);
+
 Set FOREIGN_KEY_CHECKS = 1;
