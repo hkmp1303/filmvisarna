@@ -83,4 +83,14 @@ CREATE TABLE IF NOT EXISTS `booking` (
   CONSTRAINT `book_user` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`)
 );
 
+CREATE TABLE IF NOT EXISTS `reservation` (
+  `reservationid` int unsigned NOT NULL AUTO_INCREMENT,
+  `seat_number` smallint unsigned NOT NULL,
+  `row_number` tinyint unsigned NOT NULL,
+  `bookingid` int unsigned NOT NULL,
+  PRIMARY KEY (`reservationid`),
+  KEY `reservation_booking_idx` (`bookingid`),
+  CONSTRAINT `reservation_booking` FOREIGN KEY (`bookingid`) REFERENCES `booking` (`bookingid`)
+);
+
 SET FOREIGN_KEY_CHECKS = 1;
