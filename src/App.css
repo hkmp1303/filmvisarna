@@ -9,10 +9,12 @@
 
 body {
   margin: 0;
+  background-color: blueviolet;
+  min-height: 100vh;
 }
 
 header {
-  position: fixed;
+  position: block;
   width: 100%;
   display: flex;
   justify-content: space-between;

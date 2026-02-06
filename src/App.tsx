@@ -1,8 +1,9 @@
 //import { useState } from 'react'
-import Main from './partials/Main'
-import Header from './partials/Header'
+import Main from './partials/Main';
+import Header from './partials/Header';
 
-import './App.css'
+
+import './App.css';
 
 function App() {
 
@@ -12,7 +13,7 @@ function App() {
       <Main />
 
     </>
-  )
+  );
 
 }
 
