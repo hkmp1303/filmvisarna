@@ -23,13 +23,13 @@
   padding: 12px 20px;
   border-radius: 25px;
   border: 1.5px solid #864486;
-  background: rgba(73, 11, 85, 0.692);
-  color: rgb(255, 251, 0);
+  background: rgba(65, 10, 77, 0.753);
+  color: white;
   outline: none;
   font-size: 1rem;
 }
 
-/* Filter knappar */
+
 .filter-section {
   display: flex;
   gap: 15px;
@@ -109,8 +109,8 @@
 
 .details-btn {
   width: 100%;
-  background: linear-gradient(135deg, #2a1a4a, #5a2a7a);
-  border: 1px solid #7a5a9a;
+  background: radial-gradient(circle, #5a2a7a 0%, #b527d81a 70%);
+  border: 0cap solid #7a5a9a;
   color: white;
   padding: 7px;
   border-radius: 18px;
