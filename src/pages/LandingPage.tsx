@@ -1,4 +1,3 @@
-import React from 'react';
 import '../css/LandingPage.css';
 
 interface Movie {
@@ -26,13 +25,11 @@ const MovieGallery: React.FC = () => {
         </div>
       </div>
 
-      {/* Filter sektion */}
       <div className="filter-section">
         <button className="filter-btn main-filter">filter....</button>
         <button className="filter-btn date-filter">Datum</button>
       </div>
 
-      {/* Grid med filmkort */}
       <main className="movie-grid">
         {movies.map((movie) => (
           <div key={movie.id} className="movie-card">

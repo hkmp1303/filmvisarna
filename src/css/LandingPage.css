@@ -2,10 +2,9 @@
   padding: 20px 40px;
   font-family: 'Arial', sans-serif;
   color: rgb(255, 245, 98);
-  /* Ingen bakgrundsfärg här, den styrs av App.css eller Body */
 }
 
-/* Söksektion centrerad högst upp */
+
 .search-section {
   display: flex;
   justify-content: center;
@@ -23,20 +22,11 @@
   width: 100%;
   padding: 12px 20px;
   border-radius: 25px;
-  border: 1.5px solid #7a3a7a;
-  background: rgba(255, 255, 255, 0.05);
-  /* Väldigt subtil bakgrund */
-  color: white;
+  border: 1.5px solid #864486;
+  background: rgba(73, 11, 85, 0.692);
+  color: rgb(255, 251, 0);
   outline: none;
   font-size: 1rem;
-}
-
-.search-icon {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.6;
 }
 
 /* Filter knappar */
@@ -59,7 +49,6 @@
   color: #2a002a;
 }
 
-/* Kort-layout och resten av din styling... */
 .movie-grid {
   display: flex;
   flex-wrap: wrap;
