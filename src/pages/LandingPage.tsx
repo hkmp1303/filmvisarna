@@ -23,14 +23,13 @@ const MovieGallery: React.FC = () => {
       <div className="search-section">
         <div className="search-bar">
           <input type="text" placeholder="Search..." />
-          <span className="search-icon">🔍</span>
         </div>
       </div>
 
       {/* Filter sektion */}
       <div className="filter-section">
-        <button className="filter-btn main-filter">filter.... <span>⬇️</span></button>
-        <button className="filter-btn date-filter">Datum <span>⬇️</span></button>
+        <button className="filter-btn main-filter">filter....</button>
+        <button className="filter-btn date-filter">Datum</button>
       </div>
 
       {/* Grid med filmkort */}
