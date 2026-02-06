@@ -1,0 +1,13 @@
+Globals = Obj(new
+{
+  debugOn = true,
+  detailedAclDebug = false,
+  aclOn = true,
+  isSpa = true,
+  port = args[0],
+  serverName = "Filmvisarna Backend",
+  frontendPath = args[1],
+  sessionLifeTimeHours = 2
+});
+
+Server.Start();
