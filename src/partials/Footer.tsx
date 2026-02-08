@@ -7,11 +7,50 @@
  */
 
 
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
 export default function Footer() {
-  return <footer>
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  /* TODO: We should replace this with our actual log in code, this is just a placeholder
+  that I put to try it out, ladies and gents ;) */
+  const userIsLoggedIn = false;
+
+  return (
+    <footer className="footer">
+      <Link to="/explore" className="footer-btn">
+        Upptäck
+      </Link>
+
+      {userIsLoggedIn ? (
+        <Link to="/account" className="footer-btn">
+          Konto
+        </Link>
+      ) : (
+        <Link to="/login" className="footer-btn">
+          Logga in
+        </Link>
+      )}
+
+      <div className="footer-menu-wrapper">
+        <button
+          className="footer-btn"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          Mer
+        </button>
 
 
-
-
-  </footer>;
+        {menuOpen && (
+          <div className="footer-submenu">
+            <Link to="/tema-dagar">Tema dagar</Link>
+            <Link to="/om-oss">Om oss</Link>
+            <Link to="/kontakt">Kontakt</Link>
+            <Link to="/kiosk">Kiosk</Link>
+          </div>
+        )}
+      </div>
+    </footer>
+  );
 }
