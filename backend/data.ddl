@@ -14,6 +14,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `role` enum('visitor','staff','member') NOT NULL,
   PRIMARY KEY (`userid`)
 );
+CREATE TABLE IF NOT EXISTS `session` (
+  id VARCHAR(255) PRIMARY KEY NOT NULL,
+  userid int unsigned NOT NULL,
+  created DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  modified DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  data JSON,
+  CONSTRAINT `session_user` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`)
+);
 
 CREATE TABLE IF NOT EXISTS `price` (
   `priceid` int unsigned NOT NULL AUTO_INCREMENT,
