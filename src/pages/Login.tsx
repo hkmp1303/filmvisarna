@@ -5,16 +5,29 @@ const LoginGallery: React.FC = () => {
         <h1>Login</h1>
       </div>
       <div className="login-input">
+        <div className="name-input">
+          <p>Namn</p>
+          <input type="text" placeholder="Namn"></input>
+        </div>
+
         <div className="email-input">
-          <input type="txet" placeholder="gmail"></input>
+          <p>E-post</p>
+          <input type="text" placeholder="E-post"></input>
+        </div>
+        <div className="phone-number-input">
+          <p>Telefon Nummer</p>
+          <input type="text" placeholder="Telefon nummer"></input>
         </div>
         <div className="Password-input">
-          <input type="txet" placeholder="lösenord"></input>
+          <p>Lösenord</p>
+          <input type="text" placeholder="Lösenord"></input>
         </div>
         <div className="forgotten-password">
           <button className="forgoten-password-btn">glömt lösenord</button>
         </div>
-        <div className="confirm- button"></div>
+        <div className="confirm">
+          <button className="confirm-btn">Confirm</button>
+        </div>
 
       </div>
     </div>
