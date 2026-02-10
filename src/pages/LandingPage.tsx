@@ -1,4 +1,5 @@
 import '../css/LandingPage.css';
+import { useNavigate } from 'react-router-dom';
 
 interface Movie {
   id: number;
@@ -16,6 +17,12 @@ const MovieGallery: React.FC = () => {
     { id: 4, title: 'ALTERNATIVE POSTER', Director: '', image: 'link-to-image-2.jpg' },
     { id: 5, title: 'NAME HERE', Director: '', image: 'link-to-image-1.jpg' },
   ];
+
+  const navigate = useNavigate();
+
+  const selectedMovieNavigation = () => {
+    navigate('/moviedetails')
+  }
 
   return (
     <div className="landing-page-container">
@@ -43,7 +50,7 @@ const MovieGallery: React.FC = () => {
             </div>
             <div className="card-info">
               <p className="movie-name">{movie.title}</p>
-              <button className="details-btn">Detaljer</button>
+              <button className="details-btn" onClick={selectedMovieNavigation}>Detaljer</button>
             </div>
           </div>
         ))}
