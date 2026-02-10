@@ -10,8 +10,8 @@ public static class Server
         Acl.Start();
         ErrorHandler.Start();
         FileServer.Start();
-        LoginRoutes.Start();
-        RestApi.Start();
+        //LoginRoutes.Start();
+        //RestApi.Start();
         Session.Start();
         // Start the server on port 3001
         var runUrl = "http://localhost:" + Globals.port;

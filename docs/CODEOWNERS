@@ -1,4 +1,4 @@
 /docs/ @hkmp1303
 /README.md @hkmp1303
 /setup.sql @hkmp1303
-/data.ddl @hkmp1303
+/backend/data.* @hkmp1303
