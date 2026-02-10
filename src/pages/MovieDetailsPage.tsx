@@ -13,9 +13,10 @@ export default function MovieDetails() {
                 <h2>Åldersgräns: xxx länged: xxx Genre: xxx</h2>
             </section>
             <div className="colum1-container">
-                <video src=""></video>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/ZDlYxy69R3A?si=mSlEj8VkAXaEjGk4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"   ></iframe>
-                <div>
+                <div className="trailer-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/ZDlYxy69R3A?si=mSlEj8VkAXaEjGk4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"   ></iframe>
+                </div>
+                <div className="date-picker">
                     <label htmlFor="start">Välj datum: </label>
                     <input
                         type="date"
@@ -25,10 +26,11 @@ export default function MovieDetails() {
                     />
                     <p>Valt datum: {date}</p>
                 </div>
-                <button>Boka biljetter</button>
+                <button className="btn-booking">Boka biljetter</button>
             </div>
             <div className="colum2-container">
                 <section className="movie-description">
+                    <h3>About the movie:</h3>
                     <p>long text about the movie and what it is about</p>
                     <p>long text about the movie and what it is about</p>
                     <p>long text about the movie and what it is about</p>
