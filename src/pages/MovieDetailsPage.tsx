@@ -14,7 +14,8 @@ export default function MovieDetails() {
             </section>
             <div className="colum1-container">
                 <div className="trailer-container">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/ZDlYxy69R3A?si=mSlEj8VkAXaEjGk4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"   ></iframe>
+                    <h2>Trailer</h2>
+                    <iframe src="https://www.youtube.com/embed/ZDlYxy69R3A?si=mSlEj8VkAXaEjGk4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"   ></iframe>
                 </div>
                 <div className="date-picker">
                     <label htmlFor="start">Välj datum: </label>
