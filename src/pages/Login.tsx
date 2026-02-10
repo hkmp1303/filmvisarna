@@ -1,3 +1,5 @@
+import '../css/Login.css';
+
 const LoginGallery: React.FC = () => {
   return (
     <div className="login-container">
