@@ -1,0 +1,20 @@
+.movie-details-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+
+    .movie-title {
+        grid-column: 1 / -1;
+        text-align: center;
+    }
+
+    .colum1-container {
+        grid-column: 1;
+        align-items: center;
+    }
+
+    .colum2-container {
+        grid-column: 2;
+        align-items: center;
+    }
+}
