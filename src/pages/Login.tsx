@@ -11,7 +11,6 @@ const LoginGallery: React.FC = () => {
           <p>Namn</p>
           <input type="text" placeholder="Namn"></input>
         </div>
-
         <div className="email-input">
           <p>E-post</p>
           <input type="text" placeholder="E-post"></input>
@@ -23,6 +22,10 @@ const LoginGallery: React.FC = () => {
         <div className="Password-input">
           <p>Lösenord</p>
           <input type="text" placeholder="Lösenord"></input>
+        </div>
+        <div className="validate-Password-input">
+          <p>bekräfta Lösenord </p>
+          <input type="text" placeholder="Lösenord bekräftning"></input>
         </div>
         <div className="forgotten-password">
           <button className="forgoten-password-btn">glömt lösenord</button>
