@@ -5,7 +5,6 @@ interface Movie {
   title: string;
   Director: string;
   image: string;
-
 }
 
 const MovieGallery: React.FC = () => {
