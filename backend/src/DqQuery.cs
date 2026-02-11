@@ -40,8 +40,38 @@ public static class DbQuery
     db.Close();
   }
 
+  private static void CreateTablesIfNotExist(MySqlConnection db)
+  {
+    var createTablesSql = String.Join('\n', File.ReadAllLines("data.ddl"));
+    foreach (var sql in createTablesSql.Split(';'))
+    {
+      var trimmed = sql.Trim();
+      if (!string.IsNullOrEmpty(trimmed))
+      {
+        var command = db.CreateCommand();
+        command.CommandText = trimmed;
+        command.ExecuteNonQuery();
+      }
+    }
+  }
+  private static void SeedDataIfEmpty(MySqlConnection db)
+  {
+    var tableData = String.Join('\n', File.ReadAllLines("data.sql"));
+    //Console.WriteLine(tableData);
+    foreach (var sql in tableData.Split(';'))
+    {
+      var trimmed = sql.Trim();
+      if (!string.IsNullOrEmpty(trimmed))
+      {
 
-  /* 
+        var command = db.CreateCommand();
+        command.CommandText = sql;
+        command.ExecuteNonQuery();
+      }
+    }
+
+  }
+  /*
   ----------------------------------------------------------------
   EVERYTHING IN THIS OUT-COMMENTED TEXT SHALL BE OUR OWN DATABASE!
   ----------------------------------------------------------------
@@ -109,7 +139,7 @@ public static class DbQuery
     // Seed ACL rules
     command.CommandText = "SELECT COUNT(*) FROM acl";
     if (Convert.ToInt32(command.ExecuteScalar()) == 0)
-    { 
+    {
       var aclData = @"
                 INSERT INTO acl (userRoles, method, allow, route, `match`, comment) VALUES
                 ('visitor, user', 'GET', 'disallow', '/secret.html', 'true', 'No access to /secret.html for visitors and normal users'),
@@ -123,12 +153,12 @@ public static class DbQuery
             ";
       command.CommandText = aclData;
       command.ExecuteNonQuery();
-    } 
+    }
 
     // Seed users
     command.CommandText = "SELECT COUNT(*) FROM users";
     if (Convert.ToInt32(command.ExecuteScalar()) == 0)
-    { 
+    {
       var usersData = @"
                 INSERT INTO users (created, email, firstName, lastName, role, password) VALUES
                 ('2024-04-02', 'thomas@nodehill.com', 'Thomas', 'Frank', 'admin', '$2a$13$IahRVtN2pxc1Ne1NzJUPpOQO5JCtDZvXpSF.IF8uW85S6VoZKCwZq'),
@@ -137,7 +167,7 @@ public static class DbQuery
             ";
       command.CommandText = usersData;
       command.ExecuteNonQuery();
-    } 
+    }
 
      Seed products
     command.CommandText = "SELECT COUNT(*) FROM products";
@@ -171,15 +201,15 @@ public static class DbQuery
         command.CommandText = sql;
         command.ExecuteNonQuery();
       }
-    } 
-  } 
-  
+    }
+  }
+
   --------------------------------------------------
               END OF OUR DATABASE!
   --------------------------------------------------
   */
 
-  // Helper to create an object from the DataReader
+    // Helper to create an object from the DataReader
   private static dynamic ObjFromReader(MySqlDataReader reader)
   {
     var obj = Obj();
