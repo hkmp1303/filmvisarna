@@ -13,6 +13,7 @@
     "react-rapide": "node node_modules/react-rapide"
   },
   "dependencies": {
+    "express": "^5.2.1",
     "express-http-proxy": "^2.1.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
