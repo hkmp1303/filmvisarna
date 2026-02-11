@@ -2,17 +2,25 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `userid` int unsigned NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(100) DEFAULT NULL,
+  `firstname` varchar(100) NOT NULL,
   `lastname` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `phone` int unsigned NOT NULL,
-  `phone_consent` datetime NOT NULL,
-  `data_consent` datetime NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `phone_consent` datetime DEFAULT NULL,
+  `data_consent` datetime DEFAULT NULL,
   `request_delete` datetime DEFAULT NULL,
   `request_pass` varchar(36) DEFAULT NULL,
   `role` enum('visitor','staff','member') NOT NULL,
   PRIMARY KEY (`userid`)
+);
+CREATE TABLE IF NOT EXISTS `session` (
+  id VARCHAR(255) PRIMARY KEY NOT NULL,
+  userid int unsigned NOT NULL,
+  created DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  modified DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  data JSON,
+  CONSTRAINT `session_user` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`)
 );
 
 CREATE TABLE IF NOT EXISTS `price` (
@@ -34,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `film` (
   `details` json DEFAULT NULL,
   `genre` enum('action','blackandwhite','classic','comedy','family','holiday','horror','romance') NOT NULL,
   `viewer_rating` enum('btl','7+','11+','15+','bfj') NOT NULL,
-  `priceid` int unsigned NOT NULL,
+  `priceid` int unsigned DEFAULT NULL,
   PRIMARY KEY (`filmid`),
   KEY `film_price_idx` (`priceid`),
   KEY `title` (`title`),
@@ -49,8 +57,8 @@ CREATE TABLE IF NOT EXISTS `salon` (
   `salonid` int unsigned NOT NULL AUTO_INCREMENT,
   `room_number` varchar(45) NOT NULL,
   `description` text NOT NULL,
-  `row_capcity` varchar(255) NOT NULL,
-  `amenitites` varchar(225) DEFAULT NULL,
+  `row_capacity` varchar(255) NOT NULL,
+  `amenities` varchar(225) DEFAULT NULL,
   `priceid` int unsigned DEFAULT NULL,
   PRIMARY KEY (`salonid`),
   KEY `salon_price_idx` (`priceid`),
@@ -81,6 +89,16 @@ CREATE TABLE IF NOT EXISTS `booking` (
   KEY `book_user_idx` (`userid`),
   CONSTRAINT `book_screen` FOREIGN KEY (`screeningid`) REFERENCES `screening` (`screeningid`),
   CONSTRAINT `book_user` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`)
+);
+
+CREATE TABLE IF NOT EXISTS `reservation` (
+  `reservationid` int unsigned NOT NULL AUTO_INCREMENT,
+  `seat_number` smallint unsigned NOT NULL,
+  `row_number` tinyint unsigned NOT NULL,
+  `bookingid` int unsigned NOT NULL,
+  PRIMARY KEY (`reservationid`),
+  KEY `reservation_booking_idx` (`bookingid`),
+  CONSTRAINT `reservation_booking` FOREIGN KEY (`bookingid`) REFERENCES `booking` (`bookingid`)
 );
 
 SET FOREIGN_KEY_CHECKS = 1;
