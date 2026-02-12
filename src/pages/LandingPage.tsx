@@ -47,7 +47,7 @@ export default function LandingPage() {
             <div className="poster-container">
               <div
                 className="poster-placeholder"
-                style={{ backgroundImage: `url(${movie.cover_image})` }}
+                style={{ backgroundImage: `url(/moviePoster/${movie.filmid}.png)` }}
               >
                 <div className="poster-overlay-text">
                   <h3>{movie.title}</h3>
