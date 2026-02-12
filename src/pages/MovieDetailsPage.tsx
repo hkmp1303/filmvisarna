@@ -1,16 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from 'react';
+import fetchData from '../util/fetchData';
+import { useParams } from 'react-router-dom';
 import '../css/MovieDetails.css';
+
+interface film {
+    title: string;
+    duration: number;
+    trailer: string;
+    description: string;
+    details: filmdetails;
+    genre: string;
+    viewerRating: BinaryType;
+
+}
+interface filmdetails {
+    actor: string;
+    director: string;
+    release_year: string;
+    production_company: string;
+    production_counrty: string;
+}
 
 export default function MovieDetails() {
 
-    /* */
     const [date, setDate] = useState('');
 
     return <>
         <article className="movie-details-container">
             <section className="movie-title">
                 <h1>Title of the movie</h1>
-                <h2>Åldersgräns: xxx länged: xxx Genre: xxx</h2>
+                <div className="movie-info">
+                    <h2>Åldersgräns: xxx</h2>
+                    <h2>Länged: xxx</h2>
+                    <h2>Genre: xxx</h2>
+                </div>
             </section>
             <div className="colum1-container">
                 <div className="trailer-container">

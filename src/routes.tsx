@@ -10,7 +10,7 @@ interface Route {
 
 const routes: Route[] = [
   { element: <LandingPage />, path: '/', menuLabel: 'Hem' },
-  { element: <MovieDetails />, path: '/moviedetails' }
+  { element: <MovieDetails />, path: '/moviedetails/:filmid' }
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
 ];
 

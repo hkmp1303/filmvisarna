@@ -10,6 +10,15 @@
         margin-bottom: 2rem;
     }
 
+    .movie-info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+
+
+    }
+
     .colum1-container,
     .colum2-container {
         display: flex;
@@ -104,7 +113,7 @@
                 max-width: 350px;
 
                 iframe {
-                    width: 350px;
+                    width: 300px;
                     height: 150px;
                 }
             }
