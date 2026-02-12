@@ -3,17 +3,18 @@ import fetchData from '../util/fetchData';
 import { useParams } from 'react-router-dom';
 import '../css/MovieDetails.css';
 
-interface film {
+interface Film {
+    filmid: number;
     title: string;
     duration: number;
     trailer: string;
     description: string;
-    details: filmdetails;
+    details: Filmdetails;
     genre: string;
     viewerRating: BinaryType;
 
 }
-interface filmdetails {
+interface Filmdetails {
     actor: string;
     director: string;
     release_year: string;
@@ -22,17 +23,26 @@ interface filmdetails {
 }
 
 export default function MovieDetails() {
-
+    const { filmid } = useParams();
+    const [film, setfilm] = useState<Film | null>(null);
     const [date, setDate] = useState('');
 
-    return <>
+    useEffect(() => {
+        const getFilm = async () => {
+            const data = await fetchData<Film>(`api/film/${filmid}`);
+            setfilm(data);
+        }
+        getFilm();
+    }, [filmid]);
+
+    return film && <>
         <article className="movie-details-container">
             <section className="movie-title">
-                <h1>Title of the movie</h1>
+                <h1>{film.title}</h1>
                 <div className="movie-info">
-                    <h2>Åldersgräns: xxx</h2>
-                    <h2>Länged: xxx</h2>
-                    <h2>Genre: xxx</h2>
+                    <h2>Åldersgräns: {film.viewerRating}</h2>
+                    <h2>Länged: {film.duration}</h2>
+                    <h2>Genre: {film.genre}</h2>
                 </div>
             </section>
             <div className="colum1-container">
@@ -55,19 +65,15 @@ export default function MovieDetails() {
             <div className="colum2-container">
                 <section className="movie-description">
                     <h3>About the movie:</h3>
-                    <p>long text about the movie and what it is about</p>
-                    <p>long text about the movie and what it is about</p>
-                    <p>long text about the movie and what it is about</p>
-                    <p>long text about the movie and what it is about</p>
-                    <p>long text about the movie and what it is about</p>
+                    <p>{film.description}</p>
                 </section>
                 <section className="movie-cast">
                     <h3>Cast</h3>
-                    <p>some actor</p>
-                    <p>some actor</p>
-                    <p>some actor</p>
-                    <p>some actor</p>
-                    <p>some actor</p>
+                    <p>{film.details.director}</p>
+                    <p>{film.details.actor}</p>
+                    <p>{film.details.production_company}</p>
+                    <p>{film.details.production_counrty}</p>
+                    <p>{film.details.release_year}</p>
                 </section>
             </div>
         </article>
