@@ -1,45 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useFetchJson from '../utilities/useFetchjson';
 import '../css/LandingPage.css';
 
-// Interface matches your MySQL 'film' table columns
 interface Movie {
-  filmid: number;        // PK from DB
+  filmid: number;
   title: string;
   duration: number;
   language: string;
-  cover_image: string;   // The image URL column
+  cover_image: string;
   description: string;
 }
 
-const LandingPage: React.FC = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState(true);
+export default function LandingPage() {
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch('/api/film')
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          // 2. Filter the data
-          const featuredMovieIds = [1, 3, 5];
-          const selectedMovies = data.filter((movie: any) => featuredMovieIds.includes(movie.filmid));
+  // Custoom hook from utilities pendin if we want to do it this way
+  const movies = useFetchJson<Movie[]>('/api/film');
 
-          // 3. Save the FILTERED movies, not the original data
-          setMovies(selectedMovies);
-        } else {
-          console.error("Data is not an array:", data);
-          // Optional: handle error state here
-        }
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching movies:', error);
-        setLoading(false);
-      });
-  }, []);
+  if (!movies) {
+    return <div style={{ color: 'white' }}>Laddar filmer...</div>;
+  }
+
+  // 3. Filtrer
+  const featuredMovieIds = [1, 3, 5];
+  const selectedMovies = movies.filter((movie) =>
+    featuredMovieIds.includes(movie.filmid)
+  );
+
   return (
     <div className="landing-page-container">
-      {/* Search and Filter Section */}
       <div className="search-section">
         <div className="search-bar">
           <input type="text" placeholder="Search..." />
@@ -53,12 +42,9 @@ const LandingPage: React.FC = () => {
 
       {/* Movie Grid */}
       <main className="movie-grid">
-        {loading && <p style={{ color: 'white' }}>Laddar filmer...</p>}
-
-        {movies.map((movie) => (
+        {selectedMovies.map((movie) => (
           <div key={movie.filmid} className="movie-card">
             <div className="poster-container">
-              {/* Use cover_image from DB */}
               <div
                 className="poster-placeholder"
                 style={{ backgroundImage: `url(${movie.cover_image})` }}
@@ -71,13 +57,16 @@ const LandingPage: React.FC = () => {
             </div>
             <div className="card-info">
               <p className="movie-name">{movie.title}</p>
-              <button className="details-btn">Detaljer</button>
+              <button
+                className="details-btn"
+                onClick={() => navigate(`/film/`)}
+              >
+                Detaljer
+              </button>
             </div>
           </div>
         ))}
       </main>
     </div>
   );
-};
-
-export default LandingPage;
+}
