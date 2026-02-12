@@ -1,39 +1,18 @@
-import { useState, useEffect } from 'react';
-import fetchData from '../util/fetchData';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import '../css/MovieDetails.css';
-
-interface Film {
-    filmid: number;
-    title: string;
-    duration: number;
-    trailer: string;
-    description: string;
-    details: Filmdetails;
-    genre: string;
-    viewerRating: BinaryType;
-
-}
-interface Filmdetails {
-    actor: string;
-    director: string;
-    release_year: string;
-    production_company: string;
-    production_counrty: string;
-}
+import useFetchJson from '../utilities/useFetchJson.ts';
+import type { Film } from '../utilities/filmInterface.ts';
 
 export default function MovieDetails() {
     const { filmid } = useParams();
-    const [film, setfilm] = useState<Film | null>(null);
     const [date, setDate] = useState('');
 
-    useEffect(() => {
-        const getFilm = async () => {
-            const data = await fetchData<Film>(`api/film/${filmid}`);
-            setfilm(data);
-        }
-        getFilm();
-    }, [filmid]);
+    const film = useFetchJson<Film>(`/api/film/${filmid}`);
+
+    if (!film) {
+        return <div style={{ color: 'white', padding: '20px' }}>Laddar filmdetaljer...</div>;
+    }
 
     return film && <>
         <article className="movie-details-container">
@@ -69,13 +48,14 @@ export default function MovieDetails() {
                 </section>
                 <section className="movie-cast">
                     <h3>Cast</h3>
-                    <p>{film.details.director}</p>
-                    <p>{film.details.actor}</p>
-                    <p>{film.details.production_company}</p>
-                    <p>{film.details.production_counrty}</p>
-                    <p>{film.details.release_year}</p>
                 </section>
             </div>
         </article>
     </>
 }
+
+// <p>{film.details.director}</p>
+//                     <p>{film.details.actor}</p>
+//                     <p>{film.details.production_company}</p>
+//                     <p>{film.details.production_counrty}</p>
+//                     <p>{film.details.release_year}</p>

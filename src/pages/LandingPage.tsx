@@ -1,50 +1,28 @@
-import { useNavigate } from 'react-router-dom';
-import useFetchJson from '../utilities/useFetchjson';
+import useFetchJson from '../utilities/useFetchJson.ts';
 import '../css/LandingPage.css';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import fetchData from '../util/fetchData';
-
-interface Movie {
-  filmid: number;
-  title: string;
-  duration: number;
-  language: string;
-  cover_image: string;
-  description: string;
-}
+import type { Film } from '../utilities/filmInterface.ts';
 
 export default function LandingPage() {
   const navigate = useNavigate();
 
   // Custoom hook from utilities pendin if we want to do it this way
-  const movies = useFetchJson<Movie[]>('/api/film');
-
-  if (!movies) {
-    return <div style={{ color: 'white' }}>Laddar filmer...</div>;
-  }
-
-  // 3. Filtrer
-  const featuredMovieIds = [1, 3, 5];
-  const selectedMovies = movies.filter((movie) =>
-    featuredMovieIds.includes(movie.filmid)
-  );
-
-  const navigate = useNavigate();
-  const [films, setFilms] = useState<Movie[] | null>(null);
+  const films = useFetchJson<Film[]>('/api/film');
 
   const selectedMovieNavigation = (filmid: number) => {
     navigate(`/moviedetails/${filmid}`)
   };
 
+  if (!films) {
+    return <div style={{ color: 'white' }}>Laddar filmer...</div>;
+  }
 
-  useEffect(() => {
-    const loadFilms = async () => {
-      const data = await fetchData<Movie[]>('/api/film');
-      setFilms(data);
-    };
-    loadFilms();
-  }, []);
+  // 3. Filtrer
+  const featuredMovieIds = [1, 3, 5];
+  const selectedMovies = films.filter((film) =>
+    featuredMovieIds.includes(film.filmid)
+  );
+
 
   return films && (
     <div className="landing-page-container">
@@ -61,24 +39,24 @@ export default function LandingPage() {
 
       {/* Movie Grid */}
       <main className="movie-grid">
-        {selectedMovies.map((movie) => (
-          <div key={movie.filmid} className="movie-card">
+        {selectedMovies.map((film) => (
+          <div key={film.filmid} className="movie-card">
             <div className="poster-container">
               <div
                 className="poster-placeholder"
-                style={{ backgroundImage: `url(/moviePoster/${movie.filmid}.png)` }}
+                style={{ backgroundImage: `url(/moviePoster/${film.filmid}.png)` }}
               >
                 <div className="poster-overlay-text">
-                  <h3>{movie.title}</h3>
-                  <p>{movie.duration} min | {movie.language}</p>
+                  <h3>{film.title}</h3>
+                  <p>{film.duration} min | {film.language}</p>
                 </div>
               </div>
             </div>
             <div className="card-info">
-              <p className="movie-name">{movie.title}</p>
+              <p className="movie-name">{film.title}</p>
               <button
                 className="details-btn"
-                onClick={() => navigate(`/film/`)}
+                onClick={() => selectedMovieNavigation(film.filmid)}
               >
                 Detaljer
               </button>
