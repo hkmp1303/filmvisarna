@@ -1,4 +1,4 @@
-/* namespace WebApp;
+namespace WebApp;
 
 public static class RestApi
 {
@@ -72,4 +72,4 @@ public static class RestApi
         ))
     );
   }
-} */
+}

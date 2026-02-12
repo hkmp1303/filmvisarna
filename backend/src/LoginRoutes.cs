@@ -1,4 +1,4 @@
-/* namespace WebApp;
+namespace WebApp;
 
 public static class LoginRoutes
 {
@@ -69,4 +69,4 @@ public static class LoginRoutes
           );
     });
   }
-} */
+}
