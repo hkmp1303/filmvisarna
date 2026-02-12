@@ -1,6 +1,6 @@
 import type { JSX } from 'react';
 import LandingPage from './pages/LandingPage';
-import MovieDetails from './pages/MovieDetailsPage';
+import Login from './pages/Login';
 
 interface Route {
   element: JSX.Element;
@@ -10,7 +10,8 @@ interface Route {
 
 const routes: Route[] = [
   { element: <LandingPage />, path: '/', menuLabel: 'Hem' },
-  { element: <MovieDetails />, path: '/moviedetails/:filmid' }
+  { element: <Login />, path: '/Login', menuLabel: 'login' }
+
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
 ];
 

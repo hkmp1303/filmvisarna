@@ -1,4 +1,4 @@
-/* namespace WebApp;
+namespace WebApp;
 
 public static class RestQuery
 {
@@ -106,4 +106,4 @@ public static class RestQuery
     }
     return Obj(new { sql, parameters });
   }
-} */
+}
