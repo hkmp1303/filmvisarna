@@ -1,8 +1,8 @@
 .movie-details-container {
     display: grid;
     grid-template-columns: auto auto;
-    align-items: center;
-    margin-bottom: 2rem;
+    align-items: start;
+    margin-bottom: 3rem;
 
     .movie-title {
         grid-column: 1 / -1;
@@ -34,6 +34,7 @@
         .trailer-container {
             background-color: chartreuse;
             padding: 1rem;
+            border-radius: 7px;
 
             iframe {
                 width: 560px;
@@ -68,14 +69,16 @@
 
         .movie-description {
             background-color: chartreuse;
-            min-width: 500px;
+            width: 500px;
             padding: 1rem;
+            border-radius: 7px;
         }
 
         .movie-cast {
             background-color: chartreuse;
-            min-width: 500px;
+            width: 500px;
             padding: 1rem;
+            border-radius: 7px;
         }
     }
 

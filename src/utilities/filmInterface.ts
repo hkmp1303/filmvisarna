@@ -9,7 +9,7 @@ export interface Film {
   cover_image: string;
   details: Filmdetails;
   genre: string;
-  viewerRating: BinaryType;
+  viewer_rating: 'btl' | 'bfj' | '7+' | '11+' | '15+' | string;
   priceid: number;
 
 }
