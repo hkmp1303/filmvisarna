@@ -27,5 +27,5 @@ backend/db-config.json
 backend/obj/
 backend/bin/
 
-
+# Slime Helper Notes
 slime_notes.md
