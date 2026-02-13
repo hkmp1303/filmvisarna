@@ -26,3 +26,6 @@ dist-ssr
 backend/db-config.json
 backend/obj/
 backend/bin/
+
+
+slime_notes.md
