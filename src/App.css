@@ -24,35 +24,36 @@ header {
   border-radius: 25px;
   background-color: #f4f4f474;
   box-shadow: 0.2px 0.2px 20px 0.05px rgba(255, 255, 255, 0.551);
+}
 
-  .header-logo {
-    color: #fffdc4;
-    justify-self: start;
-    padding: 20px 0px 10px 0px;
+/* Your logo wrapper */
+.header-logo {
+  display: inline-block;
+  color: #fffdc4;
+  justify-self: start;
+  padding: 20px 0px 10px 0px;
+}
 
-    img {
-      max-width: 150px;
-      max-height: 150px;
+/* The actual SVG */
+.header-logo svg {
+  width: 120px;
+  /* adjust this to shrink the logo */
+  height: auto;
+}
 
-    }
+h1 {
+  font-size: 50px;
+  justify-self: center;
+}
 
-  }
+nav {
+  padding-left: 0px;
+  text-decoration: none;
+  justify-self: end;
+}
 
-  h1 {
-    font-size: 50px;
-    justify-self: center;
-  }
-
-  nav {
-    padding-left: 0px;
-    text-decoration: none;
-    justify-self: end;
-
-    &:hover {
-      color: blue;
-
-    }
-  }
+nav:hover {
+  color: blue;
 }
 
 footer {
