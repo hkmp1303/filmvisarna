@@ -1,0 +1,17 @@
+.aboutus-page {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    .aboutus-info {
+        background-color: chartreuse;
+    }
+
+    .big-logo {
+        background-color: hotpink;
+    }
+
+    .side-link {
+        background-color: chartreuse
+    }
+}

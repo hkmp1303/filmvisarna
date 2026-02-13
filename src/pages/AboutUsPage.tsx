@@ -1,6 +1,6 @@
 import '../css/AboutUsPage.css'
 
-export default function AboutUS() {
+export default function AboutUs() {
 
     return <>
         <article className="aboutus-page">
