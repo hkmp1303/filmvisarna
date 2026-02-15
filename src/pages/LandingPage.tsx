@@ -65,18 +65,14 @@ export default function LandingPage() {
 
 
   return (
-
     <div className="landing-page-container">
       <div className="search-section">
         <div className="search-bar">
           <input type="text" placeholder="Search..." />
         </div>
       </div>
-
       <div className="filter-section">
-
-        <button className="filter-btn date-filter">Datum</button>
-
+        {/* <button className="filter-btn date-filter">Datum</button> */}
         <div className="dropdown">
           <button className="filter-btn dropdown-btn">
             Sortera: {sortLabel} ▼
@@ -91,14 +87,10 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
-
       {/* Movie Grid */}
       <main className="movie-grid">
-
         {displayMovies.map((movie) => (
           <div key={movie.filmid} className="movie-card">
-
-
             <div className="poster-container">
               <div
                 className="poster-placeholder"
