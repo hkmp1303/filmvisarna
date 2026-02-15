@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useFetchJson from '../utilities/useFetchJson';
@@ -13,12 +13,6 @@ interface Movie {
   description: string;
   details: string;
 }
-=======
-import useFetchJson from '../utilities/useFetchJson.ts';
-import '../css/LandingPage.css';
-import { useNavigate } from 'react-router-dom';
-import type { Film } from '../utilities/filmInterface.ts';
->>>>>>> ee1a050714cc294347a1bacb609e1c31efa7b906
 
 type SortOption = 'title_asc' | 'title_desc' | 'newest' | 'oldest' | 'duration_asc' | 'duration_desc';
 
@@ -26,19 +20,17 @@ export default function LandingPage() {
   const navigate = useNavigate();
 
   // Custoom hook from utilities pendin if we want to do it this way
-<<<<<<< HEAD
+
   const movies = useFetchJson<Movie[]>('/api/film');
   const [sortBy, setSortBy] = useState<SortOption>('title_asc');
   const [sortLabel, setSortLabel] = useState('Titel (A-Ö)');
-=======
-  const films = useFetchJson<Film[]>('/api/film');
->>>>>>> ee1a050714cc294347a1bacb609e1c31efa7b906
+
 
   const selectedMovieNavigation = (filmid: number) => {
-    navigate(`/moviedetails/${filmid}`)
+    navigate(`/moviedetails/${filmid}`);
   };
 
-  if (!films) {
+  if (!movies) {
     return <div style={{ color: 'white' }}>Laddar filmer...</div>;
   }
   const sortedMovies = [...movies].sort((a, b) => {
@@ -61,7 +53,7 @@ export default function LandingPage() {
   });
   // 3. Filtrer
   const featuredMovieIds = [1, 3, 5];
-<<<<<<< HEAD
+
   const displayMovies = sortedMovies.filter((movie) =>
     featuredMovieIds.includes(movie.filmid)
   );
@@ -73,14 +65,7 @@ export default function LandingPage() {
 
 
   return (
-=======
-  const selectedMovies = films.filter((film) =>
-    featuredMovieIds.includes(film.filmid)
-  );
 
-
-  return films && (
->>>>>>> ee1a050714cc294347a1bacb609e1c31efa7b906
     <div className="landing-page-container">
       <div className="search-section">
         <div className="search-bar">
@@ -109,29 +94,27 @@ export default function LandingPage() {
 
       {/* Movie Grid */}
       <main className="movie-grid">
-<<<<<<< HEAD
+
         {displayMovies.map((movie) => (
           <div key={movie.filmid} className="movie-card">
-=======
-        {selectedMovies.map((film) => (
-          <div key={film.filmid} className="movie-card">
->>>>>>> ee1a050714cc294347a1bacb609e1c31efa7b906
+
+
             <div className="poster-container">
               <div
                 className="poster-placeholder"
-                style={{ backgroundImage: `url(/moviePoster/${film.filmid}.png)` }}
+                style={{ backgroundImage: `url(/moviePoster/${movie.filmid}.png)` }}
               >
                 <div className="poster-overlay-text">
-                  <h3>{film.title}</h3>
-                  <p>{film.duration} min | {film.language}</p>
+                  <h3>{movie.title}</h3>
+                  <p>{movie.duration} min | {movie.language}</p>
                 </div>
               </div>
             </div>
             <div className="card-info">
-              <p className="movie-name">{film.title}</p>
+              <p className="movie-name">{movie.title}</p>
               <button
                 className="details-btn"
-                onClick={() => selectedMovieNavigation(film.filmid)}
+                onClick={() => selectedMovieNavigation(movie.filmid)}
               >
                 Detaljer
               </button>
