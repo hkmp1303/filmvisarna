@@ -38,7 +38,7 @@ export default function LandingPage() {
     navigate(`/moviedetails/${filmid}`)
   };
 
-  if (!movies) {
+  if (!films) {
     return <div style={{ color: 'white' }}>Laddar filmer...</div>;
   }
   const sortedMovies = [...movies].sort((a, b) => {
