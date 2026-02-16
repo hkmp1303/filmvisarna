@@ -1,6 +1,13 @@
+import { useNavigate } from 'react-router-dom'
 import '../css/AboutUsPage.css'
 
 export default function AboutUs() {
+
+    const navigate = useNavigate();
+
+    const navThemeDays = navigate('/themedays');
+    const navKiosk = navigate('/kiosk');
+    const navContact = navigate('/contactus');
 
     return <>
         <article className="aboutus-page">
@@ -47,7 +54,24 @@ export default function AboutUs() {
                 <img src="/public/logav2.svg" alt="Logotyp of Filmvisarna" />
             </div>
             <section className="side-link">
-
+                <div className='td-box'>
+                    <h3>Tema dagar:</h3>
+                    <p>Här hittar du information om våra temadagar.</p>
+                    <button className='theme-days-btn'
+                        onClick={() => navThemeDays}>Tema dagar</button>
+                </div>
+                <div className='k-box'>
+                    <h3>Kiosk: </h3>
+                    <p>Här hittar du information om våran kiosk</p>
+                    <button className='kiosk-btn'
+                        onClick={() => navKiosk}>Kiosk</button>
+                </div>
+                <div className='ko-box'>
+                    <h3>Kontaka oss:</h3>
+                    <p>Här kan du komma i kontakt med oss</p>
+                    <button className='contact-us-btn'
+                        onClick={() => navContact}>Kontakta oss</button>
+                </div>
             </section>
         </article>
     </>
