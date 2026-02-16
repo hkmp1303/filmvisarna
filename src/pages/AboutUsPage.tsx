@@ -56,19 +56,23 @@ export default function AboutUs() {
             <section className="side-link">
                 <div className='td-box'>
                     <h3>Tema dagar:</h3>
-                    <p>Här hittar du information om våra temadagar.</p>
+                    <p>Hos oss är varje dag en ny filmupplevelse! Vi kör olika genrer beroende på veckodag,
+                        så att du alltid vet vilken typ av stämning som väntar i salongen.</p>
                     <button className='theme-days-btn'
                         onClick={() => navThemeDays}>Tema dagar</button>
                 </div>
                 <div className='k-box'>
                     <h3>Kiosk: </h3>
-                    <p>Här hittar du information om våran kiosk</p>
+                    <p>I vår kiosk hittar du ett varierat utbud av snacks, dryck och enklare måltider.
+                        Vi strävar efter att erbjuda något för alla smaker,
+                        oavsett om du är sugen på något sött, salt eller uppfriskande.</p>
                     <button className='kiosk-btn'
                         onClick={() => navKiosk}>Kiosk</button>
                 </div>
                 <div className='ko-box'>
                     <h3>Kontaka oss:</h3>
-                    <p>Här kan du komma i kontakt med oss</p>
+                    <p>Har du frågor, funderingar eller förslag? Vi finns här för att hjälpa dig.
+                        Tveka inte att ta kontakt med oss via formuläret nedan eller genom våra kontaktuppgifter.</p>
                     <button className='contact-us-btn'
                         onClick={() => navContact}>Kontakta oss</button>
                 </div>
