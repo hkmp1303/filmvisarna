@@ -46,7 +46,7 @@ export default function Footer() {
           <div className="footer-submenu">
             <Link to="/tema-dagar">Tema dagar</Link>
             <Link to="/aboutus">Om oss</Link>
-            <Link to="/kontakt">Kontakt</Link>
+            <Link to="/contact">Kontakt</Link>
             <Link to="/kiosk">Kiosk</Link>
           </div>
         )}

@@ -7,7 +7,7 @@ export default function AboutUs() {
 
     const navThemeDays = navigate('/themedays');
     const navKiosk = navigate('/kiosk');
-    const navContact = navigate('/contactus');
+    const navContact = navigate('/contact');
 
     return <>
         <article className="aboutus-page">
