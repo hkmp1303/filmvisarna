@@ -17,17 +17,13 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-    /* ADD THIS LINE BELOW */
-    "types": [
-      "vite/client"
-    ],
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    /* This is what's causing the fuss with CSS */
     "noUncheckedSideEffectImports": true
   },
   "include": [
