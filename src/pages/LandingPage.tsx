@@ -16,7 +16,7 @@ export default function LandingPage() {
   const [sortBy, setSortBy] = useState<SortOption>('title_asc');
   const [sortLabel, setSortLabel] = useState('Titel (A-Ö)');
   const [searchQuery, setSearchQuery] = useState('');
-
+  const [selectedGenre, setSelectedGenre] = useState('');
 
   const selectedMovieNavigation = (filmid: number) => {
     navigate(`/moviedetails/${filmid}`);
@@ -25,12 +25,16 @@ export default function LandingPage() {
   if (!movies) {
     return <div style={{ color: 'white' }}>Laddar filmer...</div>;
   }
-  const displayMovies = sortAndFilterMovies(movies, sortBy, searchQuery);
+  const displayMovies = sortAndFilterMovies(movies, sortBy, searchQuery, selectedGenre);
 
   const handleSortChange = (key: SortOption, label: string) => {
     setSortBy(key);
     setSortLabel(label);
   };
+
+  const uniqueGenres = Array.from(
+    new Set(movies.map((m) => m.genre).filter(Boolean))
+  ).sort();
 
 
   return (
@@ -60,6 +64,19 @@ export default function LandingPage() {
             <a onClick={() => handleSortChange('duration_desc', 'Speltid (Längst)')}>Speltid (Längst)</a>
           </div>
         </div>
+        <div className="dropdown">
+          <button className="filter-btn dropdown-btn">
+            {selectedGenre === '' ? 'Alla Genrer' : selectedGenre} ▼
+          </button>
+          <div className="dropdown-content">
+            <a onClick={() => setSelectedGenre('')}>Alla Genrer</a>
+            {uniqueGenres.map((genre) => (
+              <a key={genre} onClick={() => setSelectedGenre(genre)}>
+                {genre}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
       {/* Movie Grid */}
       <main className="movie-grid">
@@ -72,7 +89,7 @@ export default function LandingPage() {
               >
                 <div className="poster-overlay-text">
                   <h3>{movie.title}</h3>
-                  <p>{movie.duration} min | {movie.language}</p>
+                  <p>{movie.duration} min | {movie.genre}| {movie.language}</p>
                 </div>
               </div>
             </div>

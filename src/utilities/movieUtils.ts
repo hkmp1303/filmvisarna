@@ -11,7 +11,8 @@ const getYear = (m: Movie) => {
 export function sortAndFilterMovies(
   movies: Movie[],
   sortBy: SortOption,
-  searchQuery: string
+  searchQuery: string,
+  selectedGenre: string
 ): Movie[] {
 
 
@@ -29,8 +30,14 @@ export function sortAndFilterMovies(
 
 
   return sorted.filter((movie) => {
-    if (searchQuery.trim() !== '') {
-      return movie.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = searchQuery.trim() === '' ||
+      movie.title.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesGenre = selectedGenre === '' ||
+      movie.genre.toLowerCase().includes(selectedGenre.toLowerCase());
+
+    if (searchQuery.trim() !== '' || selectedGenre !== '') {
+      return matchesSearch && matchesGenre;
     }
     // To be removed when the genre filter is created
     const featuredMovieIds = [1, 3, 5];

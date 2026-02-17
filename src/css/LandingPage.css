@@ -50,8 +50,11 @@
 
 .filter-section {
   display: flex;
+  flex-direction: row;
   gap: 15px;
   margin-bottom: 40px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .filter-btn {
