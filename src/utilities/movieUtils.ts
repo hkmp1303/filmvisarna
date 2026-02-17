@@ -37,7 +37,7 @@ export function sortAndFilterMovies(
       movie.genre.toLowerCase().includes(selectedGenre.toLowerCase());
 
 
-    // To be removed when the genre filter is created
+
     return matchesSearch && matchesGenre;
   });
 }
