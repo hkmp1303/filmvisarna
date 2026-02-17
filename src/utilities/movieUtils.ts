@@ -36,11 +36,8 @@ export function sortAndFilterMovies(
     const matchesGenre = selectedGenre === '' ||
       movie.genre.toLowerCase().includes(selectedGenre.toLowerCase());
 
-    if (searchQuery.trim() !== '' || selectedGenre !== '') {
-      return matchesSearch && matchesGenre;
-    }
+
     // To be removed when the genre filter is created
-    const featuredMovieIds = [1, 3, 5];
-    return featuredMovieIds.includes(movie.filmid);
+    return matchesSearch && matchesGenre;
   });
 }
