@@ -1,15 +1,53 @@
-//import { useState } from 'react'
+import { useState } from 'react'
+import type { ChangeEvent, FormEvent } from 'react';
 
 import '../css/ContactPage.css'
 
-//const [name, setName] = useState();
-//const [email, setEmail] = useState();
-//const [question, setQuestion] = useState();
-//const [message, setMessage] = useState();
+interface contactForm {
+    name: string;
+    email: string;
+    subject: 'None' | 'Föreställning' | 'Biljettfråga' | 'Kiosken' | 'Betalning' | 'Övrigt' | string;
+    message: string;
+}
 
 export default function Contact() {
 
+
+    const [submitData, setSubmitData] = useState<contactForm>({
+        name: '',
+        email: '',
+        subject: 'None',
+        message: '',
+    });
+
+    const [submitted, setSubmitted] = useState<boolean>(false);
+
+    const handleData = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setSubmitData(prev => ({ ...prev, [name]: value }));
+    }
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        setSubmitted(true);
+
+        //const nativeEvent = e.nativeEvent as SubmitEvent;
+        setSubmitted(true);
+    }
+
+
     return <article className='contact-page'>
+        {submitted && (
+            <div className='popup-window'>
+                <div className='popup-content'>
+                    <h3> Tack, {submitData.name}!</h3>
+                    <p>Ditt meddelande har nu skickats till oss.</p>
+                    <p>Vi hör av oss så snart vi kan.</p>
+                    <button onClick={() => setSubmitted(false)}>Stäng</button>
+                </div>
+            </div>
+        )}
         <section className='info-container'>
             <h1>Kontakta oss</h1>
             <h3>Adress:</h3>
@@ -27,23 +65,24 @@ export default function Contact() {
         </section>
         <section className='form-container'>
             <div className='form-box'>
-                <form action=""></form>
-                <label> Namn: </label>
-                <input className='input-field' type="text" />
-                <label> E-mail: </label>
-                <input className='input-field' type="text" />
-                <select name="" id="">
-                    <option value="">Ärende</option>
-                    <option value="">Föreställning</option>
-                    <option value="">Biljettfråga</option>
-                    <option value="">Kiosken</option>
-                    <option value="">Betalning</option>
-                    <option value="">Övrigt</option>
-                </select>
-                <label htmlFor="">Skriv
-                </label>
-                <textarea></textarea>
-                <input type="submit" className='submit-btn' />
+                <form onSubmit={handleSubmit}>
+                    <label> Namn: </label>
+                    <input name='name' value={submitData.name} className='input-field' type="text" onChange={handleData} />
+                    <label> E-mail: </label>
+                    <input name='email' value={submitData.email} className='input-field' type="text" onChange={handleData} />
+                    <select name="subject" value={submitData.subject} id="">
+                        <option value="None">Ärende</option>
+                        <option value="Föreställning">Föreställning</option>
+                        <option value="Biljettfråga">Biljettfråga</option>
+                        <option value="Kiosken">Kiosken</option>
+                        <option value="Betalning">Betalning</option>
+                        <option value="Övrigt">Övrigt</option>
+                    </select>
+                    <label htmlFor="">Skriv
+                    </label>
+                    <textarea name='message' value={submitData.message} onChange={handleData}></textarea>
+                    <button type='submit'> Skicka</button>
+                </form>
             </div>
         </section>
     </article>
