@@ -4,33 +4,82 @@ import type { User } from '../utilities/types'; // Se till att denna finns!
 import '../css/Login.css';
 
 interface LoginContext {
+  user: User | null;
   setUser: (user: User | null) => void;
 }
 
 export default function Login() {
   const navigate = useNavigate();
-  const { setUser } = useOutletContext<LoginContext>(); // Hämta global funktion
+  const { user, setUser } = useOutletContext<LoginContext>();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleLogin = async () => {
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+    setError('');
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      setUser(data); // Uppdatera App.tsx state
-      navigate('/'); // Gå till startsidan
-    } else {
-      setError("Fel e-post eller lösenord");
+      if (response.ok) {
+        setUser(data); // Uppdatera App.tsx state
+        navigate('/'); // Gå till startsidan
+      } else {
+        setError("Fel e-post eller lösenord");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Kunde inte nå servern");
     }
   };
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/login', { method: 'DELETE' }); // Säg till backend att döda sessionen
+      setUser(null); // Töm frontend-state
+      // Vi stannar kvar på sidan, så nu visas inloggningsformuläret igen
+    } catch (err) {
+      console.error("Kunde inte logga ut", err);
+    }
+  };
+
+  if (user) {
+    return (
+      <div className="login-container">
+        <div className="login-input" style={{ textAlign: 'center', maxWidth: '400px' }}>
+          <h2 style={{ color: 'rgb(255, 245, 98)', marginBottom: '20px' }}>
+            Du är redan inloggad
+          </h2>
+          <p style={{ color: 'white', marginBottom: '30px' }}>
+            Inloggad som: <strong>{user.firstname ? `${user.firstname} ${user.lastname}` : user.email}</strong>
+          </p>
+
+          <button
+            className="confirm-btn"
+            onClick={handleLogout}
+            style={{ backgroundColor: '#ff6b6b', color: 'white' }} // Röd färg för logga ut
+          >
+            Logga ut
+          </button>
+
+          <button
+            className="forgoten-password-btn"
+            onClick={() => navigate('/')}
+            style={{ marginTop: '20px', display: 'block', width: '100%' }}
+          >
+            Gå till startsidan
+          </button>
+        </div>
+      </div>
+    );
+  }
+
 
   return (
     <div className="login-container">

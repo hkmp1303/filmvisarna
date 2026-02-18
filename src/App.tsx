@@ -1,6 +1,5 @@
 //import { useState } from 'react'
 import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
 import Main from './partials/Main';
 import Header from './partials/Header';
 import Footer from './partials/Footer';
@@ -25,10 +24,7 @@ function App() {
       }
     })();
   }, []);
-  const handleLogout = async () => {
-    await fetch('/api/login', { method: 'DELETE' });
-    setUser(null);
-  };
+
 
 
 

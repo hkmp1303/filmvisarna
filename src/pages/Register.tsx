@@ -5,9 +5,10 @@ import '../css/Login.css';
 export default function Register() {
   const navigate = useNavigate();
 
-  // State för alla fält
+  // 1. Uppdatera state med firstname och lastname separat
   const [formData, setFormData] = useState({
-    name: '',
+    firstname: '',
+    lastname: '',
     email: '',
     phone: '',
     password: '',
@@ -16,69 +17,94 @@ export default function Register() {
 
   const [error, setError] = useState('');
 
-  // Hantera ändringar i fälten
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleRegister = async () => {
-    // 1. Enkel validering
+    // 2. Validera att båda namnen är ifyllda
+    if (!formData.firstname || !formData.lastname || !formData.email || !formData.password) {
+      setError("Fyll i förnamn, efternamn, e-post och lösenord.");
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       setError("Lösenorden matchar inte!");
       return;
     }
 
-    // 2. Skicka till backend (anpassa URL om du har en annan route för register)
-    // Här antar vi att din backend tar emot en POST på /api/users
-    const response = await fetch('/api/users', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: formData.email,
-        password: formData.password,
-        // Om din databas har kolumner för namn/telefon, skicka med dem:
-        // name: formData.name, 
-        // phone: formData.phone 
-      })
-    });
+    try {
+      // 3. Skicka datan direkt (ingen split behövs längre!)
+      const response = await fetch('/api/user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+          firstname: formData.firstname, // Direkt från fältet
+          lastname: formData.lastname,   // Direkt från fältet
+          phone: formData.phone
+        })
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      // Om allt gick bra, skicka användaren till inloggningssidan
-      navigate('/login');
-    } else {
-      setError(data.message || "Kunde inte registrera konto");
+      if (response.ok) {
+        alert("Konto skapat! Du kan nu logga in.");
+        navigate('/login');
+      } else {
+        setError(data.message || "Kunde inte skapa konto.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Kunde inte ansluta till servern.");
     }
   };
 
   return (
     <div className="login-container">
       <div className="login-big-text">
-        <h1>Registrera</h1>
+        <h1>Skapa Konto</h1>
       </div>
 
       <div className="login-input">
         {error && <p className="error-message">{error}</p>}
 
+        {/* --- FÖRNAMN --- */}
         <div className="name-input">
-          <p>Namn</p>
-          <input name="name" type="text" placeholder="Namn" onChange={handleChange} />
+          <p>Förnamn</p>
+          <input
+            name="firstname"
+            type="text"
+            placeholder="Förnamn"
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* --- EFTERNAMN (Ny separat rad) --- */}
+        <div className="name-input">
+          <p>Efternamn</p>
+          <input
+            name="lastname"
+            type="text"
+            placeholder="Efternamn"
+            onChange={handleChange}
+          />
         </div>
 
         <div className="email-input">
           <p>E-post</p>
-          <input name="email" type="email" placeholder="E-post" onChange={handleChange} />
+          <input name="email" type="email" placeholder="Din e-post" onChange={handleChange} />
         </div>
 
         <div className="phone-number-input">
-          <p>Telefon Nummer</p>
-          <input name="phone" type="text" placeholder="Telefon nummer" onChange={handleChange} />
+          <p>Telefonnummer</p>
+          <input name="phone" type="text" placeholder="070..." onChange={handleChange} />
         </div>
 
         <div className="Password-input">
           <p>Lösenord</p>
-          <input name="password" type="password" placeholder="Lösenord" onChange={handleChange} />
+          <input name="password" type="password" placeholder="Välj lösenord" onChange={handleChange} />
         </div>
 
         <div className="validate-Password-input">
@@ -87,7 +113,7 @@ export default function Register() {
         </div>
 
         <div className="confirm">
-          <button className="confirm-btn" onClick={handleRegister}>Skapa Konto</button>
+          <button className="confirm-btn" onClick={handleRegister}>Registrera</button>
         </div>
 
         <div className="forgotten-password">
@@ -95,7 +121,6 @@ export default function Register() {
             Har du redan konto? Logga in
           </button>
         </div>
-
       </div>
     </div>
   );
