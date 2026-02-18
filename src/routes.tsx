@@ -3,6 +3,9 @@ import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import MovieDetails from './pages/MovieDetailsPage';
 import AboutUs from './pages/AboutUsPage';
+import Contact from './pages/ContactPage';
+import Kiosk from './pages/Kiosk';
+
 import Register from './pages/register';
 
 interface Route {
@@ -13,10 +16,11 @@ interface Route {
 
 const routes: Route[] = [
   { element: <LandingPage />, path: '/', menuLabel: 'Hem' },
-  { element: <AboutUs />, path: '/aboutus', menuLabel: 'aboout us' },
-  { element: <Login />, path: '/Login' },
+  { element: <Login />, path: '/Login', menuLabel: 'Login' },
+  { element: <AboutUs />, path: '/aboutus', menuLabel: 'Om oss' },
+  { element: <Contact />, path: '/contact', menuLabel: 'Kontakt' },
   { element: <MovieDetails />, path: '/moviedetails/:filmid' },
-  { element: <Register />, path: '/register' }
+  { element: <Kiosk />, path: '/Kiosk', menuLabel: 'Kiosk' }
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
 ];
