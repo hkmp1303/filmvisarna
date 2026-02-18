@@ -13,8 +13,8 @@ interface Route {
 
 const routes: Route[] = [
   { element: <LandingPage />, path: '/', menuLabel: 'Hem' },
-  { element: <Login />, path: '/Login', menuLabel: 'login' },
-  { element: <AboutUs />, path: '/aboutus', menuLabel: 'about us' },
+  { element: <Login />, path: '/Login', menuLabel: 'Login' },
+  { element: <AboutUs />, path: '/aboutus', menuLabel: 'Om oss' },
   { element: <Contact />, path: '/contact', menuLabel: 'Kontakt' },
   { element: <MovieDetails />, path: '/moviedetails/:filmid' }
 
