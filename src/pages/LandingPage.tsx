@@ -1,62 +1,103 @@
-import useFetchJson from '../utilities/useFetchJson.ts';
-import '../css/LandingPage.css';
+
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Film } from '../utilities/filmInterface.ts';
+import useFetchJson from '../utilities/useFetchJson';
+import { sortAndFilterMovies } from '../utilities/movieUtils';
+import type { Movie, SortOption } from "../utilities/types";
+import '../css/LandingPage.css';
+
 
 export default function LandingPage() {
   const navigate = useNavigate();
 
-  // Custoom hook from utilities pendin if we want to do it this way
-  const films = useFetchJson<Film[]>('/api/film');
+
+
+  const movies = useFetchJson<Movie[]>('/api/film');
+  const [sortBy, setSortBy] = useState<SortOption>('title_asc');
+  const [sortLabel, setSortLabel] = useState('Titel (A-Ö)');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedGenre, setSelectedGenre] = useState('');
 
   const selectedMovieNavigation = (filmid: number) => {
-    navigate(`/moviedetails/${filmid}`)
+    navigate(`/moviedetails/${filmid}`);
   };
 
-  if (!films) {
+  if (!movies) {
     return <div style={{ color: 'white' }}>Laddar filmer...</div>;
   }
+  const displayMovies = sortAndFilterMovies(movies, sortBy, searchQuery, selectedGenre);
 
-  // 3. Filtrer
-  const featuredMovieIds = [1, 3, 5];
-  const selectedMovies = films.filter((film) =>
-    featuredMovieIds.includes(film.filmid)
-  );
+  const handleSortChange = (key: SortOption, label: string) => {
+    setSortBy(key);
+    setSortLabel(label);
+  };
+
+  const uniqueGenres = Array.from(
+    new Set(movies.map((m) => m.genre).filter(Boolean))
+  ).sort();
 
 
-  return films && (
+  return (
     <div className="landing-page-container">
       <div className="search-section">
         <div className="search-bar">
-          <input type="text" placeholder="Search..." />
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
       </div>
-
       <div className="filter-section">
-        <button className="filter-btn main-filter">filter....</button>
-        <button className="filter-btn date-filter">Datum</button>
+        {/* <button className="filter-btn date-filter">Datum</button> */}
+        <div className="dropdown">
+          <button className="filter-btn dropdown-btn">
+            Sortera: {sortLabel} ▼
+          </button>
+          <div className="dropdown-content">
+            <a onClick={() => handleSortChange('title_asc', 'Titel (A-Ö)')}>Titel (A-Ö)</a>
+            <a onClick={() => handleSortChange('title_desc', 'Titel (Ö-A)')}>Titel (Ö-A)</a>
+            <a onClick={() => handleSortChange('newest', 'Premiär (Nyast)')}>Premiär (Nyast)</a>
+            <a onClick={() => handleSortChange('oldest', 'Premiär (Äldst)')}>Premiär (Äldst)</a>
+            <a onClick={() => handleSortChange('duration_asc', 'Speltid (Kortast)')}>Speltid (Kortast)</a>
+            <a onClick={() => handleSortChange('duration_desc', 'Speltid (Längst)')}>Speltid (Längst)</a>
+          </div>
+        </div>
+        <div className="dropdown">
+          <button className="filter-btn dropdown-btn">
+            {selectedGenre === '' ? 'Alla Genrer' : selectedGenre} ▼
+          </button>
+          <div className="dropdown-content">
+            <a onClick={() => setSelectedGenre('')}>Alla Genrer</a>
+            {uniqueGenres.map((genre) => (
+              <a key={genre} onClick={() => setSelectedGenre(genre)}>
+                {genre}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
-
       {/* Movie Grid */}
       <main className="movie-grid">
-        {selectedMovies.map((film) => (
-          <div key={film.filmid} className="movie-card">
+        {displayMovies.map((movie) => (
+          <div key={movie.filmid} className="movie-card">
             <div className="poster-container">
               <div
                 className="poster-placeholder"
-                style={{ backgroundImage: `url(/moviePoster/${film.filmid}.png)` }}
+                style={{ backgroundImage: `url(/moviePoster/${movie.filmid}.png)` }}
               >
                 <div className="poster-overlay-text">
-                  <h3>{film.title}</h3>
-                  <p>{film.duration} min | {film.language}</p>
+                  <h3>{movie.title}</h3>
+                  <p>{movie.duration} min | {movie.genre}| {movie.language}</p>
                 </div>
               </div>
             </div>
             <div className="card-info">
-              <p className="movie-name">{film.title}</p>
+              <p className="movie-name">{movie.title}</p>
               <button
                 className="details-btn"
-                onClick={() => selectedMovieNavigation(film.filmid)}
+                onClick={() => selectedMovieNavigation(movie.filmid)}
               >
                 Detaljer
               </button>

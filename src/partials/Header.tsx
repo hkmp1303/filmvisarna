@@ -3,20 +3,20 @@ import routes from '../routes';
 
 export default function Header() {
 
-    return <header>
+  return <header>
 
-        <Link to="/" className='header-logo'>
-            <img src="/public/logav2.svg" alt="Logotyp of Filmvisarna" />
-        </Link>
+    <Link to="/" className='header-logo'>
+      <img src="/logav2.svg" alt="Logotyp of Filmvisarna" />
+    </Link>
 
-        <h1>Film Visarna</h1>
+    <h1>Film Visarna</h1>
 
-        <nav className='header-nav'>
-            {routes.filter(x => x.menuLabel)
-                .map(({ menuLabel, path }, i) =>
-                    <NavLink key={i} to={path}>{menuLabel}</NavLink>)}
-        </nav>
-    </header>
+    <nav className='header-nav'>
+      {routes.filter(x => x.menuLabel)
+        .map(({ menuLabel, path }, i) =>
+          <NavLink key={i} to={path}>{menuLabel}</NavLink>)}
+    </nav>
+  </header>;
 }
 
 /*
