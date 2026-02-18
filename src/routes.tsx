@@ -4,6 +4,8 @@ import Login from './pages/Login';
 import MovieDetails from './pages/MovieDetailsPage';
 import AboutUs from './pages/AboutUsPage';
 import Contact from './pages/ContactPage';
+import Kiosk from './pages/Kiosk';
+
 
 interface Route {
   element: JSX.Element;
@@ -16,7 +18,8 @@ const routes: Route[] = [
   { element: <Login />, path: '/Login', menuLabel: 'Login' },
   { element: <AboutUs />, path: '/aboutus', menuLabel: 'Om oss' },
   { element: <Contact />, path: '/contact', menuLabel: 'Kontakt' },
-  { element: <MovieDetails />, path: '/moviedetails/:filmid' }
+  { element: <MovieDetails />, path: '/moviedetails/:filmid' },
+  { element: <Kiosk />, path: '/Kiosk', menuLabel: 'Kiosk' }
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
 ];
