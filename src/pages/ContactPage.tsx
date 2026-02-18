@@ -64,26 +64,24 @@ export default function Contact() {
 
         </section>
         <section className='form-container'>
-            <div className='form-box'>
-                <form onSubmit={handleSubmit}>
-                    <label> Namn: </label>
-                    <input name='name' value={submitData.name} className='input-field' type="text" onChange={handleData} />
-                    <label> E-mail: </label>
-                    <input name='email' value={submitData.email} className='input-field' type="text" onChange={handleData} />
-                    <select name="subject" value={submitData.subject} id="">
-                        <option value="None">Ärende</option>
-                        <option value="Föreställning">Föreställning</option>
-                        <option value="Biljettfråga">Biljettfråga</option>
-                        <option value="Kiosken">Kiosken</option>
-                        <option value="Betalning">Betalning</option>
-                        <option value="Övrigt">Övrigt</option>
-                    </select>
-                    <label htmlFor="">Skriv
-                    </label>
-                    <textarea name='message' value={submitData.message} onChange={handleData}></textarea>
-                    <button type='submit'> Skicka</button>
-                </form>
-            </div>
+            <form onSubmit={handleSubmit}>
+                <label> Namn: </label>
+                <input name='name' value={submitData.name} className='input-field' type="text" onChange={handleData} />
+                <label> E-mail: </label>
+                <input name='email' value={submitData.email} className='input-field' type="text" onChange={handleData} />
+                <select name="subject" value={submitData.subject} id="">
+                    <option value="None">Ärende</option>
+                    <option value="Föreställning">Föreställning</option>
+                    <option value="Biljettfråga">Biljettfråga</option>
+                    <option value="Kiosken">Kiosken</option>
+                    <option value="Betalning">Betalning</option>
+                    <option value="Övrigt">Övrigt</option>
+                </select>
+                <label htmlFor="">Skriv
+                </label>
+                <textarea name='message' value={submitData.message} onChange={handleData}></textarea>
+                <button className='submit-btn' type='submit'> Skicka</button>
+            </form>
         </section>
     </article>
 }
