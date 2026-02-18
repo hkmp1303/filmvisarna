@@ -30,6 +30,8 @@ export default function Contact() {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        console.log('Skickar data:', submitData);
+
         setSubmitted(true);
 
         //const nativeEvent = e.nativeEvent as SubmitEvent;
@@ -52,7 +54,7 @@ export default function Contact() {
             <h1>Kontakta oss</h1>
             <h3>Adress:</h3>
             <p>Storgatan 12</p>
-            <p>123 45 Filmstad</p>
+            <p>123 45 Småstad</p>
             <p>Sverige</p>
             <h3>Telefon:</h3>
             <p>01-000000000</p>
@@ -66,9 +68,9 @@ export default function Contact() {
         <section className='form-container'>
             <form onSubmit={handleSubmit}>
                 <label> Namn: </label>
-                <input name='name' value={submitData.name} className='input-field' type="text" onChange={handleData} />
+                <input name='name' value={submitData.name} className='input-field' type="text" onChange={handleData} required />
                 <label> E-mail: </label>
-                <input name='email' value={submitData.email} className='input-field' type="text" onChange={handleData} />
+                <input name='email' value={submitData.email} className='input-field' type="email" onChange={handleData} required />
                 <select name="subject" value={submitData.subject} id="">
                     <option value="None">Ärende</option>
                     <option value="Föreställning">Föreställning</option>
@@ -79,7 +81,7 @@ export default function Contact() {
                 </select>
                 <label htmlFor="">Skriv
                 </label>
-                <textarea name='message' value={submitData.message} onChange={handleData}></textarea>
+                <textarea name='message' value={submitData.message} onChange={handleData} required></textarea>
                 <button className='submit-btn' type='submit'> Skicka</button>
             </form>
         </section>
