@@ -12,7 +12,6 @@ interface contactForm {
 
 export default function Contact() {
 
-
     const [submitData, setSubmitData] = useState<contactForm>({
         name: '',
         email: '',
@@ -30,6 +29,7 @@ export default function Contact() {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        //change here if we're gonna do it as an emil or as an internal message system????
         console.log('Skickar data:', submitData);
 
         setSubmitted(true);
@@ -38,8 +38,8 @@ export default function Contact() {
         setSubmitted(true);
     }
 
-
     return <article className='contact-page'>
+
         {submitted && (
             <div className='popup-window'>
                 <div className='popup-content'>
