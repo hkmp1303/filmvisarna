@@ -56,7 +56,7 @@ export default function MovieDetails() {
             </section>
             <div className="colum1-container">
                 <div className="trailer-container">
-                    <iframe src="https://www.youtube.com/embed/ZDlYxy69R3A?si=mSlEj8VkAXaEjGk4" title="Trailer video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"   ></iframe>
+                    <iframe src={film.trailer} title="Trailer video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"   ></iframe>
                 </div>
                 <div className="date-picker">
                     {screenings && screenings.length > 0 ? (
