@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
-import type { User } from '../utilities/types'; // Se till att denna finns!
+import type { User } from '../utilities/types';
 import '../css/Login.css';
 
 interface LoginContext {
@@ -42,8 +42,7 @@ export default function Login() {
   const handleLogout = async () => {
     try {
       await fetch('/api/login', { method: 'DELETE' }); // Säg till backend att döda sessionen
-      setUser(null); // Töm frontend-state
-      // Vi stannar kvar på sidan, så nu visas inloggningsformuläret igen
+      setUser(null);
     } catch (err) {
       console.error("Kunde inte logga ut", err);
     }
@@ -52,18 +51,17 @@ export default function Login() {
   if (user) {
     return (
       <div className="login-container">
-        <div className="login-input" style={{ textAlign: 'center', maxWidth: '400px' }}>
-          <h2 style={{ color: 'rgb(255, 245, 98)', marginBottom: '20px' }}>
+        <div className="login-input">
+          <h2>
             Du är redan inloggad
           </h2>
-          <p style={{ color: 'white', marginBottom: '30px' }}>
+          <p>
             Inloggad som: <strong>{user.firstname ? `${user.firstname} ${user.lastname}` : user.email}</strong>
           </p>
 
           <button
             className="confirm-btn"
             onClick={handleLogout}
-            style={{ backgroundColor: '#ff6b6b', color: 'white' }} // Röd färg för logga ut
           >
             Logga ut
           </button>
@@ -71,7 +69,6 @@ export default function Login() {
           <button
             className="forgoten-password-btn"
             onClick={() => navigate('/')}
-            style={{ marginTop: '20px', display: 'block', width: '100%' }}
           >
             Gå till startsidan
           </button>

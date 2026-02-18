@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../css/Login.css';
+import '../css/Register.css';
 
 export default function Register() {
   const navigate = useNavigate();
 
-  // 1. Uppdatera state med firstname och lastname separat
+  // firstname och lastname separat
   const [formData, setFormData] = useState({
     firstname: '',
     lastname: '',
@@ -22,7 +22,7 @@ export default function Register() {
   };
 
   const handleRegister = async () => {
-    // 2. Validera att båda namnen är ifyllda
+    // Validera att båda namnen är ifyllda
     if (!formData.firstname || !formData.lastname || !formData.email || !formData.password) {
       setError("Fyll i förnamn, efternamn, e-post och lösenord.");
       return;
@@ -34,15 +34,15 @@ export default function Register() {
     }
 
     try {
-      // 3. Skicka datan direkt (ingen split behövs längre!)
+      // Skicka datan direkt
       const response = await fetch('/api/user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: formData.email,
           password: formData.password,
-          firstname: formData.firstname, // Direkt från fältet
-          lastname: formData.lastname,   // Direkt från fältet
+          firstname: formData.firstname,
+          lastname: formData.lastname,
           phone: formData.phone
         })
       });
@@ -70,7 +70,7 @@ export default function Register() {
       <div className="login-input">
         {error && <p className="error-message">{error}</p>}
 
-        {/* --- FÖRNAMN --- */}
+        {/*FÖRNAMN*/}
         <div className="name-input">
           <p>Förnamn</p>
           <input
@@ -81,7 +81,7 @@ export default function Register() {
           />
         </div>
 
-        {/* --- EFTERNAMN (Ny separat rad) --- */}
+        {/*EFTERNAMN*/}
         <div className="name-input">
           <p>Efternamn</p>
           <input
