@@ -15,7 +15,7 @@ body {
 
 header {
   width: 99%;
-  margin: 0 auto;
+  margin: 10px auto;
   display: grid;
   color: #fdfff1;
   grid-template-columns: 1fr 1fr 1fr;
@@ -37,8 +37,9 @@ header {
 /* The actual SVG */
 .header-logo svg {
   width: 120px;
-  /* adjust this to shrink the logo */
-  height: auto;
+  height: Auto;
+  padding-left: 10px;
+  padding-bottom: 10px;
 }
 
 h1 {

@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import routes from '../routes';
-import Logo from '../assets/logav2.svg?react';
+import Logo from '../assets/logav2-cropped.svg?react';
 
 export default function Header() {
 

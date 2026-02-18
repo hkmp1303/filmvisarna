@@ -33,7 +33,7 @@ const kioskItems = [
     id: 5,
     name: "Bacon Chips",
     description: "Saltigt knappriga Bacon Chips",
-    price: "15kr, 25kr, 30kr",
+    price: "Liten - 15kr, Mellan - 25kr, Stor - 30kr",
     image: "/public/Kiosk/Bacon_Chips.jpg"
   },
 ];
