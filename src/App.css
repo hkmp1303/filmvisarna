@@ -44,6 +44,10 @@ header {
     text-decoration: none;
     justify-self: end;
 
+    a {
+      padding: 0 5px;
+    }
+
     &:hover {
       color: blue;
 

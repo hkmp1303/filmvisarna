@@ -3,6 +3,7 @@ import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import MovieDetails from './pages/MovieDetailsPage';
 import AboutUs from './pages/AboutUsPage';
+import Contact from './pages/ContactPage';
 
 interface Route {
   element: JSX.Element;
@@ -12,8 +13,9 @@ interface Route {
 
 const routes: Route[] = [
   { element: <LandingPage />, path: '/', menuLabel: 'Hem' },
-  { element: <Login />, path: '/Login', menuLabel: 'login' },
-  { element: <AboutUs />, path: '/aboutus', menuLabel: 'aboout us' },
+  { element: <Login />, path: '/Login', menuLabel: 'Login' },
+  { element: <AboutUs />, path: '/aboutus', menuLabel: 'Om oss' },
+  { element: <Contact />, path: '/contact', menuLabel: 'Kontakt' },
   { element: <MovieDetails />, path: '/moviedetails/:filmid' }
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
