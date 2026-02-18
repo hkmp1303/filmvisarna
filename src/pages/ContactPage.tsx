@@ -67,11 +67,13 @@ export default function Contact() {
         </section>
         <section className='form-container'>
             <form onSubmit={handleSubmit}>
+                <br />
                 <label> Namn: </label>
                 <input name='name' value={submitData.name} className='input-field' type="text" onChange={handleData} required />
+                <br />
                 <label> E-mail: </label>
                 <input name='email' value={submitData.email} className='input-field' type="email" onChange={handleData} required />
-                <select name="subject" value={submitData.subject} id="">
+                <select name="subject" value={submitData.subject} onChange={handleData}>
                     <option value="None">Ärende</option>
                     <option value="Föreställning">Föreställning</option>
                     <option value="Biljettfråga">Biljettfråga</option>
@@ -79,7 +81,7 @@ export default function Contact() {
                     <option value="Betalning">Betalning</option>
                     <option value="Övrigt">Övrigt</option>
                 </select>
-                <label htmlFor="">Skriv
+                <label htmlFor="">Skriv ett meddelande:
                 </label>
                 <textarea name='message' value={submitData.message} onChange={handleData} required></textarea>
                 <button className='submit-btn' type='submit'> Skicka</button>
