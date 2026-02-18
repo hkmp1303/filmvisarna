@@ -1,4 +1,4 @@
-/* namespace WebApp;
+namespace WebApp;
 
 public static class RestApi
 {
@@ -43,7 +43,7 @@ public static class RestApi
         HttpContext context, string table, string id
     ) =>
         RestResult.Parse(context, SQLQueryOne(
-            $"SELECT * FROM {table} WHERE id = @id",
+            $"SELECT * FROM {table} WHERE {table}id = @id",
             ReqBodyParse(table, Obj(new { id })).body,
             context
         ))
@@ -57,7 +57,7 @@ public static class RestApi
       body.id = id;
       var parsed = ReqBodyParse(table, body);
       var update = parsed.update;
-      var sql = $"UPDATE {table} SET {update} WHERE id = @id";
+      var sql = $"UPDATE {table} SET {update} WHERE {table}id = @id";
       var result = SQLQueryOne(sql, parsed.body, context);
       return RestResult.Parse(context, result);
     });
@@ -66,10 +66,30 @@ public static class RestApi
          HttpContext context, string table, string id
     ) =>
         RestResult.Parse(context, SQLQueryOne(
-            $"DELETE FROM {table} WHERE id = @id",
+            $"DELETE FROM {table} WHERE {table}id = @id",
             ReqBodyParse(table, Obj(new { id })).body,
             context
         ))
     );
+
+    App.MapGet("/api/selectScreening/{table}/{id}", (
+        HttpContext context, string table, string id
+      ) =>
+        RestResult.Parse(context, SQLQuery(
+            $@"SELECT 
+            f.filmid AS filmid, 
+            sc.start AS start, 
+            sa.description AS description 
+           FROM {table} AS f 
+           JOIN screening AS sc ON f.filmid = sc.filmid 
+           JOIN salon AS sa ON sc.salonid = sa.salonid 
+           WHERE f.filmid = @id",
+            ReqBodyParse(table, Obj(new { id })).body,
+            context
+        ))
+      );
   }
-} */
+}
+
+
+

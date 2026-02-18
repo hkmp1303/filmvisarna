@@ -45,8 +45,8 @@ export default function Footer() {
         {menuOpen && (
           <div className="footer-submenu">
             <Link to="/tema-dagar">Tema dagar</Link>
-            <Link to="/om-oss">Om oss</Link>
-            <Link to="/kontakt">Kontakt</Link>
+            <Link to="/aboutus">Om oss</Link>
+            <Link to="/contact">Kontakt</Link>
             <Link to="/kiosk">Kiosk</Link>
           </div>
         )}
