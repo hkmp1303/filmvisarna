@@ -5,7 +5,7 @@ import MovieDetails from './pages/MovieDetailsPage';
 import AboutUs from './pages/AboutUsPage';
 import Contact from './pages/ContactPage';
 import Kiosk from './pages/Kiosk';
-
+import Register from './pages/Register';
 
 interface Route {
   element: JSX.Element;
@@ -19,7 +19,8 @@ const routes: Route[] = [
   { element: <AboutUs />, path: '/aboutus', menuLabel: 'Om oss' },
   { element: <Contact />, path: '/contact', menuLabel: 'Kontakt' },
   { element: <MovieDetails />, path: '/moviedetails/:filmid' },
-  { element: <Kiosk />, path: '/Kiosk', menuLabel: 'Kiosk' }
+  { element: <Kiosk />, path: '/Kiosk', menuLabel: 'Kiosk' },
+  { element: <Register />, path: '/Register', menuLabel: 'Registrera' }
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
 ];
