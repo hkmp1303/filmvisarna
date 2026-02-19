@@ -56,8 +56,7 @@ export default function MovieDetails() {
             </section>
             <div className="colum1-container">
                 <div className="trailer-container">
-                    <iframe width="560" height="315" src={film.trailer+"&amp;controls=0&amp;modestbranding=0&amp;rel=0"} title="Trailer videospelare" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-                    {/* <iframe src="{film.trailer}" title="Trailer video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"   ></iframe> */}
+                    <iframe src={film.trailer+"&amp;controls=0&amp;modestbranding=0&amp;rel=0"} title="Trailer videospelare" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                 </div>
                 <div className="date-picker">
                     {screenings && screenings.length > 0 ? (
