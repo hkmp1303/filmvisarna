@@ -15,9 +15,14 @@ export interface Film {
 }
 
 export interface Filmdetails {
-  actor: string;
+  actor: any;
+  actors: Array<Actor>;
   director: string;
   release_year: string;
   production_company: string;
   production_counrty: string;
+}
+
+export interface Actor {
+  name: string;
 }
