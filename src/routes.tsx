@@ -6,6 +6,7 @@ import AboutUs from './pages/AboutUsPage';
 import Contact from './pages/ContactPage';
 import Kiosk from './pages/Kiosk';
 import Register from './pages/Register';
+import TemaDagar from './pages/TemaDagar';
 
 interface Route {
   element: JSX.Element;
@@ -20,7 +21,8 @@ const routes: Route[] = [
   { element: <Contact />, path: '/contact', menuLabel: 'Kontakt' },
   { element: <MovieDetails />, path: '/moviedetails/:filmid' },
   { element: <Kiosk />, path: '/Kiosk', menuLabel: 'Kiosk' },
-  { element: <Register />, path: '/Register', menuLabel: 'Registrera' }
+  { element: <Register />, path: '/Register', menuLabel: 'Registrera' },
+  { element: <TemaDagar />, path: '/TemaDagar', menuLabel: 'Tema Dagar' }
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
 ];
