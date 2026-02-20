@@ -27,6 +27,18 @@ public static class RestApi
       }
     });
 
+    // App.MapPost("api/PassRecovery", (HttpContent context, JsonElement bodyJson) =>
+    // {
+    //   try
+    //   {
+    //     System.Console.WriteLine("text to see if api connection works. you now have a new password");
+    //   }
+    //   catch (Exception ex)
+    //   {
+    //     System.Console.WriteLine("password crash" + ex.Message);
+    //   }
+    // });
+
     App.MapPost("/api/{table}", (
         HttpContext context, string table, JsonElement bodyJson
     ) =>

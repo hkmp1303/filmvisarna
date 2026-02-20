@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { ChangeEvent, FormEvent } from 'react';
-
+import fetchJson from '../utilities/fetchJson';
 import '../css/ContactPage.css'
 
 interface contactForm {
@@ -29,34 +29,31 @@ export default function Contact() {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5001/api/contact', {
+            const data = await fetchJson('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    name: submitData.name,
-                    email: submitData.email,
-                    subject: submitData.subject,
-                    message: submitData.message
-                }),
+                body: JSON.stringify(submitData),
             });
 
-            if (response.ok) {
+            if (data && !data.error) {
                 setSubmitted(true);
+                setSubmitData({ name: '', email: '', subject: 'None', message: '' });
             } else {
-                alert("Något gick fel vid sändningen.");
+                alert("Något gick fel" + (data.error || "Okänt fel"));
             }
         } catch (error) {
             console.error("Kunde inte kontakta servern:", error);
+            alert("Kunde inte ansluta till servern")
         }
 
         //change here if we're gonna do it as an emil or as an internal message system????
-        console.log('Skickar data:', submitData);
+        // console.log('Skickar data:', submitData);
 
-        setSubmitted(true);
+        // setSubmitted(true);
 
-        //const nativeEvent = e.nativeEvent as SubmitEvent;
+        // //const nativeEvent = e.nativeEvent as SubmitEvent;
         setSubmitted(true);
     }
 
