@@ -26,8 +26,30 @@ export default function Contact() {
         setSubmitData(prev => ({ ...prev, [name]: value }));
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        try {
+            const response = await fetch('http://localhost:5001/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: submitData.name,
+                    email: submitData.email,
+                    subject: submitData.subject,
+                    message: submitData.message
+                }),
+            });
+
+            if (response.ok) {
+                setSubmitted(true);
+            } else {
+                alert("Något gick fel vid sändningen.");
+            }
+        } catch (error) {
+            console.error("Kunde inte kontakta servern:", error);
+        }
 
         //change here if we're gonna do it as an emil or as an internal message system????
         console.log('Skickar data:', submitData);
