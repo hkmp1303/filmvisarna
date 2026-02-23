@@ -5,7 +5,7 @@ export interface Screening {
   salonid: number;
 }
 
-// includes join with salon o get room_number
+// includes join with salon to get room_number
 export interface BriefScreening {
   screeningid: number;
   filmid: number;
