@@ -12,7 +12,6 @@
     color: #fffdc4;
   }
 
-  /* Intro box */
   .themes-intro {
     background: #ffffff99;
     border-radius: 12px;
@@ -29,17 +28,14 @@
 
   .themes-intro p {
     font-size: 1rem;
-    color: #444;
   }
 
-  /* Grid */
   .themes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
   }
 
-  /* Theme card */
   .theme-card {
     background: #ffffff99;
     border-radius: 12px;
@@ -61,20 +57,21 @@
 
 
 
-/* Desktop CSS rules */
+/* Komputa stuff */
 @media (min-width: 769px) {
   .themes-title {
     font-style: italic;
+    color: #fffdc4;
   }
 
-  /* Intro box */
   .themes-intro {
     background: #ffffff99;
     border-radius: 12px;
     padding: 1.5rem;
-    margin-bottom: 2.5rem;
+    margin: 1.5rem;
+    margin-bottom: 3rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
+    text-align: center;
     font-size: 1.4rem;
   }
 
@@ -83,13 +80,13 @@
     font-style: italic;
   }
 
-  /* Grid becomes flex-like cards */
   .theme-card {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
     padding: 1.5rem;
+    margin: 1.5rem;
     text-align: left;
     font-size: 1.5rem;
 

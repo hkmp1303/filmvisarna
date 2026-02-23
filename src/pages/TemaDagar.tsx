@@ -29,8 +29,8 @@ const themes: Theme[] = [
   },
   {
     id: 5,
-    title: "Action",
-    description: "Mikael Vik"
+    title: "Romans",
+    description: "Puss puss :*"
   },
   {
     id: 6,
