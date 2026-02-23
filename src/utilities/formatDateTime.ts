@@ -1,4 +1,5 @@
-export const formatDateTime = (dateString: string) => {
+export const formatDateTime = (dateString: string | undefined): string => {
+  if (typeof dateString == "undefined") return "";
   const dateObj = new Date(dateString);
   let formatted = dateObj.toLocaleString('sv-SE', {
     weekday: 'short',

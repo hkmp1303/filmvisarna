@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useFetchJson from '../utilities/useFetchJson';
 import { sortAndFilterMovies } from '../utilities/movieUtils';
-import type { Movie, SortOption } from "../utilities/types";
+import type { SortOption } from "../utilities/types";
+import type { BriefFilm } from '../utilities/filmInterface';
 import '../css/LandingPage.css';
 
 
@@ -12,7 +13,7 @@ export default function LandingPage() {
 
 
 
-  const movies = useFetchJson<Movie[]>('/api/film');
+  const movies = useFetchJson<BriefFilm[]>('/api/film');
   const [sortBy, setSortBy] = useState<SortOption>('title_asc');
   const [sortLabel, setSortLabel] = useState('Titel (A-Ö)');
   const [searchQuery, setSearchQuery] = useState('');

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Main from './partials/Main';
 import Header from './partials/Header';
 import Footer from './partials/Footer';
-import type { User } from './utilities/types';
+import type { User } from './utilities/userInterface';
 import './App.css';
 
 function App() {
@@ -46,7 +46,7 @@ export default App
 
 /*
 
-This is how I did my old routing. 
+This is how I did my old routing.
 Add Header and Footer as they are created
 
 import Header from './partials/Header'           - Done

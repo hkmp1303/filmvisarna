@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useRef } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../css/MovieDetails.css';
 import useFetchJson from '../utilities/useFetchJson';
 import type { Film, Actor } from '../utilities/filmInterface';
-import type { Screening } from '../utilities/screeningInterface';
+import type { BriefScreening } from '../utilities/screeningInterface';
 import { formatDateTime } from '../utilities/formatDateTime';
-
+import fromYouTubeURI from '../utilities/extractVideoId';
 
 export default function MovieDetails() {
+    const navigate = useNavigate();
     const { filmid } = useParams();
     const [date, setDate] = useState('');
 
