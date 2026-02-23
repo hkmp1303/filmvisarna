@@ -1,11 +1,10 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../css/MovieDetails.css';
 import useFetchJson from '../utilities/useFetchJson';
 import type { Film, Actor } from '../utilities/filmInterface';
 import type { BriefScreening } from '../utilities/screeningInterface';
 import { formatDateTime } from '../utilities/formatDateTime';
-import fromYouTubeURI from '../utilities/extractVideoId';
 
 export default function MovieDetails() {
     const navigate = useNavigate();
