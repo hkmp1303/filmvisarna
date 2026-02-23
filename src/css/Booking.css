@@ -1,0 +1,6 @@
+dialog {
+ display:block;
+}
+dialog:not(:target):not([open]) {
+  display:none;
+}
