@@ -77,18 +77,35 @@ public static class RestApi
       ) =>
         RestResult.Parse(context, SQLQuery(
             $@"SELECT
-            screeningid,
-            filmid,
-            start,
-            room_number,
-            description
-           FROM screening
-           JOIN salon USING(salonid)
-           WHERE filmid = @id",
+          screeningid,
+          filmid,
+          start,
+          room_number,
+          description
+          FROM screening
+          JOIN salon USING(salonid)
+          WHERE filmid = @id",
             ReqBodyParse(table, Obj(new { id })).body,
             context
         ))
       );
+
+    App.MapDelete("/api/resetdb", (
+      HttpContext context
+    ) => {
+      var result = SQLQuery(
+        $@"SET FOREIGN_KEY_CHECKS = 0;
+          DROP TABLE IF EXISTS
+            user,
+            price,
+            film,
+            salon,
+            screening,
+            booking,
+            reservation;
+          SET FOREIGN_KEY_CHECKS = 1;");
+      return RestResult.Parse(context, result);
+    });
   }
 }
 
