@@ -1,0 +1,109 @@
+@media (max-width: 768px) {
+  .themes-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .themes-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: #fffdc4;
+  }
+
+  /* Intro box */
+  .themes-intro {
+    background: #ffffff99;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .themes-intro h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .themes-intro p {
+    font-size: 1rem;
+    color: #444;
+  }
+
+  /* Grid */
+  .themes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* Theme card */
+  .theme-card {
+    background: #ffffff99;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .theme-name {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .theme-description {
+    font-size: 0.95rem;
+    color: #555;
+  }
+}
+
+
+
+/* Desktop CSS rules */
+@media (min-width: 769px) {
+  .themes-title {
+    font-style: italic;
+  }
+
+  /* Intro box */
+  .themes-intro {
+    background: #ffffff99;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    font-size: 1.4rem;
+  }
+
+  .themes-intro p {
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+
+  /* Grid becomes flex-like cards */
+  .theme-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    text-align: left;
+    font-size: 1.5rem;
+
+    background: #ffffff99;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .theme-name {
+    font-size: 1.8rem;
+  }
+
+  .theme-description {
+    font-size: 1.3rem;
+    font-style: italic;
+  }
+}
