@@ -19,7 +19,7 @@ public static class RestApi
       {
         // Get the insert id and add to our result
         result.insertId = SQLQueryOne(
-                @$"SELECT id AS __insertId 
+                @$"SELECT id AS __insertId
                        FROM {table} ORDER BY id DESC LIMIT 1"
             ).__insertId;
       }
@@ -76,14 +76,15 @@ public static class RestApi
         HttpContext context, string table, string id
       ) =>
         RestResult.Parse(context, SQLQuery(
-            $@"SELECT 
-            f.filmid AS filmid, 
-            sc.start AS start, 
-            sa.description AS description 
-           FROM {table} AS f 
-           JOIN screening AS sc ON f.filmid = sc.filmid 
-           JOIN salon AS sa ON sc.salonid = sa.salonid 
-           WHERE f.filmid = @id",
+            $@"SELECT
+            screeningid,
+            filmid,
+            start,
+            room_number,
+            description
+           FROM screening
+           JOIN salon USING(salonid)
+           WHERE filmid = @id",
             ReqBodyParse(table, Obj(new { id })).body,
             context
         ))
