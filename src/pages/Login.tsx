@@ -68,7 +68,7 @@ export default function Login() {
 
           <button
             className="forgoten-password-btn"
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/passwordrecovery')}
           >
             Gå till startsidan
           </button>

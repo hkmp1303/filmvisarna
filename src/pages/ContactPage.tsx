@@ -47,13 +47,6 @@ export default function Contact() {
             console.error("Kunde inte kontakta servern:", error);
             alert("Kunde inte ansluta till servern")
         }
-
-        //change here if we're gonna do it as an emil or as an internal message system????
-        // console.log('Skickar data:', submitData);
-
-        // setSubmitted(true);
-
-        // //const nativeEvent = e.nativeEvent as SubmitEvent;
         setSubmitted(true);
     }
 
