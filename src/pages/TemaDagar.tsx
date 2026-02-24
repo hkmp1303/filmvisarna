@@ -25,7 +25,7 @@ const themes: Theme[] = [
   {
     id: 4,
     title: "Klassisk",
-    description: "Klassiska filmer som än idag ses av människor "
+    description: "Klassisker som än idag slår förväntningar"
   },
   {
     id: 5,
@@ -35,12 +35,12 @@ const themes: Theme[] = [
   {
     id: 6,
     title: "Skräck",
-    description: "Titta på egen risk! Buuuuuuu"
+    description: "Titta på egen risk! BuUUuUuUuUUUuu"
   },
   {
     id: 7,
     title: "Svart vitt",
-    description: "Svartvita filmer, kan hjälpa er o era ungar med deras jävla brainrot tiktok skit"
+    description: "Filmer utan färg, men med färgglad historia!"
   },
 ];
 
