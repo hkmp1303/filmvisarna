@@ -1,67 +1,59 @@
 using System.Text;
+using System.Text.Json; // För JsonElement
+
 namespace WebApp;
 
 public static class RecoverPassword
 {
-
-
     public static void Start()
     {
-
-        string pwdList = "123456789qwertyuiopasdfghjklzxcvbnm";
-        Random rnd = new();
-
-        int pwdLength = 10;
-        StringBuilder newRndPass = new(); // Använd StringBuilder för prestanda
-
-        for (int i = 0; i < pwdLength; i++)
+        // Vi mappar endpointen här
+        App.MapPut("/api/recoverpassword", (HttpContext context, JsonElement bodyJson) =>
         {
-            int position = rnd.Next(0, pwdList.Length);
-            newRndPass.Append(pwdList[position]);
-        }
+            string email = bodyJson.GetProperty("email").GetString();
 
-        string finalPassword = newRndPass.ToString();
-        Console.WriteLine(finalPassword);
-
-
-        App.MapPut("/api/recoverpassword", (HttpContent context, JsonElement bodyJson) =>
-        {
-
-            var dbUser = SQLQueryOne(
-                "SELECT * FROM user WHERE email = @email"
-             );
-
+            var dbUser = SQLQueryOne("SELECT * FROM user WHERE email = @email", new { email });
 
             if (dbUser == null)
             {
                 return RestResult.Parse(context, new { error = "No such user." });
             }
-            else
+
+            string pwdList = "123456789qwertyuiopasdfghjklzxcvbnm";
+            Random rnd = new();
+            StringBuilder newRndPass = new();
+            for (int i = 0; i < 10; i++)
             {
-                var newPassword = SQLQuery(
-                    "UPDATE user SET password = '{finalPassword}' WHERE email = @email* "
-                );
+                newRndPass.Append(pwdList[rnd.Next(0, pwdList.Length)]);
             }
+            string finalPassword = newRndPass.ToString();
+
+            string hashedPassword = Password.Encrypt(finalPassword);
+
+            SQLQuery("UPDATE user SET password = @password WHERE email = @email",
+                new { password = hashedPassword, email = email });
+
+            try
+            {
+                string subject = "Återställning av lösenord";
+                string body = $@"
+                    <h2>Ditt lösenord har återställts</h2>
+                    <p>Du kan nu logga in med ditt nya tillfälliga lösenord:</p>
+                    <p><b>{finalPassword}</b></p>
+                    <br>
+                    <p>Vi rekommenderar att du ändrar lösenordet när du har loggat in.</p>";
+
+                EmailService.SendEmail(email, subject, body);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Mejlfel: " + ex.Message);
+            }
+
+            return RestResult.Parse(context, new
+            {
+                message = "Password updated and sent",
+            });
         });
     }
-
-
 }
-
-
-
-
-
-
-
-// App.MapPost("api/PassRecovery", (HttpContent context, JsonElement bodyJson) =>
-// {
-//   try
-//   {
-//     System.Console.WriteLine("text to see if api connection works. you now have a new password");
-//   }
-//   catch (Exception ex)
-//   {
-//     System.Console.WriteLine("password crash" + ex.Message);
-//   }
-// });
