@@ -1,3 +1,14 @@
+export interface BriefFilm {
+  filmid: number;
+  title: string;
+  duration: number;
+  language: string;
+  cover_image: string;
+  description: string;
+  details: string;
+  genre: string;
+}
+
 export interface Film {
   filmid: number;
   title: string;

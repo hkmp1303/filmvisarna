@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import type { User } from '../utilities/types';
+import type { User } from '../utilities/userInterface';
 
 interface MainProps {
   user: User | null;
