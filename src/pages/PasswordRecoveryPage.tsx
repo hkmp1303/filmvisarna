@@ -40,6 +40,7 @@ export default function PasswordRecovery() {
                         <button onClick={() => setBtnToggle(false)}>Tillbaka</button>
                     </section>
                 ) : (
+
                     <section>
                         <h2>Glömt lösenord</h2>
                         <label>Skriv in din e-mail:</label>

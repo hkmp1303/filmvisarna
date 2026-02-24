@@ -14,6 +14,7 @@ public static class Server
     LoginRoutes.Start();
     RestApi.Start();
     Session.Start();
+    RecoverPassword.Start();
     // Start the server on port 3001
     var runUrl = "http://localhost:" + Globals.port;
     Log("Server running on:", runUrl);
