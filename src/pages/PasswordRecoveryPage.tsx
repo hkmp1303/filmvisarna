@@ -35,18 +35,21 @@ export default function PasswordRecovery() {
                 btnToggle ? (
                     <section>
                         <h2>Ditt lösenord är nu återställt</h2>
-                        <br />
-                        <p>Ett mail med ett nytt lösenord har nu skickats till din e-mail.</p>
-                        <button onClick={() => setBtnToggle(false)}>Tillbaka</button>
+                        <div className="pass-send-container">
+                            <p>Ett mail med ett nytt lösenord har nu skickats till din e-mail.</p>
+                            <button onClick={() => setBtnToggle(false)}>Tillbaka</button>
+                        </div>
                     </section>
                 ) : (
 
                     <section>
                         <h2>Glömt lösenord</h2>
-                        <label>Skriv in din e-mail:</label>
-                        <input type="email" ref={emailRef} />
-                        <button onClick={handleRecovery}>Återställ lösenord</button>
-                        <button onClick={() => navigate('/Login')}>Tillbaka</button>
+                        <div className="recover-pass-container">
+                            <label>Skriv in din e-mail:</label>
+                            <input type="email" ref={emailRef} />
+                            <button onClick={handleRecovery}>Återställ lösenord</button>
+                            <button onClick={() => navigate('/Login')}>Tillbaka</button>
+                        </div>
                     </section>
 
                 )}

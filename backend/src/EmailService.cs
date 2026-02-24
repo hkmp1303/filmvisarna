@@ -8,7 +8,7 @@ public class EmailConfig
 
 {
     public string smtpServer { get; set; }
-    public string smtpPart { get; set; }
+    public int smtpPort { get; set; }
     public string emailUsername { get; set; }
     public string emailPassword { get; set; }
 }
@@ -29,9 +29,15 @@ static class EmailService
 
             var config = JsonSerializer.Deserialize<EmailConfig>(configJson, options);
 
+            if (config != null)
+            {
+                Console.WriteLine($"Config laddad: Server={config.smtpServer}, User={config.emailUsername}");
+            }
+
             if (config == null || string.IsNullOrEmpty(config.smtpServer))
             {
                 throw new Exception("Could not read json file");
+                throw new Exception("Email configuration is missing values (check db-config.json)");
             }
 
             return config;
@@ -47,17 +53,17 @@ static class EmailService
     {
         var config = GetConfig();
 
-        var message = new MimeMessage()
-        {
-            From = { MailboxAddress.Parse(config.emailUsername) },
-            To = { MailboxAddress.Parse(to) },
-            Subject = subject,
-            Body = new TextPart("html") { Text = body } //change this if you want to write html in the email :)
-        };
+        var message = new MimeMessage();
 
+        message.From.Add(new MailboxAddress("Filmvisarna", config.emailUsername));
+        message.To.Add(new MailboxAddress("", to));
+        message.Subject = subject;
+        message.Body = new TextPart("html") { Text = body };
+
+        System.Console.WriteLine($"test to see if I get this {subject} {body}");
         using (var client = new SmtpClient())
         {
-            client.Connect(config.smtpServer, int.Parse(config.smtpPart), SecureSocketOptions.StartTls);
+            client.Connect(config.smtpServer, config.smtpPort, SecureSocketOptions.StartTls);
             client.Authenticate(config.emailUsername, config.emailPassword);
             client.Send(message);
             client.Disconnect(true);
@@ -86,8 +92,7 @@ static class EmailService
 
         using (var client = new SmtpClient())
         {
-            int port = string.IsNullOrEmpty(config.smtpPart) ? 587 : int.Parse(config.smtpPart);
-            client.Connect(config.smtpServer, port, SecureSocketOptions.StartTls); client.Authenticate(config.emailUsername, config.emailPassword);
+            client.Connect(config.smtpServer, config.smtpPort, SecureSocketOptions.StartTls); client.Authenticate(config.emailUsername, config.emailPassword);
             client.Send(message);
             client.Disconnect(true);
         }

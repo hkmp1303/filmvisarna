@@ -1,5 +1,5 @@
 using System.Text;
-using System.Text.Json; // För JsonElement
+using System.Text.Json;
 
 namespace WebApp;
 
@@ -7,7 +7,6 @@ public static class RecoverPassword
 {
     public static void Start()
     {
-        // Vi mappar endpointen här
         App.MapPut("/api/recoverpassword", (HttpContext context, JsonElement bodyJson) =>
         {
             string email = bodyJson.GetProperty("email").GetString();
@@ -47,7 +46,7 @@ public static class RecoverPassword
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Mejlfel: " + ex.Message);
+                Console.WriteLine("Error-RP: " + ex.Message);
             }
 
             return RestResult.Parse(context, new
