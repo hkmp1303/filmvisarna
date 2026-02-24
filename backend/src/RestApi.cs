@@ -54,7 +54,7 @@ public static class RestApi
       {
         // Get the insert id and add to our result
         result.insertId = SQLQueryOne(
-                @$"SELECT id AS __insertId 
+                @$"SELECT id AS __insertId
                        FROM {table} ORDER BY id DESC LIMIT 1"
             ).__insertId;
       }
@@ -111,18 +111,54 @@ public static class RestApi
         HttpContext context, string table, string id
       ) =>
         RestResult.Parse(context, SQLQuery(
-            $@"SELECT 
-            f.filmid AS filmid, 
-            sc.start AS start, 
-            sa.description AS description 
-           FROM {table} AS f 
-           JOIN screening AS sc ON f.filmid = sc.filmid 
-           JOIN salon AS sa ON sc.salonid = sa.salonid 
-           WHERE f.filmid = @id",
+            $@"SELECT
+          screeningid,
+          filmid,
+          start,
+          room_number,
+          description
+          FROM screening
+          JOIN salon USING(salonid)
+          WHERE filmid = @id",
             ReqBodyParse(table, Obj(new { id })).body,
             context
         ))
       );
+
+    App.MapDelete("/api/resetdb", (
+      HttpContext context
+    ) =>
+    {
+      var result = SQLQuery(
+        $@"SET FOREIGN_KEY_CHECKS = 0;
+          DROP TABLE IF EXISTS
+            user,
+            price,
+            film,
+            salon,
+            screening,
+            booking,
+            reservation;
+          SET FOREIGN_KEY_CHECKS = 1;");
+      return RestResult.Parse(context, result);
+    });
+    App.MapGet("/api/bookedSeatRes/{screeningid}", (
+      HttpContext context, string screeningid
+    ) =>
+      RestResult.Parse(context, SQLQuery(
+        $@"SELECT
+          `seat_number`,
+          `row_number`
+        FROM booking
+          INNER JOIN reservation USING(bookingid)
+        WHERE screeningid = @screeningid
+          AND `status`!='canceled'
+        ORDER BY `seat_number`
+        ;",
+          ReqBodyParse("booking", Obj(new { screeningid })).body,
+          context
+      ))
+    );
   }
 
   //this class i so the contactform

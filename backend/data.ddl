@@ -82,6 +82,7 @@ CREATE TABLE IF NOT EXISTS `booking` (
   `total_cost` decimal(10,2) NOT NULL,
   `date` timestamp NOT NULL,
   `guid` varchar(36) NOT NULL,
+  `status` enum('reserved','booked','canceled') NOT NULL,
   `screeningid` int unsigned NOT NULL,
   `userid` int unsigned DEFAULT NULL,
   PRIMARY KEY (`bookingid`),
