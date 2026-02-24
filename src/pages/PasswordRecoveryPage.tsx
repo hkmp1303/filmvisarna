@@ -1,5 +1,6 @@
-import { useState, useRef } from "react"
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import '../css/PasswordRecoveryPage.css';
 
 
 export default function PasswordRecovery() {
