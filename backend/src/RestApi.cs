@@ -92,7 +92,8 @@ public static class RestApi
 
     App.MapDelete("/api/resetdb", (
       HttpContext context
-    ) => {
+    ) =>
+    {
       var result = SQLQuery(
         $@"SET FOREIGN_KEY_CHECKS = 0;
           DROP TABLE IF EXISTS
@@ -106,6 +107,23 @@ public static class RestApi
           SET FOREIGN_KEY_CHECKS = 1;");
       return RestResult.Parse(context, result);
     });
+    App.MapGet("/api/bookedSeatRes/{screeningid}", (
+      HttpContext context, string screeningid
+    ) =>
+      RestResult.Parse(context, SQLQuery(
+        $@"SELECT
+          `seat_number`,
+          `row_number`
+        FROM booking
+          INNER JOIN reservation USING(bookingid)
+        WHERE screeningid = @screeningid
+          AND `status`!='canceled'
+        ORDER BY `seat_number`
+        ;",
+          ReqBodyParse("booking", Obj(new { screeningid })).body,
+          context
+      ))
+    );
   }
 }
 
