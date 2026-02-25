@@ -7,6 +7,7 @@ import type { Film } from '../utilities/filmInterface';
 import type { BriefScreening, Screening } from '../utilities/screeningInterface';
 import type { Salon, Res } from '../utilities/salonInterface';
 import { formatDateTime } from '../utilities/formatDateTime';
+import genre from '../utilities/i18n';
 
 export default function Booking() {
   const navigate = useNavigate();
@@ -85,6 +86,9 @@ export default function Booking() {
               <p>{error}</p>
               )}
               </form>*/}
+          <p>Åldersgräns: {film?.viewer_rating}</p>
+          <p>Speltid: {film?.duration} min</p>
+          <p>Genre: {genre(film?.genre ?? "")}</p>
           <p>{formatDateTime(screening?.start)} - Salong {salon?.room_number}</p>
         </fieldset>
       </section>
