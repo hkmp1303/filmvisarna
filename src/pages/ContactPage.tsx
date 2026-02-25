@@ -67,14 +67,14 @@ export default function Contact() {
             <h3>Adress:</h3>
             <p>Storgatan 12</p>
             <p>123 45 Småstad</p>
-            <p>Sverige</p>
+            <p className='pb-10'>Sverige</p>
             <h3>Telefon:</h3>
-            <p>01-000000000</p>
+            <p className='pb-10'>01-000000000</p>
             <h3>E-mail:</h3>
-            <p>info@filmvisarna.fake</p>
+            <p className='pb-10'>info@filmvisarna.fake</p>
             <h3>Öppettider:</h3>
             <p>Måndag - Fredag: 13:00 - 23:00</p>
-            <p>Lördag - Söndag: 10:00 - 00:00</p>
+            <p className='pb-10'>Lördag - Söndag: 10:00 - 00:00</p>
 
         </section>
         <section className='form-container'>
