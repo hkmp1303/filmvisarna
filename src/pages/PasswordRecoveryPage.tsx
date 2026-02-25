@@ -25,7 +25,7 @@ export default function PasswordRecovery() {
         if (response.ok) {
             setBtnToggle(true);
         } else {
-            alert("Kunde inte återställa lösenord. Kontrollera e-postadressen.");
+            alert("Ett fel har inträffat. Försök igen senare.");
         }
     };
 
@@ -36,7 +36,7 @@ export default function PasswordRecovery() {
                     <section>
                         <h2>Ditt lösenord är nu återställt</h2>
                         <div className="pass-send-container">
-                            <p>Ett mail med ett nytt lösenord har nu skickats till din e-mail.</p>
+                            <p className="text-2xl">Ett mail med ett nytt lösenord har nu skickats till din e-mail.</p>
                             <button onClick={() => setBtnToggle(false)}>Tillbaka</button>
                         </div>
                     </section>
@@ -45,7 +45,7 @@ export default function PasswordRecovery() {
                     <section>
                         <h2>Glömt lösenord</h2>
                         <div className="recover-pass-container">
-                            <label>Skriv in din e-mail:</label>
+                            <label className="text-2xl">Skriv in din e-mail:</label>
                             <input type="email" ref={emailRef} />
                             <button onClick={handleRecovery}>Återställ lösenord</button>
                             <button onClick={() => navigate('/Login')}>Tillbaka</button>
