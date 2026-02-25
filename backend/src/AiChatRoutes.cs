@@ -19,66 +19,40 @@ public static class AiChatRoutes
                 var body = JSON.Parse(bodyJson.ToString());
                 var messages = (Arr)body.messages;
 
-                var moviesFromDb = SQLQuery(@"
-                    SELECT title FROM film");
+                var moviesFromDb = SQLQuery("SELECT * FROM film");
 
-                /*SELECT film.title, screening.start, salon.room_number 
-                    FROM screening 
-                    JOIN film USING(filmid) 
-                    JOIN salon USING(salonid)*/
+                string movieContext = "\nVIKTIGT: Du får ENDAST svara baserat på dessa filmer från vår databas:\n";
 
-                string movieContext = "VIKTIGT: Du får ENDAST svara baserat på nedanstående filmlista. ";
-                movieContext += "Om listan är tom, säg att vi inte har några filmer ute just nu.\n";
-                movieContext += "Här är våra aktuella filmer hämtade direkt från databasen:\n";
-                if (moviesFromDb != null)
+                if (moviesFromDb != null && moviesFromDb.Count() > 0)
                 {
                     foreach (var movie in moviesFromDb)
                     {
-                        var name = movie.title ?? movie.Title ?? "Okänd titel";
-                        movieContext += $"- {name}\n";
+                        Console.WriteLine("DB RAD: " + JSON.Stringify(movie));
+
+                        string title = movie["title"]?.ToString()
+                                    ?? movie["Title"]?.ToString()
+                                    ?? movie["titel"]?.ToString()
+                                    ?? "Okänd titel";
+
+                        movieContext += $"- {title}\n";
                     }
                 }
                 else
                 {
-                    movieContext += "(Inga filmer hittades i databasen just nu.)";
+                    movieContext += "Just nu finns inga filmer i databasen.";
                 }
 
-                // string fullSystemInstruction = systemPrompt + "\n\n" + movieContext;
-
-                // if (messages == null)
-                // {
-                //     return RestResult.Parse(context, new { error = "Messages array is required." });
-                // }
-
-                // var fullMessages = Arr();
-
-                // if (!string.IsNullOrEmpty(systemPrompt))
-                // {
-                //     fullMessages.Push(Obj(new { role = "system", content = systemPrompt }));
-                // }
-                // if (!string.IsNullOrEmpty(fullSystemInstruction))
-                // {
-                //     fullMessages.Push(Obj(new { role = "system", content = fullSystemInstruction }));
-                // }
-                // messages.ForEach(msg => fullMessages.Push(msg));
-
-                string combinedPrompt = $"{systemPrompt}\n\n{movieContext}";
-                Console.WriteLine("DEBUG - Skickar prompt till AI:\n" + combinedPrompt);
-
                 var fullMessages = Arr();
+                string finalSystemInstruction = systemPrompt + "\n" + movieContext;
 
-                string finalInstruction = systemPrompt + "\n\n" + movieContext;
-
-                fullMessages.Push(Obj(new { role = "system", content = finalInstruction }));
+                fullMessages.Push(Obj(new { role = "system", content = finalSystemInstruction }));
 
                 if (messages != null)
                 {
                     messages.ForEach(msg => fullMessages.Push(msg));
                 }
 
-
                 var requestBody = Obj(new { messages = fullMessages });
-
                 var request = new HttpRequestMessage(HttpMethod.Post, $"{proxyUrl}/v1/chat/completions");
                 request.Headers.Add("Authorization", $"Bearer {aiAccessToken}");
                 request.Content = new StringContent(
@@ -92,64 +66,37 @@ public static class AiChatRoutes
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    var error = JSON.Parse(responseContent);
-                    return RestResult.Parse(context, error);
+                    return RestResult.Parse(context, JSON.Parse(responseContent));
                 }
 
-                var data = JSON.Parse(responseContent);
-                return RestResult.Parse(context, data);
+                return RestResult.Parse(context, JSON.Parse(responseContent));
             }
             catch (Exception ex)
             {
+                Console.WriteLine("FEL I CHATT: " + ex.Message);
                 return RestResult.Parse(context, new { error = ex.Message });
             }
         });
     }
+
     private static void LoadConfig()
     {
         try
         {
-            var configPath = Path.Combine(
-                AppContext.BaseDirectory, "..", "..", "..", "db-config.json"
-            );
-            var configJson = File.ReadAllText(configPath);
-            var config = JSON.Parse(configJson);
-
-            if (config.aiAccessToken != null)
-            {
-                aiAccessToken = (string)config.aiAccessToken;
-            }
-            else
-            {
-                Log("WARNING: aiAccessToken not found in db-config.json!");
-            }
+            var configPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "db-config.json");
+            var config = JSON.Parse(File.ReadAllText(configPath));
+            aiAccessToken = (string)config.aiAccessToken;
         }
-        catch (Exception ex)
-        {
-            Log("Error loading AI access token from config:", ex.Message);
-        }
+        catch (Exception ex) { Log("Error loading config:", ex.Message); }
     }
 
     private static void LoadSystemPrompt()
     {
         try
         {
-            var promptPath = Path.Combine(
-                AppContext.BaseDirectory, "..", "..", "..", "system-prompt.md"
-            );
-            if (File.Exists(promptPath))
-            {
-                systemPrompt = File.ReadAllText(promptPath);
-                Log("Loaded system prompt from system-prompt.md");
-            }
-            else
-            {
-                Log("No system-prompt.md found, running without system prompt");
-            }
+            var promptPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "system-prompt.md");
+            if (File.Exists(promptPath)) systemPrompt = File.ReadAllText(promptPath);
         }
-        catch (Exception ex)
-        {
-            Log("Error loading system prompt:", ex.Message);
-        }
+        catch (Exception ex) { Log("Error loading prompt:", ex.Message); }
     }
 }
