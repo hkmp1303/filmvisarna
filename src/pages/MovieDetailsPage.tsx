@@ -5,6 +5,7 @@ import useFetchJson from '../utilities/useFetchJson';
 import type { Film, Actor } from '../utilities/filmInterface';
 import type { BriefScreening } from '../utilities/screeningInterface';
 import { formatDateTime } from '../utilities/formatDateTime';
+import genre from '../utilities/i18n';
 
 export default function MovieDetails() {
     const navigate = useNavigate();
@@ -57,8 +58,8 @@ export default function MovieDetails() {
                 <h1>{film.title}</h1>
                 <div className="movie-info">
                     <h2>Åldersgräns: {viewrating}</h2>
-                    <h2>Längd: {hours} tim {minutes} min</h2>
-                    <h2>Genre: {film.genre}</h2>
+                    <h2>Speltid: {hours} tim {minutes} min</h2>
+                    <h2>Genre: {genre(film.genre)}</h2>
                 </div>
             </section>
             <div className="colum1-container">
