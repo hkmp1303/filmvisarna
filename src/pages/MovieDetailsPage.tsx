@@ -55,11 +55,11 @@ export default function MovieDetails() {
     return film && (
         <article className="movie-details-container">
             <section className="movie-title">
-                <h1>{film.title}</h1>
+                <h2>{film.title}</h2>
                 <div className="movie-info">
-                    <h2>Åldersgräns: {viewrating}</h2>
-                    <h2>Speltid: {hours} tim {minutes} min</h2>
-                    <h2>Genre: {genre(film.genre)}</h2>
+                    <p>Åldersgräns: {viewrating}</p>
+                    <p>Speltid: {hours} tim {minutes} min</p>
+                    <p>Genre: {genre(film.genre)}</p>
                 </div>
             </section>
             <div className="colum1-container">
@@ -80,7 +80,7 @@ export default function MovieDetails() {
                     ) : (
                         <p>Finns inga visningar</p>
                     )}
-                    <p>Vald tid: {screeningid ? formatDateTime(screenings?.find((s) => parseInt(screeningid) == s.screeningid)?.start) : " "}</p>
+                    {/*<p>Vald tid: {screeningid ? formatDateTime(screenings?.find((s) => parseInt(screeningid) == s.screeningid)?.start) : " "}</p>*/}
                 </div>
                 <button className="btn-booking" onClick={handleClick}> Boka biljetter</button>
             </div>
