@@ -44,7 +44,7 @@ export default function LandingPage() {
         <div className="search-bar">
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="Sök titel..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
