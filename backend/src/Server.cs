@@ -32,7 +32,7 @@ public static class Server
     {
 
       context.Response.Headers.Append("Access-Control-Allow-Origin", "http://localhost:5173");
-      context.Response.Headers.Append("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+      context.Response.Headers.Append("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
       context.Response.Headers.Append("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
       if (context.Request.Method == "OPTIONS")
@@ -54,7 +54,6 @@ public static class Server
       }
       else { await next(context); }
 
-      // Add some extra info for debugging
       var res = context.Response;
       var contentLength = res.ContentLength;
       contentLength = contentLength == null ? 0 : contentLength;

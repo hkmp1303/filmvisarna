@@ -15,7 +15,7 @@ public static class RecoverPassword
 
       if (dbUser == null)
       {
-        return RestResult.Parse(context, new { error = "No such user." });
+        return RestResult.Parse(context, new { error = "Connection failed" });
       }
 
       string pwdList = "123456789qwertyuiopasdfghjklzxcvbnm";
@@ -51,7 +51,7 @@ public static class RecoverPassword
 
       return RestResult.Parse(context, new
       {
-        message = "Password updated and sent",
+        message = "Successfull",
       });
     });
   }

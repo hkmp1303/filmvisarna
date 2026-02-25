@@ -29,10 +29,10 @@ static class EmailService
 
       var config = JsonSerializer.Deserialize<EmailConfig>(configJson, options);
 
-      if (config != null)
-      {
-        Console.WriteLine($"Config laddad: Server={config.smtpServer}, User={config.emailUsername}");
-      }
+      // if (config != null)
+      // {
+      //   Console.WriteLine($"Config laddad: Server={config.smtpServer}, User={config.emailUsername}");
+      // }
 
       if (config == null || string.IsNullOrEmpty(config.smtpServer))
       {
@@ -60,7 +60,6 @@ static class EmailService
     message.Subject = subject;
     message.Body = new TextPart("html") { Text = body };
 
-    System.Console.WriteLine($"test to see if I get this {subject} {body}");
     using (var client = new SmtpClient())
     {
       client.Connect(config.smtpServer, config.smtpPort, SecureSocketOptions.StartTls);
