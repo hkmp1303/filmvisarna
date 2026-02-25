@@ -9,8 +9,8 @@ public static class AiChatRoutes
 
     public static void Start()
     {
-        //LoadConfig();
-        //LoadSystemPrompt();
+        LoadConfig();
+        LoadSystemPrompt();
 
         App.MapPost("/api/chat", async (HttpContext context, JsonElement bodyJson) =>
         {
@@ -27,28 +27,55 @@ public static class AiChatRoutes
                     JOIN film USING(filmid) 
                     JOIN salon USING(salonid)*/
 
-                string movieContext = "Här är filmerna som visas på biografen just nu:\n";
-                foreach (var movie in moviesFromDb)
+                string movieContext = "VIKTIGT: Du får ENDAST svara baserat på nedanstående filmlista. ";
+                movieContext += "Om listan är tom, säg att vi inte har några filmer ute just nu.\n";
+                movieContext += "Här är våra aktuella filmer hämtade direkt från databasen:\n";
+                if (moviesFromDb != null)
                 {
-                    movieContext += $"- {movie.title}";
+                    foreach (var movie in moviesFromDb)
+                    {
+                        var name = movie.title ?? movie.Title ?? "Okänd titel";
+                        movieContext += $"- {name}\n";
+                    }
                 }
-                string fullSystemInstruction = systemPrompt + "\n\n" + movieContext;
+                else
+                {
+                    movieContext += "(Inga filmer hittades i databasen just nu.)";
+                }
 
-                if (messages == null)
-                {
-                    return RestResult.Parse(context, new { error = "Messages array is required." });
-                }
+                // string fullSystemInstruction = systemPrompt + "\n\n" + movieContext;
+
+                // if (messages == null)
+                // {
+                //     return RestResult.Parse(context, new { error = "Messages array is required." });
+                // }
+
+                // var fullMessages = Arr();
+
+                // if (!string.IsNullOrEmpty(systemPrompt))
+                // {
+                //     fullMessages.Push(Obj(new { role = "system", content = systemPrompt }));
+                // }
+                // if (!string.IsNullOrEmpty(fullSystemInstruction))
+                // {
+                //     fullMessages.Push(Obj(new { role = "system", content = fullSystemInstruction }));
+                // }
+                // messages.ForEach(msg => fullMessages.Push(msg));
+
+                string combinedPrompt = $"{systemPrompt}\n\n{movieContext}";
+                Console.WriteLine("DEBUG - Skickar prompt till AI:\n" + combinedPrompt);
 
                 var fullMessages = Arr();
-                if (!string.IsNullOrEmpty(systemPrompt))
+
+                string finalInstruction = systemPrompt + "\n\n" + movieContext;
+
+                fullMessages.Push(Obj(new { role = "system", content = finalInstruction }));
+
+                if (messages != null)
                 {
-                    fullMessages.Push(Obj(new { role = "system", content = systemPrompt }));
+                    messages.ForEach(msg => fullMessages.Push(msg));
                 }
-                if (!string.IsNullOrEmpty(fullSystemInstruction))
-                {
-                    fullMessages.Push(Obj(new { role = "system", content = fullSystemInstruction }));
-                }
-                messages.ForEach(msg => fullMessages.Push(msg));
+
 
                 var requestBody = Obj(new { messages = fullMessages });
 
