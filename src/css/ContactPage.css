@@ -1,23 +1,9 @@
 @import "tailwindcss";
 
-
-p,
-label {
-    font-size: 20px;
-}
-
-h1{
+.contact-text{
     color: var(--font-primary);
     @apply text-shadow-lg/30;
     margin-bottom: 3rem;
-}
-
-h3 {
-    font-size: 24px;
-}
-
-select {
-    font-size: 16px;
 }
 
 .contact-page {
@@ -38,16 +24,6 @@ select {
         background-color: #ffffff99;
         border-radius: 10px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-
-        p {
-            margin: 1px;
-
-            &:last-child {
-                padding-bottom: 2rem;
-            }
-        }
-
     }
 
     .form-container {
@@ -65,15 +41,6 @@ select {
             justify-content: center;
             align-items: center;
             padding: 1rem;
-
-            label {
-                margin-bottom: 10px;
-                margin-top: 5px;
-
-                &:first-child {
-                    margin-top: 0;
-                }
-            }
 
             select {
                 margin: 2rem 0;

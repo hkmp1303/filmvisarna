@@ -30,7 +30,7 @@ export default function PasswordRecovery() {
     };
 
     return (
-        <article>
+        <article className="pr-art">
             {
                 btnToggle ? (
                     <section>
