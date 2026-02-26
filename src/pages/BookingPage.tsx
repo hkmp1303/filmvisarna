@@ -169,12 +169,14 @@ export default function Booking() {
             </form>
           </fieldset>
         </section>
-      </div><div>
+      </div>
+      <div>
         <section className="fifty">
-        <fieldset className=''>
-          <legend>Tillgängliga platser i Salong {salon?.room_number}</legend>
-          <div className='seating-arrangement'>
-              {salon?.row_capacity.map((r: number, row_index) =>{
+          <fieldset className=''>
+            <legend>Tillgängliga platser i Salong {salon?.room_number}</legend>
+            <div className='seating-arrangement'>
+              <p className="screen"> Filmduk</p>
+              {salon?.row_capacity.map((r: number, row_index) => {
                 return <div key={"row-"+row_index}>{Array(r).fill(null).map((v,index) =>{
                   return <label key={"seat-"+index}>
                     <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" >

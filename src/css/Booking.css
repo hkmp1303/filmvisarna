@@ -80,4 +80,8 @@ h2.movie-title {
   .reserved {
     fill: var(--reserved-seat);
   }
+  .screen {
+    border-bottom: 3px solid var(--border-primary);
+    @apply w-90 inline-block mb-3;
+  }
 }
