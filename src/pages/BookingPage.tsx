@@ -6,8 +6,9 @@ import '../css/Booking.css';
 import type { Film } from '../utilities/filmInterface';
 import type { BriefScreening, Screening } from '../utilities/screeningInterface';
 import type { Salon, Res } from '../utilities/salonInterface';
-import { formatDateTime } from '../utilities/formatDateTime';
+import { formatDateIso, formatDay, formatHourMin } from '../utilities/formatDateTime';
 import genre from '../utilities/i18n';
+import { sumNumArray, csvToNumArray } from '../utilities/tools';
 
 export default function Booking() {
   const navigate = useNavigate();
@@ -20,6 +21,8 @@ export default function Booking() {
   const [film, setFilm] = useState<Film>();
   const [screenings, setScreenings] = useState<BriefScreening[]>([]);
   const [res, setRes] = useState<Res[]>([]);
+  const [totalSeats, setSeats] = useState<number>(0);
+  const [ticketTotal, setTicketTotal] = useState<number>(0);
 
   const qs = new URLSearchParams(useLocation().search);
   const id = parseInt(qs.get("screeningid") as string, 10);
@@ -38,7 +41,11 @@ export default function Booking() {
 
         const salonRes = await fetchJson(`/api/salon/${screeningRes?.salonid}`);
         if (!salonRes) throw new Error("Kunde inte ladda salon");
-        setSalon(salonRes)
+        salonRes.row_capacity = csvToNumArray(salonRes?.row_capacity);
+        setSalon(salonRes);
+        setSeats(sumNumArray(salonRes.row_capacity));
+
+        console.log(salonRes?.row_capacity.split(',').map((n:string) => parseInt(n)));
 
         const screeningsRes = await fetchJson(`/api/selectScreening/film/${screeningRes?.filmid}`);
         if (!screeningsRes) throw new Error("Kunde inte ladda visning");
@@ -64,13 +71,22 @@ export default function Booking() {
     };
     getData();
   }, [id]);
+
+  const calcTotal = (e:any) => {
+    setTicketTotal(e.target.form["adult"].value * 140
+      + e.target.form["senior"].value * 120
+      + e.target.form["child"].value * 80
+    );
+  };
+
   const handleClick = () => navigate(`/movieDetails/${film?.filmid}`);
   return (!loading && (<>
-    <h2 className='text-center text-4xl font-bold pt-10'>{ film?.title }</h2>
-    <article className="columns-2 gap-6 p-10">
-      <section className='fifty'>
+    <h2 className='movie-title'>{ film?.title }</h2>
+    <article className="grid grid-cols-2 gap-6 p-10">
+      <div>
+        <section className='fifty'>
         <fieldset className="">
-          <legend>Visning</legend>
+          <legend>Vald föreställning </legend>
           {/*<form>
             {screenings && (screenings as BriefScreening[]).length > 1 ? (<>
             <label htmlFor="screening">Visning</label>
@@ -86,21 +102,62 @@ export default function Booking() {
               <p>{error}</p>
               )}
               </form>*/}
-          <p>Åldersgräns: {film?.viewer_rating}</p>
-          <p>Speltid: {film?.duration} min</p>
-          <p>Genre: {genre(film?.genre ?? "")}</p>
-          <p>{formatDateTime(screening?.start)} - Salong {salon?.room_number}</p>
+          <div className='screening-info'>
+            <div>
+              <img className="float-right mx-5" src={film?.cover_image} alt="Film Affisch" width="200" height="300" /></div>
+            <div>
+              <p>Åldersgräns: {film?.viewer_rating}</p>
+              <p>Speltid: {film?.duration} min</p>
+              <p>Genre: {genre(film?.genre ?? "")}</p>
+              <p>Tal: {film?.language}</p>
+              <p>Undertext: {film?.subtitle_language}</p>
+              <p> {formatDateIso(screening?.start)}</p>
+              <p>{(formatDay(screening?.start))} - kl {formatHourMin(screening?.start) }</p>
+              <p>Salong {salon?.room_number}</p>
+            </div>
+          </div>
+          <div className='items-center text-center'>
+            <button className="screen-select-btn" onClick={handleClick}>Välj annan föreställning</button>
+          </div>
         </fieldset>
-      </section>
-      <section className="fifty">
+        </section>
+        <hr className='div' />
+        <section className='fifty'>
+          <fieldset>
+            <legend>Välj antal biljetter</legend>
+            <form className='ticket-count'>
+              <table className=''>
+                <tbody>
+                  <tr>
+                    <td className='ticket-label'><label htmlFor="adult">Ordinarie</label></td>
+                    <td className='ticket-number'><input onChange={calcTotal} type="number" min="0" max={totalSeats} defaultValue="0" id='adult' /></td>
+                    <td className='ticket-price'>140 kr</td>
+                  </tr><tr>
+                    <td className='ticket-label'><label htmlFor="senior">Pensionär</label></td>
+                    <td className='ticket-number'><input onChange={calcTotal} type="number" min="0" max={totalSeats} defaultValue="0" id='senior' /></td>
+                    <td className='ticket-price'>120 kr</td>
+                  </tr><tr>
+                    <td className='ticket-label'><label htmlFor="child">Barn (max 12 år)</label></td>
+                    <td className='ticket-number'><input onChange={calcTotal} type="number" min="0" max={totalSeats} defaultValue="0" id='child' /></td>
+                    <td className='ticket-price'>80 kr</td>
+                  </tr><tr>
+                    <td colSpan={3}>Summa: {ticketTotal} kr</td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+          </fieldset>
+        </section>
+      </div><div>
+        <section className="fifty">
         <fieldset className=''>
-          <legend>Välj plats i Salong {salon?.room_number}</legend>
+          <legend>Tillgängliga platser i Salong {salon?.room_number}</legend>
           <div className='seating-arrangement'>
 
           </div>
         </fieldset>
-      </section>
+        </section>
+      </div>
     </article>
-    <button className="btn text-center m-10" onClick={handleClick}>Välj annan föreställning</button>
   </>));
 }
