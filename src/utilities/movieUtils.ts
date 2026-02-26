@@ -1,7 +1,8 @@
-import type { Movie, SortOption } from '../utilities/types';
+import type { SortOption } from '../utilities/types';
+import type { BriefFilm } from '../utilities/filmInterface';
 
 
-const getYear = (m: Movie) => {
+const getYear = (m: BriefFilm) => {
   try {
     const d = typeof m.details === 'string' ? JSON.parse(m.details) : m.details;
     return parseInt(d?.release_year) || 0;
@@ -9,11 +10,11 @@ const getYear = (m: Movie) => {
 };
 
 export function sortAndFilterMovies(
-  movies: Movie[],
+  movies: BriefFilm[],
   sortBy: SortOption,
   searchQuery: string,
   selectedGenre: string
-): Movie[] {
+): BriefFilm[] {
 
 
   const sorted = [...movies].sort((a, b) => {

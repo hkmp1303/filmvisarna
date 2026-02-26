@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
-import type { User } from '../utilities/types';
+import type { User } from '../utilities/userInterface';
 import '../css/Login.css';
 
 interface LoginContext {

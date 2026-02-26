@@ -290,7 +290,7 @@ public static class DbQuery
     var rows = Arr();
     try
     {
-      if (sql.StartsWith("SELECT ", true, null))
+      if (sql.StartsWith("SELECT", true, null))
       {
         var reader = command.ExecuteReader();
         while (reader.Read())

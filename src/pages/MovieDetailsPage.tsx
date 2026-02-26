@@ -1,18 +1,26 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../css/MovieDetails.css';
 import useFetchJson from '../utilities/useFetchJson';
 import type { Film, Actor } from '../utilities/filmInterface';
-import type { Screening } from '../utilities/screeningInterface';
+import type { BriefScreening } from '../utilities/screeningInterface';
 import { formatDateTime } from '../utilities/formatDateTime';
-
+import genre from '../utilities/i18n';
 
 export default function MovieDetails() {
+    const navigate = useNavigate();
     const { filmid } = useParams();
-    const [date, setDate] = useState('');
+    const [screeningid, setDate] = useState('');
 
     const film = useFetchJson<Film>(`/api/film/${filmid}`);
-    const screenings = useFetchJson<Screening[]>(`/api/selectScreening/film/${filmid}`);
+    const screenings = useFetchJson<BriefScreening[]>(`/api/selectScreening/film/${filmid}`);
+
+    const handleClick = (e: any) => {
+        e.preventDefault();
+        console.log("test");
+        if (!screeningid) alert("Du måste välja en visning");
+        else navigate("/booking?screeningid=" + screeningid);
+    };
 
     let viewrating: string;
 
@@ -44,14 +52,14 @@ export default function MovieDetails() {
     const hours = Math.floor(film.duration / 60);
     const minutes = film.duration % 60;
 
-    return film && (<>
+    return film && (
         <article className="movie-details-container">
             <section className="movie-title">
-                <h1>{film.title}</h1>
+                <h2>{film.title}</h2>
                 <div className="movie-info">
-                    <h2>Åldersgräns: {viewrating}</h2>
-                    <h2>Längd: {hours} tim {minutes} min</h2>
-                    <h2>Genre: {film.genre}</h2>
+                    <p>Åldersgräns: {viewrating}</p>
+                    <p>Speltid: {hours} tim {minutes} min</p>
+                    <p>Genre: {genre(film.genre)}</p>
                 </div>
             </section>
             <div className="colum1-container">
@@ -60,20 +68,21 @@ export default function MovieDetails() {
                 </div>
                 <div className="date-picker">
                     {screenings && screenings.length > 0 ? (
-                        <select value={date} onChange={(e) => setDate(e.target.value)}>
+                        //<label htmlFor="screening">Visning</label>
+                        <select id="screening" value={screeningid} onChange={(e) => setDate(e.target.value)} required>
                             <option value="">Välj en tid</option>
-                            {screenings.map((s, index) => (
-                                <option key={index} value={s.start}>
-                                    {formatDateTime(s.start)} - {s.description}
+                            {screenings.map((s: BriefScreening, index) => (
+                                <option key={index} value={s.screeningid}>
+                                    {formatDateTime(s.start)} - Salong {s.room_number}
                                 </option>
                             ))}
                         </select>
                     ) : (
                         <p>Finns inga visningar</p>
                     )}
-                    <p>Vald tid: {date ? formatDateTime(date) : " "}</p>
+                    {/*<p>Vald tid: {screeningid ? formatDateTime(screenings?.find((s) => parseInt(screeningid) == s.screeningid)?.start) : " "}</p>*/}
                 </div>
-                <button className="btn-booking">Boka biljetter</button>
+                <button className="btn-booking" onClick={handleClick}> Boka biljetter</button>
             </div>
             <div className="colum2-container">
                 <section className="movie-description">
@@ -103,6 +112,6 @@ export default function MovieDetails() {
                 </section>
             </div>
         </article>
-    </>)
+    )
 }
 

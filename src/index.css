@@ -1,5 +1,16 @@
-/*:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+@import "tailwindcss";
+
+
+
+:root {
+  --primary-bg: linear-gradient(to bottom, #660157, #4e023e);
+  --dark-primary: #660157;
+  --second-bg: #c9b0d8;
+  --border-primary: #864486;
+  --font-primary: #fffdc4;
+  --log-heading-primary: #FFF562;
+  --background-btn: #919398;
+/*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -11,7 +22,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}*/
+*/
+}
 
 html {
   box-sizing: border-box;
