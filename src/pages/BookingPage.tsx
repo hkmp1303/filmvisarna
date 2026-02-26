@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 //import useFetchJson from '../utilities/useFetchJson';
 import fetchJson from '../utilities/fetchJson';
@@ -11,24 +11,27 @@ import genre from '../utilities/i18n';
 import { sumNumArray, csvToNumArray } from '../utilities/tools';
 
 export default function Booking() {
+  const adultCnt = useRef<HTMLInputElement>(null);
+  const seniorCnt = useRef<HTMLInputElement>(null);
+  const childCnt = useRef<HTMLInputElement>(null);
+  const loading = useRef<boolean>(false);
   const navigate = useNavigate();
-  //const { filmid } = useParams<string>();
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>();
-  const [screeningid, setScreeningId] = useState<number>();
+  //const [screeningid, setScreeningId] = useState<number>(); // to select screening, unreferenced
+  //const [screenings, setScreenings] = useState<BriefScreening[]>([]);  // to select screening, unreferenced
   const [screening, setScreening] = useState<Screening>();
   const [salon, setSalon] = useState<Salon>();
   const [film, setFilm] = useState<Film>();
-  const [screenings, setScreenings] = useState<BriefScreening[]>([]);
   const [res, setRes] = useState<Res[]>([]);
   const [totalSeats, setSeats] = useState<number>(0);
   const [ticketTotal, setTicketTotal] = useState<number>(0);
-  const [seatPlan, setSeatPlan] = useState<HTMLInputElement[]>([]);
+  const [ticketCount, setTicketCount] = useState<number>(0);
 
   const qs = new URLSearchParams(useLocation().search);
   const id = parseInt(qs.get("screeningid") as string, 10);
   useEffect(() => {
     const getData = async () => {
+      loading.current = true;
       try {
         if (!id) throw new Error("Felaktig visning");
 
@@ -45,9 +48,11 @@ export default function Booking() {
         salonRes.row_capacity = csvToNumArray(salonRes?.row_capacity);
         setSalon(salonRes);
 
+        /* // to select screening, unreferenced
         const screeningsRes = await fetchJson(`/api/selectScreening/film/${screeningRes?.filmid}`);
         if (!screeningsRes) throw new Error("Kunde inte ladda visning");
         setScreenings(screeningsRes);
+        */
 
         const resRes = await fetchJson(`/api/bookedSeatRes/${id}`);
         if (!resRes) throw new Error("Kunde inte ladda reserverade platser");
@@ -55,30 +60,32 @@ export default function Booking() {
         setRes(resRes);
         setSeats(sumNumArray(salonRes.row_capacity)-resRes.length);
 
-        // make sure both film and screening could be retrieved
-        if (!screeningsRes || !filmRes || !salonRes || !resRes) {
+        // make sure film, salon and reservation could be retrieved
+        if (!filmRes || !salonRes || !resRes) {
           throw new Error("Kunde inte ladda");
         }
         /*setFilm(filmRes as Film);
         setScreenings(screeningsRes as BriefScreening[]);
         setSalons(salonsRes as Salon[]);*/
-        setLoading(!(!screeningRes || !filmRes || !salonRes || !resRes || screeningRes.filmid !== filmRes.filmid));
+        loading.current = !(!screeningRes || !filmRes || !salonRes || !resRes || screeningRes.filmid !== filmRes.filmid);
       } catch (e) {
         setError(e);
       } finally {
-        setLoading(false);
+        loading.current = false;
       }
     };
     getData();
   }, [id]);
 
   const calcTotal = (e: any) => {
-    const f=e.target.form
-    setSeats(sumNumArray(salon?.row_capacity ?? [])
-      - f["adult"].value
-      - f["senior"].value
-      - f["child"].value
-      - res.length)
+    const f = e.target.form,
+      salonTotalSeats = sumNumArray(salon?.row_capacity ?? []),
+      ticketCount = (parseInt(f["adult"].value) || 0) + (parseInt(f["senior"].value) || 0) + (parseInt(f["child"].value) || 0);
+    // calculate total vacant seats
+    setSeats(salonTotalSeats - ticketCount - res.length);
+    setTicketCount(ticketCount);
+    console.log(salonTotalSeats + " " + ticketCount + " " + res.length);
+    // calculate total ticket price
     setTicketTotal(f["adult"].value * 140
       + f["senior"].value * 120
       + f["child"].value * 80
@@ -101,7 +108,7 @@ export default function Booking() {
   }
 
   const handleClick = () => navigate(`/movieDetails/${film?.filmid}`);
-  return (!loading && (<>
+  return (!loading.current && (<>
     <h2 className='movie-title'>{ film?.title }</h2>
     <article className="grid grid-cols-1 md:grid-cols-2 gap-6 p-10">
       <div>
@@ -151,15 +158,15 @@ export default function Booking() {
                 <tbody>
                   <tr>
                     <td className='ticket-label'><label htmlFor="adult">Ordinarie</label></td>
-                    <td className='ticket-number'><input onChange={calcTotal} type="number" min="0" max={totalSeats} defaultValue="0" id='adult' /></td>
+                    <td className='ticket-number'><input ref={adultCnt} onChange={calcTotal} type="number" min="0" max={totalSeats + (parseInt(adultCnt.current?.value as string) || 0)} defaultValue="0" id='adult' /></td>
                     <td className='ticket-price'>140 kr</td>
                   </tr><tr>
                     <td className='ticket-label'><label htmlFor="senior">Pensionär</label></td>
-                    <td className='ticket-number'><input onChange={calcTotal} type="number" min="0" max={totalSeats} defaultValue="0" id='senior' /></td>
+                    <td className='ticket-number'><input ref={seniorCnt} onChange={calcTotal} type="number" min="0" max={totalSeats + (parseInt(seniorCnt.current?.value as string) || 0)} defaultValue="0" id='senior' /></td>
                     <td className='ticket-price'>120 kr</td>
                   </tr><tr>
                     <td className='ticket-label'><label htmlFor="child">Barn (max 12 år)</label></td>
-                    <td className='ticket-number'><input onChange={calcTotal} type="number" min="0" max={totalSeats} defaultValue="0" id='child' /></td>
+                    <td className='ticket-number'><input ref={childCnt} onChange={calcTotal} type="number" min="0" max={totalSeats + (parseInt(childCnt.current?.value as string) || 0)} defaultValue="0" id='child' /></td>
                     <td className='ticket-price'>80 kr</td>
                   </tr><tr>
                     <td colSpan={3}>Summa: {ticketTotal} kr</td>
