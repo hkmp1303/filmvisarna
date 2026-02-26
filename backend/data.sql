@@ -136,7 +136,7 @@ INSERT IGNORE INTO screening (screeningid, start, filmid, salonid) VALUES
 (99,'2026-09-04 03:30:21',9,1),
 (100,'2026-05-04 12:30:03',2,2);
 
-INSERT IGNORE INTO booking (bookingid, total_cost, date, guid, status, screeningid, userid) VALUES
+INSERT IGNORE INTO booking (bookingid, total_cost, date, guid, status, userid, screeningid) VALUES
 (1,120,'2026-03-14 13:53:12','9558e514-f7ff-49ff-a0df-08d8d348840d','booked',1,89),
 (2,280,'2026-02-01 20:56:19','a9c51215-81e6-4ff5-8216-e1196788b3de','booked',4,89),
 (3,320,'2026-03-12 08:05:01','a2bc9e37-e37d-4241-90c2-79b37c30e101','booked',1,74),
