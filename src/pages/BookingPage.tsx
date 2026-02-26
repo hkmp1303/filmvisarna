@@ -23,6 +23,7 @@ export default function Booking() {
   const [res, setRes] = useState<Res[]>([]);
   const [totalSeats, setSeats] = useState<number>(0);
   const [ticketTotal, setTicketTotal] = useState<number>(0);
+  const [seatPlan, setSeatPlan] = useState<HTMLInputElement[]>([]);
 
   const qs = new URLSearchParams(useLocation().search);
   const id = parseInt(qs.get("screeningid") as string, 10);
@@ -43,9 +44,6 @@ export default function Booking() {
         if (!salonRes) throw new Error("Kunde inte ladda salon");
         salonRes.row_capacity = csvToNumArray(salonRes?.row_capacity);
         setSalon(salonRes);
-        setSeats(sumNumArray(salonRes.row_capacity));
-
-        console.log(salonRes?.row_capacity.split(',').map((n:string) => parseInt(n)));
 
         const screeningsRes = await fetchJson(`/api/selectScreening/film/${screeningRes?.filmid}`);
         if (!screeningsRes) throw new Error("Kunde inte ladda visning");
@@ -53,7 +51,9 @@ export default function Booking() {
 
         const resRes = await fetchJson(`/api/bookedSeatRes/${id}`);
         if (!resRes) throw new Error("Kunde inte ladda reserverade platser");
+        console.log(resRes);
         setRes(resRes);
+        setSeats(sumNumArray(salonRes.row_capacity)-resRes.length);
 
         // make sure both film and screening could be retrieved
         if (!screeningsRes || !filmRes || !salonRes || !resRes) {
@@ -72,17 +72,38 @@ export default function Booking() {
     getData();
   }, [id]);
 
-  const calcTotal = (e:any) => {
-    setTicketTotal(e.target.form["adult"].value * 140
-      + e.target.form["senior"].value * 120
-      + e.target.form["child"].value * 80
+  const calcTotal = (e: any) => {
+    const f=e.target.form
+    setSeats(sumNumArray(salon?.row_capacity ?? [])
+      - f["adult"].value
+      - f["senior"].value
+      - f["child"].value
+      - res.length)
+    setTicketTotal(f["adult"].value * 140
+      + f["senior"].value * 120
+      + f["child"].value * 80
     );
   };
+
+  const seatTaken = (index:number, row_index:number): boolean => {
+    const currentSeatNum = calcSeatNum(index, row_index);
+    return res.some(s=>s.seat_number === currentSeatNum);
+  }
+
+  const calcSeatNum = (index: number, row_index: number): number => {
+    const currentRowCap:number = salon?.row_capacity[row_index] ?? 0;
+    return 1+index+(currentRowCap * row_index);
+  }
+
+  const handleClickSeat = (e: any) => {
+    const btns = document.querySelectorAll(".seating-arrangement input[type=checkbox]");
+    console.log(btns);
+  }
 
   const handleClick = () => navigate(`/movieDetails/${film?.filmid}`);
   return (!loading && (<>
     <h2 className='movie-title'>{ film?.title }</h2>
-    <article className="grid grid-cols-2 gap-6 p-10">
+    <article className="grid grid-cols-1 md:grid-cols-2 gap-6 p-10">
       <div>
         <section className='fifty'>
         <fieldset className="">
@@ -153,7 +174,20 @@ export default function Booking() {
         <fieldset className=''>
           <legend>Tillgängliga platser i Salong {salon?.room_number}</legend>
           <div className='seating-arrangement'>
-
+              {salon?.row_capacity.map((r: number, row_index) =>{
+                return <div key={"row-"+row_index}>{Array(r).fill(null).map((v,index) =>{
+                  return <label key={"seat-"+index}>
+                    <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" >
+                      <rect width="20" height="20" rx="3" ry="3" className={seatTaken(index, row_index)?"booked": "vacant"} />
+                    </svg>
+                    <input type="checkbox" key={calcSeatNum(index, row_index)}
+                      name={"seat[" + calcSeatNum(index, row_index) + "]"}
+                      checked={seatTaken(index, row_index)}
+                      onChange={handleClickSeat}
+                    />
+                  </label>}
+                )}</div>}
+              )}
           </div>
         </fieldset>
         </section>

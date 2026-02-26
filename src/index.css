@@ -11,6 +11,9 @@
   --log-heading-primary: #FFF562;
   --background-btn: #919398;
   --input-bg: #fff;
+  --vacant-seat: #406ae8;
+  --reserved-seat: #d5da4d;
+  --booked-seat: #4e4851;
 /*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
