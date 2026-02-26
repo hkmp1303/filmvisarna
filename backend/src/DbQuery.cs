@@ -312,6 +312,10 @@ public static class DbQuery
     {
       rows.Push(new { error = err.Message });
     }
+    finally
+    {
+      db.Close();
+    }
     return rows;
   }
 
