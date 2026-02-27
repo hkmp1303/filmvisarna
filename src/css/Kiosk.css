@@ -1,4 +1,7 @@
-/* @media (max-width: 768px) {
+@import "tailwindcss";
+
+
+@media (max-width: 768px) {
   .kiosk-container {
     padding: 2rem;
     max-width: 1200px;
@@ -86,6 +89,7 @@
   .kiosk-description {
     font-size: 1.5rem;
     font-style: italic;
+    @apply p-10;
   }
 
 
@@ -106,10 +110,8 @@
     display: flex;
     gap: 6rem;
   }
-} 
+}
 
-=====================================
+/* =====================================
            -OG CSS FILE-  
-=====================================
-
-*/
+===================================== */
