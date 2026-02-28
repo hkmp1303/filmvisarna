@@ -3,7 +3,7 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import type { User } from '../utilities/userInterface';
 import '../css/Login.css';
 
-interface LoginContext {
+export interface LoginContext {
   user: User | null;
   setUser: (user: User | null) => void;
 }
