@@ -21,7 +21,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: #ffffff99;
+        background-color: var(--second-bg);
         border-radius: 10px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
@@ -31,7 +31,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: #ffffff99;
+        background-color: var(--second-bg);
         border-radius: 10px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
@@ -45,7 +45,7 @@
             select {
                 margin: 2rem 0;
                 padding: 10px;
-                background: antiquewhite;
+                background: var(--input-grad-backcolor);
                 border-radius: 18px;
                 cursor: pointer;
                 border: 1px solid black;
@@ -53,7 +53,7 @@
             }
 
             .input-field {
-                background: antiquewhite;
+                background: var(--input-grad-backcolor);
                 border: 1px solid #000000;
                 color: black;
                 padding: 7px;
@@ -65,7 +65,7 @@
                 width: 300px;
 
                 &:-webkit-autofill {
-                    background: antiquewhite;
+                    background: var(--input-grad-backcolor);
                 }
 
                 &:focus {
@@ -75,7 +75,7 @@
             }
 
             textarea {
-                background: antiquewhite;
+                background: var(--input-grad-backcolor);
                 border: 1px solid #000000;
                 color: black;
                 padding: 7px;
@@ -87,7 +87,7 @@
                 height: 200px;
 
                 &:-webkit-autofill {
-                    background: antiquewhite;
+                    background: var(--input-grad-backcolor);
                 }
 
                 &:focus {
@@ -99,7 +99,7 @@
             .submit-btn {
                 margin: 10px 0;
                 align-self: center;
-                background: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
+                background: var(--btn-grad-backcolor);
                 border: 0cap solid #7a5a9a;
                 color: white;
                 padding: 7px;
@@ -130,7 +130,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: #ffffff99;
+            background-color: var(--second-bg);
             border-radius: 10px;
             padding-bottom: 1rem;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -146,7 +146,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: #ffffff99;
+            background-color: var(--second-bg);
             border-radius: 10px;
             margin-bottom: 2rem;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -170,7 +170,7 @@
                 select {
                     margin: 2rem 0;
                     padding: 10px;
-                    background: antiquewhite;
+                    background: var(--input-grad-backcolor);
                     border-radius: 18px;
                     cursor: pointer;
                     border: 1px solid black;
@@ -178,7 +178,7 @@
                 }
 
                 .input-field {
-                    background: antiquewhite;
+                    background: var(--input-grad-backcolor);
                     border: 1px solid #000000;
                     color: black;
                     padding: 7px;
@@ -190,7 +190,7 @@
                     width: 300px;
 
                     &:-webkit-autofill {
-                        background: antiquewhite;
+                        background: var(--input-grad-backcolor);
                     }
 
                     &:focus {
@@ -200,7 +200,7 @@
                 }
 
                 textarea {
-                    background: antiquewhite;
+                    background: var(--input-grad-backcolor);
                     border: 1px solid #000000;
                     color: black;
                     padding: 7px;
@@ -212,7 +212,7 @@
                     height: 200px;
 
                     &:-webkit-autofill {
-                        background: antiquewhite;
+                        background: var(--input-grad-backcolor);
                     }
 
                     &:focus {
@@ -224,7 +224,7 @@
                 .submit-btn {
                     margin: 10px 0;
                     align-self: center;
-                    background: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
+                    background: var(--btn-grad-backcolor);
                     border: 0cap solid #7a5a9a;
                     color: white;
                     padding: 7px;
@@ -256,20 +256,25 @@
 }
 
 .popup-content {
-    background: white;
+    background: var(--second-bg);
     padding: 2rem;
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     max-width: 400px;
     color: #333;
+    h3{
+        color: var(--font-primary);
+            @apply text-shadow-lg/30;
+
+    }
 }
 
 .popup-content button {
     margin-top: 1rem;
     padding: 10px 20px;
     cursor: pointer;
-    background: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
+    background: var(--btn-grad-backcolor);
     color: white;
     border: none;
     border-radius: 5px;

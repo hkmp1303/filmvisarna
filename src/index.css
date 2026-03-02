@@ -10,6 +10,14 @@
   --font-primary: #fffdc4;
   --log-heading-primary: #FFF562;
   --background-btn: #919398;
+
+  /*purple button*/
+  --btn-grad-backcolor: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
+  /*Background for input fields*/
+  --input-grad-backcolor: radial-gradient(circle, #fffdc4 20%, #fffdc4 60%);
+
+
+
 /*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;

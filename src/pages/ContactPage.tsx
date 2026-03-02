@@ -55,7 +55,7 @@ export default function Contact() {
         {submitted && (
             <div className='popup-window'>
                 <div className='popup-content'>
-                    <h3 className='text-2xl'> Tack, {submitData.name}!</h3>
+                    <h3 className='text-2xl'> Tack!</h3>
                     <p className='text-xl'>Ditt meddelande har nu skickats till oss.</p>
                     <p className='text-xl'>Vi hör av oss så snart vi kan.</p>
                     <button onClick={() => setSubmitted(false)}>Stäng</button>
