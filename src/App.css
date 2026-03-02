@@ -1,10 +1,5 @@
-/*#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-*/
+@import url('https://fonts.googleapis.com/css2?family=Pattaya&display=swap');
+@import "tailwindcss";
 
 
 body {
@@ -22,8 +17,16 @@ header {
   align-items: center;
   border: 2px solid #fffdc4;
   border-radius: 25px;
-  background-color: #f4f4f474;
+  background-color: var(--background-h);
   box-shadow: 0.2px 0.2px 20px 0.05px rgba(255, 255, 255, 0.551);
+  padding: 10px;
+
+  h1{
+    font-family: Pattaya;
+    color: #fdfff1;
+    margin: 0;
+    text-align: center;
+  }
 }
 
 /* Your logo wrapper */
@@ -31,7 +34,7 @@ header {
   display: inline-block;
   color: #fffdc4;
   justify-self: start;
-  padding: 20px 0px 10px 0px;
+  padding: 20px 0px 10px 20px;
 }
 
 /* The actual SVG */
@@ -42,21 +45,32 @@ header {
   padding-bottom: 10px;
 }
 
-h1 {
-  font-size: 50px;
-  justify-self: center;
-}
-
-nav {
+.header-nav {
   padding-left: 0px;
   text-decoration: none;
   justify-self: end;
-}
 
-nav:hover {
-  color: blue;
-}
+  a{
+    padding: 10px 7px;
+    color: var(--font-primary);
+    text-decoration: none;
+    transition: all 0.2s;
 
+    &:last-child{
+      margin-right: 20px;
+    }
+
+    &:hover{
+      background-color: rgba(255, 253, 196, 0.1);
+      border-radius: 12px;
+      color: rgba(65, 10, 77, 0.753);
+    }
+  }
+  a.active {
+  color: #660157;
+  }
+
+}
 footer {
   display: none;
 }
@@ -65,11 +79,29 @@ footer {
 /*Mobile View*/
 @media (max-width: 768px) {
 
-  /*Footer Mobile View*/
+  /*Header Mobile View*/
+
+  header {
+    width: 99%;
+    margin: 2px auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    padding: 10px 0;
+
+    .header-logo {
+      display: none;
+    }
+    nav {
+      display: none;
+    }
+  }
+
+    /*Footer Mobile View*/
   footer {
     display: flex;
     width: 100%;
-    background-color: aqua;
+    background-color: var(--second-bg);
     padding: 10px 20px;
 
     justify-content: space-around;
@@ -119,40 +151,5 @@ footer {
 
   .footer-submenu a:hover {
     color: blue;
-  }
-
-  /*Header Mobile View*/
-
-  header {
-
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    margin: 0;
-    padding: 10px 0;
-
-    .header-logo {
-      justify-self: start;
-      padding-left: 1em;
-
-      img {
-        max-width: 60px;
-      }
-    }
-
-    h1 {
-      grid-column: 2;
-      font-size: 30px;
-      text-align: center;
-    }
-
-    nav {
-      display: none;
-    }
-
-    &::after {
-      content: "";
-      width: 60px;
-    }
   }
 }
