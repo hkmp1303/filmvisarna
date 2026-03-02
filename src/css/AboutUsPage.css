@@ -19,6 +19,7 @@
         @media (min-width: 768px) {
             display: inline-block;
             align-self: center;
+            justify-self: center;
             color: #fffdc4;
         }
     }
