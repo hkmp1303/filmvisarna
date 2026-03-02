@@ -10,6 +10,7 @@ import Booking from './pages/BookingPage';
 import TemaDagar from './pages/TemaDagar';
 import ConfirmBooking from './pages/ConfirmBooking';
 import PasswordRecovery from './pages/PasswordRecoveryPage';
+import ResetPassword from './pages/ResetPasswordPage';
 
 interface Route {
   element: JSX.Element;
@@ -28,7 +29,8 @@ const routes: Route[] = [
   { element: <Register />, path: '/Register' },
   { element: <TemaDagar />, path: '/themedays', menuLabel: 'Tema Dagar' },
   { element: <ConfirmBooking />, path: '/confirmbooking' },
-  { element: <PasswordRecovery />, path: '/passwordrecovery' }
+  { element: <PasswordRecovery />, path: '/passwordrecovery' },
+  { element: <ResetPassword />, path: '/reset-password' }
 
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }

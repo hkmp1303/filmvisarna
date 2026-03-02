@@ -9,50 +9,83 @@ public static class RecoverPassword
   {
     App.MapPut("/api/recoverpassword", (HttpContext context, JsonElement bodyJson) =>
     {
-      string email = bodyJson.GetProperty("email").GetString();
+      try
+      {
 
-      var dbUser = SQLQueryOne("SELECT * FROM user WHERE email = @email", new { email });
+
+        if (!bodyJson.TryGetProperty("email", out JsonElement emailElement))
+        {
+          return RestResult.Parse(context, new { error = "Email is missing in request." });
+        }
+
+        string email = bodyJson.GetProperty("email").GetString();
+
+        var dbUser = SQLQueryOne("SELECT * FROM user WHERE email = @email", new { email });
+
+        if (dbUser == null)
+        {
+          return RestResult.Parse(context, new { error = "Connection failed" });
+        }
+
+        String resetToken = Guid.NewGuid().ToString();
+
+        SQLQuery("UPDATE user SET request_pass = @token WHERE email = @email",
+        new { token = resetToken, email = email });
+
+        try
+        {
+          string resetLink = $"http://localhost:5173/reset-password?token={resetToken}";
+          string body = $@"
+                    <h2>Återställning av lösenord.</h2>
+                    <br>
+                    <p>Vi har tagit emot en förfrågan om att återställa ditt lösenord.</p>
+                    <p>Klicka på länken nedan för att välja ett nytt lösenord:</p>
+                    <a href='{resetLink}'>Återställ lösenord här</a>                    
+                    <br>
+                    <p>Vi rekommenderar att du ändrar lösenordet när du har loggat in.</p>
+                    <p> Om du inte har begärt detta kan du bortse från detta mejl.</p>";
+
+          EmailService.SendEmail(email, "Återställ lösenord", body);
+
+        }
+        catch (Exception ex)
+        {
+          Console.WriteLine("Error-RP: " + ex.Message);
+        }
+
+        return RestResult.Parse(context, new
+        {
+          message = "Successfull",
+        });
+      }
+      catch (Exception exx)
+      {
+        Console.WriteLine("CRITICAL ERROR: " + exx.Message);
+        return RestResult.Parse(context, new { error = "Internal server error." });
+      }
+    });
+
+    App.MapPost("/api/reset-password", (HttpContext context, JsonElement bodyJson) =>
+    {
+
+      string token = bodyJson.GetProperty("token").GetString();
+      string newPassword = bodyJson.GetProperty("password").GetString();
+
+      var dbUser = SQLQueryOne("SELECT * FROM user WHERE request_pass = @token", new { token });
 
       if (dbUser == null)
       {
-        return RestResult.Parse(context, new { error = "Connection failed" });
+        return RestResult.Parse(context, new { error = "Länken är ogiltlig eller har gått ut." });
       }
 
-      string pwdList = "123456789qwertyuiopasdfghjklzxcvbnm";
-      Random rnd = new();
-      StringBuilder newRndPass = new();
-      for (int i = 0; i < 10; i++)
-      {
-        newRndPass.Append(pwdList[rnd.Next(0, pwdList.Length)]);
-      }
-      string finalPassword = newRndPass.ToString();
+      string hashedPassword = Password.Encrypt(newPassword);
 
-      string hashedPassword = Password.Encrypt(finalPassword);
+      SQLQuery("UPDATE user SET password = @password, request_pass = NULL WHERE request_pass = @token",
+      new { password = hashedPassword, token = token });
 
-      SQLQuery("UPDATE user SET password = @password WHERE email = @email",
-              new { password = hashedPassword, email = email });
+      return RestResult.Parse(context, new { message = "Ditt lösenord har ändrats." });
 
-      try
-      {
-        string subject = "Återställning av lösenord";
-        string body = $@"
-                    <h2>Ditt lösenord har återställts</h2>
-                    <p>Du kan nu logga in med ditt nya tillfälliga lösenord:</p>
-                    <p><b>{finalPassword}</b></p>
-                    <br>
-                    <p>Vi rekommenderar att du ändrar lösenordet när du har loggat in.</p>";
-
-        EmailService.SendEmail(email, subject, body);
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine("Error-RP: " + ex.Message);
-      }
-
-      return RestResult.Parse(context, new
-      {
-        message = "Successfull",
-      });
     });
+
   }
 }
