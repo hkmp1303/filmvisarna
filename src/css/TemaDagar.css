@@ -1,4 +1,5 @@
-@media (max-width: 768px) {
+@import "tailwindcss";
+
   .themes-container {
     padding: 2rem;
     max-width: 1200px;
@@ -10,58 +11,7 @@
     margin-bottom: 2rem;
     font-size: 2.5rem;
     color: #fffdc4;
-  }
-
-  .themes-intro {
-    background: #ffffff99;
-    border-radius: 12px;
-    padding: 1rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-
-  .themes-intro h3 {
-    font-size: 1.6rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .themes-intro p {
-    font-size: 1rem;
-  }
-
-  .themes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .theme-card {
-    background: #ffffff99;
-    border-radius: 12px;
-    padding: 1rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-
-  .theme-name {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .theme-description {
-    font-size: 0.95rem;
-    color: #555;
-  }
-}
-
-
-
-/* Komputa stuff */
-@media (min-width: 769px) {
-  .themes-title {
-    font-style: italic;
-    color: #fffdc4;
+    @apply text-shadow-lg/30 text-5xl pt-6 pb-4;
   }
 
   .themes-intro {
@@ -72,7 +22,11 @@
     margin-bottom: 3rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    font-size: 1.4rem;
+  }
+
+  .themes-intro h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
   }
 
   .themes-intro p {
@@ -80,27 +34,54 @@
     font-style: italic;
   }
 
-  .theme-card {
+  .themes-grid {
+    gap: 1.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
-    padding: 1.5rem;
-    margin: 1.5rem;
-    text-align: left;
-    font-size: 1.5rem;
+  }
 
+  .theme-card {
     background: #ffffff99;
     border-radius: 12px;
+    padding: 1.5rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    font-size: 1.5rem;
+    justify-content: center;
   }
 
   .theme-name {
     font-size: 1.8rem;
+    margin-bottom: 0.5rem;
   }
 
   .theme-description {
     font-size: 1.3rem;
+    color: #555;
     font-style: italic;
   }
+
+/* Mobile view */
+@media (max-width: 768px) {
+
+  .themes-intro {
+    padding: 1rem;
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+  }
+
+  .themes-grid {
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .theme-card {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .theme-name {
+    font-size: 1.4rem;
+  }
+
 }

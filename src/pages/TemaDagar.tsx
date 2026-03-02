@@ -47,10 +47,10 @@ const themes: Theme[] = [
 export default function Themes() {
   return (
     <div className="themes-container">
-      <h1 className="themes-title">Teman</h1>
+      <h2 className="themes-title">Teman</h2>
 
       <div className="themes-intro">
-        <h2>Vad är temadagar?</h2>
+        <h3>Vad är temadagar?</h3>
         <p>
           Här hittar du olika filmteman som vi visar under våra temadagar.
           Perfekt för dig som vill upptäcka något nytt eller återuppleva gamla favoriter.
@@ -61,7 +61,7 @@ export default function Themes() {
         {themes.map(theme => (
           <div key={theme.id} className="theme-card">
             <div className="theme-info">
-              <h3 className="theme-name">{theme.title}</h3>
+              <h4 className="theme-name">{theme.title}</h4>
               <p className="theme-description">{theme.description}</p>
             </div>
           </div>
