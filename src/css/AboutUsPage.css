@@ -5,7 +5,32 @@
     padding: 1.5rem;
     gap: 1.5rem;
 
-    button {
+    .aboutus-info {
+        background-color: var(--second-bg);
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
+    .big-logo {
+        align-self: center;
+    }
+
+    .side-link {
+        background-color: var(--second-bg);
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        padding: 1rem;
+
+        .td-box, .k-box, .ko-box {
+            display: grid;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .theme-days-btn, .kiosk-btn, .contact-us-btn{
         background: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
         border: 0cap solid #7a5a9a;
         color: white;
@@ -18,50 +43,6 @@
         justify-self: center;
     }
 
-    .aboutus-info {
-        background-color: chartreuse;
-        padding: 1rem;
-        border-radius: 10px;
-
-        h1 {
-            text-align: center;
-        }
-    }
-
-    .big-logo {
-        align-self: center;
-    }
-
-    .side-link {
-        background-color: chartreuse;
-        display: grid;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10px;
-        padding: 1rem;
-
-        h3 {
-            text-align: center;
-        }
-
-        .td-box {
-            display: grid;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .k-box {
-            display: grid;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .ko-box {
-            display: grid;
-            align-items: center;
-            justify-content: center;
-        }
-    }
 }
 
 /*Tablet fix*/
