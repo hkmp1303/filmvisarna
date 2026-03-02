@@ -24,7 +24,7 @@ const routes: Route[] = [
   { element: <Booking />, path: '/booking' },
   { element: <Kiosk />, path: '/Kiosk', menuLabel: 'Kiosk' },
   { element: <Register />, path: '/Register', menuLabel: 'Registrera' },
-  { element: <TemaDagar />, path: '/TemaDagar', menuLabel: 'Tema Dagar' }
+  { element: <TemaDagar />, path: '/themedays', menuLabel: 'Tema Dagar' }
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
 ];
