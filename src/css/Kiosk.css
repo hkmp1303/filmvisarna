@@ -12,7 +12,6 @@
     text-align: center;
     margin-bottom: 2rem;
     font-size: 2.5rem;
-    color: #fffdc4;
   }
 
   .kiosk-grid {
@@ -66,6 +65,7 @@
 
   .kiosk-title {
     font-style: italic;
+    color: #fffdc4;
   }
 
 
@@ -76,6 +76,7 @@
     padding: 1rem;
     text-align: left;
     font-size: 1.75rem;
+    align-items: stretch;
   }
 
   .kiosk-image {
@@ -89,7 +90,6 @@
   .kiosk-description {
     font-size: 1.5rem;
     font-style: italic;
-    @apply p-10;
   }
 
 

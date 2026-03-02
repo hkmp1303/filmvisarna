@@ -63,7 +63,7 @@ export default function Kiosk() {
             <img src={item.image} alt={item.name} className="kiosk-image" />
 
             <div className="kiosk-info">
-              <h2 className="kiosk-name">{item.name}</h2>
+              <h3 className="kiosk-name text-[#fdfff1]">{item.name}</h3>
               <p className="kiosk-description">{item.description}</p>
               <p className="kiosk-price">
                 {item.price.split(",").map((p, i) => (
