@@ -44,7 +44,7 @@ export default function Footer() {
 
         {menuOpen && (
           <div className="footer-submenu">
-            <Link to="/tema-dagar">Tema dagar</Link>
+            <Link to="/themedays">Tema dagar</Link>
             <Link to="/aboutus">Om oss</Link>
             <Link to="/contact">Kontakt</Link>
             <Link to="/kiosk">Kiosk</Link>

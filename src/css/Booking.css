@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
 dialog {
- display:block;
+  display: block;
 }
+
 dialog:not(:target):not([open]) {
-  display:none;
+  display: none;
 }
+
 .fifty {
   border-radius: 7px;
   background-color: var(--second-bg);
@@ -21,6 +23,7 @@ h2.movie-title {
 }
 .screen-select-btn {
   background-color: #919398;
+
   :hover {}
   @apply font-bold py-2 px-4 rounded-full text-white m-8;
   display:inline-block;

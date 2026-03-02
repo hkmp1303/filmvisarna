@@ -7,6 +7,7 @@ import Contact from './pages/ContactPage';
 import Kiosk from './pages/Kiosk';
 import Register from './pages/Register';
 import Booking from './pages/BookingPage';
+import TemaDagar from './pages/TemaDagar';
 import ConfirmBooking from './pages/ConfirmBooking';
 
 interface Route {
@@ -23,8 +24,11 @@ const routes: Route[] = [
   { element: <MovieDetails />, path: '/moviedetails/:filmid' },
   { element: <Booking />, path: '/booking' },
   { element: <Kiosk />, path: '/Kiosk', menuLabel: 'Kiosk' },
-  { element: <Register />, path: '/Register', menuLabel: 'Registrera' },
+  { element: <Register />, path: '/Register'},
+  { element: <TemaDagar />, path: '/themedays', menuLabel: 'Tema Dagar' },
   { element: <ConfirmBooking />, path: '/confirmbooking' }
+
+
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
 ];
 
