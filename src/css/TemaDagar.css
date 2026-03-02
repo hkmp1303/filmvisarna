@@ -52,13 +52,13 @@
   text-align: left;
   font-size: 1.5rem;
   justify-content: center;
-  color: #fffdc4;
+  color: var(--purpletext-h4);
 }
 
 .theme-name {
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
-  text-shadow: 3px 2.5px 10px black;
+  text-shadow: 3px 2.5px 10px rgb(255, 255, 255);
   ;
 }
 
