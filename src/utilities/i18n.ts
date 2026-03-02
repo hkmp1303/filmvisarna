@@ -11,3 +11,14 @@ export default function genre(genre: string): string {
   };
   return translation[genre] ?? "";
 }
+
+export function displayVeiwerRating(viewer_rating: string): string {
+  const display: Record<string, string> = {
+    btl: 'Barntilläten',
+    '7+': '7+',
+    '11+': '11+',
+    '15+': '15+',
+    bfj: 'Barnförbjuden'
+  };
+  return display[viewer_rating] ?? "";
+}

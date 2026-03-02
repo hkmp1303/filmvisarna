@@ -8,6 +8,7 @@ import Kiosk from './pages/Kiosk';
 import Register from './pages/Register';
 import Booking from './pages/BookingPage';
 import TemaDagar from './pages/TemaDagar';
+import ConfirmBooking from './pages/ConfirmBooking';
 
 interface Route {
   element: JSX.Element;
@@ -24,7 +25,8 @@ const routes: Route[] = [
   { element: <Booking />, path: '/booking' },
   { element: <Kiosk />, path: '/Kiosk', menuLabel: 'Kiosk' },
   { element: <Register />, path: '/Register'},
-  { element: <TemaDagar />, path: '/themedays', menuLabel: 'Tema Dagar' }
+  { element: <TemaDagar />, path: '/themedays', menuLabel: 'Tema Dagar' },
+  { element: <ConfirmBooking />, path: '/confirmbooking' }
 
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
