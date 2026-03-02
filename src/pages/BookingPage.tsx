@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 //import useFetchJson from '../utilities/useFetchJson';
 import fetchJson from '../utilities/fetchJson';
 import '../css/Booking.css';
@@ -9,6 +9,8 @@ import type { Salon, Res } from '../utilities/salonInterface';
 import { formatDateIso, formatDay, formatHourMin } from '../utilities/formatDateTime';
 import genre from '../utilities/i18n';
 import { sumNumArray, csvToNumArray } from '../utilities/tools';
+import type { LoginContext } from './Login';
+import useFetchJson from '../utilities/useFetchJson';
 
 export default function Booking() {
   const adultCnt = useRef<HTMLInputElement>(null);
@@ -26,6 +28,8 @@ export default function Booking() {
   const [totalSeats, setSeats] = useState<number>(0);
   const [ticketTotal, setTicketTotal] = useState<number>(0);
   const [ticketCount, setTicketCount] = useState<number>(0);
+  const { user } = useOutletContext<LoginContext>();
+  const [bookingGuid, setBookingGuid] = useState<string>("");
 
   const qs = new URLSearchParams(useLocation().search);
   const id = parseInt(qs.get("screeningid") as string, 10);
@@ -92,69 +96,102 @@ export default function Booking() {
     );
   };
 
-  const seatTaken = (index:number, row_index:number): boolean => {
+  const seatTaken = (index: number, row_index: number): boolean => {
     const currentSeatNum = calcSeatNum(index, row_index);
-    return res.some(s=>s.seat_number === currentSeatNum);
-  }
+    return res.some(s => s.seat_number === currentSeatNum);
+  };
 
   const calcSeatNum = (index: number, row_index: number): number => {
-    const currentRowCap:number = salon?.row_capacity[row_index] ?? 0;
-    return 1+index+(currentRowCap * row_index);
-  }
+    const currentRowCap: number = salon?.row_capacity[row_index] ?? 0;
+    return 1 + index + (currentRowCap * row_index);
+  };
 
   const handleClickSeat = (e: any) => {
     const btns = document.querySelectorAll(".seating-arrangement input[type=checkbox]");
     console.log(btns);
-  }
+  };
 
   const handleClick = () => navigate(`/movieDetails/${film?.filmid}`);
+
+  const handleReservation = (e: any) => {
+    e.preventDefault();
+    if (ticketTotal == 0) {
+      return alert("Du måste boka minst en biljett");
+    }
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    try {
+      const res = fetch("/api/reserveSeatRes/" + id, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(Object.fromEntries(formData.entries()))
+      }).then((res) => {
+        if (!res.ok) throw new Error("Kunde inte spara bokning.");
+      }).then((data) => {
+        console.log(data);
+        alert("Bokningen har sparats");
+      });
+    } catch (e:any) {
+      alert(e.message)
+    }
+    //navigate(`/confirmBooking/${film?.filmid}`);
+  };
+
+  const handleBooking = (e: any) => {
+    e.preventDefault();
+    navigate("/confirmbooking");
+  };
+
   return (!loading.current && (<>
     <h2 className='movie-title'>{ film?.title }</h2>
     <article className="grid grid-cols-1 md:grid-cols-2 gap-6 p-10">
       <div>
         <section className='fifty'>
-        <fieldset className="">
-          <legend>Vald föreställning </legend>
-          {/*<form>
-            {screenings && (screenings as BriefScreening[]).length > 1 ? (<>
-            <label htmlFor="screening">Visning</label>
-            <select name="screeningid" id="screening" required>
-            <option value="">Välj en visning</option>
-            {(screenings as BriefScreening[]).map((s: BriefScreening, index: number) => (
-              <option key={index} value={s.screeningid}>
-              {formatDateTime(s.start)} - Salong {s.room_number}
-              </option>
-              ))}
-              </select>
-            </>) : (
-              <p>{error}</p>
-              )}
-              </form>*/}
-          <div className='screening-info'>
-            <div>
-              <img className="float-right mx-5" src={film?.cover_image} alt="Film Affisch" width="200" height="300" /></div>
-            <div>
-              <p>Åldersgräns: {film?.viewer_rating}</p>
-              <p>Speltid: {film?.duration} min</p>
-              <p>Genre: {genre(film?.genre ?? "")}</p>
-              <p>Tal: {film?.language}</p>
-              <p>Undertext: {film?.subtitle_language}</p>
-              <p> {formatDateIso(screening?.start)}</p>
-              <p>{(formatDay(screening?.start))} - kl {formatHourMin(screening?.start) }</p>
-              <p>Salong {salon?.room_number}</p>
-            </div>
-          </div>
-          <div className='items-center text-center'>
-            <button className="screen-select-btn" onClick={handleClick}>Välj annan föreställning</button>
-          </div>
-        </fieldset>
+          <form>
+            <fieldset className="">
+              <legend>Vald föreställning </legend>
+              {/*<form>
+                {screenings && (screenings as BriefScreening[]).length > 1 ? (<>
+                <label htmlFor="screening">Visning</label>
+                <select name="screeningid" id="screening" required>
+                <option value="">Välj en visning</option>
+                {(screenings as BriefScreening[]).map((s: BriefScreening, index: number) => (
+                  <option key={index} value={s.screeningid}>
+                  {formatDateTime(s.start)} - Salong {s.room_number}
+                  </option>
+                  ))}
+                  </select>
+                </>) : (
+                  <p>{error}</p>
+                  )}
+                  </form>*/}
+              <div className='screening-info'>
+                <div>
+                  <img className="float-right mx-5" src={film?.cover_image} alt="Film Affisch" width="200" height="300" /></div>
+                <div>
+                  <p>Åldersgräns: {film?.viewer_rating}</p>
+                  <p>Speltid: {film?.duration} min</p>
+                  <p>Genre: {genre(film?.genre ?? "")}</p>
+                  <p>Tal: {film?.language}</p>
+                  <p>Undertext: {film?.subtitle_language}</p>
+                  <p> {formatDateIso(screening?.start)}</p>
+                  <p>{(formatDay(screening?.start))} - kl {formatHourMin(screening?.start) }</p>
+                  <p>Salong {salon?.room_number}</p>
+                </div>
+              </div>
+              <div className='items-center text-center'>
+                <button className="screen-select-btn" onClick={handleClick}>Välj annan föreställning</button>
+              </div>
+            </fieldset>
+          </form>
         </section>
         <hr className='div' />
         <section className='fifty'>
-          <fieldset>
-            <legend>Välj antal biljetter</legend>
-            <form className='ticket-count'>
-              <table className=''>
+          <form>
+            <fieldset>
+              <legend>Välj antal biljetter</legend>
+              <table className='ticket-count'>
                 <tbody>
                   <tr>
                     <td className='ticket-label'><label htmlFor="adult">Ordinarie</label></td>
@@ -173,33 +210,44 @@ export default function Booking() {
                   </tr>
                 </tbody>
               </table>
-            </form>
-          </fieldset>
+            </fieldset>
+          </form>
         </section>
       </div>
       <div>
         <section className="fifty">
           <fieldset className=''>
             <legend>Tillgängliga platser i Salong {salon?.room_number}</legend>
-            <div className='seating-arrangement'>
-              <p className="screen"> Filmduk</p>
-              {salon?.row_capacity.map((r: number, row_index) => {
-                return <div key={"row-"+row_index}>{Array(r).fill(null).map((v,index) =>{
-                  return <label key={"seat-"+index}>
-                    <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" >
-                      <rect width="20" height="20" rx="3" ry="3" className={seatTaken(index, row_index)?"booked": "vacant"} />
-                    </svg>
-                    <input type="checkbox" key={calcSeatNum(index, row_index)}
-                      name={"seat[" + calcSeatNum(index, row_index) + "]"}
-                      checked={seatTaken(index, row_index)}
-                      onChange={handleClickSeat}
-                    />
-                  </label>}
-                )}</div>}
-              )}
-          </div>
-        </fieldset>
+            <form onSubmit={handleReservation}>
+              <input type="hidden" name="total_cost" value={ticketTotal} />
+              <input type="hidden" name="guid" value={bookingGuid} />
+              <div className='seating-arrangement'>
+                <p className="screen"> Filmduk</p>
+                {salon?.row_capacity.map((r: number, row_index) => {
+                  return <div key={"row-"+row_index}>{Array(r).fill(null).map((v,index) =>{
+                    return <label key={"seat-"+index}>
+                      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" >
+                        <rect width="20" height="20" rx="3" ry="3" className={seatTaken(index, row_index)?"booked": "vacant"} />
+                      </svg>
+                      <input type="checkbox" key={calcSeatNum(index, row_index)}
+                        name={"seat[" + calcSeatNum(index, row_index) + "]"}
+                        checked={seatTaken(index, row_index)}
+                        onChange={handleClickSeat}
+                        data-row={row_index}
+                        disabled={seatTaken(index, row_index)} // ignored on submit, prevent changes to booked seats
+                      />
+                    </label>}
+                  )}</div>}
+                )}
+              </div>
+              <button className="book-seats-btn">Reservera platser</button>
+
+            </form>
+          </fieldset>
         </section>
+        <form className='text-center' onSubmit={handleBooking}>
+          <button className="book-seats-btn">Boka platser</button>
+        </form>
       </div>
     </article>
   </>));

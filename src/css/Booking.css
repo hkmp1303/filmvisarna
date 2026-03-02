@@ -7,6 +7,7 @@ dialog:not(:target):not([open]) {
   display:none;
 }
 .fifty {
+  border-radius: 7px;
   background-color: var(--second-bg);
   @apply p-2 pt-0;
   fieldset {
@@ -85,3 +86,15 @@ h2.movie-title {
     @apply w-90 inline-block mb-3;
   }
 }
+    .book-seats-btn {
+      width: 85%;
+      background: radial-gradient(circle, #5a2a7a 0%, #b527d81a 70%);
+      border: 0cap solid #7a5a9a;
+      color: var(--font-primary);
+      @apply p-2 m-10;
+      border-radius: 18px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-size: 20px;
+      border: 1px solid var(--border-primary);
+    }
