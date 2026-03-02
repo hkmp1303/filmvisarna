@@ -20,7 +20,7 @@ const routes: Route[] = [
   { element: <Contact />, path: '/contact', menuLabel: 'Kontakt' },
   { element: <MovieDetails />, path: '/moviedetails/:filmid' },
   { element: <Booking />, path: '/booking' },
-  { element: <Kiosk />, path: '/Kiosk', menuLabel: 'Kiosk' },
+  { element: <Kiosk />, path: '/kiosk', menuLabel: 'Kiosk' },
   { element: <Register />, path: '/Register', menuLabel: 'Registrera' }
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
