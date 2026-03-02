@@ -13,7 +13,7 @@ export default function Header() {
     </Link>
 
 
-    <h1>Film Visarna</h1>
+    <h1 className='text-5xl justify-self-center md:text-4xl xl:text-6xl'>FilmVisaren</h1>
 
     <nav className='header-nav'>
       {routes.filter(x => x.menuLabel)
@@ -22,10 +22,3 @@ export default function Header() {
     </nav>
   </header>;
 }
-
-/*
-Need to add the logo image when
-
-header-nav goes throw every element in routes.tsx and displayes them
-
-*/

@@ -10,14 +10,17 @@
   --font-primary: #fffdc4;
   --log-heading-primary: #FFF562;
   --background-btn: #919398;
-
-  /*purple button*/
-  --btn-grad-backcolor: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
-  /*Background for input fields*/
-  --input-grad-backcolor: radial-gradient(circle, #fffdc4 20%, #fffdc4 60%);
-
+  --input-bg: #fff;
+  --vacant-seat: #406ae8;
+  --reserved-seat: #d5da4d;
+  --booked-seat: #4e4851;
 
 
+
+
+  --purpletext-h4: #550755;
+  /*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --background-h: #f4f4f474;
 /*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
