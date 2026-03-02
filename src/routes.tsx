@@ -20,8 +20,8 @@ const routes: Route[] = [
   { element: <Contact />, path: '/contact', menuLabel: 'Kontakt' },
   { element: <MovieDetails />, path: '/moviedetails/:filmid' },
   { element: <Booking />, path: '/booking' },
-  { element: <Kiosk />, path: '/kiosk', menuLabel: 'Kiosk' },
-  { element: <Register />, path: '/Register', menuLabel: 'Registrera' }
+  { element: <Kiosk />, path: '/Kiosk', menuLabel: 'Kiosk' },
+  { element: <Register />, path: '/Register' }
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
 ];
