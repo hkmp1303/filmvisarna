@@ -13,9 +13,9 @@ export default function AboutUs() {
     return <>
         <article className="aboutus-page">
             <section className="aboutus-info">
-                <h1 className='font-medium text-(--font-primary) text-shadow-lg/30 pb-4'>Om Filmvisarna AB</h1>
+                <h1 className='font-medium text-(--font-primary) text-shadow-lg/30 pb-4'>Om Filmvisaren AB</h1>
                 <h3 className='font-medium text-xl flex justify-center items-center pb-4'>Den personliga bioupplevelsen i Småstad</h3>
-                <p className='pb-2'>Filmvisarna AB föddes ur en enkel dröm: att ge Småstad den bioupplevelse staden förtjänar.
+                <p className='pb-2'>Filmvisaren AB föddes ur en enkel dröm: att ge Småstad den bioupplevelse staden förtjänar.
                     Medan de stora biograferna blir alltmer opersonliga,
                     tror vi på den lokala närvaron.
                     Vi är den lilla biografkedjan med det stora hjärtat,
