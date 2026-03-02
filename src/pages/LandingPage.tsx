@@ -7,6 +7,7 @@ import type { SortOption } from "../utilities/types";
 import type { BriefFilm } from '../utilities/filmInterface';
 import '../css/LandingPage.css';
 import translateGenre from '../utilities/i18n';
+import { displayVeiwerRating } from '../utilities/i18n';
 
 
 export default function LandingPage() {
