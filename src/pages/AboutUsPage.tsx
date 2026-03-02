@@ -6,8 +6,8 @@ export default function AboutUs() {
 
     const navigate = useNavigate();
 
-    const navThemeDays = () => navigate('/TemaDagar');
-    const navKiosk = () => navigate('/Kiosk');
+    const navThemeDays = () => navigate('/themedays');
+    const navKiosk = () => navigate('/kiosk');
     const navContact = () => navigate('/contact');
 
     return <>
