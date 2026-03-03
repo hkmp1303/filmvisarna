@@ -6,6 +6,8 @@ import { sortAndFilterMovies } from '../utilities/movieUtils';
 import type { SortOption } from "../utilities/types";
 import type { BriefFilm } from '../utilities/filmInterface';
 import '../css/LandingPage.css';
+import translateGenre from '../utilities/i18n';
+import { displayVeiwerRating } from '../utilities/i18n';
 
 
 export default function LandingPage() {
@@ -44,7 +46,7 @@ export default function LandingPage() {
         <div className="search-bar">
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="Sök titel..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -67,13 +69,13 @@ export default function LandingPage() {
         </div>
         <div className="dropdown">
           <button className="filter-btn dropdown-btn">
-            {selectedGenre === '' ? 'Alla Genrer' : selectedGenre} ▼
+            {selectedGenre === '' ? 'Alla Genrer' : translateGenre(selectedGenre)} ▼
           </button>
           <div className="dropdown-content">
             <a onClick={() => setSelectedGenre('')}>Alla Genrer</a>
             {uniqueGenres.map((genre) => (
               <a key={genre} onClick={() => setSelectedGenre(genre)}>
-                {genre}
+                {translateGenre(genre)}
               </a>
             ))}
           </div>
@@ -90,7 +92,7 @@ export default function LandingPage() {
               >
                 <div className="poster-overlay-text">
                   <h3>{movie.title}</h3>
-                  <p>{movie.duration} min | {movie.genre}| {movie.language}</p>
+                  <p>{movie.duration} min | {translateGenre(movie.genre)}| {movie.language}</p>
                 </div>
               </div>
             </div>

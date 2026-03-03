@@ -1,7 +1,30 @@
 @import "tailwindcss";
 
-/*:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+
+:root {
+  --primary-bg: linear-gradient(to bottom, #660157, #4e023e);
+  --dark-primary: #660157;
+  --second-bg: #c9b0d8;
+  --border-primary: #864486;
+  --font-primary: #fffdc4;
+  --log-heading-primary: #FFF562;
+  --background-btn: #919398;
+  --input-bg: #fff;
+  --vacant-seat: #406ae8;
+  --reserved-seat: #d5da4d;
+  --booked-seat: #4e4851;
+
+/*purple button*/
+  --btn-grad-backcolor: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
+  /*Background for input fields*/
+  --input-grad-backcolor: radial-gradient(circle, #fffdc4 20%, #fffdc4 60%);
+
+
+
+  --purpletext-h4: #550755;
+  --background-h: #f4f4f474;
+/*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -13,7 +36,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}*/
+*/
+}
 
 html {
   box-sizing: border-box;

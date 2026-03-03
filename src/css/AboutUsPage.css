@@ -1,12 +1,50 @@
 .aboutus-page {
-
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     padding: 1.5rem;
     gap: 1.5rem;
+    align-items: stretch;
 
-    button {
-        background: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
+    @media (min-width: 1250px) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .aboutus-info {
+        background-color: var(--second-bg);
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .big-logo {
+        display: none; 
+        @media (min-width: 768px) {
+            display: inline-block;
+            align-self: center;
+            justify-self: center;
+            color: #fffdc4;
+        }
+    }
+
+    .side-link {
+        background-color: var(--second-bg);
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        padding: 1rem;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+
+        @media(max-width: 768px){
+            margin-bottom: 4rem;
+        }
+
+    }
+
+    .theme-days-btn, .kiosk-btn, .contact-us-btn {
+        margin: 10px 0;
+        align-self: center;
+        background: var(--btn-grad-backcolor);
         border: 0cap solid #7a5a9a;
         color: white;
         padding: 7px;
@@ -16,202 +54,11 @@
         font-size: 20px;
         width: 15rem;
         justify-self: center;
+        transition: transform 0.1s, background-color 0.2s;
+
+        &:hover {
+        background-color: #fff;
+        transform: scale(1.02);
     }
-
-    .aboutus-info {
-        background-color: chartreuse;
-        padding: 1rem;
-        border-radius: 10px;
-
-        h1 {
-            text-align: center;
-        }
-    }
-
-    .big-logo {
-        align-self: center;
-    }
-
-    .side-link {
-        background-color: chartreuse;
-        display: grid;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10px;
-        padding: 1rem;
-
-        h3 {
-            text-align: center;
-        }
-
-        .td-box {
-            display: grid;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .k-box {
-            display: grid;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .ko-box {
-            display: grid;
-            align-items: center;
-            justify-content: center;
-        }
-    }
-}
-
-/*Tablet fix*/
-@media (max-width: 1250px) {
-
-    .aboutus-page {
-
-        display: grid;
-        grid-template-columns: 1fr;
-        padding: 1.5rem;
-        gap: 1.5rem;
-
-        button {
-            background: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
-            border: 0cap solid #7a5a9a;
-            color: white;
-            padding: 7px;
-            border-radius: 18px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-size: 20px;
-            width: 15rem;
-            justify-self: center;
-        }
-
-        .aboutus-info {
-            background-color: chartreuse;
-            padding: 1rem;
-            border-radius: 10px;
-
-            h1 {
-                text-align: center;
-            }
-        }
-
-        .big-logo {
-            justify-self: center;
-
-            img {
-                max-width: 150px;
-            }
-        }
-
-        .side-link {
-            background-color: chartreuse;
-            display: grid;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 3rem;
-
-            h3 {
-                text-align: center;
-            }
-
-            .td-box {
-                display: grid;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .k-box {
-                display: grid;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .ko-box {
-                display: grid;
-                align-items: center;
-                justify-content: center;
-            }
-        }
-    }
-}
-
-
-/*Mobile View*/
-@media (max-width: 768px) {
-
-    .aboutus-page {
-
-        display: grid;
-        grid-template-columns: 1fr;
-        padding: 1.5rem;
-        gap: 1.5rem;
-
-        button {
-            background: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
-            border: 0cap solid #7a5a9a;
-            color: white;
-            padding: 7px;
-            border-radius: 18px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-size: 20px;
-            width: 15rem;
-            justify-self: center;
-        }
-
-        .aboutus-info {
-            background-color: chartreuse;
-            padding: 1rem;
-            border-radius: 10px;
-
-            h1 {
-                text-align: center;
-            }
-        }
-
-        .big-logo {
-            display: none;
-            justify-self: center;
-
-            img {
-                max-width: 150px;
-            }
-        }
-
-        .side-link {
-            background-color: chartreuse;
-            display: grid;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 3rem;
-
-            h3 {
-                text-align: center;
-            }
-
-            .td-box {
-                display: grid;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .k-box {
-                display: grid;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .ko-box {
-                display: grid;
-                align-items: center;
-                justify-content: center;
-            }
-        }
     }
 }

@@ -4,6 +4,29 @@ public static class RestApi
 {
   public static void Start()
   {
+    //sending contact email to email
+    App.MapPost("/api/contact", async (HttpContext context) =>
+    {
+      try
+      {
+        var body = await context.Request.ReadFromJsonAsync<JsonElement>();
+        //innehål
+        string name = body.GetProperty("name").GetString();
+        string email = body.GetProperty("email").GetString();
+        string subject = body.GetProperty("subject").GetString();
+        string message = body.GetProperty("message").GetString();
+
+        EmailService.ReceiveEmail(name, email, subject, message);
+
+        return Results.Ok(new { message = "Mail sent" });
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine("crash " + ex.Message);
+        return Results.Problem("error: " + ex.Message);
+      }
+    });
+
     App.MapPost("/api/{table}", (
         HttpContext context, string table, JsonElement bodyJson
     ) =>
@@ -124,6 +147,15 @@ public static class RestApi
           context
       ))
     );
+  }
+
+  //this class i so the contactform
+  public class ContactRequest
+  {
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public string Subject { get; set; }
+    public string Message { get; set; }
   }
 }
 
