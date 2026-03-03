@@ -60,10 +60,29 @@
     font-size: 14px;
 }
 
+.message-bubble ul {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    list-style-type: disc;
+}
+
+.message-bubble li {
+    margin-bottom: 5px;
+}
+
+.message-bubble p {
+    margin-bottom: 10px;
+}
+
+.message-bubble strong {
+    font-weight: bold;
+    color: purple;
+}
+
 .user {
     align-self: flex-end;
-    background: #e50914;
-    color: white;
+    background: var(--second-bg);
+    color: black;
 }
 
 .assistant {

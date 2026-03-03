@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import '../css/AiChat.css'
 import Logo from '../../public/robot.svg?react';
+import ReactMarkdown from 'react-markdown';
 
 interface Message {
     role: 'user' | 'assistant' | 'system';
@@ -73,7 +74,7 @@ export default function AiChat() {
                         )}
                         {messages.map((msg, i) => (
                             <div key={i} className={`message-bubble ${msg.role}`}>
-                                {msg.content}
+                                <ReactMarkdown>{msg.content}</ReactMarkdown>
                             </div>
                         ))}
                         {isLoading && <div className="message-bubble assistant loading">Tänker...</div>}

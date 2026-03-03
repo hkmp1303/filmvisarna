@@ -4,6 +4,7 @@ public static class AiChatRoutes
 {
     private static string aiAccessToken = "";
     private static string systemPrompt = "";
+    private static string webSiteInfo = "";
     private static readonly string proxyUrl = "https://ai-api.nodehill.com";
     private static readonly HttpClient httpClient = new HttpClient();
 
@@ -11,6 +12,7 @@ public static class AiChatRoutes
     {
         LoadConfig();
         LoadSystemPrompt();
+        LoadWebInfo();
 
         App.MapPost("/api/chat", async (HttpContext context, JsonElement bodyJson) =>
         {
@@ -58,7 +60,7 @@ public static class AiChatRoutes
                 }
 
                 var fullMessages = Arr();
-                string finalSystemInstruction = systemPrompt + "\n" + movieContext;
+                string finalSystemInstruction = systemPrompt + "\n\n" + webSiteInfo + "\n\n" + movieContext;
 
                 fullMessages.Push(Obj(new { role = "system", content = finalSystemInstruction }));
 
@@ -94,6 +96,20 @@ public static class AiChatRoutes
         });
     }
 
+    private static void LoadWebInfo()
+    {
+        try
+        {
+            var path = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "AI-info.md");
+            if (File.Exists(path))
+            {
+                webSiteInfo = File.ReadAllText(path);
+                Log("Loaded web info from AI-info.md");
+            }
+        }
+        catch (Exception ex) { Log("Error loading kiosk info:", ex.Message); }
+    }
+
     private static void LoadConfig()
     {
         try
@@ -114,6 +130,8 @@ public static class AiChatRoutes
         }
         catch (Exception ex) { Log("Error loading prompt:", ex.Message); }
     }
+
+
 }
 
 /*
