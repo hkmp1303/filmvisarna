@@ -15,11 +15,14 @@
   --reserved-seat: #d5da4d;
   --booked-seat: #4e4851;
 
+/*purple button*/
+  --btn-grad-backcolor: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
+  /*Background for input fields*/
+  --input-grad-backcolor: radial-gradient(circle, #fffdc4 20%, #fffdc4 60%);
 
 
 
   --purpletext-h4: #550755;
-  /*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   --background-h: #f4f4f474;
 /*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

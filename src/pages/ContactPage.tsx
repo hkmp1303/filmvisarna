@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { ChangeEvent, FormEvent } from 'react';
-
+import fetchJson from '../utilities/fetchJson';
 import '../css/ContactPage.css'
 
 interface contactForm {
@@ -26,15 +26,27 @@ export default function Contact() {
         setSubmitData(prev => ({ ...prev, [name]: value }));
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        try {
+            const data = await fetchJson('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(submitData),
+            });
 
-        //change here if we're gonna do it as an emil or as an internal message system????
-        console.log('Skickar data:', submitData);
-
-        setSubmitted(true);
-
-        //const nativeEvent = e.nativeEvent as SubmitEvent;
+            if (data && !data.error) {
+                setSubmitted(true);
+                setSubmitData({ name: '', email: '', subject: 'None', message: '' });
+            } else {
+                alert("Något gick fel" + (data.error || "Okänt fel"));
+            }
+        } catch (error) {
+            console.error("Kunde inte kontakta servern:", error);
+            alert("Kunde inte ansluta till servern")
+        }
         setSubmitted(true);
     }
 
@@ -43,37 +55,37 @@ export default function Contact() {
         {submitted && (
             <div className='popup-window'>
                 <div className='popup-content'>
-                    <h3> Tack, {submitData.name}!</h3>
-                    <p>Ditt meddelande har nu skickats till oss.</p>
-                    <p>Vi hör av oss så snart vi kan.</p>
+                    <h3 className='text-2xl'> Tack!</h3>
+                    <p className='text-xl'>Ditt meddelande har nu skickats till oss.</p>
+                    <p className='text-xl'>Vi hör av oss så snart vi kan.</p>
                     <button onClick={() => setSubmitted(false)}>Stäng</button>
                 </div>
             </div>
         )}
         <section className='info-container'>
-            <h1>Kontakta oss</h1>
-            <h3>Adress:</h3>
-            <p>Storgatan 12</p>
-            <p>123 45 Småstad</p>
-            <p>Sverige</p>
-            <h3>Telefon:</h3>
-            <p>01-000000000</p>
-            <h3>E-mail:</h3>
-            <p>info@filmvisarna.fake</p>
-            <h3>Öppettider:</h3>
-            <p>Måndag - Fredag: 13:00 - 23:00</p>
-            <p>Lördag - Söndag: 10:00 - 00:00</p>
+            <h1 className='contact-text'>Kontakta oss</h1>
+            <h3 className='text-2xl font-semibold'>Adress:</h3>
+            <p className='text-xl'>Storgatan 12</p>
+            <p className='text-xl'>123 45 Småstad</p>
+            <p className='pb-10 text-xl'>Sverige</p>
+            <h3 className='text-2xl font-semibold'>Telefon:</h3>
+            <p className='pb-10 text-xl'>01-000000000</p>
+            <h3 className='text-2xl font-semibold'>E-mail:</h3>
+            <p className='pb-10 text-xl'>info@filmvisarna.fake</p>
+            <h3 className='text-2xl font-semibold'>Öppettider:</h3>
+            <p className='text-xl'>Måndag - Fredag: 13:00 - 23:00</p>
+            <p className='pb-10 text-xl'>Lördag - Söndag: 10:00 - 00:00</p>
 
         </section>
         <section className='form-container'>
             <form onSubmit={handleSubmit}>
                 <br />
-                <label> Namn: </label>
+                <label className='text-xl font-semibold mb-2'> Namn: </label>
                 <input name='name' value={submitData.name} className='input-field' type="text" onChange={handleData} required />
                 <br />
-                <label> E-mail: </label>
+                <label className='text-xl font-semibold mb-2 mt-1'> E-mail: </label>
                 <input name='email' value={submitData.email} className='input-field' type="email" onChange={handleData} required />
-                <select name="subject" value={submitData.subject} onChange={handleData}>
+                <select className='text-base' name="subject" value={submitData.subject} onChange={handleData}>
                     <option value="None">Ärende</option>
                     <option value="Föreställning">Föreställning</option>
                     <option value="Biljettfråga">Biljettfråga</option>
@@ -81,7 +93,7 @@ export default function Contact() {
                     <option value="Betalning">Betalning</option>
                     <option value="Övrigt">Övrigt</option>
                 </select>
-                <label htmlFor="">Skriv ett meddelande:
+                <label className='text-xl font-semibold mb-2 mt-1'>Skriv ett meddelande:
                 </label>
                 <textarea name='message' value={submitData.message} onChange={handleData} required></textarea>
                 <button className='submit-btn' type='submit'> Skicka</button>
