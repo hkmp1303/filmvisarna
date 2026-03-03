@@ -17,26 +17,35 @@ dialog:not(:target):not([open]) {
     border: 1px solid var(--border-primary);
   }
 }
+
 h2.movie-title {
   color: var(--font-primary);
   @apply text-center text-shadow-lg/30 pt-6 pb-4 text-5xl;
 }
+
 .screen-select-btn {
   background-color: #919398;
-
-  :hover {}
-  @apply font-bold py-2 px-4 rounded-full text-white m-8;
+  border: 2px solid transparent;
+  @apply font-bold py-2 px-4 rounded-full text-white my-8;
   display:inline-block;
 }
+.screen-select-btn:hover {
+  background-color: var(--border-primary);
+  color: var(--input-bg);
+  border: 2px solid var(--font-primary);
+}
+
 .screening-info {
   max-width: 100%;
   @apply grid grid-cols-2 text-left;
 }
+
 .div {
   background-image: transparent;
   height: 20px;
   width: 100%;
 }
+
 .ticket-count {
   border-spacing: 2px;
   width: 80%;
@@ -55,12 +64,16 @@ h2.movie-title {
       border: 1.5px solid var(--border-primary);
       @apply text-center;
     }
+    input[type=number]:hover {
+      border: 1.5px solid var(--font-primary);
+    }
     @apply w-25;
   }
   .ticket-price {
     width: 25%;
   }
 }
+
 .seating-arrangement {
   label {
     display: inline-block;
@@ -71,10 +84,17 @@ h2.movie-title {
       @apply m-1;
     }
     input[type=checkbox] {
-      position:relative;
+      position: relative;
       @apply p-0 w-0 h-0;
     }
+    .vacant:hover{
+      stroke:var(--font-primary);
+      stroke-width: 3px;
+      stroke-linejoin: round;
+    }
+
   }
+
   .booked {
     fill: var(--booked-seat);
   }
@@ -86,18 +106,23 @@ h2.movie-title {
   }
   .screen {
     border-bottom: 3px solid var(--border-primary);
-    @apply w-90 inline-block mb-3;
+    @apply inline-block mb-3;
+    width: 80%;
   }
 }
-    .book-seats-btn {
-      width: 85%;
-      background: radial-gradient(circle, #5a2a7a 0%, #b527d81a 70%);
-      border: 0cap solid #7a5a9a;
-      color: var(--font-primary);
-      @apply p-2 m-10;
-      border-radius: 18px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-size: 20px;
-      border: 1px solid var(--border-primary);
-    }
+
+.book-seats-btn {
+  width: 85%;
+  background: radial-gradient(circle, #5a2a7a 0%, #b527d81a 70%);
+  color: var(--font-primary);
+  @apply p-2 m-10;
+  border-radius: 18px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-size: 20px;
+  border: 2px solid var(--border-primary);
+}
+
+.book-seats-btn:hover {
+  border: 2px solid var(--font-primary)
+}
