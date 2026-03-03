@@ -22,7 +22,7 @@ public static class RecoverPassword
 
         if (dbUser == null)
         {
-          return RestResult.Parse(context, new { error = "Connection failed" });
+          return RestResult.Parse(context, new { error = "Invalid input information" });
         }
 
         String resetToken = Guid.NewGuid().ToString();
