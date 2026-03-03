@@ -7,16 +7,19 @@
 }
 
 .ai-chat-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: #e50914;
-    /* Biograf-röd? */
+    background-color: var(--second-bg);
     color: white;
     border: none;
     cursor: pointer;
-    font-size: 24px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    color: black;
 }
 
 .ai-chat-window {
@@ -80,6 +83,16 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+.ai-chat-logo-icon {
+  width: 40px;
+  height: 40px;
+  fill: black;
+  transition: transform 0.2s;
+}
+
+.ai-chat-toggle:hover .ai-chat-logo-icon {
+  transform: scale(1.1);
 }
 
 @media (max-width: 768px) {

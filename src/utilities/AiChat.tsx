@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import '../css/AiChat.css'
+import Logo from '../../public/robot.svg?react';
 
 interface Message {
     role: 'user' | 'assistant' | 'system';
@@ -62,7 +63,7 @@ export default function AiChat() {
             {isOpen && (
                 <div className="ai-chat-window">
                     <div className="ai-chat-header">
-                        <span>Filmvisarna AI-Support</span>
+                        <span>Filmvisaren AI-Support</span>
                         <button onClick={() => setIsOpen(false)}>×</button>
                     </div>
 
@@ -93,7 +94,7 @@ export default function AiChat() {
 
             {/* Bubblan man klickar på */}
             <button className="ai-chat-toggle" onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? 'Close' : '💬'}
+                {isOpen ? ('Stäng') : (<Logo className='ai-chat-logo-icon' />)}
             </button>
         </div>
     );

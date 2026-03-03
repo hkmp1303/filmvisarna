@@ -19,22 +19,37 @@ public static class AiChatRoutes
                 var body = JSON.Parse(bodyJson.ToString());
                 var messages = (Arr)body.messages;
 
-                var moviesFromDb = SQLQuery("SELECT * FROM film");
+                var moviesFromDb = SQLQuery("SELECT * FROM ai_movie_context");
 
-                string movieContext = "\nVIKTIGT: Du får ENDAST svara baserat på dessa filmer från vår databas:\n";
+                string movieContext = "\n--- AKTUELLT PROGRAM OCH DETALJERAD INFO ---\n";
 
                 if (moviesFromDb != null && moviesFromDb.Count() > 0)
                 {
-                    foreach (var movie in moviesFromDb)
+                    foreach (var m in moviesFromDb)
                     {
-                        Console.WriteLine("DB RAD: " + JSON.Stringify(movie));
+                        Console.WriteLine("DB RAD: " + JSON.Stringify(m));
 
-                        string title = movie["title"]?.ToString()
-                                    ?? movie["Title"]?.ToString()
-                                    ?? movie["titel"]?.ToString()
-                                    ?? "Okänd titel";
+                        string title = m["movie_title"]?.ToString() ?? "Okänd";
+                        string genre = m["movie_genre"]?.ToString() ?? "Ej angiven";
+                        string rating = m["movie_viewer_rating"]?.ToString() ?? "Ej betygsatt";
+                        string duration = m["movie_duration"]?.ToString() ?? "?";
+                        string lang = m["movie_language"]?.ToString() ?? "Svenska";
+                        string sub = m["movie_subtitle"]?.ToString() ?? "Ingen";
+                        string time = m["start_time"]?.ToString() ?? "Okänd tid";
+                        if (m["start_time"] != null)
+                        {
+                            DateTime dt = DateTime.Parse(m["start_time"].ToString());
+                            time = dt.ToString("HH:mm (dd MMM)");
+                        }
+                        string salon = m["salon_name"]?.ToString() ?? "Okänd salong";
+                        string desc = m["movie_description"]?.ToString() ?? "";
 
-                        movieContext += $"- {title}\n";
+                        // Vi bygger en kompakt men informationsrik sträng för varje föreställning
+                        movieContext += $"FILM: {title} | GENRE: {genre} | BETYG: {rating} | LÄNGD: {duration} min\n";
+                        movieContext += $"SPRÅK: {lang} (Text: {sub})\n";
+                        movieContext += $"VISAS: {time} i {salon}\n";
+                        movieContext += $"OM FILMEN: {desc}\n";
+                        movieContext += "-----------------------------------\n";
                     }
                 }
                 else
@@ -100,3 +115,24 @@ public static class AiChatRoutes
         catch (Exception ex) { Log("Error loading prompt:", ex.Message); }
     }
 }
+
+/*
+CREATE OR REPLACE VIEW ai_movie_context AS
+SELECT 
+    f.title AS movie_title, 
+    f.duration AS movie_duration,
+    f.genre AS movie_genre,
+    f.viewer_rating AS movie_viewer_rating,
+    f.details AS movie_details,
+    f.`language` AS movie_language,
+    f.subtitle_language AS movie_subtitle,
+    s.start AS start_time,
+    salon.description  AS salon_name,
+    f.description AS movie_description
+FROM screening s
+JOIN film f ON s.filmid = f.filmid
+JOIN salon ON s.salonid = salon.salonid
+WHERE s.start > NOW()
+ORDER BY s.start ASC;
+
+*/
