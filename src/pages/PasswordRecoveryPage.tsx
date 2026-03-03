@@ -46,9 +46,9 @@ export default function PasswordRecovery() {
                         <h2>Glömt lösenord</h2>
                         <div className="recover-pass-container">
                             <label className="text-2xl">Skriv in din e-mail:</label>
-                            <input type="email" ref={emailRef} />
-                            <button onClick={handleRecovery}>Återställ lösenord</button>
-                            <button onClick={() => navigate('/Login')}>Tillbaka</button>
+                            <input className="recovery-input" type="email" ref={emailRef} />
+                            <button className="recover-btn" onClick={handleRecovery}>Återställ lösenord</button>
+                            <button className="recover-btn" onClick={() => navigate('/Login')}>Tillbaka</button>
                         </div>
                     </section>
 

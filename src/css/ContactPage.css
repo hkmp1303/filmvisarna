@@ -4,6 +4,7 @@
     color: var(--font-primary);
     @apply text-shadow-lg/30;
     margin-bottom: 3rem;
+    font-size: 36px;
 }
 
 .contact-page {
@@ -109,6 +110,12 @@
                 font-size: 20px;
                 width: 15rem;
                 justify-self: center;
+                transition: transform 0.1s, background-color 0.2s;
+
+                &:hover {
+                background-color: #fff;
+                transform: scale(1.02);
+                }
             }
         }
 
