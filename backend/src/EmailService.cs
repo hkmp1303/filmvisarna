@@ -29,11 +29,6 @@ static class EmailService
 
       var config = JsonSerializer.Deserialize<EmailConfig>(configJson, options);
 
-      // if (config != null)
-      // {
-      //   Console.WriteLine($"Config laddad: Server={config.smtpServer}, User={config.emailUsername}");
-      // }
-
       if (config == null || string.IsNullOrEmpty(config.smtpServer))
       {
         throw new Exception("Could not read json file");
