@@ -30,10 +30,29 @@ export default function Register() {
       return;
     }
 
+    if (formData.firstname.length < 2 || formData.lastname.length < 2) {
+      setError("Namn måste vara minst 2 tecken.");
+      return;
+    }
+
+    if (!formData.email.includes('@') || !formData.email.includes('.')) {
+      setError("Ange en giltig e-post.");
+      return;
+    }
+
+    const passwordRegex = /^(?=.*\d).{5,}$/;
+    if (!passwordRegex.test(formData.password)) {
+      setError("Lösenordet måste vara minst 5 tecken och innehålla en siffra.");
+      return;
+    }
+
+
     if (formData.password !== formData.confirmPassword) {
       setError("Lösenorden matchar inte!");
       return;
     }
+
+    setError('');
 
     try {
       // Skicka datan direkt
@@ -65,7 +84,7 @@ export default function Register() {
   const closeAndNav = () => {
     setRegAccount(false);
     navigate('/login');
-  }
+  };
 
   return (
     <div className="reg-container">
