@@ -11,3 +11,7 @@ Kiosk:
     Bacon Chips: Liten - 15kr, Mellan - 25kr, Stor - 30kr
     Mjukglass: Liten - 10kr, Mellan - 20kr, Stor - 25kr
     Pizza: Liten - 70kr, Mellan - 85kr, Stor - 99kr
+
+Öppettider:
+    Måndag - Fredag: 13:00 - 23:00
+    Lördag - Söndag: 10:00 - 00:00
