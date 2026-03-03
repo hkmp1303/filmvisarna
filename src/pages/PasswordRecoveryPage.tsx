@@ -37,7 +37,7 @@ export default function PasswordRecovery() {
                         <h2>Ditt lösenord är nu återställt</h2>
                         <div className="pass-send-container">
                             <p className="text-2xl">Ett mejl med instruktioner för att återställa ditt lösenord har skickats till din e-post</p>
-                            <button onClick={() => setBtnToggle(false)}>Tillbaka</button>
+                            <button className="recover-btn" onClick={() => setBtnToggle(false)}>Tillbaka</button>
                         </div>
                     </section>
                 ) : (
