@@ -14,13 +14,9 @@
   --vacant-seat: #406ae8;
   --reserved-seat: #d5da4d;
   --booked-seat: #4e4851;
-
-
-
-
   --purpletext-h4: #550755;
-  /*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   --background-h: #f4f4f474;
+
 /*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -44,4 +40,8 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
+}
+
+*:focus {
+  outline: none;
 }
