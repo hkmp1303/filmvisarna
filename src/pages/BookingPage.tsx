@@ -102,8 +102,16 @@ export default function Booking() {
   };
 
   const calcSeatNum = (index: number, row_index: number): number => {
-    const currentRowCap: number = salon?.row_capacity[row_index] ?? 0;
-    return 1 + index + (currentRowCap * row_index);
+    let currentSeatFromIndex: number = 0;
+    let loops = 0;
+    for (let i of salon?.row_capacity ?? []) {
+      if (loops >= row_index && index < i) {
+        break;
+      }
+      currentSeatFromIndex += i;
+      loops++;
+    }
+    return currentSeatFromIndex + index + 1;
   };
 
   const handleClickSeat = (e: any) => {
@@ -233,7 +241,7 @@ export default function Booking() {
                         name={"seat[" + calcSeatNum(index, row_index) + "]"}
                         checked={seatTaken(index, row_index)}
                         onChange={handleClickSeat}
-                        data-row={row_index}
+                        data-row={row_index +1}
                         disabled={seatTaken(index, row_index)} // ignored on submit, prevent changes to booked seats
                       />
                     </label>}
