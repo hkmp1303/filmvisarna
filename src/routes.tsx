@@ -9,6 +9,8 @@ import Register from './pages/Register';
 import Booking from './pages/BookingPage';
 import TemaDagar from './pages/TemaDagar';
 import ConfirmBooking from './pages/ConfirmBooking';
+import PasswordRecovery from './pages/PasswordRecoveryPage';
+import ResetPassword from './pages/ResetPasswordPage';
 
 interface Route {
   element: JSX.Element;
@@ -18,15 +20,17 @@ interface Route {
 
 const routes: Route[] = [
   { element: <LandingPage />, path: '/', menuLabel: 'Hem' },
-  { element: <Login />, path: '/Login', menuLabel: 'Login' },
+  { element: <Login />, path: '/login', menuLabel: 'Login' },
   { element: <AboutUs />, path: '/aboutus', menuLabel: 'Om oss' },
   { element: <Contact />, path: '/contact', menuLabel: 'Kontakt' },
   { element: <MovieDetails />, path: '/moviedetails/:filmid' },
   { element: <Booking />, path: '/booking' },
   { element: <Kiosk />, path: '/Kiosk', menuLabel: 'Kiosk' },
-  { element: <Register />, path: '/Register'},
+  { element: <Register />, path: '/register' },
   { element: <TemaDagar />, path: '/themedays', menuLabel: 'Tema Dagar' },
-  { element: <ConfirmBooking />, path: '/confirmbooking' }
+  { element: <ConfirmBooking />, path: '/confirmbooking' },
+  { element: <PasswordRecovery />, path: '/passwordrecovery' },
+  { element: <ResetPassword />, path: '/reset-password' }
 
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }

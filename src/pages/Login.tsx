@@ -68,7 +68,7 @@ export default function Login() {
 
           <button
             className="forgoten-password-btn"
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/passwordrecovery')}
           >
             Gå till startsidan
           </button>
@@ -108,7 +108,7 @@ export default function Login() {
         </div>
 
         <div className="forgotten-password">
-          <button className="forgoten-password-btn">Glömt lösenord?</button>
+          <button className="forgoten-password-btn" onClick={() => navigate('//passwordrecovery')}>Glömt lösenord?</button>
         </div>
 
         <div className="confirm">

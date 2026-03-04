@@ -19,37 +19,39 @@ export default function Footer() {
 
   return (
     <footer className="footer">
-      <Link to="/explore" className="footer-btn">
-        Upptäck
-      </Link>
-
-      {userIsLoggedIn ? (
-        <Link to="/account" className="footer-btn">
-          Konto
+      <div className="footer-container">
+        <Link to="/" className="footer-btn">
+          Upptäck
         </Link>
-      ) : (
-        <Link to="/login" className="footer-btn">
-          Logga in
-        </Link>
-      )}
 
-      <div className="footer-menu-wrapper">
-        <button
-          className="footer-btn"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          Mer
-        </button>
-
-
-        {menuOpen && (
-          <div className="footer-submenu">
-            <Link to="/themedays">Tema dagar</Link>
-            <Link to="/aboutus">Om oss</Link>
-            <Link to="/contact">Kontakt</Link>
-            <Link to="/kiosk">Kiosk</Link>
-          </div>
+        {userIsLoggedIn ? (
+          <Link to="/account" className="footer-btn">
+            Konto
+          </Link>
+        ) : (
+          <Link to="/login" className="footer-btn">
+            Logga in
+          </Link>
         )}
+
+        <div className="footer-menu-wrapper">
+          <button
+            className="footer-btn"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            Mer
+          </button>
+
+
+          {menuOpen && (
+            <div className="footer-submenu">
+              <Link className='submenu-link' to="/themedays">Tema dagar</Link>
+              <Link className='submenu-link' to="/aboutus">Om oss</Link>
+              <Link className='submenu-link' to="/contact">Kontakt</Link>
+              <Link className='submenu-link' to="/kiosk">Kiosk</Link>
+            </div>
+          )}
+        </div>
       </div>
     </footer>
   );

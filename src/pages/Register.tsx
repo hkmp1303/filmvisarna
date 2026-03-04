@@ -4,6 +4,8 @@ import '../css/Register.css';
 
 export default function Register() {
   const navigate = useNavigate();
+  const [regaccount, setRegAccount] = useState<boolean>(false);
+
 
   // firstname och lastname separat
   const [formData, setFormData] = useState({
@@ -50,8 +52,7 @@ export default function Register() {
       const data = await response.json();
 
       if (response.ok) {
-        alert("Konto skapat! Du kan nu logga in.");
-        navigate('/login');
+        setRegAccount(true);
       } else {
         setError(data.message || "Kunde inte skapa konto.");
       }
@@ -61,18 +62,32 @@ export default function Register() {
     }
   };
 
+  const closeAndNav = () => {
+    setRegAccount(false);
+    navigate('/login');
+  }
+
   return (
-    <div className="login-container">
-      <div className="login-big-text">
+    <div className="reg-container">
+      {regaccount && (
+        <div className='popup-window'>
+          <div className='popup-content'>
+            <h3 className='text-2xl'>Ditt konto är nu skapat</h3>
+            <p className='text-xl'>Du kommer nu omdirigeras till inloggningssidan</p>
+            <button onClick={closeAndNav}>Stäng</button>
+          </div>
+        </div>
+      )}
+      <div className="reg-big-text">
         <h1>Skapa Konto</h1>
       </div>
 
-      <div className="login-input">
+      <div className="reg-input">
         {error && <p className="error-message">{error}</p>}
 
         {/*FÖRNAMN*/}
-        <div className="name-input">
-          <p>Förnamn</p>
+        <div className="reg-name-input">
+          <p className='text-xl text-black m-0 font-medium'>Förnamn</p>
           <input
             name="firstname"
             type="text"
@@ -82,8 +97,8 @@ export default function Register() {
         </div>
 
         {/*EFTERNAMN*/}
-        <div className="name-input">
-          <p>Efternamn</p>
+        <div className="reg-name-input">
+          <p className='text-xl text-black m-0 font-medium'>Efternamn</p>
           <input
             name="lastname"
             type="text"
@@ -92,32 +107,32 @@ export default function Register() {
           />
         </div>
 
-        <div className="email-input">
-          <p>E-post</p>
+        <div className="reg-email-input">
+          <p className='text-xl text-black m-0 font-medium'>E-post</p>
           <input name="email" type="email" placeholder="Din e-post" onChange={handleChange} />
         </div>
 
-        <div className="phone-number-input">
-          <p>Telefonnummer</p>
+        <div className="reg-phone-number-input">
+          <p className='text-xl text-black m-0 font-medium'>Telefonnummer</p>
           <input name="phone" type="text" placeholder="070..." onChange={handleChange} />
         </div>
 
-        <div className="Password-input">
-          <p>Lösenord</p>
+        <div className="reg-Password-input">
+          <p className='text-xl text-black m-0 font-medium'>Lösenord</p>
           <input name="password" type="password" placeholder="Välj lösenord" onChange={handleChange} />
         </div>
 
-        <div className="validate-Password-input">
-          <p>Bekräfta Lösenord</p>
+        <div className="reg-validate-Password-input">
+          <p className='text-xl text-black m-0 font-medium'>Bekräfta Lösenord</p>
           <input name="confirmPassword" type="password" placeholder="Upprepa lösenord" onChange={handleChange} />
         </div>
 
-        <div className="confirm">
-          <button className="confirm-btn" onClick={handleRegister}>Registrera</button>
+        <div className="reg-confirm">
+          <button className="reg-confirm-btn" onClick={handleRegister}>Registrera</button>
         </div>
 
-        <div className="forgotten-password">
-          <button className="forgoten-password-btn" onClick={() => navigate('/login')}>
+        <div className="reg-already-account">
+          <button className="reg-already-account-btn" onClick={() => navigate('/login')}>
             Har du redan konto? Logga in
           </button>
         </div>
