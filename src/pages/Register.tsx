@@ -17,42 +17,42 @@ export default function Register() {
     confirmPassword: ''
   });
 
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState<{ [key: string]: string; }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleRegister = async () => {
-    // Validera att båda namnen är ifyllda
-    if (!formData.firstname || !formData.lastname || !formData.email || !formData.password) {
-      setError("Fyll i förnamn, efternamn, e-post och lösenord.");
-      return;
+    const newErrors: { [key: string]: string; } = {};
+
+    if (!formData.firstname || formData.firstname.length < 2) {
+      newErrors.firstname = "Minst 2 tecken krävs.";
     }
 
-    if (formData.firstname.length < 2 || formData.lastname.length < 2) {
-      setError("Namn måste vara minst 2 tecken.");
-      return;
+    if (!formData.lastname || formData.lastname.length < 2) {
+      newErrors.lastname = "Minst 2 tecken krävs.";
     }
 
-    if (!formData.email.includes('@') || !formData.email.includes('.')) {
-      setError("Ange en giltig e-post.");
-      return;
+    if (!formData.email || !formData.email.includes('@')) {
+      newErrors.email = "Ange en giltig e-postadress.";
     }
 
     const passwordRegex = /^(?=.*\d).{5,}$/;
-    if (!passwordRegex.test(formData.password)) {
-      setError("Lösenordet måste vara minst 5 tecken och innehålla en siffra.");
-      return;
+    if (!formData.password || !passwordRegex.test(formData.password)) {
+      newErrors.password = "Minst 5 tecken och 1 siffra krävs.";
     }
-
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Lösenorden matchar inte!");
-      return;
+      newErrors.confirmPassword = "Lösenorden matchar inte.";
     }
 
-    setError('');
+
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) { return; }
+
 
     try {
       // Skicka datan direkt
@@ -73,11 +73,11 @@ export default function Register() {
       if (response.ok) {
         setRegAccount(true);
       } else {
-        setError(data.message || "Kunde inte skapa konto.");
+        setErrors({ server: data.message || "Kunde inte skapa konto." });
       }
     } catch (err) {
       console.error(err);
-      setError("Kunde inte ansluta till servern.");
+      setErrors({ server: "Kunde inte ansluta till servern." });
     }
   };
 
@@ -102,7 +102,7 @@ export default function Register() {
       </div>
 
       <div className="reg-input">
-        {error && <p className="error-message">{error}</p>}
+        {errors.server && <p className="error-message">{errors.server}</p>}
 
         {/*FÖRNAMN*/}
         <div className="reg-name-input">
@@ -113,6 +113,7 @@ export default function Register() {
             placeholder="Förnamn"
             onChange={handleChange}
           />
+          {errors.firstname && <span className="text-red-500 text-sm m-0 mt-[-10px] font-bold">{errors.firstname}</span>}
         </div>
 
         {/*EFTERNAMN*/}
@@ -124,26 +125,33 @@ export default function Register() {
             placeholder="Efternamn"
             onChange={handleChange}
           />
+          {errors.lastname && <span className="text-red-500 text-sm m-0 mt-[-10px] font-bold">{errors.lastname}</span>}
         </div>
 
         <div className="reg-email-input">
           <p className='text-xl text-black m-0 font-medium'>E-post</p>
           <input name="email" type="email" placeholder="Din e-post" onChange={handleChange} />
+          {errors.email && <span className="text-red-500 text-sm m-0 mt-[-10px] font-bold">{errors.email}</span>}
         </div>
 
         <div className="reg-phone-number-input">
           <p className='text-xl text-black m-0 font-medium'>Telefonnummer</p>
           <input name="phone" type="text" placeholder="070..." onChange={handleChange} />
+
         </div>
 
         <div className="reg-Password-input">
           <p className='text-xl text-black m-0 font-medium'>Lösenord</p>
           <input name="password" type="password" placeholder="Välj lösenord" onChange={handleChange} />
+          <span className={`text-sm m-0 -mt-2.5 font-bold ${errors.password ? 'text-red-500' : 'text-[#fffdc4]'}`}>
+            {errors.password ? errors.password : "Minst 5 tecken och 1 siffra krävs."}
+          </span>
         </div>
 
         <div className="reg-validate-Password-input">
           <p className='text-xl text-black m-0 font-medium'>Bekräfta Lösenord</p>
           <input name="confirmPassword" type="password" placeholder="Upprepa lösenord" onChange={handleChange} />
+          {errors.confirmPassword && <span className="text-red-500 text-sm m-0 mt-[-10px] font-bold">{errors.confirmPassword}</span>}
         </div>
 
         <div className="reg-confirm">
