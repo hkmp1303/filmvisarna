@@ -37,7 +37,7 @@
 }
 
 .login-input p {
-  @apply m-0 text-sm font-bold text-[#c0b0d0];
+  @apply m-0 text-sm font-bold text-[#000000];
 }
 
 .login-input input {
