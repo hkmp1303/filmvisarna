@@ -150,7 +150,7 @@ export default function Booking() {
 
   return (!loading.current && (<>
     <h2 className='movie-title'>{ film?.title }</h2>
-    <article className="grid grid-cols-1 md:grid-cols-2 gap-6 p-10">
+    <article className="">
       <div>
         <section className='fifty'>
           <form>
@@ -173,17 +173,21 @@ export default function Booking() {
                   </form>*/}
               <div className='screening-info'>
                 <div>
-                  <img className="float-right mx-5" src={film?.cover_image} alt="Film Affisch" width="200" height="300" /></div>
-                <div>
-                  <p>Åldersgräns: {film?.viewer_rating}</p>
-                  <p>Speltid: {film?.duration} min</p>
-                  <p>Genre: {genre(film?.genre ?? "")}</p>
-                  <p>Tal: {film?.language}</p>
-                  <p>Undertext: {film?.subtitle_language}</p>
-                  <p> {formatDateIso(screening?.start)}</p>
-                  <p>{(formatDay(screening?.start))} - kl {formatHourMin(screening?.start) }</p>
-                  <p>Salong {salon?.room_number}</p>
+                  <img className="screen-info-img" src={film?.cover_image} alt="Film Affisch" width="200" height="300" />
                 </div>
+                <dl className='text-screening-info'>
+                  <dt><b>Film detaljer</b></dt><dd></dd>
+                  <dt>Åldersgräns:</dt><dd>{film?.viewer_rating}</dd>
+                  <dt>Speltid:</dt><dd>{film?.duration} min</dd>
+                  <dt>Genre:</dt><dd>{genre(film?.genre ?? "")}</dd>
+                  <dt>Tal:</dt><dd>{film?.language}</dd>
+                  <dt>Undertext:</dt><dd>{film?.subtitle_language}</dd>
+                  <dt></dt><dd></dd>
+                  <dt><b>Tid och plats</b></dt><dd></dd>
+                  <dt>Datum:</dt><dd>{formatDateIso(screening?.start)}</dd>
+                  <dt>{(formatDay(screening?.start))} - kl {formatHourMin(screening?.start) }</dt><dd></dd>
+                  <dt>Salong {salon?.room_number}</dt><dd></dd>
+                </dl>
               </div>
               <div className='items-center text-center'>
                 <button className="screen-select-btn" onClick={handleClick}>Välj annan föreställning</button>
@@ -203,11 +207,11 @@ export default function Booking() {
                     <td className='ticket-number'><input ref={adultCnt} onChange={calcTotal} type="number" min="0" max={totalSeats + (parseInt(adultCnt.current?.value as string) || 0)} defaultValue="0" id='adult' /></td>
                     <td className='ticket-price'>140 kr</td>
                   </tr><tr>
-                    <td className='ticket-label'><label htmlFor="senior">Pensionär</label></td>
+                    <td className='ticket-label'><label htmlFor="senior">Pensionär (+65 år)</label></td>
                     <td className='ticket-number'><input ref={seniorCnt} onChange={calcTotal} type="number" min="0" max={totalSeats + (parseInt(seniorCnt.current?.value as string) || 0)} defaultValue="0" id='senior' /></td>
                     <td className='ticket-price'>120 kr</td>
                   </tr><tr>
-                    <td className='ticket-label'><label htmlFor="child">Barn (max 12 år)</label></td>
+                    <td className='ticket-label'><label htmlFor="child">Barn (till 12 år)</label></td>
                     <td className='ticket-number'><input ref={childCnt} onChange={calcTotal} type="number" min="0" max={totalSeats + (parseInt(childCnt.current?.value as string) || 0)} defaultValue="0" id='child' /></td>
                     <td className='ticket-price'>80 kr</td>
                   </tr><tr>
@@ -246,8 +250,6 @@ export default function Booking() {
                   )}</div>}
                 )}
               </div>
-              <button className="book-seats-btn">Reservera platser</button>
-
             </form>
           </fieldset>
         </section>
