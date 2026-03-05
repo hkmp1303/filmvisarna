@@ -28,6 +28,7 @@ h2.movie-title {
 }
 
 .screen-select-btn {
+  width: 60%;
   background-color: #919398;
   border: 2px solid transparent;
   @apply font-bold py-2 px-4 rounded-full text-white my-8;
@@ -84,11 +85,11 @@ h2.movie-title {
       background-color: var(--input-bg);
       color: #000;
       width: 50px;
-      border: 1.5px solid var(--border-primary);
+      border: 2px solid var(--border-primary);
       @apply text-center;
     }
     input[type=number]:hover {
-      border: 1.5px solid var(--font-primary);
+      border: 2px solid var(--font-primary);
     }
     @apply w-25;
   }
@@ -98,7 +99,7 @@ h2.movie-title {
 }
 
 .seating-arrangement {
-  @apply py-8;
+  @apply py-11;
   label {
     display: inline-block;
     line-height: 2;
@@ -106,6 +107,12 @@ h2.movie-title {
     svg {
       display: inline-block;
       @apply m-1;
+      width: 2.5vw;
+      height: 2.5vw;
+      rect {
+        width: 2.5vw;
+        height: 2.5vw;
+      }
     }
     input[type=checkbox] {
       position: relative;
@@ -113,7 +120,7 @@ h2.movie-title {
     }
     .vacant:hover{
       stroke:var(--font-primary);
-      stroke-width: 3px;
+      stroke-width: 8px;
       stroke-linejoin: round;
     }
 
@@ -135,8 +142,8 @@ h2.movie-title {
     fill: var(--reserved-seat);
   }
   .screen {
-    border-bottom: 3px solid var(--border-primary);
-    @apply inline-block mb-3;
+    border-bottom: 8px solid var(--border-primary);
+    @apply inline-block mb-8 pb-4 text-xl font-bold;
     width: 80%;
   }
 }
@@ -188,7 +195,13 @@ h2.movie-title {
     @apply py-7;
     svg {
       @apply scale-x-90;
-      margin: 2px !important;
+      margin: 2px;
+      width: 2.5vh !important;
+      height: 2.5vh !important;
+      rect {
+        width: 2.5vh !important;
+        height: 2.5vh !important;
+      }
     }
   }
 }
