@@ -22,8 +22,16 @@
   --input-grad-backcolor: radial-gradient(circle, #fffdc4 20%, #fffdc4 60%);
 
   --purpletext-h4: #550755;
-  --background-h: #f4f4f474;
 
+  /*Header*/
+  --background-h: #f4f4f474;
+  --border-color-h: #fffdc4;
+  --text-color-h: #fdfff1;
+  --logo-color-h: #fffdc4;
+  --nav-primary-color: #fffdc4;
+  --base-color-h: #fdfff1;
+
+  --footer-base-background: #660157;
 
 
   /*Horror Color Palette*/
@@ -53,6 +61,10 @@
   /*Black & White Color Palette*/
 
   --blackwhite-background: linear-gradient(to bottom, rgba(63, 63, 63, 1) 0%,rgba(0, 0, 0, 1) 100%);
+
+  /*holiday christmas*/
+
+  --christmas-background: linear-gradient(to bottom, rgba(10, 77, 28, 1) 0%, rgba(139, 0, 0, 1) 100%);
 
 /*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
