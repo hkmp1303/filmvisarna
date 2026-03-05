@@ -147,6 +147,87 @@ public static class RestApi
           context
       ))
     );
+    App.MapPost("/api/reserveSeatRes/{screeningid}", (
+      HttpContext context, string screeningid, JsonElement bodyJson
+    ) =>
+    {
+      var body = JSON.Parse(bodyJson.ToString());
+      dynamic result;
+      dynamic oreturny = new Obj();
+      body.screeningid = screeningid;
+      body.userid = null;
+      bool isFirstRes = string.IsNullOrEmpty(body.guid);
+      if (isFirstRes == true)
+      {
+        Console.WriteLine("Creating new booking");
+        body.guid = Guid.NewGuid().ToString();
+        SQLQueryOne(
+          $@"INSERT INTO booking (total_cost, `date`, `guid`, `status`, screeningid, userid) VALUES(
+            @total_cost,
+            NOW(),
+            @guid,
+            'reserved',
+            @screeningid,
+            @userid
+          );",
+          Obj(new
+          {
+            total_cost = body.total_cost,
+            guid = body.guid,
+            userid = body.userid,
+            screeningid = body.screeningid
+          }), // TODO sesion
+          context
+        );
+        result = Obj(new { guid = body.guid });
+      }
+      else
+      {
+        Console.WriteLine(body.guid);
+        result = SQLQueryOne($@"SELECT bookingid FROM booking
+          WHERE screeningid=@screeningid AND guid=@guid AND `status`='reserved';",
+          Obj(new { screeningid = body.screeningid, guid = body.guid }),
+          context
+        );
+        Console.WriteLine(result);
+        bool bookingok = false;
+        try {
+          var tmp = result.bookingid;
+          bookingok = true;
+        }
+        catch { }
+        Console.WriteLine(result);
+        if (bookingok){
+          result = SQLQueryOne(
+            $@"UPDATE booking SET
+              total_cost = @total_cost,
+              `date` = NOW(),
+              userid = @userid
+            WHERE screeningid=@screeningid AND guid=@guid AND `status`='reserved';",
+            Obj(new { total_cost = body.total_cost, userid = body.userid, guid = body.guid, screeningid = body.screeningid }),
+            context
+          );
+          Console.WriteLine(result);
+        }
+        else Console.WriteLine("Sorry, better luck next shlong");
+      }
+      result = SQLQuery($@"SELECT seat_number FROM reservation
+        JOIN booking USING(bookingid)
+        WHERE screeningid = @screeningid AND guid = @guid;",
+        Obj(new { guid = body.guid, screeningid = body.screeningid }),
+        context
+      );
+      Console.WriteLine("length of the shlonglonger" + result.Length);
+      foreach (dynamic res in result)
+      {
+        if(body[$"seat[{res.seat_number}]"]!= null)
+        {
+          Console.WriteLine("Found seat"+ res.seat_number);
+        }
+      }
+      oreturny.guid = body.guid;
+      return RestResult.Parse(context, oreturny);
+    });
   }
 
   //this class i so the contactform

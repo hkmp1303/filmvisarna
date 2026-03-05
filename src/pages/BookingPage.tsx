@@ -114,31 +114,28 @@ export default function Booking() {
     return currentSeatFromIndex + index + 1;
   };
 
-  const handleClickSeat = (e: any) => {
-    const btns = document.querySelectorAll(".seating-arrangement input[type=checkbox]");
-    console.log(btns);
-  };
-
   const handleClick = () => navigate(`/movieDetails/${film?.filmid}`);
 
-  const handleReservation = (e: any) => {
+  const handleClickSeat = (e: any) => {
     e.preventDefault();
     if (ticketTotal == 0) {
       return alert("Du måste boka minst en biljett");
     }
-    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const formData = new FormData(e.target.form as HTMLFormElement);
     try {
-      const res = fetch("/api/reserveSeatRes/" + id, {
+      fetch("/api/reserveSeatRes/" + id, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Accept: 'application/json'
         },
         body: JSON.stringify(Object.fromEntries(formData.entries()))
       }).then((res) => {
         if (!res.ok) throw new Error("Kunde inte spara bokning.");
+        return res.json();
       }).then((data) => {
-        console.log(data);
         alert("Bokningen har sparats");
+        setBookingGuid(data?.guid);
       });
     } catch (e:any) {
       alert(e.message)
@@ -226,7 +223,7 @@ export default function Booking() {
         <section className="fifty">
           <fieldset className=''>
             <legend>Tillgängliga platser i Salong {salon?.room_number}</legend>
-            <form onSubmit={handleReservation}>
+            <form>
               <input type="hidden" name="total_cost" value={ticketTotal} />
               <input type="hidden" name="guid" value={bookingGuid} />
               <div className='seating-arrangement'>
@@ -238,7 +235,8 @@ export default function Booking() {
                         <rect width="20" height="20" rx="3" ry="3" className={seatTaken(index, row_index)?"booked": "vacant"} />
                       </svg>
                       <input type="checkbox" key={calcSeatNum(index, row_index)}
-                        name={"seat[" + calcSeatNum(index, row_index) + "]"}
+                        name="seat[]"
+                        value={calcSeatNum(index, row_index)}
                         checked={seatTaken(index, row_index)}
                         onChange={handleClickSeat}
                         data-row={row_index +1}
@@ -254,6 +252,8 @@ export default function Booking() {
           </fieldset>
         </section>
         <form className='text-center' onSubmit={handleBooking}>
+          <input type="hidden" name="total_cost" value={ticketTotal} />
+          <input type="hidden" name="guid" value={bookingGuid} />
           <button className="book-seats-btn">Boka platser</button>
         </form>
       </div>
