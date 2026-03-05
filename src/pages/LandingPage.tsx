@@ -8,7 +8,8 @@ import type { BriefFilm } from '../utilities/filmInterface';
 import '../css/LandingPage.css';
 import translateGenre from '../utilities/i18n';
 import { displayVeiwerRating } from '../utilities/i18n';
-
+import { ThemedayToggle } from '../utilities/ThemedayToggle';
+import { useEffect } from 'react';
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -20,6 +21,13 @@ export default function LandingPage() {
   const [sortLabel, setSortLabel] = useState('Titel (A-Ö)');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
+
+  useEffect(() => {
+
+    ThemedayToggle(selectedGenre || 'default');
+
+    return () => ThemedayToggle('default');
+  }, [selectedGenre]);
 
   const selectedMovieNavigation = (filmid: number) => {
     navigate(`/moviedetails/${filmid}`);
@@ -88,7 +96,7 @@ export default function LandingPage() {
             <div className="poster-container">
               <div
                 className="poster-placeholder"
-                style={{ backgroundImage: `url(${movie.cover_image??''})` }}
+                style={{ backgroundImage: `url(${movie.cover_image ?? ''})` }}
               >
                 <div className="poster-overlay-text">
                   <h3>{movie.title}</h3>
