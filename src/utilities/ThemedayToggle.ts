@@ -11,5 +11,8 @@ export function ThemedayToggle(genre: string) {
 
   if (safeGenre && safeGenre !== 'default') {
     body.classList.add(`genre-${safeGenre}`);
+    localStorage.setItem('selectedTheme', safeGenre);
+  } else {
+    localStorage.removeItem('selectedTheme');
   }
 }

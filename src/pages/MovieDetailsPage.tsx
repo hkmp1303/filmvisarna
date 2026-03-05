@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../css/MovieDetails.css';
 import useFetchJson from '../utilities/useFetchJson';
@@ -6,6 +6,7 @@ import type { Film, Actor } from '../utilities/filmInterface';
 import type { BriefScreening } from '../utilities/screeningInterface';
 import { formatDateTime } from '../utilities/formatDateTime';
 import genre from '../utilities/i18n';
+import { ThemedayToggle } from '../utilities/ThemedayToggle';
 
 export default function MovieDetails() {
     const navigate = useNavigate();
@@ -14,6 +15,12 @@ export default function MovieDetails() {
 
     const film = useFetchJson<Film>(`/api/film/${filmid}`);
     const screenings = useFetchJson<BriefScreening[]>(`/api/selectScreening/film/${filmid}`);
+
+    useEffect(() => {
+        if (film?.genre) {
+            ThemedayToggle(film.genre);
+        }
+    }, [film]);
 
     const handleClick = (e: any) => {
         e.preventDefault();
@@ -64,7 +71,7 @@ export default function MovieDetails() {
             </section>
             <div className="colum1-container">
                 <div className="trailer-container">
-                    <iframe src={film.trailer+"&amp;controls=0&amp;modestbranding=0&amp;rel=0"} title="Trailer videospelare" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                    <iframe src={film.trailer + "&amp;controls=0&amp;modestbranding=0&amp;rel=0"} title="Trailer videospelare" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                 </div>
                 <div className="date-picker">
                     {screenings && screenings.length > 0 ? (
@@ -91,24 +98,24 @@ export default function MovieDetails() {
                 </section>
                 <section className="movie-cast">
                     {film.details && !!film.details.director && (<>
-                    <h3>Regissör:</h3>
+                        <h3>Regissör:</h3>
                         <p>{film.details.director}</p></>)}
-                    {film.details && film.details.actor  && film.details.actor.length > 0 && (<>
-                    <h3>Skådespelare:</h3>
+                    {film.details && film.details.actor && film.details.actor.length > 0 && (<>
+                        <h3>Skådespelare:</h3>
                         {film.details.actor.map((a: Actor) => (<p>{a.name}</p>))}</>)}
                     <h3>Språk:</h3>
                     <p>{film.language}</p>
                     <h3>Undertext:</h3>
                     <p>{film.subtitle_language}</p>
                     {film.details && !!film.details.production_company && (<>
-                    <h3>Produktionsbolag:</h3>
-                      <p>{film.details.production_company}</p></>)}
+                        <h3>Produktionsbolag:</h3>
+                        <p>{film.details.production_company}</p></>)}
                     {film.details && !!film.details.production_counrty && (<>
-                    <h3>Produktionsland:</h3>
-                      <p>{film.details.production_counrty}</p></>)}
+                        <h3>Produktionsland:</h3>
+                        <p>{film.details.production_counrty}</p></>)}
                     {film.details && !!film.details.release_year && (<>
-                    <h3>Produktionsår:</h3>
-                    <p>{film.details.release_year}</p></>)}
+                        <h3>Produktionsår:</h3>
+                        <p>{film.details.release_year}</p></>)}
                 </section>
             </div>
         </article>

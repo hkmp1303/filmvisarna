@@ -24,9 +24,9 @@ export default function LandingPage() {
 
   useEffect(() => {
 
-    ThemedayToggle(selectedGenre || 'default');
-
-    return () => ThemedayToggle('default');
+    if (selectedGenre) {
+      ThemedayToggle(selectedGenre);
+    }
   }, [selectedGenre]);
 
   const selectedMovieNavigation = (filmid: number) => {
