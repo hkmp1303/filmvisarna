@@ -14,7 +14,7 @@ body.genre-horror{
     background: var(--horror-background);
     --second-bg: #959e9e;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(221, 0, 0, 0.55) 0%,rgba(222, 38, 38, 0.19) 100%);
+    --btn-grad-backcolor: radial-gradient(circle, rgba(121, 0, 0, 0.55) 40%,rgba(222, 38, 38, 0.19) 100%);
   /*Header:*/
     --background-h: #f4f4f474;
     --border-color-h: #622f2f;
@@ -31,7 +31,7 @@ body.genre-comedy{
     background: var(--comedy-background);
     --second-bg: #e6e377;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(211, 218, 217, 0.55) 0%,rgba(211, 218, 217, 0.19) 100%);
+    --btn-grad-backcolor: radial-gradient(circle, rgba(111, 118, 117, 0.55) 0%,rgba(111, 118, 117, 0.19) 100%);
   /*Header:*/
     --background-h: #f4f4f474;
     --border-color-h: #fffdc4;
@@ -48,7 +48,7 @@ body.genre-family{
     background: var(--family-background);
     --second-bg: #9ac1ed;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(255, 187, 0, 0.55) 0%,rgba(255, 187, 0, 0.19) 100%);
+    --btn-grad-backcolor: radial-gradient(circle, rgba(255, 187, 0, 0.70) 0%,rgba(255, 187, 0, 0.49) 100%);
   /*Header:*/
     --background-h: #f4f4f474;
     --border-color-h: #ad7f00;
@@ -65,7 +65,7 @@ body.genre-action{
     background: var(--action-background);
     --second-bg: #66abcc;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(227, 133, 0, 0.55) 0%,rgba(227, 133, 0, 0.19) 100%);
+    --btn-grad-backcolor: radial-gradient(circle, rgba(227, 93, 0, 0.75) 60%,rgba(227, 133, 0, 0.45) 100%);
   /*Header:*/
     --background-h: #f4f4f474;
     --border-color-h: #995a01;
@@ -83,7 +83,7 @@ body.genre-romance{
     background: var(--romance-background);
     --second-bg: #c9b0d8;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(255, 255, 255, 0.55) 0%,rgba(255, 255, 255, 0.19) 100%);
+    --btn-grad-backcolor: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
   /*Header:*/
     --background-h: #f4f4f474;
     --border-color-h: #fffdc4;
@@ -101,7 +101,7 @@ body.genre-classic{
     background: var(--classic-background);
     --second-bg: #5c9c4b;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(255, 241, 202, 0.55) 0%,rgba(255, 241, 202, 0.19) 100%);
+    --btn-grad-backcolor: radial-gradient(circle, rgba(47, 71, 47, 0.55) 0%,rgba(255, 241, 202, 0.19) 100%);
   /*Header:*/
     --background-h: #f4f4f474;
     --border-color-h: #ffb823;
@@ -119,7 +119,7 @@ body.genre-blackandwhite{
     background: var(--blackwhite-background);
     --second-bg: #959e9e;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(211, 218, 217, 0.55) 0%,rgba(211, 218, 217, 0.19) 100%);
+    --btn-grad-backcolor: radial-gradient(circle, rgba(71, 78, 77, 0.85) 20%,rgba(31, 38, 37, 0.09) 100%);
   /*Header:*/
     --background-h: #f4f4f474;
     --border-color-h: #fffdc4;
@@ -134,10 +134,10 @@ body.genre-blackandwhite{
 
 body.genre-holiday{
   /*Body*/
-    background: var(--christmas-background:);
-    --second-bg: #70e0e6;
+    background: var(--christmas-background);
+    --second-bg: #2a7d1f;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(221, 0, 0, 0.55) 0%,rgba(222, 38, 38, 0.19) 100%);
+    --btn-grad-backcolor: radial-gradient(circle, rgba(10, 77, 28, 0.95) 20%,rgba(222, 0, 0, 0.19) 100%);
   /*Header:*/
     --background-h: #f4f4f474;
     --border-color-h: #fffdc4;
