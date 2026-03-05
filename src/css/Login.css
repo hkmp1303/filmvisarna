@@ -1,79 +1,62 @@
+@import "tailwindcss";
+
+
 .login-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 80vh;
-  padding: 20px;
-  color: white;
-  font-family: 'Arial', sans-serif;
+  @apply flex flex-col items-center justify-center min-h-[80vh] p-5 text-white;
 }
 
 .login-big-text h1 {
-  font-size: 3rem;
-  margin-bottom: 30px;
-  color: rgb(255, 245, 98);
+  @apply text-[3rem] mb-7.5;
+  color: var(--log-heading-primary);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .login-input {
-  background-color: rgba(65, 10, 77, 0.85);
-  padding: 40px;
-  border-radius: 20px;
+  @apply flex flex-col gap-5 p-10 rounded-[20px] w-full max-w-[400px];
+  background-color: var(--second-bg);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  width: 100%;
-  max-width: 400px;
-  /* Flyttat från inline style */
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
 }
 
 /* Specifikt för när man är inloggad */
 .login-input.center-content {
-  text-align: center;
+  @apply text-center;
 }
 
 .logged-in-title {
-  color: rgb(255, 245, 98);
-  margin-bottom: 20px;
+  @apply mb-5;
+  color: var(--log-heading-primary);
 }
 
 .logged-in-text {
-  color: white;
-  margin-bottom: 30px;
+  @apply mb-[30px] text-white;
 }
 
 /* Knappar och Input-fält */
 .login-input div {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  @apply flex flex-col gap-2;
 }
 
 .login-input p {
-  margin: 0;
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #c0b0d0;
-  text-align: left;
+  @apply m-0 text-sm font-bold text-[#c0b0d0];
 }
 
 .login-input input {
-  padding: 12px 15px;
-  border-radius: 10px;
-  border: 1.5px solid #864486;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.2s;
+  @apply self-center mb-4 p-[7px] rounded-[18px] text-[20px] cursor-pointer outline-none transition-all;
+  background: var(--input-grad-backcolor);
+  border: 1px solid #000000;
+  color: black;
+
+  @media (min-width: 769px) {
+    @apply w-[322px];
+  }
+
+  &:focus {
+    @apply bg-white/20;
+    border-color: var(--log-heading-primary);
+  }
 }
 
-.login-input input:focus {
-  border-color: rgb(255, 245, 98);
-  background-color: rgba(255, 255, 255, 0.2);
-}
+
 
 /* Knappar */
 .confirm-btn,
@@ -90,9 +73,16 @@
 }
 
 .confirm-btn {
-  background-color: rgb(255, 245, 98);
-  color: #2a002a;
+  @apply self-center justify-self-center w-[15rem] p-[7px] rounded-[18px] text-[20px] text-white cursor-pointer transition-transform duration-100;
+  background: var(--btn-grad-backcolor);
+  border: 0 solid #7a5a9a;
+  margin: 10px 0;
+
+  &:hover {
+    @apply bg-white scale-[1.02];
+  }
 }
+
 
 .confirm-btn:hover {
   background-color: #fff;
@@ -101,8 +91,8 @@
 
 /* Röd Logga ut-knapp */
 .confirm-btn.logout-btn-red {
-  background-color: #ff6b6b;
-  color: white;
+  @apply bg-red-500 hover:bg-red-600;
+  background-image: none;
 }
 
 .confirm-btn.logout-btn-red:hover {
@@ -110,14 +100,14 @@
 }
 
 .forgoten-password-btn {
-  background: transparent;
-  color: #c0b0d0;
-  text-decoration: underline;
-  font-size: 0.9rem;
-  margin-top: 0;
+  @apply bg-transparent text-black no-underline text-[0.9rem] mt-0 cursor-pointer;
+
+  &:hover {
+    @apply text-white;
+  }
 }
 
-.forgoten-password-btn:hover {
+/* .forgoten-password-btn:hover {
   color: white;
 }
 
@@ -131,4 +121,4 @@
   text-align: center;
   margin-bottom: 10px;
   font-weight: bold;
-}
+} */
