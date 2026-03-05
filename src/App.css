@@ -13,6 +13,8 @@ body.genre-horror{
   /*Body*/
     background: var(--horror-background);
     --second-bg: #959e9e;
+    --search-bar: #783232;
+    --landing-drop-btn: #b35151FF;
   /*Button*/
     --btn-grad-backcolor: radial-gradient(circle, rgba(121, 0, 0, 0.55) 40%,rgba(222, 38, 38, 0.19) 100%);
   /*Header:*/
@@ -30,6 +32,8 @@ body.genre-comedy{
   /*Body*/
     background: var(--comedy-background);
     --second-bg: #e6e377;
+    --search-bar: #a19c3b;
+    --landing-drop-btn: #e6e377;
   /*Button*/
     --btn-grad-backcolor: radial-gradient(circle, rgba(111, 118, 117, 0.55) 0%,rgba(111, 118, 117, 0.19) 100%);
   /*Header:*/
@@ -47,6 +51,8 @@ body.genre-family{
   /*Body*/
     background: var(--family-background);
     --second-bg: #9ac1ed;
+    --search-bar: #cc9706;
+    --landing-drop-btn: #ffbb00FF;
   /*Button*/
     --btn-grad-backcolor: radial-gradient(circle, rgba(255, 187, 0, 0.70) 0%,rgba(255, 187, 0, 0.49) 100%);
   /*Header:*/
@@ -64,6 +70,8 @@ body.genre-action{
   /*Body*/
     background: var(--action-background);
     --second-bg: #66abcc;
+    --search-bar: #bd7004;
+    --landing-drop-btn:#e38500FF;
   /*Button*/
     --btn-grad-backcolor: radial-gradient(circle, rgba(227, 93, 0, 0.75) 60%,rgba(227, 133, 0, 0.45) 100%);
   /*Header:*/
@@ -82,6 +90,8 @@ body.genre-romance{
   /*Body*/  
     background: var(--romance-background);
     --second-bg: #c9b0d8;
+    --search-bar: #5a2a7a;
+    --landing-drop-btn:#ffffffFF;
   /*Button*/
     --btn-grad-backcolor: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
   /*Header:*/
@@ -100,6 +110,8 @@ body.genre-classic{
   /*Body*/
     background: var(--classic-background);
     --second-bg: #5c9c4b;
+    --search-bar: #b5a476;
+    --landing-drop-btn: #fff1ca;
   /*Button*/
     --btn-grad-backcolor: radial-gradient(circle, rgba(47, 71, 47, 0.55) 0%,rgba(255, 241, 202, 0.19) 100%);
   /*Header:*/
@@ -118,6 +130,8 @@ body.genre-blackandwhite{
   /*Body*/
     background: var(--blackwhite-background);
     --second-bg: #959e9e;
+    --search-bar: #959e9e;
+    --landing-drop-btn: #d3dad9FF;
   /*Button*/
     --btn-grad-backcolor: radial-gradient(circle, rgba(71, 78, 77, 0.85) 20%,rgba(31, 38, 37, 0.09) 100%);
   /*Header:*/
@@ -136,6 +150,8 @@ body.genre-holiday{
   /*Body*/
     background: var(--christmas-background);
     --second-bg: #2a7d1f;
+    --search-bar: #1c5414;
+    --landing-drop-btn: #2a7d1f;
   /*Button*/
     --btn-grad-backcolor: radial-gradient(circle, rgba(10, 77, 28, 0.95) 20%,rgba(222, 0, 0, 0.19) 100%);
   /*Header:*/
