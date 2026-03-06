@@ -99,14 +99,14 @@ public static class RestApi
         HttpContext context, string table, string id
       ) =>
         RestResult.Parse(context, SQLQuery(
-            $@"SELECT
-          screeningid,
-          filmid,
-          start,
-          room_number,
-          description
+          $@"SELECT
+            screeningid,
+            filmid,
+            start,
+            room_number,
+            description
           FROM screening
-          JOIN salon USING(salonid)
+            JOIN salon USING(salonid)
           WHERE filmid = @id",
             ReqBodyParse(table, Obj(new { id })).body,
             context
@@ -130,6 +130,7 @@ public static class RestApi
           SET FOREIGN_KEY_CHECKS = 1;");
       return RestResult.Parse(context, result);
     });
+
     App.MapGet("/api/bookedSeatRes/{screeningid}", (
       HttpContext context, string screeningid
     ) =>
@@ -147,22 +148,22 @@ public static class RestApi
           context
       ))
     );
+
     App.MapPost("/api/reserveSeatRes/{screeningid}", (
       HttpContext context, string screeningid, JsonElement bodyJson
     ) =>
     {
-      var body = JSON.Parse(bodyJson.ToString());
-      dynamic result;
-      dynamic oreturny = new Obj();
-      body.screeningid = screeningid;
-      body.userid = null;
-      bool isFirstRes = string.IsNullOrEmpty(body.guid);
-      if (isFirstRes == true)
-      {
-        Console.WriteLine("Creating new booking");
-        body.guid = Guid.NewGuid().ToString();
-        SQLQueryOne(
-          $@"INSERT INTO booking (total_cost, `date`, `guid`, `status`, screeningid, userid) VALUES(
+    var body = JSON.Parse(bodyJson.ToString());
+    dynamic result;
+    dynamic oreturny = new Obj();
+    body.screeningid = screeningid;
+    body.userid = null; // TODO sesion
+    bool isFirstRes = string.IsNullOrEmpty(body.guid);
+    if (isFirstRes == true)
+    {
+      body.guid = Guid.NewGuid().ToString();
+      SQLQueryOne(
+        $@"INSERT INTO booking (total_cost, `date`, `guid`, `status`, screeningid, userid) VALUES(
             @total_cost,
             NOW(),
             @guid,
@@ -170,62 +171,78 @@ public static class RestApi
             @screeningid,
             @userid
           );",
-          Obj(new
-          {
-            total_cost = body.total_cost,
-            guid = body.guid,
-            userid = body.userid,
-            screeningid = body.screeningid
-          }), // TODO sesion
-          context
-        );
-        result = Obj(new { guid = body.guid });
+        Obj(new
+        {
+          total_cost = body.total_cost,
+          guid = body.guid,
+          userid = body.userid,
+          screeningid = body.screeningid
+        }),
+        context
+      );
+      result = Obj(new { guid = body.guid });
+    }
+    else
+    {
+      result = SQLQueryOne($@"SELECT bookingid FROM booking
+          WHERE screeningid=@screeningid AND `guid`=@guid AND `status`='reserved';",
+        Obj(new { screeningid = body.screeningid, guid = body.guid }),
+        context
+      );
+      bool bookingok = false;
+      try {
+        body.bookingid = result.bookingid;
+        bookingok = true;
       }
-      else
-      {
-        Console.WriteLine(body.guid);
-        result = SQLQueryOne($@"SELECT bookingid FROM booking
-          WHERE screeningid=@screeningid AND guid=@guid AND `status`='reserved';",
-          Obj(new { screeningid = body.screeningid, guid = body.guid }),
-          context
-        );
-        Console.WriteLine(result);
-        bool bookingok = false;
-        try {
-          var tmp = result.bookingid;
-          bookingok = true;
-        }
-        catch { }
-        Console.WriteLine(result);
-        if (bookingok){
-          result = SQLQueryOne(
-            $@"UPDATE booking SET
+      catch { }
+      if (bookingok) {
+        result = SQLQueryOne(
+          $@"UPDATE booking SET
               total_cost = @total_cost,
               `date` = NOW(),
               userid = @userid
-            WHERE screeningid=@screeningid AND guid=@guid AND `status`='reserved';",
-            Obj(new { total_cost = body.total_cost, userid = body.userid, guid = body.guid, screeningid = body.screeningid }),
-            context
-          );
-          Console.WriteLine(result);
-        }
-        else Console.WriteLine("Sorry, better luck next shlong");
+            WHERE bookingid=@bookingid;",
+          Obj(new { total_cost = body.total_cost, userid = body.userid, bookingid = body.bookingid }),
+          context
+        );
+        Console.WriteLine(result);
       }
-      result = SQLQuery($@"SELECT seat_number FROM reservation
-        JOIN booking USING(bookingid)
-        WHERE screeningid = @screeningid AND guid = @guid;",
-        Obj(new { guid = body.guid, screeningid = body.screeningid }),
-        context
-      );
-      Console.WriteLine("length of the shlonglonger" + result.Length);
+      else {
+        context.Response.StatusCode = 404;
+        return RestResult.Parse(context, Obj(new { error = "Invalid reservation guid." }));
+      };
+    }
+    result = SQLQuery($@"SELECT seat_number
+        FROM reservation
+        WHERE screeningid = @screeningid AND bookingid = @bookingid;",
+      Obj(new { bookingid = body.bookingid, screeningid = body.screeningid }),
+      context
+    );
+    Console.WriteLine(bodyJson.GetProperty("seat"));
+    //Console.WriteLine(body.GetValue("seat[]"));
+    // foreach(dynamic i in body) {
+    try {
+      var selectedSeats = body.seat;
       foreach (dynamic res in result)
       {
-        if(body[$"seat[{res.seat_number}]"]!= null)
+        if (body.seat.Contains(res.seat_number))
         {
-          Console.WriteLine("Found seat"+ res.seat_number);
+          continue;
         }
+          SQLQuery($@"INSERT INTO reservation (seat_number, `row_number`, bookingid) VALUES (
+          @seat_number,
+          @row_number,
+          @bookingid
+          )",
+          Obj(new { seat_number = res.seat_number, row_number = res.row_number, bookingid = res.bookingid }),
+          context
+        );
       }
       oreturny.guid = body.guid;
+      }
+      catch (Exception e) {
+        return RestResult.Parse(context, Obj(new { error = "Kunde inte spara reservation" }));
+      }
       return RestResult.Parse(context, oreturny);
     });
   }
