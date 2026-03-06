@@ -8,7 +8,7 @@ import type { BriefScreening, Screening } from '../utilities/screeningInterface'
 import type { Salon, Res } from '../utilities/salonInterface';
 import { formatDateIso, formatDay, formatHourMin } from '../utilities/formatDateTime';
 import genre from '../utilities/i18n';
-import { sumNumArray, csvToNumArray } from '../utilities/tools';
+import { sumNumArray, csvToNumArray, getFormEntries } from '../utilities/tools';
 import type { LoginContext } from './Login';
 import useFetchJson from '../utilities/useFetchJson';
 
@@ -121,7 +121,8 @@ export default function Booking() {
     if (ticketTotal == 0) {
       return alert("Du måste boka minst en biljett");
     }
-    const formData = new FormData(e.target.form as HTMLFormElement);
+    const reqBody = getFormEntries(e.target.form);
+    console.log(reqBody);
     try {
       fetch("/api/reserveSeatRes/" + id, {
         method: "POST",
@@ -129,7 +130,7 @@ export default function Booking() {
           "Content-Type": "application/json",
           Accept: 'application/json'
         },
-        body: JSON.stringify(Object.fromEntries(formData.entries()))
+        body: reqBody
       }).then((res) => {
         if (!res.ok) throw new Error("Kunde inte spara bokning.");
         return res.json();
