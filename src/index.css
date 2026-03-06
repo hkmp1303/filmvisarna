@@ -40,37 +40,46 @@
   --footer-base-background: #660157;
 
 
-  /*Horror Color Palette*/
-
+  /*Horror Color Palette
   --horror-background: linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%,rgba(22, 1, 1, 1) 100%);
+  */
+
   
-  /*Comedy Color Palette*/
-  
+  /*Comedy Color Palette
   --comedy-background: linear-gradient(to bottom, rgba(255, 210, 0, 1) 0%,rgba(65, 77, 28, 1) 100%);
+  */
   
-  /*Family Color Palette*/
   
+  /*Family Color Palette
   --family-background: linear-gradient(to bottom, rgba(0, 124, 234, 1) 0%,rgba(184, 141, 22, 1) 100%);  
+  */
   
-  /*Action Color Palette*/
   
+  /*Action Color Palette
   --action-background: linear-gradient(to bottom, rgba(128, 181, 231, 1) 0%,rgba(0, 0, 0, 1) 100%);
+  */
   
-  /*Romance Color Palette*/
   
+  /*Romance Color Palette
   --romance-background: linear-gradient(to bottom, rgba(216, 186, 229, 1) 0%,rgba(184, 78, 198, 1) 99%);
+  */
   
-  /*Classic Color Palette*/
   
+  /*Classic Color Palette
   --classic-background: linear-gradient(to bottom, rgba(45, 79, 43, 1) 0%,rgba(0, 0, 0, 1) 100%);
+  */
   
-  /*Black & White Color Palette*/
-
+  
+  /*Black & White Color Palette
   --blackwhite-background: linear-gradient(to bottom, rgba(63, 63, 63, 1) 0%,rgba(0, 0, 0, 1) 100%);
+  */
 
-  /*holiday christmas*/
 
+  /*holiday christmas
   --christmas-background: linear-gradient(to bottom, rgba(10, 77, 28, 1) 0%, rgba(139, 0, 0, 1) 100%);
+  
+  */
+
 
 /*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

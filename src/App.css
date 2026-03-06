@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Pattaya&display=swap');
 @import "tailwindcss";
 
-
+/*
 body {
   margin: 0;
   background: var(--primary-bg);
@@ -9,9 +9,29 @@ body {
   transition: background 0.5s ease;
 }
 
+*/
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  
+  /* STANDARDVÄRDEN (Om inget tema är valt) */
+  --hero-url: url('/heroimages/Classic_V5.jpg');
+  --genre-grad: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 70%, #000 100%);
+
+  /* MASTER-LOGIK (Denna rad behöver du aldrig ändra igen) */
+  background: var(--genre-grad), var(--hero-url) no-repeat center top;
+  
+  background-size: 100% 100vh, cover;
+  background-attachment: fixed;
+  background-color: #000;
+  transition: background 0.8s ease-in-out;
+}
+
 body.genre-horror{
   /*Body*/
-    background: var(--horror-background);
+    --genre-grad: linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%,rgba(22, 1, 1, 1) 100%);
+    --hero-url: url('/heroimages/Horror_background.jpeg');
     --second-bg: #959e9e;
     --search-bar: #783232;
     --landing-drop-btn: #b35151FF;
@@ -30,7 +50,8 @@ body.genre-horror{
 
 body.genre-comedy{
   /*Body*/
-    background: var(--comedy-background);
+    --genre-grad: linear-gradient(to bottom, rgba(255, 210, 0, 1) 0%,rgba(65, 77, 28, 1) 100%);
+    --hero-url: url('/heroimages/Comedy_V2.jpg');
     --second-bg: #e6e377;
     --search-bar: #a19c3b;
     --landing-drop-btn: #e6e377;
@@ -49,7 +70,8 @@ body.genre-comedy{
 
 body.genre-family{
   /*Body*/
-    background: var(--family-background);
+    --genre-grad: linear-gradient(to bottom, rgba(0, 124, 234, 1) 0%,rgba(184, 141, 22, 1) 100%);
+    --hero-url: url('/heroimages/Family_V1.jpg');  
     --second-bg: #9ac1ed;
     --search-bar: #cc9706;
     --landing-drop-btn: #ffbb00FF;
@@ -68,7 +90,8 @@ body.genre-family{
 
 body.genre-action{
   /*Body*/
-    background: var(--action-background);
+    --genre-grad: linear-gradient(to bottom, rgba(128, 181, 231, 1) 0%,rgba(0, 0, 0, 1) 100%);
+    --hero-url: url('/heroimages/Action_V1.jpg');
     --second-bg: #66abcc;
     --search-bar: #bd7004;
     --landing-drop-btn:#e38500FF;
@@ -88,7 +111,8 @@ body.genre-action{
 
 body.genre-romance{
   /*Body*/  
-    background: var(--romance-background);
+    --genre-grad: linear-gradient(to bottom, rgba(216, 186, 229, 1) 0%,rgba(184, 78, 198, 1) 99%);
+    --hero-url: url('/heroimages/Romance_V1.jpg');
     --second-bg: #c9b0d8;
     --search-bar: #5a2a7a;
     --landing-drop-btn:#ffffffFF;
@@ -108,7 +132,8 @@ body.genre-romance{
 
 body.genre-classic{
   /*Body*/
-    background: var(--classic-background);
+    --genre-grad: linear-gradient(to bottom, rgba(45, 79, 43, 1) 0%,rgba(0, 0, 0, 1) 100%);
+    --hero-url: url('/heroimages/Classic_V7.jpg');
     --second-bg: #5c9c4b;
     --search-bar: #b5a476;
     --landing-drop-btn: #fff1ca;
@@ -128,7 +153,8 @@ body.genre-classic{
 
 body.genre-blackandwhite{
   /*Body*/
-    background: var(--blackwhite-background);
+    --genre-grad: linear-gradient(to bottom, rgba(63, 63, 63, 1) 0%,rgba(0, 0, 0, 1) 100%);
+    --hero-url: url('/heroimages/BlackWhite_V1.jpg');
     --second-bg: #959e9e;
     --search-bar: #959e9e;
     --landing-drop-btn: #d3dad9FF;
@@ -148,7 +174,8 @@ body.genre-blackandwhite{
 
 body.genre-holiday{
   /*Body*/
-    background: var(--christmas-background);
+    --genre-grad: linear-gradient(to bottom, rgba(10, 77, 28, 1) 0%, rgba(139, 0, 0, 1) 100%);
+    --hero-url: url('/heroimages/Christmas_V1.jpg');
     --second-bg: #2a7d1f;
     --search-bar: #1c5414;
     --landing-drop-btn: #2a7d1f;
