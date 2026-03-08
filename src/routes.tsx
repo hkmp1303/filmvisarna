@@ -11,6 +11,7 @@ import TemaDagar from './pages/TemaDagar';
 import ConfirmBooking from './pages/ConfirmBooking';
 import PasswordRecovery from './pages/PasswordRecoveryPage';
 import ResetPassword from './pages/ResetPasswordPage';
+import Profile from './pages/ProfilePage';
 
 interface Route {
   element: JSX.Element;
@@ -30,7 +31,8 @@ const routes: Route[] = [
   { element: <TemaDagar />, path: '/themedays', menuLabel: 'Tema Dagar' },
   { element: <ConfirmBooking />, path: '/confirmbooking' },
   { element: <PasswordRecovery />, path: '/passwordrecovery' },
-  { element: <ResetPassword />, path: '/reset-password' }
+  { element: <ResetPassword />, path: '/reset-password' },
+  { element: <Profile />, path: '/Profile', menuLabel: 'Profile' }
 
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
