@@ -9,20 +9,40 @@ public static class RestApi
     {
       try
       {
-        var body = await context.Request.ReadFromJsonAsync<JsonElement>();
-        //innehål
-        string name = body.GetProperty("name").GetString();
-        string email = body.GetProperty("email").GetString();
-        string subject = body.GetProperty("subject").GetString();
-        string message = body.GetProperty("message").GetString();
+        //var body = await context.Request.ReadFromJsonAsync<JsonElement>();
+        var body = await context.Request.ReadFromJsonAsync<ContactRequest>();
 
-        EmailService.ReceiveEmail(name, email, subject, message);
+        //innehåll
+        // string name = body.GetProperty("name").GetString();
+        // string email = body.GetProperty("email").GetString();
+        // string subject = body.GetProperty("subject").GetString();
+        // string message = body.GetProperty("message").GetString();
 
-        return Results.Ok(new { message = "Mail sent" });
+        if (string.IsNullOrEmpty(body.Email) || !body.Email.Contains("@"))
+        {
+          return Results.BadRequest(new { error = "Ogiltlig E-mail." });
+        }
+        if (body.Subject == "")
+        {
+          return Results.BadRequest(new { error = "vänligen välj ett ärende." });
+        }
+        if (string.IsNullOrEmpty(body.Message))
+        {
+          return Results.BadRequest(new { error = "Meddelande kan inte vara tomt" });
+        }
+        if (body.Message.Length < 10)
+        {
+          //lägg till att räkna ut hur många täcken man behöver ha???
+          return Results.BadRequest(new { error = "Meddelande är för kort." });
+        }
+
+        EmailService.ReceiveEmail(body.Name, body.Email, body.Subject, body.Message);
+
+        return Results.Ok(new { success = true, message = "Ditt meddelande har skickats." });
       }
       catch (Exception ex)
       {
-        Console.WriteLine("crash " + ex.Message);
+        Console.WriteLine("error: " + ex.Message);
         return Results.Problem("error: " + ex.Message);
       }
     });

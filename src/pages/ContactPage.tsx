@@ -20,6 +20,7 @@ export default function Contact() {
     });
 
     const [submitted, setSubmitted] = useState<boolean>(false);
+    const [serverMessage, setServerMessage] = useState<string>('');
 
     const handleData = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -29,7 +30,7 @@ export default function Contact() {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const data = await fetchJson('/api/contact', {
+            const response = await fetchJson('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,12 +38,23 @@ export default function Contact() {
                 body: JSON.stringify(submitData),
             });
 
-            if (data && !data.error) {
+            const data = await response.json();
+
+            if (response.ok) {
+                setServerMessage(data.message);
                 setSubmitted(true);
                 setSubmitData({ name: '', email: '', subject: 'None', message: '' });
-            } else {
-                alert("Något gick fel" + (data.error || "Okänt fel"));
             }
+            else {
+                alert(data.error || "Ett oväntat fel uppstod");
+            }
+
+            // if (data && !data.error) {
+            //     setSubmitted(true);
+            //     setSubmitData({ name: '', email: '', subject: 'None', message: '' });
+            // } else {
+            //     alert("Något gick fel" + (data.error || "Okänt fel"));
+            // }
         } catch (error) {
             console.error("Kunde inte kontakta servern:", error);
             alert("Kunde inte ansluta till servern")
@@ -55,9 +67,7 @@ export default function Contact() {
         {submitted && (
             <div className='popup-window'>
                 <div className='popup-content'>
-                    <h3 className='text-2xl'> Tack!</h3>
-                    <p className='text-xl'>Ditt meddelande har nu skickats till oss.</p>
-                    <p className='text-xl'>Vi hör av oss så snart vi kan.</p>
+                    <p className='text-xl'>{serverMessage}</p>
                     <button onClick={() => setSubmitted(false)}>Stäng</button>
                 </div>
             </div>
