@@ -35,8 +35,8 @@ export default function ProfilePage() {
       }
 
       setUser(data.user);
-      setActiveBookings(data.activeBookings ?? []); 
-      setHistory(data.history ?? []); 
+      setActiveBookings(Array.isArray(data.activeBookings) ? data.activeBookings : []);
+      setHistory(Array.isArray(data.history) ? data.history : []); 
       setLoading(false);
     };
 
@@ -81,18 +81,23 @@ export default function ProfilePage() {
         <h3 className="text-xl font-semibold mb-3">Aktiva Bokningar</h3>
         <div className="bg-white/70 backdrop-blur-md shadow-md rounded-xl p-4 space-y-3">
           {activeBookings.length === 0 ? (
-            <p className="text-gray-500">Inga Aktiva bokningar</p>
+            <p className="border-b last:border-none pb-2 last:pb-0">Inga Aktiva bokningar</p>
           ) : (
-            activeBookings.map((b) => (
-              <div
-                key={b.id}
-                className="border-b last:border-none pb-2 last:pb-0"
-              >
-                <p className="font-medium">{b.movieTitle}</p>
-                <p className="text-sm text-gray-600">{b.showtime}</p>
-              </div>
-            ))
+            activeBookings.map((b) => {
+              console.log("Active booking:", b);
+
+              return (
+                <div
+                  key={b.id}
+                  className="border-b last:border-none pb-2 last:pb-0"
+                >
+                  <p className="font-medium">{b.movieTitle}</p>
+                  <p className="text-sm text-gray-600">{b.showtime}</p>
+                </div>
+              );
+            })
           )}
+
         </div>
       </section>
 
@@ -101,18 +106,25 @@ export default function ProfilePage() {
         <h3 className="text-xl font-semibold mb-3">Historik</h3>
         <div className="bg-white/70 backdrop-blur-md shadow-md rounded-xl p-4 space-y-3">
           {history.length === 0 ? (
-            <p className="text-gray-500">Du har inte sett någon film ännu</p>
+            <p className="text-gray-600 text-base font-medium py-2">
+              Du har inte sett någon film ännu
+            </p>
           ) : (
-            history.map((h) => (
-              <div
-                key={h.id}
-                className="border-b last:border-none pb-2 last:pb-0"
-              >
-                <p className="font-medium">{h.movieTitle}</p>
-                <p className="text-sm text-gray-600">{h.showtime}</p>
-              </div>
-            ))
+            history.map((h) => {
+              console.log("History booking:", h);
+
+              return (
+                <div
+                  key={h.id}
+                  className="border-b last:border-none pb-2 last:pb-0"
+                >
+                  <p className="font-medium">{h.movieTitle}</p>
+                  <p className="text-sm text-gray-600">{h.showtime}</p>
+                </div>
+              );
+            })
           )}
+
         </div>
       </section>
     </div>
@@ -135,7 +147,7 @@ export default function ProfilePage() {
 
 
 // CREATE OR REPLACE VIEW user_booking_view AS
-// SELECT;
+// SELECT
 // b.bookingid AS id,
 //   b.userid,
 //   b.status,
