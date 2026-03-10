@@ -27,6 +27,64 @@ public static class RestApi
       }
     });
 
+     App.MapGet("/api/profile", (HttpContext context) =>
+  {
+   var sessionId = context.Request.Cookies["sessionid"];
+   if (sessionId == null)
+   {
+     return RestResult.Parse(context, Obj(new { error = "Not logged in" }));
+   }
+
+    var session = SQLQueryOne(
+        "SELECT * FROM session WHERE id = @id",
+        Obj(new { id = sessionId }),
+        context
+    );
+
+    if (session == null || !session.HasKey("userid"))
+   {
+      return RestResult.Parse(context, Obj(new { error = "Not logged in" }));
+    }
+
+    int userId = (int)session.userid;
+
+    var user = SQLQueryOne(
+        "SELECT firstname, lastname, email FROM user WHERE userid = @userid",
+        Obj(new { userid = userId }),
+        context
+    );
+
+    var active = SQLQuery(
+        @"SELECT id, movieTitle, showtime
+            FROM user_booking_view
+            WHERE userid = @userid
+              AND status = 'booked'
+              AND showtime >= NOW()
+           ORDER BY showtime ASC",
+       Obj(new { userid = userId }),
+       context
+    );
+
+    var history = SQLQuery(
+       @"SELECT id, movieTitle, showtime
+           FROM user_booking_view
+            WHERE userid = @userid
+            AND status = 'booked'
+            AND showtime < NOW()
+           ORDER BY showtime DESC",
+        Obj(new { userid = userId }),
+        context
+    );
+
+    return RestResult.Parse(context, Obj(new
+    {
+      user,
+      activeBookings = active,
+      history
+    }));
+  });
+
+
     App.MapPost("/api/{table}", (
         HttpContext context, string table, JsonElement bodyJson
     ) =>
