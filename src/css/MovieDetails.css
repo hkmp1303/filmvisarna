@@ -47,11 +47,14 @@
                 height: 315px;
             }
         }
+        .trailer-container:hover {
+            background-color: var(--font-primary);
+        }
 
         .date-picker {
             background-color: var(--dark-primary);
             padding: 1rem;
-            border: 1px solid var(--border-primary);
+            border: 2px solid var(--border-primary);
             border-radius: 7px;
             select {
                 @apply p-1;
@@ -61,7 +64,9 @@
                 color: #000;
             }
         }
-
+        .date-picker:hover {
+            border: 2px solid var(--font-primary);
+        }
         .btn-booking {
             width: 85%;
             background: radial-gradient(circle, #5a2a7a 0%, #b527d81a 70%);
@@ -72,7 +77,13 @@
             cursor: pointer;
             font-size: 0.85rem;
             font-size: 20px;
-            border: 1px solid var(--border-primary);
+            border: 2px solid var(--border-primary);
+        }
+
+        .btn-booking:hover {
+            background-color: var(--border-primary);
+            color: var(--input-bg);
+            border: 2px solid var(--font-primary);
         }
     }
 
