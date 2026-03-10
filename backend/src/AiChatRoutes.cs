@@ -46,7 +46,6 @@ public static class AiChatRoutes
                         string salon = m["salon_name"]?.ToString() ?? "Okänd salong";
                         string desc = m["movie_description"]?.ToString() ?? "";
 
-                        // Vi bygger en kompakt men informationsrik sträng för varje föreställning
                         movieContext += $"FILM: {title} | GENRE: {genre} | BETYG: {rating} | LÄNGD: {duration} min\n";
                         movieContext += $"SPRÅK: {lang} (Text: {sub})\n";
                         movieContext += $"VISAS: {time} i {salon}\n";
