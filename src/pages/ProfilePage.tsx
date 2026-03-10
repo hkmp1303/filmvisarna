@@ -25,6 +25,10 @@ export default function ProfilePage() {
       const res = await fetch("/api/profile");
       const data = await res.json();
 
+      // Logging the console data to see what's happening
+      console.log("Active bookings from API:", data.activeBookings);
+      console.log("History from API:", data.history);
+
       if (data.error) {
         console.error("Not logged in");
         setLoading(false);
@@ -32,8 +36,8 @@ export default function ProfilePage() {
       }
 
       setUser(data.user);
-      setActiveBookings(data.activeBookings);
-      setHistory(data.history);
+      setActiveBookings(data.activeBookings ?? []); // Added "?? []" 
+      setHistory(data.history ?? []);               // Added "?? []" - on both to check the data
       setLoading(false);
     };
 
@@ -115,3 +119,30 @@ export default function ProfilePage() {
     </div>
   );
 }
+
+
+
+
+
+
+
+// ###########################################
+// #                                         #
+// #        Down below is my View            #
+// #        for MySQL, saving it             #
+// #             just in case                #
+// #                                         #
+// ###########################################
+
+
+// CREATE OR REPLACE VIEW user_booking_view AS
+// SELECT;
+// b.bookingid AS id,
+//   b.userid,
+//   b.status,
+//   b.date AS bookingDate,
+//     s.start AS showtime,
+//       f.title AS movieTitle
+// FROM booking b
+// JOIN screening s ON b.screeningid = s.screeningid
+// JOIN film f ON s.filmid = f.filmid;
