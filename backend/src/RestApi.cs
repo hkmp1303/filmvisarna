@@ -9,20 +9,13 @@ public static class RestApi
     {
       try
       {
-        //var body = await context.Request.ReadFromJsonAsync<JsonElement>();
         var body = await context.Request.ReadFromJsonAsync<ContactRequest>();
-
-        //innehåll
-        // string name = body.GetProperty("name").GetString();
-        // string email = body.GetProperty("email").GetString();
-        // string subject = body.GetProperty("subject").GetString();
-        // string message = body.GetProperty("message").GetString();
 
         if (string.IsNullOrEmpty(body.Email) || !body.Email.Contains("@"))
         {
           return Results.BadRequest(new { error = "Ogiltlig E-mail." });
         }
-        if (body.Subject == "")
+        if (body.Subject == "None")
         {
           return Results.BadRequest(new { error = "vänligen välj ett ärende." });
         }
@@ -32,8 +25,9 @@ public static class RestApi
         }
         if (body.Message.Length < 10)
         {
-          //lägg till att räkna ut hur många täcken man behöver ha???
-          return Results.BadRequest(new { error = "Meddelande är för kort." });
+          int BML = body.Message.Length;
+          int charLeft = 10 - BML;
+          return Results.BadRequest(new { error = $"Meddelande är för kort. Du behöver {charLeft} fler karaktärer." });
         }
 
         EmailService.ReceiveEmail(body.Name, body.Email, body.Subject, body.Message);

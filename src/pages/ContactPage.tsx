@@ -21,6 +21,7 @@ export default function Contact() {
 
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [serverMessage, setServerMessage] = useState<string>('');
+    const [isError, setIsError] = useState<boolean>(false);
 
     const handleData = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -30,7 +31,7 @@ export default function Contact() {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await fetchJson('/api/contact', {
+            const data = await fetchJson('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,28 +39,21 @@ export default function Contact() {
                 body: JSON.stringify(submitData),
             });
 
-            const data = await response.json();
-
-            if (response.ok) {
-                setServerMessage(data.message);
+            if (data && data.error) {
+                setServerMessage(data.error);
+                setIsError(true);
+                setSubmitted(true);
+            } else {
+                setServerMessage(data.message || "Ditt meddelande har skickats");
+                setIsError(false);
                 setSubmitted(true);
                 setSubmitData({ name: '', email: '', subject: 'None', message: '' });
             }
-            else {
-                alert(data.error || "Ett oväntat fel uppstod");
-            }
-
-            // if (data && !data.error) {
-            //     setSubmitted(true);
-            //     setSubmitData({ name: '', email: '', subject: 'None', message: '' });
-            // } else {
-            //     alert("Något gick fel" + (data.error || "Okänt fel"));
-            // }
         } catch (error) {
-            console.error("Kunde inte kontakta servern:", error);
-            alert("Kunde inte ansluta till servern")
+            setServerMessage("Kunde inte ansluta till servern. Försök igen senare.");
+            setIsError(true);
+            setSubmitted(true);
         }
-        setSubmitted(true);
     }
 
     return <article className='contact-page'>
@@ -67,7 +61,9 @@ export default function Contact() {
         {submitted && (
             <div className='popup-window'>
                 <div className='popup-content'>
-                    <p className='text-xl'>{serverMessage}</p>
+                    <h3 className={`text-2xl font-bold ${isError ? 'text-red-600' : 'text-green-600'}`}>
+                        {isError ? 'Oj, något blev fel' : 'Tack!'}</h3>
+                    <p className='text-xl py-4'>{serverMessage}</p>
                     <button onClick={() => setSubmitted(false)}>Stäng</button>
                 </div>
             </div>
