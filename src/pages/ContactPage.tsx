@@ -39,14 +39,14 @@ export default function Contact() {
                 body: JSON.stringify(submitData),
             });
 
+            setSubmitted(true);
+
             if (data && data.error) {
                 setServerMessage(data.error);
                 setIsError(true);
-                setSubmitted(true);
             } else {
                 setServerMessage(data.message || "Ditt meddelande har skickats");
                 setIsError(false);
-                setSubmitted(true);
                 setSubmitData({ name: '', email: '', subject: 'None', message: '' });
             }
         } catch (error) {

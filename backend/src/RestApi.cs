@@ -1,3 +1,5 @@
+using MimeKit;
+
 namespace WebApp;
 
 public static class RestApi
@@ -10,10 +12,10 @@ public static class RestApi
       try
       {
         var body = await context.Request.ReadFromJsonAsync<ContactRequest>();
-
-        if (string.IsNullOrEmpty(body.Email) || !body.Email.Contains("@"))
+        bool hasDotAfterAt = Regex.IsMatch(body.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+        if (string.IsNullOrEmpty(body.Email) || !MailboxAddress.TryParse(body.Email, out _) || !hasDotAfterAt)
         {
-          return Results.BadRequest(new { error = "Ogiltlig E-mail." });
+          return Results.BadRequest(new { error = "Ogiltig E-mail." });
         }
         if (body.Subject == "None")
         {
