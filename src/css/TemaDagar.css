@@ -12,6 +12,7 @@
   font-size: 2.5rem;
   color: #fffdc4;
   @apply text-shadow-lg/30 text-5xl pt-6 pb-4;
+  font-weight: medium;
 }
 
 .themes-intro {
@@ -56,10 +57,11 @@
 }
 
 .theme-name {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   margin-bottom: 0.5rem;
   text-shadow: 3px 2.5px 10px rgb(255, 255, 255);
-  ;
+  text-align: center;
+  font-weight: medium;
 }
 
 .theme-description {
