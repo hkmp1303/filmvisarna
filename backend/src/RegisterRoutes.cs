@@ -24,7 +24,6 @@ public static class RegisterRoutes
           return RestResult.Parse(context, new { message = "Alla obligatoriska fält måste fyllas i." });
         }
 
-        //check if email exists
         var existingUser = SQLQueryOne("SELECT id FROM user WHERE email = @email", new { email });
 
         if (existingUser != null)
@@ -32,7 +31,6 @@ public static class RegisterRoutes
           return RestResult.Parse(context, new { message = "E-postadressen är redan registrerad." });
         }
 
-        // 
         string hashedPassword = Password.Encrypt(password);
 
         var insertQuery = @"
