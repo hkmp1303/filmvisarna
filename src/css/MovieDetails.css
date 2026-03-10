@@ -62,6 +62,7 @@
                 border-radius: 7px;
                 background-color: var(--second-bg);
                 color: #000;
+                cursor: pointer;
             }
         }
         .date-picker:hover {
