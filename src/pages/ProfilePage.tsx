@@ -22,10 +22,9 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const loadProfile = async () => {
-      const res = await fetch("/api/profile");
+      const res = await fetch("/api/profileinformation");
       const data = await res.json();
 
-      // Logging the console data to see what's happening
       console.log("Active bookings from API:", data.activeBookings);
       console.log("History from API:", data.history);
 
@@ -36,8 +35,8 @@ export default function ProfilePage() {
       }
 
       setUser(data.user);
-      setActiveBookings(data.activeBookings ?? []); // Added "?? []" 
-      setHistory(data.history ?? []);               // Added "?? []" - on both to check the data
+      setActiveBookings(data.activeBookings ?? []); 
+      setHistory(data.history ?? []); 
       setLoading(false);
     };
 

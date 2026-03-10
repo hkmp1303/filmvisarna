@@ -27,7 +27,7 @@ public static class RestApi
       }
     });
 
-     App.MapGet("/api/profile", (HttpContext context) =>
+     App.MapGet("/api/profileinformation", (HttpContext context) =>
   {
    var sessionId = context.Request.Cookies["sessionid"];
    if (sessionId == null)
