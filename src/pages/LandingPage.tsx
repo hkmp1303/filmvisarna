@@ -23,11 +23,11 @@ export default function LandingPage() {
   const [selectedGenre, setSelectedGenre] = useState('');
 
   useEffect(() => {
-
-    if (selectedGenre) {
-      ThemedayToggle(selectedGenre);
+    const savedTheme = sessionStorage.getItem('savedTheme');
+    if (savedTheme) {
+      ThemedayToggle(savedTheme);
     }
-  }, [selectedGenre]);
+  }, []);
 
   const selectedMovieNavigation = (filmid: number) => {
     navigate(`/moviedetails/${filmid}`);

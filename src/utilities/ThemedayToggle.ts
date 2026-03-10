@@ -9,10 +9,10 @@ export function ThemedayToggle(genre: string) {
 
   const safeGenre = genre.toLocaleLowerCase().replace(/[\s&]/g, '');
 
-  if (safeGenre && safeGenre !== 'default') {
+  if (safeGenre && safeGenre !== 'default' && safeGenre !== '') {
     body.classList.add(`genre-${safeGenre}`);
-    localStorage.setItem('selectedTheme', safeGenre);
+    sessionStorage.setItem('selectedTheme', safeGenre);
   } else {
-    localStorage.removeItem('selectedTheme');
+    sessionStorage.removeItem('selectedTheme');
   }
 }
