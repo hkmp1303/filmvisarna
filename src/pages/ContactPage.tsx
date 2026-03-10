@@ -6,7 +6,7 @@ import '../css/ContactPage.css'
 interface contactForm {
     name: string;
     email: string;
-    subject: 'None' | 'Föreställning' | 'Biljettfråga' | 'Kiosken' | 'Betalning' | 'Övrigt' | string;
+    subject: 'None' | 'Föreställning' | 'Biljettfråga' | 'Kiosken' | 'Betalning' | 'Förslag' | 'TemaDagar' | 'Övrigt' | string;
     message: string;
 }
 
@@ -97,6 +97,8 @@ export default function Contact() {
                     <option value="Biljettfråga">Biljettfråga</option>
                     <option value="Kiosken">Kiosken</option>
                     <option value="Betalning">Betalning</option>
+                    <option value="Förslag">Förslag</option>
+                    <option value="TemaDagar">Tema dagar</option>
                     <option value="Övrigt">Övrigt</option>
                 </select>
                 <label className='text-xl font-semibold mb-2 mt-1'>Skriv ett meddelande:
