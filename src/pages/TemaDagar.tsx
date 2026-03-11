@@ -65,9 +65,14 @@ export default function Themes() {
 
       <div className="themes-intro">
         <h3>Vad är temadagar?</h3>
-        <p> Varje helg kör filmvisaren våra temadagar.</p>
-        <p>Då har du möjlighet att se filmer i dina favorit genres</p>
-        <p>På högtider så som Jul och Halloween kör vi film ut på genres som passar högtiderna.</p>
+        <p> Varje helg (Fredag, Lördag, Söndag) kör filmvisaren våra temadagar.</p>
+        <p>Då har du möjlighet att se filmer i dina favorit genres.</p>
+        <br />
+        <h3>Vårat rullande schema är:</h3>
+        <p>Jämna helger: Familjefilmer, Komedi, Action.</p>
+        <p>Udda helger: Klassisk, Romantik, Svart vitt.</p>
+        <br />
+        <p>På högtider så som Jul och Halloween kör vi film ut ifrån de genres som passar högtiderna.</p>
       </div>
 
       <div className="themes-grid">
