@@ -56,11 +56,11 @@ export default function AboutUs() {
             </div>
             <section className="side-link">
                 <div className='grid items-center justify-center'>
-                    <h3 className='font-medium text-2xl flex justify-center items-center pb-4'>Tema dagar:</h3>
+                    <h3 className='font-medium text-2xl flex justify-center items-center pb-4'>Temadagar:</h3>
                     <p className='pb-6'>Hos oss är varje helgdag en ny filmupplevelse! Vi kör olika genrer beroende på helgdag,
                         så att du alltid vet vilken typ av stämning som väntar i salongen.</p>
                     <button className='theme-days-btn'
-                        onClick={navThemeDays}>Tema dagar</button>
+                        onClick={navThemeDays}>Temadagar</button>
                 </div>
                 <div className='grid items-center justify-center'>
                     <h3 className='font-medium text-2xl flex justify-center items-center pb-4'>Kiosk: </h3>
