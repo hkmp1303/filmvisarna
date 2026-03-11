@@ -29,8 +29,8 @@ public static class LoginRoutes
       );
       if (dbUser == null)
       {
-        context.Response.StatusCode = 403;
-        return RestResult.Parse(context, Obj(new { error = LOGIN_FAIL_MSG }));
+        return RestResult.Parse(context,
+          Obj(new { msg = LOGIN_FAIL_MSG }));
       }
 
       // If the password doesn't match
@@ -41,7 +41,7 @@ public static class LoginRoutes
       {
         context.Response.StatusCode = 403;
         return RestResult.Parse(context,
-          Obj(new { error = LOGIN_FAIL_MSG }));
+          Obj(new { msg = LOGIN_FAIL_MSG }));
       }
 
       // Add the user to the session, without password
