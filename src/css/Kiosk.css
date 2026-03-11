@@ -65,10 +65,11 @@
 
 
   .kiosk-title {
+    text-align: center;
     font-style: italic;
-    color: #fffdc4;
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
+    @apply font-medium text-5xl text-(--font-primary) text-shadow-lg/30;
   }
 
 
