@@ -2,13 +2,7 @@ import { useState } from 'react'
 import type { ChangeEvent, FormEvent } from 'react';
 import fetchJson from '../utilities/fetchJson';
 import '../css/ContactPage.css'
-
-interface contactForm {
-    name: string;
-    email: string;
-    subject: 'None' | 'Föreställning' | 'Biljettfråga' | 'Kiosken' | 'Betalning' | 'Förslag' | 'TemaDagar' | 'Övrigt' | string;
-    message: string;
-}
+import type { contactForm } from '../utilities/contactFormInterface';
 
 export default function Contact() {
 
