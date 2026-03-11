@@ -20,6 +20,17 @@ export default function ProfilePage() {
   const [history, setHistory] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
 
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/login', { method: 'DELETE' });   // Använde Timoty's "handleLogout" funktion han skapade i "Login.tsx". Very Sigma :)
+      setUser(null);
+    } catch (err) {
+      console.error("Kunde inte logga ut", err);
+    }
+  };
+
+
   useEffect(() => {
     const loadProfile = async () => {
       const res = await fetch("/api/profileinformation");
@@ -53,8 +64,8 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-10">
-      <section className="bg-white/70 backdrop-blur-md shadow-md rounded-xl p-6 flex items-center gap-6">
-        <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
+      <section className="profile-header">
+        <div className="profile-info">
           {user.profilePic ? (
             <img
               src={user.profilePic}
@@ -68,12 +79,20 @@ export default function ProfilePage() {
           )}
         </div>
 
-        <div>
+        <div className="profile-details">
           <h2 className="text-2xl font-semibold">
             {user.firstname} {user.lastname}
           </h2>
           <p className="text-gray-600">{user.email}</p>
         </div>
+
+        <button
+          onClick={handleLogout}
+          className="logout-btn"
+        >
+          Logga ut
+        </button>
+
       </section>
 
       
