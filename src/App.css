@@ -5,10 +5,11 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: var(--body-bg, #000);
+  background-color: var(--body-bg, #4e023e);
   transition: background 0.5s ease;
 
-  --genre-grad: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%);
+  --genre-grad: linear-gradient(to bottom, rgba(102,1,87,0.55) 0%, rgba(78,2,62,1) 100%);
+  //--genre-grad: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%);
   --hero-url: url('/heroimages/movie_strip_v1.jpg');
 
 }
