@@ -12,7 +12,6 @@
     text-align: center;
     margin-bottom: 2rem;
     font-size: 2.5rem;
-    font-style: italic;
     @apply font-medium text-5xl text-(--font-primary) text-shadow-lg/30;
   }
 
@@ -66,7 +65,6 @@
 
   .kiosk-title {
     text-align: center;
-    font-style: italic;
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
     @apply font-medium text-5xl text-(--font-primary) text-shadow-lg/30;
