@@ -115,14 +115,14 @@ public static class RestApi
         HttpContext context, string table, string id
       ) =>
         RestResult.Parse(context, SQLQuery(
-            $@"SELECT
-          screeningid,
-          filmid,
-          start,
-          room_number,
-          description
+          $@"SELECT
+            screeningid,
+            filmid,
+            start,
+            room_number,
+            description
           FROM screening
-          JOIN salon USING(salonid)
+            JOIN salon USING(salonid)
           WHERE filmid = @id",
             ReqBodyParse(table, Obj(new { id })).body,
             context
@@ -146,23 +146,6 @@ public static class RestApi
           SET FOREIGN_KEY_CHECKS = 1;");
       return RestResult.Parse(context, result);
     });
-    App.MapGet("/api/bookedSeatRes/{screeningid}", (
-      HttpContext context, string screeningid
-    ) =>
-      RestResult.Parse(context, SQLQuery(
-        $@"SELECT
-          `seat_number`,
-          `row_number`
-        FROM booking
-          INNER JOIN reservation USING(bookingid)
-        WHERE screeningid = @screeningid
-          AND `status`!='canceled'
-        ORDER BY `seat_number`
-        ;",
-          ReqBodyParse("booking", Obj(new { screeningid })).body,
-          context
-      ))
-    );
   }
 
   //this class i so the contactform
