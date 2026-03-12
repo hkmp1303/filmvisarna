@@ -64,7 +64,7 @@ export default function AiChat() {
             {isOpen && (
                 <div className="ai-chat-window">
                     <div className="ai-chat-header">
-                        <span>Filmvisaren AI-Support</span>
+                        <span>Filmvisarna AI-Support</span>
                         <button onClick={() => setIsOpen(false)}>×</button>
                     </div>
 
