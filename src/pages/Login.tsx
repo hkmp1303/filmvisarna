@@ -67,7 +67,7 @@ export default function Login() {
           </button>
 
           <button
-            className="forgoten-password-btn"
+            className="return-to-landingpage"
             onClick={() => navigate('/')}
           >
             Gå till startsidan
