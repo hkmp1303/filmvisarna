@@ -16,7 +16,8 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleLogin = async () => {
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
     setError('');
     try {
       const response = await fetch('/api/login', {
@@ -28,8 +29,12 @@ export default function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        setUser(data); // Uppdatera App.tsx state
-        navigate('/'); // Gå till startsidan
+        if (data.email) {
+          setUser(data); // Uppdatera App.tsx state
+          navigate('/'); // Gå till startsidan
+        } else if(data.msg) {
+          setError(data.msg);
+        }
       } else {
         setError("Fel e-post eller lösenord");
       }
@@ -67,8 +72,8 @@ export default function Login() {
           </button>
 
           <button
-            className="forgoten-password-btn"
-            onClick={() => navigate('/passwordrecovery')}
+            className="return-to-landingpage"
+            onClick={() => navigate('/')}
           >
             Gå till startsidan
           </button>
@@ -84,12 +89,12 @@ export default function Login() {
         <h1>Logga In</h1>
       </div>
 
-      <div className="login-input">
+      <form className="login-input" autoComplete="off">
         {error && <p className="error-message">{error}</p>}
 
         <div className="email-input">
-          <p>E-post</p>
-          <input
+          <label htmlFor="email">E-post</label>
+          <input id="email"
             type="email"
             placeholder="E-post"
             value={email}
@@ -97,9 +102,9 @@ export default function Login() {
           />
         </div>
 
-        <div className="Password-input">
-          <p>Lösenord</p>
-          <input
+        <div className="password-input">
+          <label htmlFor="password">Lösenord</label>
+          <input id="password"
             type="password"
             placeholder="Lösenord"
             value={password}
@@ -107,12 +112,12 @@ export default function Login() {
           />
         </div>
 
-        <div className="forgotten-password">
-          <button className="forgoten-password-btn" onClick={() => navigate('//passwordrecovery')}>Glömt lösenord?</button>
-        </div>
-
         <div className="confirm">
           <button className="confirm-btn" onClick={handleLogin}>Logga In</button>
+        </div>
+
+        <div className="forgotten-password">
+          <button className="forgoten-password-btn" onClick={() => navigate('/passwordrecovery')}>Glömt lösenord?</button>
         </div>
 
         <div className="forgotten-password">
@@ -121,7 +126,7 @@ export default function Login() {
           </button>
         </div>
 
-      </div>
+      </form>
     </div>
   );
 }

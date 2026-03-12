@@ -12,8 +12,7 @@
     text-align: center;
     margin-bottom: 2rem;
     font-size: 2.5rem;
-    font-style: italic;
-    color: #fffdc4;
+    @apply font-medium text-5xl text-(--font-primary) text-shadow-lg/30;
   }
 
   .kiosk-grid {
@@ -65,10 +64,10 @@
 
 
   .kiosk-title {
-    font-style: italic;
-    color: #fffdc4;
+    text-align: center;
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
+    @apply font-medium text-5xl text-(--font-primary) text-shadow-lg/30;
   }
 
 

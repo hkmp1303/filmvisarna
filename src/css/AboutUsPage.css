@@ -1,3 +1,5 @@
+@import 'tailwindcss';
+
 .aboutus-page {
     display: grid;
     grid-template-columns: 1fr;
@@ -17,7 +19,8 @@
     }
 
     .big-logo {
-        display: none; 
+        display: none;
+        @apply p-3;
         @media (min-width: 768px) {
             display: inline-block;
             align-self: center;
