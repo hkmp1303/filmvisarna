@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import '../css/AboutUsPage.css'
-import Logo from '../assets/logav2-cropped.svg?react'
+import Logo from '../assets/logo-new.svg?react'
 
 export default function AboutUs() {
 
@@ -13,9 +13,9 @@ export default function AboutUs() {
     return <>
         <article className="aboutus-page">
             <section className="aboutus-info">
-                <h1 className='font-medium text-5xl flex justify-center text-(--font-primary) text-shadow-lg/30 pb-4 pt-1'>Om Filmvisaren AB</h1>
+                <h1 className='font-medium text-5xl flex justify-center text-(--font-primary) text-shadow-lg/30 pb-4 pt-1'>Om Filmvisarna AB</h1>
                 <h3 className='font-medium text-xl flex justify-center items-center pb-4'>Den personliga bioupplevelsen i Småstad</h3>
-                <p className='pb-2'>Filmvisaren AB föddes ur en enkel dröm: att ge Småstad den bioupplevelse staden förtjänar.
+                <p className='pb-2'>Filmvisarna AB föddes ur en enkel dröm: att ge Småstad den bioupplevelse staden förtjänar.
                     Medan de stora biograferna blir alltmer opersonliga,
                     tror vi på den lokala närvaron.
                     Vi är den lilla biografkedjan med det stora hjärtat,
@@ -56,11 +56,11 @@ export default function AboutUs() {
             </div>
             <section className="side-link">
                 <div className='grid items-center justify-center'>
-                    <h3 className='font-medium text-2xl flex justify-center items-center pb-4'>Tema dagar:</h3>
-                    <p className='pb-6'>Hos oss är varje dag en ny filmupplevelse! Vi kör olika genrer beroende på veckodag,
+                    <h3 className='font-medium text-2xl flex justify-center items-center pb-4'>Temadagar:</h3>
+                    <p className='pb-6'>Hos oss är varje helgdag en ny filmupplevelse! Vi kör olika genrer beroende på helgdag,
                         så att du alltid vet vilken typ av stämning som väntar i salongen.</p>
                     <button className='theme-days-btn'
-                        onClick={navThemeDays}>Tema dagar</button>
+                        onClick={navThemeDays}>Temadagar</button>
                 </div>
                 <div className='grid items-center justify-center'>
                     <h3 className='font-medium text-2xl flex justify-center items-center pb-4'>Kiosk: </h3>
