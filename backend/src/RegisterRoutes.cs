@@ -16,6 +16,7 @@ public static class RegisterRoutes
         string firstname = body.firstname;
         string lastname = body.lastname;
         string phone = body.phone;
+        string role = "member";
 
 
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) ||
@@ -34,8 +35,8 @@ public static class RegisterRoutes
         string hashedPassword = Password.Encrypt(password);
 
         var insertQuery = @"
-                    INSERT INTO user (email, password, firstname, lastname, phone) 
-                    VALUES (@email, @password, @firstname, @lastname, @phone)";
+                    INSERT INTO user (email, password, firstname, lastname, phone, role) 
+                    VALUES (@email, @password, @firstname, @lastname, @phone, @role)";
 
         var result = SQLQueryOne(insertQuery, new
         {
@@ -43,7 +44,8 @@ public static class RegisterRoutes
           password = hashedPassword,
           firstname,
           lastname,
-          phone
+          phone,
+          role
         });
 
         if (result == null || result.rowsAffected == 0)
