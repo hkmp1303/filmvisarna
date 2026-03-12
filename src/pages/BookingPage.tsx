@@ -151,83 +151,80 @@ export default function Booking() {
 
   return (!loading.current && (<>
     <h2 className='movie-title'>{ film?.title }</h2>
-    <article className="">
-      <div>
-        <section className='fifty'>
-          <form>
-            <fieldset className="">
-              <legend>Vald föreställning </legend>
-              {/*<form>
-                {screenings && (screenings as BriefScreening[]).length > 1 ? (<>
-                <label htmlFor="screening">Visning</label>
-                <select name="screeningid" id="screening" required>
-                <option value="">Välj en visning</option>
-                {(screenings as BriefScreening[]).map((s: BriefScreening, index: number) => (
-                  <option key={index} value={s.screeningid}>
-                  {formatDateTime(s.start)} - Salong {s.room_number}
-                  </option>
-                  ))}
-                  </select>
-                </>) : (
-                  <p>{error}</p>
-                  )}
-                  </form>*/}
-              <div className='screening-info'>
-                <div>
-                  <img className="screen-info-img" src={film?.cover_image} alt="Film Affisch" width="200" height="300" />
-                </div>
-                <dl className='text-screening-info'>
-                  <dt><b>Film detaljer</b></dt><dd></dd>
-                  <dt>Åldersgräns:</dt><dd>{film?.viewer_rating}</dd>
-                  <dt>Speltid:</dt><dd>{film?.duration} min</dd>
-                  <dt>Genre:</dt><dd>{genre(film?.genre ?? "")}</dd>
-                  <dt>Tal:</dt><dd>{film?.language}</dd>
-                  <dt>Undertext:</dt><dd>{film?.subtitle_language}</dd>
-                  <dt></dt><dd></dd>
-                  <dt><b>Tid och plats</b></dt><dd></dd>
-                  <dt>Datum:</dt><dd>{formatDateIso(screening?.start)}</dd>
-                  <dt>{(formatDay(screening?.start))} - kl {formatHourMin(screening?.start) }</dt><dd></dd>
-                  <dt>Salong {salon?.room_number}</dt><dd></dd>
-                </dl>
+    <article className="booking-grid-all">
+      <section className='fifty'>
+        <form>
+          <fieldset className="screening-w-counter">
+            <legend>Vald föreställning </legend>
+            {/*<form>
+              {screenings && (screenings as BriefScreening[]).length > 1 ? (<>
+              <label htmlFor="screening">Visning</label>
+              <select name="screeningid" id="screening" required>
+              <option value="">Välj en visning</option>
+              {(screenings as BriefScreening[]).map((s: BriefScreening, index: number) => (
+                <option key={index} value={s.screeningid}>
+                {formatDateTime(s.start)} - Salong {s.room_number}
+                </option>
+                ))}
+                </select>
+              </>) : (
+                <p>{error}</p>
+                )}
+                </form>*/}
+            <div className='screening-info'>
+              <div>
+                <img className="screen-info-img" src={film?.cover_image} alt="Film Affisch" width="200" height="300" />
               </div>
-              <div className='items-center text-center'>
-                <button className="screen-select-btn" onClick={handleClick}>Välj annan föreställning</button>
-              </div>
-            </fieldset>
-          </form>
-        </section>
-        <hr className='div' />
-        <section className='fifty'>
-          <form>
-            <fieldset>
-              <legend>Välj antal biljetter</legend>
-              <table className='ticket-count'>
-                <tbody>
-                  <tr>
-                    <td className='ticket-label'><label htmlFor="adult">Ordinarie</label></td>
-                    <td className='ticket-number'><input ref={adultCnt} onChange={calcTotal} type="number" min="0" max={totalSeats + (parseInt(adultCnt.current?.value as string) || 0)} defaultValue="0" id='adult' /></td>
-                    <td className='ticket-price'>140 kr</td>
-                  </tr><tr>
-                    <td className='ticket-label'><label htmlFor="senior">Pensionär (+65 år)</label></td>
-                    <td className='ticket-number'><input ref={seniorCnt} onChange={calcTotal} type="number" min="0" max={totalSeats + (parseInt(seniorCnt.current?.value as string) || 0)} defaultValue="0" id='senior' /></td>
-                    <td className='ticket-price'>120 kr</td>
-                  </tr><tr>
-                    <td className='ticket-label'><label htmlFor="child">Barn (till 12 år)</label></td>
-                    <td className='ticket-number'><input ref={childCnt} onChange={calcTotal} type="number" min="0" max={totalSeats + (parseInt(childCnt.current?.value as string) || 0)} defaultValue="0" id='child' /></td>
-                    <td className='ticket-price'>80 kr</td>
-                  </tr><tr>
-                    <td colSpan={3}>Summa: {ticketTotal} kr</td>
-                  </tr>
-                </tbody>
-              </table>
-            </fieldset>
-          </form>
-        </section>
-      </div>
-      <div>
-        <section className="fifty">
-          <fieldset className=''>
-            <legend>Tillgängliga platser i Salong {salon?.room_number}</legend>
+              <dl className='text-screening-info'>
+                <dt><b>Film detaljer</b></dt><dd></dd>
+                <dt>Åldersgräns:</dt><dd>{film?.viewer_rating}</dd>
+                <dt>Speltid:</dt><dd>{film?.duration} min</dd>
+                <dt>Genre:</dt><dd>{genre(film?.genre ?? "")}</dd>
+                <dt>Tal:</dt><dd>{film?.language}</dd>
+                <dt>Undertext:</dt><dd>{film?.subtitle_language}</dd>
+                <dt></dt><dd></dd>
+                <dt><b>Tid och plats</b></dt><dd></dd>
+                <dt></dt><dd>{formatDateIso(screening?.start)}</dd>
+                <dt>{(formatDay(screening?.start))} - kl {formatHourMin(screening?.start) }</dt><dd></dd>
+                <dt>Salong {salon?.room_number}</dt><dd></dd>
+              </dl>
+            </div>
+            <div className='items-center text-center'>
+              <button className="screen-select-btn" onClick={handleClick}>Välj annan föreställning</button>
+            </div>
+          </fieldset>
+        </form>
+      </section>
+      <section className='fifty'>
+        <form>
+          <fieldset>
+            <legend>Välj antal biljetter</legend>
+            <table className='ticket-count'>
+              <tbody>
+                <tr>
+                  <td className='ticket-label'><label htmlFor="adult">Ordinarie</label></td>
+                  <td className='ticket-number'><input ref={adultCnt} onChange={calcTotal} type="number" min="0" max={totalSeats + (parseInt(adultCnt.current?.value as string) || 0)} defaultValue="0" id='adult' /></td>
+                  <td className='ticket-price'>140 kr</td>
+                </tr><tr>
+                  <td className='ticket-label'><label htmlFor="senior">Pensionär (+65 år)</label></td>
+                  <td className='ticket-number'><input ref={seniorCnt} onChange={calcTotal} type="number" min="0" max={totalSeats + (parseInt(seniorCnt.current?.value as string) || 0)} defaultValue="0" id='senior' /></td>
+                  <td className='ticket-price'>120 kr</td>
+                </tr><tr>
+                  <td className='ticket-label'><label htmlFor="child">Barn (till 12 år)</label></td>
+                  <td className='ticket-number'><input ref={childCnt} onChange={calcTotal} type="number" min="0" max={totalSeats + (parseInt(childCnt.current?.value as string) || 0)} defaultValue="0" id='child' /></td>
+                  <td className='ticket-price'>80 kr</td>
+                </tr><tr>
+                  <td>Summa: </td><td>{ticketTotal} kr</td><td></td>
+                </tr>
+              </tbody>
+            </table>
+          </fieldset>
+        </form>
+      </section>
+      <section className="fifty">
+        <fieldset className=''>
+          <legend>Tillgängliga platser i Salong {salon?.room_number}</legend>
+          <span>
             <form>
               <input type="hidden" name="total_cost" value={ticketTotal} />
               <input type="hidden" name="guid" value={bookingGuid} />
@@ -252,14 +249,14 @@ export default function Booking() {
                 )}
               </div>
             </form>
-          </fieldset>
-        </section>
-        <form className='text-center' onSubmit={handleBooking}>
-          <input type="hidden" name="total_cost" value={ticketTotal} />
-          <input type="hidden" name="guid" value={bookingGuid} />
-          <button className="book-seats-btn">Boka platser</button>
-        </form>
-      </div>
+            <form className='text-center' onSubmit={handleBooking}>
+              <input type="hidden" name="total_cost" value={ticketTotal} />
+              <input type="hidden" name="guid" value={bookingGuid} />
+              <button className="book-seats-btn">Boka platser</button>
+            </form>
+          </span>
+        </fieldset>
+      </section>
     </article>
   </>));
 }
