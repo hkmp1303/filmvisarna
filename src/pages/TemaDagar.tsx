@@ -36,7 +36,7 @@ const themes: Theme[] = [
     id: 5,
     title: "Romantik",
     tagline: "Stora känslor, tårar och kärlek som övervinner allt",
-    description: "Filmvisaren visar de mest gripande berättelserna för dig som älskar film som berör på djupet. Perfekt för en dejt eller en kväll med vännerna där glädje, sorg och hopp står i centrum."
+    description: "Filmvisarna visar de mest gripande berättelserna för dig som älskar film som berör på djupet. Perfekt för en dejt eller en kväll med vännerna där glädje, sorg och hopp står i centrum."
   },
   {
     id: 6,
@@ -65,7 +65,7 @@ export default function Themes() {
 
       <div className="themes-intro">
         <h3>Vad är temadagar?</h3>
-        <p> Varje helg (Fredag, Lördag, Söndag) kör filmvisaren våra temadagar.</p>
+        <p> Varje helg (Fredag, Lördag, Söndag) kör filmvisarna våra temadagar.</p>
         <p>Då har du möjlighet att se filmer i dina favorit genres.</p>
         <br />
         <h3>Vårat rullande schema är:</h3>
