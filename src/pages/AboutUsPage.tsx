@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import '../css/AboutUsPage.css'
-import Logo from '../assets/logav2-cropped.svg?react'
+import Logo from '../assets/logo-new.svg?react'
 
 export default function AboutUs() {
 
