@@ -70,7 +70,7 @@ export default function Register() {
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok && data.success) {
         setRegAccount(true);
       } else {
         setErrors({ server: data.message || "Kunde inte skapa konto." });

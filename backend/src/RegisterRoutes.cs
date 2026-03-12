@@ -9,8 +9,8 @@ public static class RegisterRoutes
     {
       try
       {
-        var body = JSON.Parse(bodyJson.ToString());
 
+        var body = JSON.Parse(bodyJson.ToString());
         string email = body.email;
         string password = body.password;
         string firstname = body.firstname;
@@ -21,10 +21,10 @@ public static class RegisterRoutes
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) ||
                 string.IsNullOrEmpty(firstname) || string.IsNullOrEmpty(lastname))
         {
-          return RestResult.Parse(context, new { message = "Alla obligatoriska fält måste fyllas i." });
+          return RestResult.Parse(context, new { error = "Alla obligatoriska fält måste fyllas i." });
         }
 
-        var existingUser = SQLQueryOne("SELECT id FROM user WHERE email = @email", new { email });
+        var existingUser = SQLQueryOne("SELECT userid FROM user WHERE email = @email", new { email });
 
         if (existingUser != null)
         {
@@ -46,9 +46,9 @@ public static class RegisterRoutes
           phone
         });
 
-        if (result != null && result.HasKey("error"))
+        if (result == null || result.rowsAffected == 0)
         {
-          Console.WriteLine("DB Error: " + result.error);
+
           return RestResult.Parse(context, new { message = "Kunde inte spara användaren i databasen." });
         }
 
