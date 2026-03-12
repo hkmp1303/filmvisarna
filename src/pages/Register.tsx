@@ -34,7 +34,7 @@ export default function Register() {
       newErrors.lastname = "Minst 2 tecken krävs.";
     }
 
-    if (!formData.email || !formData.email.includes('@')) {
+    if (!formData.email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(formData.email)) {
       newErrors.email = "Ange en giltig e-postadress.";
     }
 
