@@ -3,10 +3,10 @@
  <g>
   <title>Layer 1</title>
   <defs>
-   <path id="arcPath" d="m100,285 A200,200 0 0,1 500,285" fill="none" />
+   <path id="arcPath" d="m100,300 A200,200 0 0,1 500,300" fill="none" />
   </defs>
-  <text font-family="dejavu sans, sans-serif" font-size="78" font-weight="800" letter-spacing="-6" fill="currentColor" id="svg_2">
-   <textPath href="#arcPath" startOffset="50%" text-anchor="middle">FILMVISARNA</textPath>
+  <text font-family="pattaya, dejavu sans, sans-serif" font-size="95" font-weight="400" letter-spacing="3" fill="currentColor" id="svg_2">
+   <textPath href="#arcPath" startOffset="50%" text-anchor="middle">Filmvisarna</textPath>
   </text>
   <g transform="translate(0 884) scale(0.1 -0.1)" fill="currentColor" id="svg_1">
    <path d="m2867.80869,7102.87241c-107,-9 -282,-42 -316,-60c-14,-8 -19,-19 -17,-38c4,-33 24,-34 138,-9c242,52 468,48 705,-13c206,-53 370,-138 497,-258c196,-185 259,-408 177,-631c-30,-82 -32,-96 -15,-110c28,-23 53,-3 79,62c39,97 50,164 45,268c-8,166 -72,301 -206,437c-248,253 -659,386 -1087,352z" id="svg_12"/>

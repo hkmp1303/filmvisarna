@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import routes from '../routes';
-import Logo from '../assets/logav2-cropped.svg?react';
+import Logo from '../assets/logo-new.svg?react';
 
 export default function Header() {
 
@@ -13,7 +13,7 @@ export default function Header() {
     </Link>
 
 
-    <h1 className='text-5xl justify-self-center md:text-4xl xl:text-6xl'>FilmVisaren</h1>
+    <h1 className='text-5xl justify-self-center md:text-4xl xl:text-6xl'>Filmvisarna</h1>
 
     <nav className='header-nav'>
       {routes.filter(x => x.menuLabel)
