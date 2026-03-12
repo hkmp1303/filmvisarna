@@ -2,6 +2,7 @@ namespace WebApp;
 
 public static class LoginRoutes
 {
+  const string LOGIN_FAIL_MSG = "Fel e-post eller lösenord.";
   private static Obj GetUser(HttpContext context)
   {
     return Session.Get(context, "user");
@@ -9,9 +10,9 @@ public static class LoginRoutes
 
   public static void Start()
   {
-    App.MapPost("/api/login", (HttpContext context, JsonElement bodyJson) =>
+    App.MapPost("/api/login", async (HttpContext context, JsonElement bodyJson) =>
     {
-      var user = GetUser(context);
+      Obj user = GetUser(context); // try get user session from sessions table
       var body = JSON.Parse(bodyJson.ToString());
 
       // If there is a user logged in already
@@ -23,22 +24,24 @@ public static class LoginRoutes
 
       // Find the user in the DB
       var dbUser = SQLQueryOne(
-              "SELECT * FROM user WHERE email = @email",
-              new { body.email }
-          );
+        "SELECT * FROM user WHERE email = @email",
+        new { body.email }
+      );
       if (dbUser == null)
       {
-        return RestResult.Parse(context, new { error = "No such user." });
+        return RestResult.Parse(context,
+          Obj(new { msg = LOGIN_FAIL_MSG }));
       }
 
       // If the password doesn't match
       if (!Password.Verify(
-              (string)body.password,
-              (string)dbUser.password
-          ))
+        (string)body.password,
+        (string)dbUser.password
+      ))
       {
+        context.Response.StatusCode = 403;
         return RestResult.Parse(context,
-                new { error = "Password mismatch." });
+          Obj(new { msg = LOGIN_FAIL_MSG }));
       }
 
       // Add the user to the session, without password
@@ -49,14 +52,15 @@ public static class LoginRoutes
       return RestResult.Parse(context, dbUser!);
     });
 
-    App.MapGet("/api/login", (HttpContext context) =>
+    App.MapGet("/api/login", async (HttpContext context) =>
     {
       var user = GetUser(context);
       return RestResult.Parse(context, user != null ?
-              user : new { error = "No user is logged in." });
+        user : new { msg = "Användaren ej inloggad" }
+      );
     });
 
-    App.MapDelete("/api/login", (HttpContext context) =>
+    App.MapDelete("/api/login", async (HttpContext context) =>
     {
       var user = GetUser(context);
 
@@ -64,9 +68,9 @@ public static class LoginRoutes
       Session.Set(context, "user", null);
 
       return RestResult.Parse(context, user == null ?
-              new { error = "No user is logged in." } :
-              new { status = "Successful logout." }
-          );
+        new { error = "No user is logged in." } :
+        new { status = "Successful logout." }
+      );
     });
   }
 }
