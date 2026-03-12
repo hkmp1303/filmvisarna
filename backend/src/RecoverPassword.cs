@@ -35,22 +35,22 @@ public static class RecoverPassword
           string resetLink = $"http://localhost:5173/reset-password?token={resetToken}";
           string body = $@"
                     <div style='font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #fffdc4; border-radius: 15px; padding: 20px; background-color: #660157; color: #fdfff1;'>
-                    <h2 style='color: #fffdc4; text-align: center;'>FilmVisaren</h2>
+                    <h2 style='color: #fffdc4; text-align: center;'>Filmvisarna</h2>
                     <hr style='border: 0; border-top: 1px solid #fffdc4; margin: 20px 0;'>
                     <h3 style='margin-top: 0; text-align: center;'>Återställning av lösenord</h3>
                     <br>
                     <p style='text-align: center;'>Vi har tagit emot en förfrågan om att återställa ditt lösenord.</p>
                     <p style='text-align: center;'>Klicka på länken nedan för att välja ett nytt lösenord:</p>
                     <div style='text-align: center; margin: 30px 0;'>
-                      <a href='{resetLink}' 
+                      <a href='{resetLink}'
                         style='background-color: #fffdc4; color: #660157; padding: 12px 25px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block;'>
                         Återställ lösenord här
                       </a>
-                    </div>                 
+                    </div>
                     <br>
                     <p style='font-size: 0.9em; opacity: 0.8; text-align: center;'> Om du inte har begärt detta kan du bortse från detta mejl.</p>
                     <hr style='border: 0; border-top: 1px solid #fffdc4; margin: 20px 0;'>
-                    <p style='text-align: center; font-size: 0.8em; text-align: center;'>© 2026 FilmVisaren AB</p>
+                    <p style='text-align: center; font-size: 0.8em; text-align: center;'>© 2026 Filmvisarna AB</p>
                     </div>";
 
           EmailService.SendEmail(email, "Återställ lösenord", body);
