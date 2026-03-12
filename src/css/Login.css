@@ -107,6 +107,11 @@
   }
 }
 
+.email-input > label,
+.password-input > label {
+  color: #000;
+}
+
 /* .forgoten-password-btn:hover {
   color: white;
 }
@@ -114,11 +119,11 @@
 .home-btn {
   margin-top: 20px;
   display: block;
-}
+}*/
 
 .error-message {
-  color: #ff6b6b;
+  color: #b00 !important;
   text-align: center;
-  margin-bottom: 10px;
+  font-size: 1.2rem !important;
   font-weight: bold;
-} */
+}

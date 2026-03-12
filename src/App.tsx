@@ -1,4 +1,3 @@
-//import { useState } from 'react'
 import { useState, useEffect } from 'react';
 import Main from './partials/Main';
 import Header from './partials/Header';

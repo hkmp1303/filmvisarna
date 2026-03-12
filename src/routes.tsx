@@ -27,7 +27,7 @@ const routes: Route[] = [
   { element: <Booking />, path: '/booking' },
   { element: <Kiosk />, path: '/Kiosk', menuLabel: 'Kiosk' },
   { element: <Register />, path: '/register' },
-  { element: <TemaDagar />, path: '/themedays', menuLabel: 'Tema Dagar' },
+  { element: <TemaDagar />, path: '/themedays', menuLabel: 'Temadagar' },
   { element: <ConfirmBooking />, path: '/confirmbooking' },
   { element: <PasswordRecovery />, path: '/passwordrecovery' },
   { element: <ResetPassword />, path: '/reset-password' }
