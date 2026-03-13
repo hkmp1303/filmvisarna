@@ -75,32 +75,71 @@ header {
   color: #660157;
   }
 
-.footer-container {
-  display: none;
+@media(min-width: 770px){
+
+  /*Footer pc view*/
+  .footer-container {
+    display: none;
+  }
+  
+    footer {
+      display: flex;
+      width: 100%;
+      background: #660157; 
+      bottom: 0;
+      left: 0;
+      z-index: 50;
+    }
+  
+    .footer-container-pc {
+      display: flex;
+      width: 100%; 
+      margin: 0 auto;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      border-top: 2px solid #fffdc4;
+      border-radius: 12px 12px 0 0;
+      background-color: var(--background-h); 
+      box-shadow: 0.2px 0.2px 20px 0.05px rgba(255, 255, 255, 0.551);
+    }
+  
+    .company-cr{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 3rem;
+  
+      h4{
+        margin-bottom: 14px;
+      }
+    }
+  
+    .pc-nav{
+      display: grid;
+      grid-template-columns: repeat(2, auto);    background: none;
+      gap: 7px 40px;
+      border: none;
+      font-family: inherit;
+      font-size: 16px;
+      cursor: pointer;
+      padding-right: 3rem;
+      margin-left: 20px;
+      transition: opacity 0.2s;
+  
+      a, button{
+        margin: 5px 0;
+  
+      &:hover{
+        cursor: pointer;
+        color: var(--font-primary);
+      }
+      }
+  
+  }
+
 }
 
-  footer {
-    display: flex;
-    width: 100%;
-    background: #660157; 
-    //position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 50;
-  }
-
-  .footer-container-pc {
-    display: flex;
-    width: 100%; 
-    margin: 0 auto;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px;
-    border-top: 2px solid #fffdc4;
-    border-radius: 12px 12px 0 0;
-    background-color: var(--background-h); 
-    box-shadow: 0.2px 0.2px 20px 0.05px rgba(255, 255, 255, 0.551);
-  }
 
 
 /*Mobile View*/
@@ -187,9 +226,12 @@ header {
   }
 
   .submenu-link {
+    display: block;
     text-decoration: none;
     color: black;
     border-bottom: 1px solid #fffdc4;
+    text-align: left;
+    
     &:hover {
       color: #660157;
     }
