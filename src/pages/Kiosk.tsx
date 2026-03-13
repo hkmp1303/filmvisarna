@@ -57,6 +57,15 @@ export default function Kiosk() {
     <div className="kiosk-container">
       <h1 className="kiosk-title">Kiosk Menu</h1>
 
+      <div className='kiosk-text'>
+        <p className='kiosk-lead'>
+          I våran mysiga kiosk hittar du allt du behöver för en komplett bioupplevelse från nypoppade popcorn till dina favoritdrycker.</p>
+        <p>
+          <strong>Observera:</strong> All försäljning sker på plats. Kom gärna i god tid
+          innan filmen börjar för att säkra dina godsaker!
+        </p>
+      </div>
+
       <div className="kiosk-grid">
         {kioskItems.map(item => (
           <div key={item.id} className="kiosk-item">
