@@ -30,5 +30,109 @@ public static class ProfileRoutes
         history
       });
     });
+
+
+    App.MapGet("/api/profileinformation", (HttpContext context) =>
+        {
+          var user = Session.Get(context, "user");
+          if (user == null)
+          {
+            return RestResult.Parse(context, new { error = "Not logged in" });
+          }
+
+          int userId = (int)user.userid;
+
+          var active = SQLQuery(
+              @"SELECT userid, movieTitle, showtime
+                  FROM user_booking_view
+                  WHERE userid = @userid
+                    AND status = 'booked'
+                    AND showtime >= NOW()
+                  ORDER BY showtime ASC",
+              Obj(new { userid = userId }),
+              context
+          );
+
+          var history = SQLQuery(
+              @"SELECT userid, movieTitle, showtime
+                  FROM user_booking_view
+                  WHERE userid = @userid
+                    AND status = 'booked'
+                    AND showtime < NOW()
+                  ORDER BY showtime DESC",
+              Obj(new { userid = userId }),
+              context
+          );
+
+          return RestResult.Parse(context, Obj(new
+          {
+            user,
+            activeBookings = active,
+            history
+          }));
+        });
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// #######################################
+// #                                     #
+// #           Previous RestApi.cs       # 
+// #               Code Below            #
+// #                                     #
+// #######################################
+
+
+
+
+// App.MapGet("/api/profileinformation", (HttpContext context) =>
+//     {
+//       var user = Session.Get(context, "user");
+//       if (user == null)
+//       {
+//         return RestResult.Parse(context, new { error = "Not logged in" });
+//       }
+
+//       int userId = (int)user.userid;
+
+// var active = SQLQuery(
+// @"SELECT userid, movieTitle, showtime
+//           FROM user_booking_view
+//           WHERE userid = @userid
+//             AND status = 'booked'
+//             AND showtime >= NOW()
+//           ORDER BY showtime ASC",
+// Obj(new { userid = userId }),
+// context
+// );
+
+// var history = SQLQuery(
+// @"SELECT userid, movieTitle, showtime
+//           FROM user_booking_view
+//           WHERE userid = @userid
+//             AND status = 'booked'
+//             AND showtime < NOW()
+//           ORDER BY showtime DESC",
+// Obj(new { userid = userId }),
+// context
+// );
+
+// return RestResult.Parse(context, Obj(new
+// {
+//   user,
+//   activeBookings = active,
+//   history
+// }));
+//     });
