@@ -52,6 +52,7 @@ header {
   padding-left: 0px;
   text-decoration: none;
   justify-self: end;
+  margin-top: 55px;
 
   .nav-btn{
     padding: 10px 7px;
