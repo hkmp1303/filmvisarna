@@ -7,7 +7,7 @@ body {
   background-image: linear-gradient(to bottom, #660157, #4e023e);
   min-height: 100vh;
 }
-
+/*Header Pc and Tablet View*/
 header {
   width: 99%;
   margin: 10px auto;
@@ -75,9 +75,9 @@ header {
   color: #660157;
   }
 
-@media(min-width: 770px){
-
   /*Footer pc view*/
+@media(min-width: 1025px){
+
   .footer-container {
     display: none;
   }
@@ -141,11 +141,9 @@ header {
 }
 
 
-
-/*Mobile View*/
+/*Header Mobile View*/
 @media (max-width: 768px) {
 
-  /*Header Mobile View*/
 
   header {
     width: 99%;
@@ -162,8 +160,11 @@ header {
       display: none;
     }
   }
+}
 
-    /*Footer Mobile View*/
+/*Footer Mobile and Tablet View*/
+@media (max-width: 1024px) {
+
   footer {
     display: flex;
     width: 100%;
