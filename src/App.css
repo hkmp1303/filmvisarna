@@ -147,11 +147,9 @@ header {
 
 
   header {
-    width: 99%;
     margin: 2px auto;
     display: grid;
     grid-template-columns: 1fr;
-    align-items: center;
     padding: 10px 0;
 
     .header-logo {
@@ -167,7 +165,6 @@ header {
 @media (max-width: 1024px) {
 
   footer {
-    display: flex;
     width: 100%;
     background: #660157; 
     position: fixed;
