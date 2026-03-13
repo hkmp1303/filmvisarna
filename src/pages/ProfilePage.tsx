@@ -85,10 +85,18 @@ export default function ProfilePage() {
               return (
                 <div
                   key={b.id}
-                  className="border-b last:border-none pb-2 last:pb-0"
-                >
+                  className="flex items-center gap-4 border-b last:border-none pb-2 last:pb-0">
+                  
+                  <img
+                    src={b.poster}
+                    alt={b.movieTitle}
+                    className="w-16 h-24 object-cover rounded"/>
+
+                  <div>
                   <p className="font-medium">{b.movieTitle}</p>
                   <p className="text-sm text-gray-600">{b.showtime}</p>
+                  </div>
+
                 </div>
               );
             })
@@ -112,10 +120,18 @@ export default function ProfilePage() {
               return (
                 <div
                   key={h.id}
-                  className="border-b last:border-none pb-2 last:pb-0"
-                >
+                  className="flex items-center gap-4 border-b last:border-none pb-2 last:pb-0">
+                  
+                  <img
+                    src={h.poster}
+                    alt={h.movieTitle}
+                    className="w-16 h-24 object-cover rounded"/>
+                  
+                  <div>
                   <p className="font-medium">{h.movieTitle}</p>
                   <p className="text-sm text-gray-600">{h.showtime}</p>
+                  </div>
+
                 </div>
               );
             })
@@ -150,6 +166,37 @@ export default function ProfilePage() {
 //   b.date AS bookingDate,
 //     s.start AS showtime,
 //       f.title AS movieTitle
+// FROM booking b
+// JOIN screening s ON b.screeningid = s.screeningid
+// JOIN film f ON s.filmid = f.filmid;
+
+
+
+// ==================================================
+// ||         Updated view down below              ||
+// ==================================================
+
+
+
+// ###########################################
+// #                                         #
+// #        Down below is my View            #
+// #        for MySQL WITH posters,          #
+// #               saving it                 #
+// #             just in case                #
+// #                                         #
+// ###########################################
+
+
+// CREATE OR REPLACE VIEW user_booking_view AS;
+// SELECT;
+// b.bookingid AS id,
+//   b.userid,
+//   b.status,
+//   b.date AS bookingDate,
+//     s.start AS showtime,
+//       f.title AS movieTitle,
+//         f.cover_image AS poster
 // FROM booking b
 // JOIN screening s ON b.screeningid = s.screeningid
 // JOIN film f ON s.filmid = f.filmid;
