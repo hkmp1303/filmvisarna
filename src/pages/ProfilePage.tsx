@@ -2,51 +2,38 @@ import { useEffect, useState } from "react";
 import "../css/ProfilePage.css";
 import type { User } from "../utilities/userInterface";
 import type { Booking } from "../utilities/bookingInterface";
+import useFetchJson from "../utilities/useFetchJson";
 
 
 export default function ProfilePage() {
-  const [user, setUser] = useState<User | null>(null);
-  const [activeBookings, setActiveBookings] = useState<Booking[]>([]);
-  const [history, setHistory] = useState<Booking[]>([]);
-  const [loading, setLoading] = useState(true);
+  const data = useFetchJson<{
+    user: User;
+    activeBookings: Booking[];
+    history: Booking[];
+    error?: string;
+  }>("/api/profileinformation");
 
+  if (data === null) {
+    return <p>Laddar profilsidan</p>;
+  }
+
+  if (data.error) {
+    return <p>Du måste vara inloggad för att se din profil</p>;
+  }
+
+  const user = data.user;
+  const activeBookings = data.activeBookings ?? [];
+  const history = data.history ?? [];
 
   const handleLogout = async () => {
     try {
-      await fetch('/api/login', { method: 'DELETE' });   // Använde Timoty's "handleLogout" funktion han skapade i "Login.tsx". Very Sigma :)
-      setUser(null);
+      await fetch("/api/login", { method: "DELETE" });
     } catch (err) {
       console.error("Kunde inte logga ut", err);
     }
   };
 
 
-  useEffect(() => {
-    const loadProfile = async () => {
-      const res = await fetch("/api/profileinformation");
-      const data = await res.json();
-
-      console.log("Active bookings from API:", data.activeBookings);
-      console.log("History from API:", data.history);
-
-      if (data.error) {
-        console.error("Not logged in");
-        setLoading(false);
-        return;
-      }
-
-      setUser(data.user);
-      setActiveBookings(Array.isArray(data.activeBookings) ? data.activeBookings : []);
-      setHistory(Array.isArray(data.history) ? data.history : []); 
-      setLoading(false);
-    };
-
-    loadProfile();
-  }, []);
-
-  if (loading) {
-    return <p>Laddar profilsidan</p>;
-  }
 
   if (!user) {
     return <p>Du måste vara inloggad för att se din profil</p>;
