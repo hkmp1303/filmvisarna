@@ -41,7 +41,7 @@ export default function Footer({ user, setUser }: HeaderProps) {
         </Link>
 
         {user ? (
-          <Link to="/account" className="footer-btn">
+          <Link to="/profile" className="footer-btn">
             Konto
           </Link>
         ) : (
@@ -72,6 +72,11 @@ export default function Footer({ user, setUser }: HeaderProps) {
           )}
         </div>
       </div>
+      <div className="footer-container-pc">
+        <p>placeholder</p>
+      </div>
     </footer>
+
+
   );
 }

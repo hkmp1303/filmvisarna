@@ -20,14 +20,14 @@ interface Route {
 
 const routes: Route[] = [
   { element: <LandingPage />, path: '/', menuLabel: 'Hem' },
-  { element: <Login />, path: '/login', menuLabel: 'Login' },
+  { element: <Login />, path: '/login', menuLabel: 'Logga in' },
   { element: <AboutUs />, path: '/aboutus', menuLabel: 'Om oss' },
-  { element: <Contact />, path: '/contact', menuLabel: 'Kontakt' },
+  { element: <Contact />, path: '/contact' },
   { element: <MovieDetails />, path: '/moviedetails/:filmid' },
   { element: <Booking />, path: '/booking' },
   { element: <Kiosk />, path: '/Kiosk', menuLabel: 'Kiosk' },
   { element: <Register />, path: '/register' },
-  { element: <TemaDagar />, path: '/themedays', menuLabel: 'Temadagar' },
+  { element: <TemaDagar />, path: '/themedays' },
   { element: <ConfirmBooking />, path: '/confirmbooking' },
   { element: <PasswordRecovery />, path: '/passwordrecovery' },
   { element: <ResetPassword />, path: '/reset-password' }
