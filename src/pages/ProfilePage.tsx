@@ -1,18 +1,8 @@
 import { useEffect, useState } from "react";
 import "../css/ProfilePage.css";
+import type { User } from "../utilities/userInterface";
+import type { Booking } from "../utilities/bookingInterface";
 
-type Booking = {
-  id: string;
-  movieTitle: string;
-  showtime: string;
-};
-
-type User = {
-  firstname: string;
-  lastname: string;
-  email: string;
-  profilePic?: string;
-};
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);

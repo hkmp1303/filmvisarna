@@ -27,7 +27,6 @@ public static class RestApi
       }
     });
 
-
     App.MapPost("/api/{table}", (
         HttpContext context, string table, JsonElement bodyJson
     ) =>
