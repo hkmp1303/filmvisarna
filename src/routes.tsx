@@ -32,7 +32,7 @@ const routes: Route[] = [
   { element: <ConfirmBooking />, path: '/confirmbooking' },
   { element: <PasswordRecovery />, path: '/passwordrecovery' },
   { element: <ResetPassword />, path: '/reset-password' },
-  { element: <Profile />, path: '/Profile', menuLabel: 'Profile' }
+  { element: <Profile />, path: '/profile', menuLabel: 'Profil' }
 
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
