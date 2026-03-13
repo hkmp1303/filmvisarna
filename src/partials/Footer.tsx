@@ -9,13 +9,29 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import type { User } from '../utilities/userInterface';
 
-export default function Footer() {
+interface HeaderProps {
+  user: User | null;
+  setUser: (user: User | null) => void;
+}
+
+export default function Footer({ user, setUser }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   /* TODO: We should replace this with our actual log in code, this is just a placeholder
   that I put to try it out, ladies and gents ;) */
-  const userIsLoggedIn = false;
+  //const userIsLoggedIn = false;
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/login', { method: 'DELETE' });
+      setUser(null);
+    }
+    catch (err) {
+      console.error("Logout failed", err);
+    }
+  };
 
   return (
     <footer className="footer">
@@ -24,7 +40,7 @@ export default function Footer() {
           Upptäck
         </Link>
 
-        {userIsLoggedIn ? (
+        {user ? (
           <Link to="/account" className="footer-btn">
             Konto
           </Link>
@@ -49,6 +65,9 @@ export default function Footer() {
               <Link className='submenu-link' to="/aboutus">Om oss</Link>
               <Link className='submenu-link' to="/contact">Kontakt</Link>
               <Link className='submenu-link' to="/kiosk">Kiosk</Link>
+              {user && (
+                <button className="submenu-link" onClick={handleLogout}>Logga ut ({user.firstname})</button>
+              )}
             </div>
           )}
         </div>
