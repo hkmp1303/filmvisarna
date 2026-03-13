@@ -14,12 +14,12 @@ public static class ProfileRoutes
       }
 
       var activeBookings = DbQuery.SQLQuery(
-              "SELECT * FROM bookings WHERE userId = @id AND isActive = 1",
+              "SELECT * FROM booking WHERE userId = @id AND isActive = 1",
               new { id = user.id }
           );
 
       var history = DbQuery.SQLQuery(
-              "SELECT * FROM bookings WHERE userId = @id AND isActive = 0",
+              "SELECT * FROM booking WHERE userId = @id AND isActive = 0",
               new { id = user.id }
           );
 
