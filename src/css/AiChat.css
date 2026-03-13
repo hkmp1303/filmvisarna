@@ -20,11 +20,16 @@
     font-size: 18px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     color: black;
+
 }
 
 .ai-chat-window {
     width: 350px;
     height: 450px;
+    margin-bottom: 15px;
+
+    display: flex;
+    flex-direction: column;
     background: white;
     border-radius: 10px;
     display: flex;
