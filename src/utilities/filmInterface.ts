@@ -1,5 +1,3 @@
-import type { Screening } from './screeningInterface';
-
 export interface BriefFilm {
   filmid: number;
   title: string;
@@ -39,4 +37,9 @@ export interface Filmdetails {
 
 export interface Actor {
   name: string;
+}
+
+export function sortViewerRating(a: string, b: string): number {
+  const order = ['btl', '7+', '11+', '15+', 'bfj'];
+  return order.indexOf(a) > order.indexOf(b) ? 1 : -1;
 }

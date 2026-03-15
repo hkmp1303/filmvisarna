@@ -4,11 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import useFetchJson from '../utilities/useFetchJson';
 import { sortAndFilterMovies } from '../utilities/movieUtils';
 import type { SortOption } from "../utilities/types";
-import type { BriefFilm } from '../utilities/filmInterface';
+import { sortViewerRating, type BriefFilm } from '../utilities/filmInterface';
 import '../css/LandingPage.css';
-import translateGenre from '../utilities/i18n';
-import { displayVeiwerRating } from '../utilities/i18n';
-import { formatDateIso, formatDay } from '../utilities/formatDateTime';
+import { displayVeiwerRating, displayGenre } from '../utilities/i18n';
+import { formatDateIso, formatDay, formatDayMonth } from '../utilities/formatDateTime';
 
 
 export default function LandingPage() {
@@ -20,8 +19,6 @@ export default function LandingPage() {
   const [selectedGenre, setSelectedGenre] = useState('');
   const [selectedRating, setSelectedRating] = useState('');
   const [selectedScreeningDay, setSelectedScreeningDay] = useState('');
-
-  const Rating = ['btl', '7+', '11+', '15+', 'bfj'];
 
   const Now = Math.floor(Date.now() / 1000); // Unix timestamp format
   const Week: Record<string, string> = {};
@@ -48,8 +45,11 @@ export default function LandingPage() {
   // extract movie genre from movie list
   const uniqueGenres = Array.from(
     new Set(movies.map((m) => m.genre).filter(Boolean))
-  ).sort();
+  ).sort((a, b) => displayGenre(a) > displayGenre(b) ? 1 : -1);
 
+  const uniqueRatings = Array.from(
+    new Set(movies.map((m) => m.viewer_rating).filter(Boolean))
+  ).sort(sortViewerRating);
 
   return (
     <div className="landing-page-container">
@@ -79,13 +79,13 @@ export default function LandingPage() {
         </div>
         <div className="dropdown">
           <button className="filter-btn dropdown-btn">
-            {selectedGenre === '' ? 'Alla Genrer' : translateGenre(selectedGenre)} ▼
+            {selectedGenre === '' ? 'Alla Genrer' : displayGenre(selectedGenre)} ▼
           </button>
           <div className="dropdown-content">
             <a onClick={() => setSelectedGenre('')}>Alla Genrer</a>
             {uniqueGenres.map((genre) => (
               <a key={genre} onClick={() => setSelectedGenre(genre)}>
-                {translateGenre(genre)}
+                {displayGenre(genre)}
               </a>
             ))}
           </div>
@@ -96,7 +96,7 @@ export default function LandingPage() {
           </button>
           <div className='dropdown-content'>
             <a onClick={() => setSelectedRating('')}>Alla Ålder</a>
-            {Rating.map((viewer_rating) => (
+            {uniqueRatings.map((viewer_rating) => (
               <a key={viewer_rating} onClick={() => setSelectedRating(viewer_rating)}>
                 {displayVeiwerRating(viewer_rating)}
               </a>
@@ -105,13 +105,13 @@ export default function LandingPage() {
         </div>
         <div className='dropdown'>
           <button className='filter-btn dropdown-btn'>
-            {selectedScreeningDay === '' ? 'Alla Datum' : formatDay(selectedScreeningDay) + ' ' + formatDateIso(selectedScreeningDay)} ▼
+            {selectedScreeningDay === '' ? 'Alla Datum' : formatDayMonth(selectedScreeningDay)} ▼
           </button>
           <div className='dropdown-content'>
             <a onClick={() => setSelectedScreeningDay('')}>Alla Dagar</a>
             {Object.keys(Week).map((start, index) => (
               <a key={index} onClick={() => setSelectedScreeningDay(start)}>
-                {formatDay(start)+' '+start.substring(5, 16)}
+                {formatDayMonth(start)}
               </a>
             ))}
           </div>
@@ -128,7 +128,7 @@ export default function LandingPage() {
               >
                 <div className="poster-overlay-text">
                   <h3>{movie.title}</h3>
-                  <p>{movie.duration} min | {translateGenre(movie.genre)}| {movie.language}</p>
+                  <p>{movie.duration} min | {displayGenre(movie.genre)}| {movie.language}</p>
                 </div>
               </div>
             </div>
