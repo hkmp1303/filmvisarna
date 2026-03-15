@@ -8,18 +8,28 @@ import type { BriefFilm } from '../utilities/filmInterface';
 import '../css/LandingPage.css';
 import translateGenre from '../utilities/i18n';
 import { displayVeiwerRating } from '../utilities/i18n';
+import { formatDateIso, formatDay } from '../utilities/formatDateTime';
 
 
 export default function LandingPage() {
   const navigate = useNavigate();
-
-
-
-  const movies = useFetchJson<BriefFilm[]>('/api/film');
+  const movies = useFetchJson<BriefFilm[]>('/api/films');
   const [sortBy, setSortBy] = useState<SortOption>('title_asc');
   const [sortLabel, setSortLabel] = useState('Titel (A-Ö)');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
+  const [selectedRating, setSelectedRating] = useState('');
+  const [selectedScreeningDay, setSelectedScreeningDay] = useState('');
+
+  const Rating = ['btl', '7+', '11+', '15+', 'bfj'];
+
+  const Now = Math.floor(Date.now() / 1000); // Unix timestamp format
+  const Week: Record<string, string> = {};
+  for (let i = 0; i <= 7; i++) {
+    let tmp = new Date((Now + (i*60*60*24)) * 1000);
+    let key = formatDateIso(tmp.toISOString()); // date only from DateTime
+    Week[key] = tmp.toISOString().substring(0, 19); // exclude milliseconds
+  }
 
   const selectedMovieNavigation = (filmid: number) => {
     navigate(`/moviedetails/${filmid}`);
@@ -28,13 +38,14 @@ export default function LandingPage() {
   if (!movies) {
     return <div style={{ color: 'white' }}>Laddar filmer...</div>;
   }
-  const displayMovies = sortAndFilterMovies(movies, sortBy, searchQuery, selectedGenre);
+  const displayMovies = sortAndFilterMovies(movies, sortBy, searchQuery, selectedGenre, selectedRating, selectedScreeningDay);
 
   const handleSortChange = (key: SortOption, label: string) => {
     setSortBy(key);
     setSortLabel(label);
   };
 
+  // extract movie genre from movie list
   const uniqueGenres = Array.from(
     new Set(movies.map((m) => m.genre).filter(Boolean))
   ).sort();
@@ -53,7 +64,6 @@ export default function LandingPage() {
         </div>
       </div>
       <div className="filter-section">
-        {/* <button className="filter-btn date-filter">Datum</button> */}
         <div className="dropdown">
           <button className="filter-btn dropdown-btn">
             Sortera: {sortLabel} ▼
@@ -76,6 +86,32 @@ export default function LandingPage() {
             {uniqueGenres.map((genre) => (
               <a key={genre} onClick={() => setSelectedGenre(genre)}>
                 {translateGenre(genre)}
+              </a>
+            ))}
+          </div>
+        </div>
+        <div className='dropdown'>
+          <button className='filter-btn dropdown-btn'>
+            {selectedRating === '' ? 'Alla Åldrar' : displayVeiwerRating(selectedRating)} ▼
+          </button>
+          <div className='dropdown-content'>
+            <a onClick={() => setSelectedRating('')}>Alla Ålder</a>
+            {Rating.map((viewer_rating) => (
+              <a key={viewer_rating} onClick={() => setSelectedRating(viewer_rating)}>
+                {displayVeiwerRating(viewer_rating)}
+              </a>
+            ))}
+          </div>
+        </div>
+        <div className='dropdown'>
+          <button className='filter-btn dropdown-btn'>
+            {selectedScreeningDay === '' ? 'Alla Datum' : formatDay(selectedScreeningDay) + ' ' + formatDateIso(selectedScreeningDay)} ▼
+          </button>
+          <div className='dropdown-content'>
+            <a onClick={() => setSelectedScreeningDay('')}>Alla Dagar</a>
+            {Object.keys(Week).map((start, index) => (
+              <a key={index} onClick={() => setSelectedScreeningDay(start)}>
+                {formatDay(start)+' '+start.substring(5, 16)}
               </a>
             ))}
           </div>

@@ -1,12 +1,16 @@
+import type { Screening } from './screeningInterface';
+
 export interface BriefFilm {
   filmid: number;
   title: string;
   duration: number;
   language: string;
   cover_image: string;
-  description: string;
-  details: string;
+  description: string | undefined;
+  details: string | undefined;
   genre: string;
+  viewer_rating: 'btl' | 'bfj' | '7+' | '11+' | '15+' | string;
+  screenings: string[] | undefined;
 }
 
 export interface Film {
@@ -22,7 +26,6 @@ export interface Film {
   genre: string;
   viewer_rating: 'btl' | 'bfj' | '7+' | '11+' | '15+' | string;
   priceid: number;
-
 }
 
 export interface Filmdetails {
