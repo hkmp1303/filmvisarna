@@ -26,6 +26,8 @@
   --input-light-bg: #f3e3f1;       /*input field*/
   --footer-background: #400938;
 
+  --third-bg: #ffffff99;
+
   /*booking button */
   --btn-booking: radial-gradient(circle, var(--dark-primary) 0%, var(--border-primary) 70%);
   /*purple button*/
