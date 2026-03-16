@@ -86,10 +86,13 @@ header {
     footer {
       display: flex;
       width: 100%;
-      background: #660157; 
+      /* background: var(--text-charcoal);  */
+      background: var(--footer-background);
       bottom: 0;
       left: 0;
       z-index: 50;
+      margin-top: 6rem;
+      
     }
   
     .footer-container-pc {
@@ -101,9 +104,8 @@ header {
       padding: 10px 20px;
       border-top: 2px solid #fffdc4;
       border-radius: 12px 12px 0 0;
-      background-color: var(--background-h); 
       box-shadow: 0.2px 0.2px 20px 0.05px rgba(255, 255, 255, 0.551);
-      color: #221f1f;
+      color: var(--font-primary);
       Font-Weight: 600;
     }
   
@@ -166,6 +168,10 @@ header {
 /*Footer Mobile and Tablet View*/
 @media (max-width: 1024px) {
 
+  body{
+    margin-bottom: 6rem;
+  }
+
   footer {
     width: 100%;
     background: #660157; 
@@ -173,6 +179,7 @@ header {
     bottom: 0;
     left: 0;
     z-index: 50;
+    margin-top: 16rem;
   }
 
   .footer-container-pc{

@@ -24,6 +24,7 @@
   --text-charcoal: #2b2b2b;        /*input field text*/
   --dark-secondary-bg: #69195d;     /*alt panel colors a85e95*/
   --input-light-bg: #f3e3f1;       /*input field*/
+  --footer-background: #400938;
 
   /*booking button */
   --btn-booking: radial-gradient(circle, var(--dark-primary) 0%, var(--border-primary) 70%);
