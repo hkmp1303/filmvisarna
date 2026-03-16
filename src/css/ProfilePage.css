@@ -1,9 +1,7 @@
 @import "tailwindcss";
 
 
-
 @media (max-width: 768px) {
-
 
   .login-error-container {
     display: flex;
@@ -22,6 +20,21 @@
 
   .login-error-container p {
     color: var(--primary-subtext);
+    margin-top: 0.25rem;
+  }
+
+  .loading-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    text-align: center;
+  }
+
+  .loading-profile p {
+    color: var(--primary-subtext);
+    font-size: 1.1rem;
     margin-top: 0.25rem;
   }
 
@@ -88,7 +101,6 @@
     background-color: #ffffff;
     transform: scale(0.95);
   }
-
 }
 
 
@@ -115,6 +127,21 @@
   .login-error-container p {
     color: var(--primary-subtext);
     margin-top: 0.25rem;
+  }
+
+  .loading-profile {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 50vh;
+      text-align: center;
+    }
+  
+    .loading-profile p {
+      color: var(--primary-subtext);
+      font-size: 1.1rem;
+      margin-top: 0.25rem;
   }
 
   .profile-header {

@@ -14,7 +14,11 @@ export default function ProfilePage() {
   }>("/api/profileinformation");
 
   if (data === null) {
-    return <p>Laddar profilsidan</p>;
+    return (
+      <div className="loading-profile">
+        <p>Laddar profilsidan</p>
+      </div>
+    );
   }
 
   if (data.error) {
