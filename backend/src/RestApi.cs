@@ -130,6 +130,32 @@ public static class RestApi
           SET FOREIGN_KEY_CHECKS = 1;");
       return RestResult.Parse(context, result);
     });
+
+    App.MapGet("/api/films", async (HttpContext context) =>
+    {
+      var films = SQLQuery(
+        $@"SELECT
+          filmid,
+          title,
+          duration,
+          language,
+          cover_image,
+          genre,
+          viewer_rating,
+          GROUP_CONCAT(DATE(start)) AS screenings
+        FROM film
+          INNER JOIN screening USING(filmid)
+        /*WHERE DATE(NOW()) >= DATE(start) -- for testing all dates included */
+        GROUP BY filmid",
+        null, context
+      );
+      foreach (dynamic film in films)
+      {
+        film.screenings = film.screenings.Split(',');
+      }
+      return RestResult.Parse(context, films);
+    });
+
   }
 
   //this class i so the contactform
