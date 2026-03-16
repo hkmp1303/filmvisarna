@@ -8,8 +8,7 @@
   --second-bg: #c9b0d8;
   --border-primary: #864486;
   --font-primary: #fffdc4;
-  --primary-subtext: #fdfff1;
-  --log-heading-primary: #FFF562; /* This is the wrong color, not on the PenPot/mockups - Oscar */
+  --log-heading-primary: #FFF562;
   --background-btn: #919398;
   --input-bg: #fff;
   --vacant-seat: #406ae8;
@@ -17,6 +16,7 @@
   --booked-seat: #4e4851;
   --booked-blue-border: #3b569a;
   --booked-blue-back: #727e9c;
+  --primary-subtext: #fdfff1;
 
 /*purple button*/
   --btn-grad-backcolor: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
