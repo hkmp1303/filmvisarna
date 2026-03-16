@@ -34,6 +34,7 @@ export default function Header({ user, setUser }: HeaderProps) {
         .filter(route => {
           if (!route.menuLabel) return false;
           if (user && route.path === '/login') return false;
+          if (!user && route.path === '/profile') return false;
           return true;
         })
         .map((route, i) => (

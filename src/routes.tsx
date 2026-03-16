@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
+import Profile from './pages/ProfilePage';
 import MovieDetails from './pages/MovieDetailsPage';
 import AboutUs from './pages/AboutUsPage';
 import Contact from './pages/ContactPage';
@@ -12,6 +13,7 @@ import ConfirmBooking from './pages/ConfirmBooking';
 import PasswordRecovery from './pages/PasswordRecoveryPage';
 import ResetPassword from './pages/ResetPasswordPage';
 
+
 interface Route {
   element: JSX.Element;
   path: string;
@@ -21,6 +23,7 @@ interface Route {
 const routes: Route[] = [
   { element: <LandingPage />, path: '/', menuLabel: 'Hem' },
   { element: <Login />, path: '/login', menuLabel: 'Logga in' },
+  { element: <Profile />, path: '/profile', menuLabel: 'Profil' },
   { element: <AboutUs />, path: '/aboutus', menuLabel: 'Om oss' },
   { element: <Contact />, path: '/contact' },
   { element: <MovieDetails />, path: '/moviedetails/:filmid' },
@@ -31,6 +34,7 @@ const routes: Route[] = [
   { element: <ConfirmBooking />, path: '/confirmbooking' },
   { element: <PasswordRecovery />, path: '/passwordrecovery' },
   { element: <ResetPassword />, path: '/reset-password' }
+
 
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
