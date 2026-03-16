@@ -25,6 +25,8 @@
   --dark-secondary-bg: #69195d;     /*alt panel colors a85e95*/
   --input-light-bg: #f3e3f1;       /*input field*/
 
+  --third-bg: #ffffff99;
+
   /*booking button */
   --btn-booking: radial-gradient(circle, var(--dark-primary) 0%, var(--border-primary) 70%);
   /*purple button*/
