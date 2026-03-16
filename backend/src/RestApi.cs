@@ -1,3 +1,5 @@
+using MimeKit;
+
 namespace WebApp;
 
 public static class RestApi
@@ -9,20 +11,34 @@ public static class RestApi
     {
       try
       {
-        var body = await context.Request.ReadFromJsonAsync<JsonElement>();
-        //innehål
-        string name = body.GetProperty("name").GetString();
-        string email = body.GetProperty("email").GetString();
-        string subject = body.GetProperty("subject").GetString();
-        string message = body.GetProperty("message").GetString();
+        var body = await context.Request.ReadFromJsonAsync<ContactRequest>();
+        bool hasDotAfterAt = Regex.IsMatch(body.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+        if (string.IsNullOrEmpty(body.Email) || !MailboxAddress.TryParse(body.Email, out _) || !hasDotAfterAt)
+        {
+          return Results.BadRequest(new { error = "Ogiltig E-mail." });
+        }
+        if (body.Subject == "None")
+        {
+          return Results.BadRequest(new { error = "vänligen välj ett ärende." });
+        }
+        if (string.IsNullOrEmpty(body.Message))
+        {
+          return Results.BadRequest(new { error = "Meddelande kan inte vara tomt" });
+        }
+        if (body.Message.Length < 10)
+        {
+          int BML = body.Message.Length;
+          int charLeft = 10 - BML;
+          return Results.BadRequest(new { error = $"Meddelande är för kort. Du behöver {charLeft} fler karaktärer." });
+        }
 
-        EmailService.ReceiveEmail(name, email, subject, message);
+        EmailService.ReceiveEmail(body.Name, body.Email, body.Subject, body.Message);
 
-        return Results.Ok(new { message = "Mail sent" });
+        return Results.Ok(new { success = true, message = "Ditt meddelande har skickats." });
       }
       catch (Exception ex)
       {
-        Console.WriteLine("crash " + ex.Message);
+        Console.WriteLine("error: " + ex.Message);
         return Results.Problem("error: " + ex.Message);
       }
     });
