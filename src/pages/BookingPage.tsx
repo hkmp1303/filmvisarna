@@ -137,7 +137,16 @@ export default function Booking() {
       }).then((data) => {
         alert("Bokningen har sparats");
         setBookingGuid(data?.guid);
+        fetch(`/api/bookedSeatRes/${id}`).then((res) => {
+          if (!res.ok) throw new Error("res.error");
+          return res.json();
+        }).then((data) => {
+          setRes(data);
+          console.log(data);
+        });
       });
+
+
     } catch (e:any) {
       alert(e.message)
     }
@@ -146,7 +155,17 @@ export default function Booking() {
 
   const handleBooking = (e: any) => {
     e.preventDefault();
-    navigate("/confirmbooking");
+    fetch("/api/finalizeBooking", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: 'application/json'
+      },
+      body: getFormEntries(e.target.form)
+    }).then((res) => {
+      if (!res.ok) throw new Error("");
+      navigate("/confirmbooking");
+    })
   };
 
   return (!loading.current && (<>

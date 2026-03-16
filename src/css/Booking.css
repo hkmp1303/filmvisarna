@@ -145,6 +145,11 @@ h2.movie-title {
     @apply mr-0 pl-0;
   }
 
+  svg ~ input:checked:disabled {
+    rect {
+      fill: var(--booked-seat);
+    }
+  }
   .booked {
     fill: var(--booked-seat);
   }
