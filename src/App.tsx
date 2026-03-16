@@ -1,4 +1,3 @@
-//import { useState } from 'react'
 import { useState, useEffect } from 'react';
 import Main from './partials/Main';
 import Header from './partials/Header';
@@ -30,9 +29,9 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header user={user} setUser={setUser} />
       <Main user={user} setUser={setUser} />
-      <Footer />
+      <Footer user={user} setUser={setUser} />
     </>
   );
 }
