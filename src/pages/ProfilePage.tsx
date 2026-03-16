@@ -43,7 +43,6 @@ export default function ProfilePage() {
   };
 
 
-
   if (!user) {
     return <p>Du måste vara inloggad för att se din profil</p>;
   }
@@ -81,7 +80,6 @@ export default function ProfilePage() {
 
       </section>
 
-      
       <section>
         <h3 className="profile_booking_title">Aktiva Bokningar</h3>
         <div className="bg-white/70 backdrop-blur-md shadow-md rounded-xl p-4 space-y-3">
@@ -113,7 +111,6 @@ export default function ProfilePage() {
 
         </div>
       </section>
-
 
       <section>
         <h3 className="profile_booking_title">Historik</h3>
@@ -152,38 +149,6 @@ export default function ProfilePage() {
   );
 }
 
-
-
-
-
-
-
-// ###########################################
-// #                                         #
-// #        Down below is my View            #
-// #        for MySQL, saving it             #
-// #             just in case                #
-// #                                         #
-// ###########################################
-
-
-// CREATE OR REPLACE VIEW user_booking_view AS
-// SELECT
-// b.bookingid AS id,
-//   b.userid,
-//   b.status,
-//   b.date AS bookingDate,
-//     s.start AS showtime,
-//       f.title AS movieTitle
-// FROM booking b
-// JOIN screening s ON b.screeningid = s.screeningid
-// JOIN film f ON s.filmid = f.filmid;
-
-
-
-// ==================================================
-// ||         Updated view down below              ||
-// ==================================================
 
 
 
