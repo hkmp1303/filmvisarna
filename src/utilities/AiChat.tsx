@@ -100,46 +100,4 @@ export default function AiChat() {
             </button>
         </div>
     );
-
-    // return (
-    //     <div className="ai-chat-container">
-    //         {/* Själva chattfönstret */}
-    //         {isOpen && (
-    //             <div className="ai-chat-window">
-    //                 <div className="ai-chat-header">
-    //                     <span>Filmvisarna AI-Support</span>
-    //                     <button onClick={() => setIsOpen(false)}>×</button>
-    //                 </div>
-
-    //                 <div className="ai-chat-messages">
-    //                     {messages.length === 0 && (
-    //                         <p className="welcome-text">Hej! Undrar du något om våra filmer eller hur man bokar?</p>
-    //                     )}
-    //                     {messages.map((msg, i) => (
-    //                         <div key={i} className={`message-bubble ${msg.role}`}>
-    //                             <ReactMarkdown>{msg.content}</ReactMarkdown>
-    //                         </div>
-    //                     ))}
-    //                     {isLoading && <div className="message-bubble assistant loading">Tänker...</div>}
-    //                     <div ref={messagesEndRef} />
-    //                 </div>
-
-    //                 <div className="ai-chat-input">
-    //                     <input
-    //                         value={input}
-    //                         onChange={(e) => setInput(e.target.value)}
-    //                         onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-    //                         placeholder="Skriv ett meddelande..."
-    //                     />
-    //                     <button onClick={sendMessage} disabled={isLoading}>Skicka</button>
-    //                 </div>
-    //             </div>
-    //         )}
-
-    //         {/* Bubblan man klickar på */}
-    //         <button className="ai-chat-toggle" onClick={() => setIsOpen(!isOpen)}>
-    //             {isOpen ? ('Stäng') : (<Logo className='ai-chat-logo-icon' />)}
-    //         </button>
-    //     </div>
-    // );
 }
