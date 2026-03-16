@@ -2,13 +2,7 @@ import { useState } from 'react'
 import type { ChangeEvent, FormEvent } from 'react';
 import fetchJson from '../utilities/fetchJson';
 import '../css/ContactPage.css'
-
-interface contactForm {
-    name: string;
-    email: string;
-    subject: 'None' | 'Föreställning' | 'Biljettfråga' | 'Kiosken' | 'Betalning' | 'Övrigt' | string;
-    message: string;
-}
+import type { contactForm } from '../utilities/contactFormInterface';
 
 export default function Contact() {
 
@@ -20,6 +14,8 @@ export default function Contact() {
     });
 
     const [submitted, setSubmitted] = useState<boolean>(false);
+    const [serverMessage, setServerMessage] = useState<string>('');
+    const [isError, setIsError] = useState<boolean>(false);
 
     const handleData = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -37,17 +33,21 @@ export default function Contact() {
                 body: JSON.stringify(submitData),
             });
 
-            if (data && !data.error) {
-                setSubmitted(true);
-                setSubmitData({ name: '', email: '', subject: 'None', message: '' });
+            setSubmitted(true);
+
+            if (data && data.error) {
+                setServerMessage(data.error);
+                setIsError(true);
             } else {
-                alert("Något gick fel" + (data.error || "Okänt fel"));
+                setServerMessage(data.message || "Ditt meddelande har skickats");
+                setIsError(false);
+                setSubmitData({ name: '', email: '', subject: 'None', message: '' });
             }
         } catch (error) {
-            console.error("Kunde inte kontakta servern:", error);
-            alert("Kunde inte ansluta till servern")
+            setServerMessage("Kunde inte ansluta till servern. Försök igen senare.");
+            setIsError(true);
+            setSubmitted(true);
         }
-        setSubmitted(true);
     }
 
     return <article className='contact-page'>
@@ -55,9 +55,9 @@ export default function Contact() {
         {submitted && (
             <div className='popup-window'>
                 <div className='popup-content'>
-                    <h3 className='text-2xl'> Tack!</h3>
-                    <p className='text-xl'>Ditt meddelande har nu skickats till oss.</p>
-                    <p className='text-xl'>Vi hör av oss så snart vi kan.</p>
+                    <h3 className={`text-2xl font-bold ${isError ? 'text-red-600' : 'text-green-600'}`}>
+                        {isError ? 'Oj, något blev fel' : 'Tack!'}</h3>
+                    <p className='text-xl py-4'>{serverMessage}</p>
                     <button onClick={() => setSubmitted(false)}>Stäng</button>
                 </div>
             </div>
@@ -91,6 +91,8 @@ export default function Contact() {
                     <option value="Biljettfråga">Biljettfråga</option>
                     <option value="Kiosken">Kiosken</option>
                     <option value="Betalning">Betalning</option>
+                    <option value="Förslag">Förslag</option>
+                    <option value="TemaDagar">Tema dagar</option>
                     <option value="Övrigt">Övrigt</option>
                 </select>
                 <label className='text-xl font-semibold mb-2 mt-1'>Skriv ett meddelande:

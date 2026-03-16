@@ -4,9 +4,11 @@ export interface BriefFilm {
   duration: number;
   language: string;
   cover_image: string;
-  description: string;
-  details: string;
+  description: string | undefined;
+  details: string | undefined;
   genre: string;
+  viewer_rating: 'btl' | 'bfj' | '7+' | '11+' | '15+' | string;
+  screenings: string[] | undefined;
 }
 
 export interface Film {
@@ -22,7 +24,6 @@ export interface Film {
   genre: string;
   viewer_rating: 'btl' | 'bfj' | '7+' | '11+' | '15+' | string;
   priceid: number;
-
 }
 
 export interface Filmdetails {
@@ -36,4 +37,9 @@ export interface Filmdetails {
 
 export interface Actor {
   name: string;
+}
+
+export function sortViewerRating(a: string, b: string): number {
+  const order = ['btl', '7+', '11+', '15+', 'bfj'];
+  return order.indexOf(a) > order.indexOf(b) ? 1 : -1;
 }

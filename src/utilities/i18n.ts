@@ -1,4 +1,4 @@
-export default function genre(genre: string): string {
+export function displayGenre(genre: string): string {
   const translation: Record<string, string> = {
     action: 'Action',
     blackandwhite: 'Svart Vitt',
