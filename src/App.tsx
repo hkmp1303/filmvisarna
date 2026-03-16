@@ -31,6 +31,7 @@ function App() {
   return (
     <>
       <Header user={user} setUser={setUser} />
+      <AiChat />
       <Main user={user} setUser={setUser} />
       <Footer user={user} setUser={setUser} />
     </>
