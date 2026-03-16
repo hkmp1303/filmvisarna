@@ -50,7 +50,7 @@ export default function ProfilePage() {
               className="w-full h-full object-cover"
             />
           ) : (
-            <div className="flex items-center justify-center h-full text-gray-500">
+              <div className="no_image_text">
               Ingen bild uppladdad ännu
             </div>
           )}
@@ -74,10 +74,10 @@ export default function ProfilePage() {
 
       
       <section>
-        <h3 className="text-xl font-semibold mb-3">Aktiva Bokningar</h3>
+        <h3 className="profile_booking_title">Aktiva Bokningar</h3>
         <div className="bg-white/70 backdrop-blur-md shadow-md rounded-xl p-4 space-y-3">
           {activeBookings.length === 0 ? (
-            <p className="border-b last:border-none pb-2 last:pb-0">Inga Aktiva bokningar</p>
+            <p className="profile_no_bookings_titles">Inga Aktiva bokningar</p>
           ) : (
             activeBookings.map((b) => {
               console.log("Active booking:", b);
@@ -107,10 +107,10 @@ export default function ProfilePage() {
 
 
       <section>
-        <h3 className="text-xl font-semibold mb-3">Historik</h3>
+        <h3 className="profile_booking_title">Historik</h3>
         <div className="bg-white/70 backdrop-blur-md shadow-md rounded-xl p-4 space-y-3">
           {history.length === 0 ? (
-            <p className="text-gray-600 text-base font-medium py-2">
+            <p className="profile_no_bookings_titles">
               Du har inte sett någon film ännu
             </p>
           ) : (
