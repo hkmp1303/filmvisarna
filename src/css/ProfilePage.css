@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+
+@media (max-width: 768px) {
+
+  .login-error-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    text-align: center;
+  }
+
+  .login-error-container h2 {
+    color: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .login-error-container p {
+    color: var(--primary-subtext);
+    margin-top: 0.25rem;
+  }
+
+  .loading-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    text-align: center;
+  }
+
+  .loading-profile p {
+    color: var(--primary-subtext);
+    font-size: 1.1rem;
+    margin-top: 0.25rem;
+  }
+
+  .profile-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 3.5rem 1.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-details {
+    margin-left: 0;
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+
+  .no_image_text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--profile-subtext);
+  }
+
+  .profile_booking_title {
+    color: var(--font-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .profile_no_bookings_titles {
+    font-size: 1rem;
+    font-weight: 500;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .logout-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background-color: var(--dark-primary);
+    color: white;
+    padding: 0.4rem 0.75rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+  }
+
+  .logout-btn:hover {
+    background-color: #ff0000;
+  }
+
+  .logout-btn:active {
+    background-color: #ffffff;
+    transform: scale(0.95);
+  }
+}
+
+
+@media (min-width: 769px) {
+
+  .login-error-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    text-align: center;
+  }
+
+  .login-error-container h2 {
+    color: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .login-error-container p {
+    color: var(--primary-subtext);
+    margin-top: 0.25rem;
+  }
+
+  .loading-profile {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 50vh;
+      text-align: center;
+    }
+  
+    .loading-profile p {
+      color: var(--primary-subtext);
+      font-size: 1.1rem;
+      margin-top: 0.25rem;
+  }
+
+  .profile-header {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(6px);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-details {
+    margin-left: 2rem;
+    font-size: 0.8rem;
+  }
+
+  .no_image_text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--profile-subtext);
+  }
+
+  .profile_booking_title {
+    color: var(--font-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .profile_no_bookings_titles {
+    font-size: 1rem;
+    font-weight: 500;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .logout-btn {
+    margin-left: auto;
+    background-color: var(--dark-primary);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .logout-btn:hover {
+    background-color: #f2f2f2;
+  }
+
+  .logout-btn:active {
+    background-color: #ff0000;
+    transform: scale(0.95);
+  }
+}

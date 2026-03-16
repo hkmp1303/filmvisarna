@@ -13,7 +13,9 @@ export function sortAndFilterMovies(
   movies: BriefFilm[],
   sortBy: SortOption,
   searchQuery: string,
-  selectedGenre: string
+  selectedGenre: string,
+  selectedRating: string,
+  selectedScreeningDay: string
 ): BriefFilm[] {
 
 
@@ -35,10 +37,14 @@ export function sortAndFilterMovies(
       movie.title.toLowerCase().includes(searchQuery.toLowerCase());
 
     const matchesGenre = selectedGenre === '' ||
-      movie.genre.toLowerCase().includes(selectedGenre.toLowerCase());
+      movie.genre.toLowerCase() == selectedGenre.toLowerCase();
 
+    const matchesRating = selectedRating === '' ||
+      movie.viewer_rating == selectedRating;
 
+    const matchesDay = selectedScreeningDay === '' || ( movie.screenings &&
+      movie.screenings.indexOf(selectedScreeningDay) !== -1);
 
-    return matchesSearch && matchesGenre;
+    return matchesSearch && matchesGenre && matchesRating && matchesDay;
   });
 }
