@@ -23,6 +23,7 @@ interface Route {
 const routes: Route[] = [
   { element: <LandingPage />, path: '/', menuLabel: 'Hem' },
   { element: <Login />, path: '/login', menuLabel: 'Logga in' },
+  { element: <Profile />, path: '/profile', menuLabel: 'Profil' },
   { element: <AboutUs />, path: '/aboutus', menuLabel: 'Om oss' },
   { element: <Contact />, path: '/contact' },
   { element: <MovieDetails />, path: '/moviedetails/:filmid' },
@@ -32,8 +33,8 @@ const routes: Route[] = [
   { element: <TemaDagar />, path: '/themedays' },
   { element: <ConfirmBooking />, path: '/confirmbooking' },
   { element: <PasswordRecovery />, path: '/passwordrecovery' },
-  { element: <ResetPassword />, path: '/reset-password' },
-  { element: <Profile />, path: '/profile' }
+  { element: <ResetPassword />, path: '/reset-password' }
+
 
 
   //{ element: <Page-Name />, path: '/file-path', menuLabel: 'Lable-Name' }
