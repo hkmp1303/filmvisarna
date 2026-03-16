@@ -7,10 +7,9 @@ import type { Film } from '../utilities/filmInterface';
 import type { BriefScreening, Screening } from '../utilities/screeningInterface';
 import type { Salon, Res } from '../utilities/salonInterface';
 import { formatDateIso, formatDay, formatHourMin } from '../utilities/formatDateTime';
-import genre from '../utilities/i18n';
+import { displayGenre } from '../utilities/i18n';
 import { sumNumArray, csvToNumArray, getFormEntries } from '../utilities/tools';
 import type { LoginContext } from './Login';
-import useFetchJson from '../utilities/useFetchJson';
 
 export default function Booking() {
   const adultCnt = useRef<HTMLInputElement>(null);
@@ -198,7 +197,7 @@ export default function Booking() {
                 <dt><b>Film detaljer</b></dt><dd></dd>
                 <dt>Åldersgräns:</dt><dd>{film?.viewer_rating}</dd>
                 <dt>Speltid:</dt><dd>{film?.duration} min</dd>
-                <dt>Genre:</dt><dd>{genre(film?.genre ?? "")}</dd>
+                <dt>Genre:</dt><dd>{displayGenre(film?.genre ?? "")}</dd>
                 <dt>Tal:</dt><dd>{film?.language}</dd>
                 <dt>Undertext:</dt><dd>{film?.subtitle_language}</dd>
                 <dt></dt><dd></dd>

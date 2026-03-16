@@ -5,4 +5,5 @@ export interface User {
   lastname: string;  // Matchar DB
   phone?: string;    // Matchar DB
   role?: 'visitor' | 'staff' | 'member'; // Matchar DB enum
+  profilePic?: string;
 }

@@ -16,7 +16,7 @@
 }
 
 .themes-intro {
-  background: #ffffff99;
+  background: var(--third-bg);
   border-radius: 12px;
   padding: 1.5rem;
   margin: 1.5rem;
@@ -46,7 +46,7 @@
 }
 
 .theme-card {
-  background: #ffffff99;
+  background: var(--third-bg);
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
