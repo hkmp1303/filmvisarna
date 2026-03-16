@@ -27,10 +27,10 @@ public static partial class Session
     if (session == null)
     {
       SQLQuery(
-          "INSERT INTO session(id, data) VALUES(@id, @data)",
-          new { id = cookieValue, data = "{}" }
+          "INSERT INTO session(id, userid, data) VALUES(@id, @userid, @data)",
+          new { id = cookieValue, userid = (int?)null, data = "{}" }
       );
-      session = Obj(new { id = cookieValue, data = Obj() });
+      session = Obj(new { id = cookieValue, userid = (int?)null, data = Obj() });
     }
 
     // Cache the session in context.Items
