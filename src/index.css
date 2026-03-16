@@ -8,7 +8,8 @@
   --second-bg: #c9b0d8;
   --border-primary: #864486;
   --font-primary: #fffdc4;
-  --log-heading-primary: #FFF562;
+  --primary-subtext: #fdfff1;
+  --log-heading-primary: #FFF562; /* This is the wrong color, not on the PenPot/mockups - Oscar */
   --background-btn: #919398;
   --input-bg: #fff;
   --vacant-seat: #406ae8;

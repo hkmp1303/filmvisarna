@@ -3,6 +3,28 @@
 
 
 @media (max-width: 768px) {
+
+
+  .login-error-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    text-align: center;
+  }
+
+  .login-error-container h2 {
+    color: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .login-error-container p {
+    color: var(--primary-subtext);
+    margin-top: 0.25rem;
+  }
+
   .profile-header {
     position: relative;
     display: flex;
@@ -74,6 +96,26 @@
 
 
 @media (min-width: 769px) {
+
+  .login-error-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    text-align: center;
+  }
+
+  .login-error-container h2 {
+    color: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .login-error-container p {
+    color: var(--primary-subtext);
+    margin-top: 0.25rem;
+  }
 
   .profile-header {
     display: flex;

@@ -18,7 +18,12 @@ export default function ProfilePage() {
   }
 
   if (data.error) {
-    return <p>Du måste vara inloggad för att se din profil</p>;
+    return (
+      <div className="login-error-container">
+        <h2>Du måste vara inloggad för att se din profil</h2>
+        <p>Hur fan kom du ens hit? O_o</p>
+      </div>
+    );
   }
 
   const user = data.user;
