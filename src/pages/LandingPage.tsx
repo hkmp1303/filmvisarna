@@ -8,7 +8,8 @@ import { sortViewerRating, type BriefFilm } from '../utilities/filmInterface';
 import '../css/LandingPage.css';
 import { displayVeiwerRating, displayGenre } from '../utilities/i18n';
 import { formatDateIso, formatDay, formatDayMonth } from '../utilities/formatDateTime';
-
+import { ThemedayToggle } from '../utilities/ThemedayToggle';
+import { useEffect } from 'react';
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -19,6 +20,19 @@ export default function LandingPage() {
   const [selectedGenre, setSelectedGenre] = useState('');
   const [selectedRating, setSelectedRating] = useState('');
   const [selectedScreeningDay, setSelectedScreeningDay] = useState('');
+
+
+  useEffect(() => {
+    const savedTheme = sessionStorage.getItem('savedTheme');
+    if (savedTheme) {
+      setSelectedGenre(savedTheme);
+      ThemedayToggle(savedTheme);
+    }
+  }, []);
+
+  useEffect(() => {
+    ThemedayToggle(selectedGenre);
+  }, [selectedGenre]);
 
   const Now = Math.floor(Date.now() / 1000); // Unix timestamp format
   const Week: Record<string, string> = {};
