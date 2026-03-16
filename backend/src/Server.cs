@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Identity.Data;
+
 namespace WebApp;
 
 public static class Server
@@ -15,6 +17,7 @@ public static class Server
     RestApi.Start();
     Session.Start();
     RecoverPassword.Start();
+    RegisterRoutes.Start();
     BookingRoutes.Start();
     AiChatRoutes.Start();
     // Start the server on port 3001

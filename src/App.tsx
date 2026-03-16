@@ -30,10 +30,9 @@ function App() {
 
   return (
     <>
-      <Header />
-      <AiChat />
+      <Header user={user} setUser={setUser} />
       <Main user={user} setUser={setUser} />
-      <Footer />
+      <Footer user={user} setUser={setUser} />
     </>
   );
 }

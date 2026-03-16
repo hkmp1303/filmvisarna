@@ -5,10 +5,10 @@
 :root {
   --primary-bg: linear-gradient(to bottom, #660157, #4e023e);
   --dark-primary: #660157;
-  --second-bg: #c9b0d8;
+  --second-bg: #c9b0d8;           /*penpot panel*/
   --border-primary: #864486;
-  --font-primary: #fffdc4;
-  --log-heading-primary: #FFF562;
+  --font-primary: #fffdc4;        /* logo-header-border */
+  --log-heading-primary: #FFF562; /* page title */
   --background-btn: #919398;
   --input-bg: #fff;
   --vacant-seat: #406ae8;
@@ -16,8 +16,21 @@
   --booked-seat: #4e4851;
   --booked-blue-border: #3b569a;
   --booked-blue-back: #727e9c;
+  --header-bg: #a6709e;            /*header panel bg */
+  --header-title: #fdfff1;         /*company title */
+  --panel-light-bg: #d0b3cb;       /*profile panel */
+  --panel-mid-bg: #c199bb;         /*kiosk panel*/
+  --offwhite-bg: #f7f3f6;
+  --text-charcoal: #2b2b2b;        /*input field text*/
+  --dark-secondary-bg: #69195d;     /*alt panel colors a85e95*/
+  --input-light-bg: #f3e3f1;       /*input field*/
+  --footer-background: #400938;
 
-/*purple button*/
+  --third-bg: #ffffff99;
+
+  /*booking button */
+  --btn-booking: radial-gradient(circle, var(--dark-primary) 0%, var(--border-primary) 70%);
+  /*purple button*/
   --btn-grad-backcolor: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
   /*Background for input fields*/
   --input-grad-backcolor: radial-gradient(circle, #fffdc4 20%, #fffdc4 60%);
