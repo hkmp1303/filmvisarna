@@ -23,7 +23,7 @@ export default function LandingPage() {
   const Now = Math.floor(Date.now() / 1000); // Unix timestamp format
   const Week: Record<string, string> = {};
   for (let i = 0; i <= 7; i++) {
-    let tmp = new Date((Now + (i*60*60*24)) * 1000);
+    let tmp = new Date((Now + (i * 60 * 60 * 24)) * 1000);
     let key = formatDateIso(tmp.toISOString()); // date only from DateTime
     Week[key] = tmp.toISOString().substring(0, 19); // exclude milliseconds
   }
@@ -77,69 +77,70 @@ export default function LandingPage() {
             <a onClick={() => handleSortChange('duration_desc', 'Speltid (Längst)')}>Speltid (Längst)</a>
           </div>
         </div>
-        <div className="dropdown">
-          <button className="filter-btn dropdown-btn">
-            {selectedGenre === '' ? 'Alla Genrer' : displayGenre(selectedGenre)} ▼
-          </button>
-          <div className="dropdown-content">
-            <a onClick={() => setSelectedGenre('')}>Alla Genrer</a>
-            {uniqueGenres.map((genre) => (
-              <a key={genre} onClick={() => setSelectedGenre(genre)}>
-                {displayGenre(genre)}
-              </a>
-            ))}
+        <div className='dropdown-mv'>
+          <div className="dropdown">
+            <button className="filter-btn dropdown-btn">
+              {selectedGenre === '' ? 'Alla Genrer' : displayGenre(selectedGenre)} ▼
+            </button>
+            <div className="dropdown-content">
+              <a onClick={() => setSelectedGenre('')}>Alla Genrer</a>
+              {uniqueGenres.map((genre) => (
+                <a key={genre} onClick={() => setSelectedGenre(genre)}>
+                  {displayGenre(genre)}
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className='dropdown'>
-          <button className='filter-btn dropdown-btn'>
-            {selectedRating === '' ? 'Alla Åldrar' : displayVeiwerRating(selectedRating)} ▼
-          </button>
-          <div className='dropdown-content'>
-            <a onClick={() => setSelectedRating('')}>Alla Ålder</a>
-            {uniqueRatings.map((viewer_rating) => (
-              <a key={viewer_rating} onClick={() => setSelectedRating(viewer_rating)}>
-                {displayVeiwerRating(viewer_rating)}
-              </a>
-            ))}
+          <div className='dropdown'>
+            <button className='filter-btn dropdown-btn'>
+              {selectedRating === '' ? 'Alla Åldrar' : displayVeiwerRating(selectedRating)} ▼
+            </button>
+            <div className='dropdown-content'>
+              <a onClick={() => setSelectedRating('')}>Alla Ålder</a>
+              {uniqueRatings.map((viewer_rating) => (
+                <a key={viewer_rating} onClick={() => setSelectedRating(viewer_rating)}>
+                  {displayVeiwerRating(viewer_rating)}
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className='dropdown'>
-          <button className='filter-btn dropdown-btn'>
-            {selectedScreeningDay === '' ? 'Alla Datum' : formatDayMonth(selectedScreeningDay)} ▼
-          </button>
-          <div className='dropdown-content'>
-            <a onClick={() => setSelectedScreeningDay('')}>Alla Dagar</a>
-            {Object.keys(Week).map((start, index) => (
-              <a key={index} onClick={() => setSelectedScreeningDay(start)}>
-                {formatDayMonth(start)}
-              </a>
-            ))}
+          <div className='dropdown'>
+            <button className='filter-btn dropdown-btn'>
+              {selectedScreeningDay === '' ? 'Alla Datum' : formatDayMonth(selectedScreeningDay)} ▼
+            </button>
+            <div className='dropdown-content'>
+              <a onClick={() => setSelectedScreeningDay('')}>Alla Dagar</a>
+              {Object.keys(Week).map((start, index) => (
+                <a key={index} onClick={() => setSelectedScreeningDay(start)}>
+                  {formatDayMonth(start)}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
       {/* Movie Grid */}
       <main className="movie-grid">
         {displayMovies.map((movie) => (
-          <div key={movie.filmid} className="movie-card">
+          <div key={movie.filmid} className="movie-card" onClick={() => selectedMovieNavigation(movie.filmid)}>
             <div className="poster-container">
               <div
                 className="poster-placeholder"
-                style={{ backgroundImage: `url(${movie.cover_image??''})` }}
+                style={{ backgroundImage: `url(${movie.cover_image ?? ''})` }}
               >
                 <div className="poster-overlay-text">
-                  <h3>{movie.title}</h3>
-                  <p>{movie.duration} min | {displayGenre(movie.genre)}| {movie.language}</p>
                 </div>
               </div>
             </div>
             <div className="card-info">
               <p className="movie-name">{movie.title}</p>
-              <button
+              <p className='movie-small-info'>{movie.duration} min | {displayGenre(movie.genre)} | {movie.language}</p>
+              {/* <button
                 className="details-btn"
                 onClick={() => selectedMovieNavigation(movie.filmid)}
               >
                 Detaljer
-              </button>
+              </button> */}
             </div>
           </div>
         ))}
