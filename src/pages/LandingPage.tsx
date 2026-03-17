@@ -121,26 +121,22 @@ export default function LandingPage() {
       <main className="movie-grid">
         {displayMovies.map((movie) => (
           <div key={movie.filmid} className="movie-card">
-            <div className="poster-container">
-              <div
-                className="poster-placeholder"
-                style={{ backgroundImage: `url(${movie.cover_image??''})` }}
-              >
-                <div className="poster-overlay-text">
-                  <h3>{movie.title}</h3>
-                  <p>{movie.duration} min | {displayGenre(movie.genre)}| {movie.language}</p>
+            <button
+              className="details-btn"
+              onClick={() => selectedMovieNavigation(movie.filmid)}
+            >
+              <div className="poster-container">
+                <div
+                  className="poster-placeholder"
+                  style={{ backgroundImage: `url(${movie.cover_image??''})` }}
+                >
                 </div>
               </div>
-            </div>
-            <div className="card-info">
-              <p className="movie-name">{movie.title}</p>
-              <button
-                className="details-btn"
-                onClick={() => selectedMovieNavigation(movie.filmid)}
-              >
-                Detaljer
-              </button>
-            </div>
+              <div className="poster-overlay-text card-info">
+                <h3>{movie.title}</h3>
+                <p>{movie.duration} min | {displayGenre(movie.genre)} | {movie.language}</p>
+              </div>
+            </button>
           </div>
         ))}
       </main>
