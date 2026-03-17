@@ -1,11 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/Register.css';
+import { ThemedayToggle } from '../utilities/ThemedayToggle';
+
 
 export default function Register() {
   const navigate = useNavigate();
   const [regaccount, setRegAccount] = useState<boolean>(false);
 
+  useEffect(() => {
+    const savedTheme = sessionStorage.getItem('selectedTheme');
+    if (savedTheme) {
+      ThemedayToggle(savedTheme);
+    }
+  }, []);
 
   // firstname och lastname separat
   const [formData, setFormData] = useState({

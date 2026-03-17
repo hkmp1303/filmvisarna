@@ -1,12 +1,20 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import '../css/PasswordRecoveryPage.css';
+import { ThemedayToggle } from "../utilities/ThemedayToggle";
 
 
 export default function PasswordRecovery() {
     const navigate = useNavigate();
     const [btnToggle, setBtnToggle] = useState<boolean>(false);
     const emailRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        const savedTheme = sessionStorage.getItem('selectedTheme');
+        if (savedTheme) {
+            ThemedayToggle(savedTheme);
+        }
+    }, []);
 
     const handleRecovery = async () => {
         const email = emailRef.current?.value;
