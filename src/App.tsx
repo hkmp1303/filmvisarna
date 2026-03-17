@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Main from './partials/Main';
 import Header from './partials/Header';
 import Footer from './partials/Footer';
+import AiChat from './utilities/AiChat';
 import type { User } from './utilities/userInterface';
 import './App.css';
 
@@ -30,6 +31,7 @@ function App() {
   return (
     <>
       <Header user={user} setUser={setUser} />
+      <AiChat />
       <Main user={user} setUser={setUser} />
       <Footer user={user} setUser={setUser} />
     </>

@@ -20,6 +20,7 @@ public static class Server
     RegisterRoutes.Start();
     BookingRoutes.Start();
     ProfileRoutes.Start();
+    AiChatRoutes.Start();
     // Start the server on port 3001
     var runUrl = "http://localhost:" + Globals.port;
     Log("Server running on:", runUrl);

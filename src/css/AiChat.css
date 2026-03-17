@@ -1,0 +1,127 @@
+.ai-chat-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    font-family: sans-serif;
+}
+
+.ai-chat-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--second-bg);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    color: black;
+
+}
+
+.ai-chat-window {
+    width: 350px;
+    height: 450px;
+    margin-bottom: 15px;
+
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    color: #333;
+}
+
+.ai-chat-header {
+    background: #222;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ai-chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message-bubble {
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.message-bubble ul {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    list-style-type: disc;
+}
+
+.message-bubble li {
+    margin-bottom: 5px;
+}
+
+.message-bubble p {
+    margin-bottom: 10px;
+}
+
+.message-bubble strong {
+    font-weight: bold;
+    color: purple;
+}
+
+.user {
+    align-self: flex-end;
+    background: var(--second-bg);
+    color: black;
+}
+
+.assistant {
+    align-self: flex-start;
+    background: #f0f0f0;
+}
+
+.ai-chat-input {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    gap: 5px;
+}
+
+.ai-chat-input input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.ai-chat-logo-icon {
+  width: 40px;
+  height: 40px;
+  fill: black;
+  transition: transform 0.2s;
+}
+
+.ai-chat-toggle:hover .ai-chat-logo-icon {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+
+    .ai-chat-container {
+        display: none;
+    }
+}
