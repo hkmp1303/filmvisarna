@@ -57,14 +57,6 @@
     font-size: 1rem;
   }
 
-  .no_image_text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: var(--profile-subtext);
-  }
-
   .profile_booking_title {
     color: var(--font-primary);
     font-size: 1.25rem;
@@ -154,14 +146,6 @@
   .profile-details {
     margin-left: 2rem;
     font-size: 0.8rem;
-  }
-
-  .no_image_text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: var(--profile-subtext);
   }
 
   .profile_booking_title {
