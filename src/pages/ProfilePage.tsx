@@ -5,6 +5,118 @@ import type { Booking } from "../utilities/bookingInterface";
 import useFetchJson from "../utilities/useFetchJson";
 
 
+// CHANGE PASSWORD BUTTON //
+
+// ------------------------------------------------------------------------
+function ChangePasswordButton() {
+  const [open, setOpen] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setMessage(null);
+
+    try {
+      const res = await fetch("/api/change-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          currentPassword,
+          newPassword,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setMessage(data.message || "Lösenordet har uppdaterats!");
+        setCurrentPassword("");
+        setNewPassword("");
+      }
+    } catch {
+      setError("Något gick fel. Försök igen.");
+    }
+
+    setLoading(false);
+  }
+
+  return (
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        className="change-password-btn">
+        Byt lösenord
+      </button>
+
+      {open && (
+        <div className="popup-restofpage">
+          <div className="main-popup">
+            <h2 className="popup-title">Byt lösenord</h2>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="subtitles-popup">
+                  Nuvarande lösenord
+                </label>
+                <input
+                  type="password"
+                  className="popup-innerborder"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="subtitles-popup">
+                  Nytt lösenord
+                </label>
+                <input
+                  type="password"
+                  className="popup-innerborder"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+              </div>
+
+              {error && <p className="text-red-600 text-sm">{error}</p>}
+              {message && <p className="text-green-600 text-sm">{message}</p>}
+
+              <div className="flex justify-end gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="popup-cancelbutton"
+                >
+                  Avbryt
+                </button>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="popup-updatebutton"
+                >
+                  {loading ? "Sparar..." : "Uppdatera"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+// ---------End of Change password button--------------
+
+
 export default function ProfilePage() {
   const data = useFetchJson<{
     user: User;
@@ -73,12 +185,13 @@ export default function ProfilePage() {
           <p className="text-gray-600">{user.email}</p>
         </div>
 
-        <button
-          onClick={handleLogout}
-          className="logout-btn"
-        >
-          Logga ut
-        </button>
+        <div className="profile-actions">
+          <ChangePasswordButton />
+          <button onClick={handleLogout} className="logout-btn">
+            Logga ut
+          </button>
+        </div>
+
 
       </section>
 
