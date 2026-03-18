@@ -8,6 +8,7 @@ import { sortViewerRating, type BriefFilm } from '../utilities/filmInterface';
 import '../css/LandingPage.css';
 import { displayVeiwerRating, displayGenre } from '../utilities/i18n';
 import { formatDateIso, formatDayMonth } from '../utilities/formatDateTime';
+import { LoadingWheel } from '../utilities/loadingWheel';
 
 
 export default function LandingPage() {

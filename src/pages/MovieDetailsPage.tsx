@@ -6,6 +6,8 @@ import type { Film, Actor } from '../utilities/filmInterface';
 import type { BriefScreening } from '../utilities/screeningInterface';
 import { formatDateTime } from '../utilities/formatDateTime';
 import { displayGenre } from '../utilities/i18n';
+import { LoadingWheel } from '../utilities/loadingWheel';
+
 
 export default function MovieDetails() {
     const navigate = useNavigate();
