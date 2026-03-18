@@ -133,15 +133,6 @@
             }
             .btn-booking {
                 width: 75%;
-                background: var(--btn-grad-backcolor);
-                border: 0cap solid #7a5a9a;
-                color: white;
-                padding: 7px;
-                border-radius: 18px;
-                cursor: pointer;
-                font-size: 0.85rem;
-                font-size: 20px;
-
             }
         }
 
