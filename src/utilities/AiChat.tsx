@@ -64,7 +64,7 @@ export default function AiChat() {
             ai-chat-window 
             transition-all duration-300 ease-out origin-bottom-right
             ${isOpen
-                    ? 'scale-100 opacity-100 translate-y-0'
+                    ? 'scale-100 opacity-100 translate-y-0 pointer-events-auto'
                     : 'scale-0 opacity-0 translate-y-10 pointer-events-none'}
         `}>
                 <div className="ai-chat-header">
