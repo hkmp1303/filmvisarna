@@ -61,7 +61,7 @@ const themes: Theme[] = [
 export default function Themes() {
   return (
     <div className="themes-container">
-      <h2 className="themes-title">Temadagar</h2>
+      <h1 className="themes-title">Temadagar</h1>
 
       <div className="themes-intro">
         <h3>Vad är temadagar?</h3>

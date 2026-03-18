@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Pattaya&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Pattaya&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&family=Gelasio:ital,wght@0,400..700;1,400..700&family=Notable&family=Pattaya&family=Ultra&display=swap');
+
 @import "tailwindcss";
 
 
@@ -12,6 +14,18 @@ body {
   //--genre-grad: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%);
   --hero-url: url('/heroimages/movie_strip_v1.jpg');
 
+  h1{
+    /* font-family:  Notable; */
+    font-family:  Ultra;
+  }
+
+  h2,h3,h4{
+    font-family:  Carter One;
+
+  }
+  p{
+    font-family: Gelasio;
+  }
 }
 
 body::before{
