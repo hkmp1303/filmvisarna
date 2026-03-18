@@ -149,6 +149,7 @@ export default function ProfilePage() {
   const handleLogout = async () => {
     try {
       await fetch("/api/login", { method: "DELETE" });
+      window.location.href = "/";
     } catch (err) {
       console.error("Kunde inte logga ut", err);
     }
