@@ -47,8 +47,8 @@ body.genre-horror{
     --background-h: #f4f4f474;
     --border-color-h: #622f2f;
     --text-color-h: #b35151;
-    --logo-color-h: #b35151;
-    --nav-primary-color: #b35151;
+    --logo-color-h: #000000;
+    --nav-primary-color: #000000;
     --base-color-h: #b35151;
   /*Footer*/
     --footer-base-background: rgba(0, 0, 0, 0.8);
@@ -71,8 +71,8 @@ body.genre-comedy{
     --background-h: #f4f4f474;
     --border-color-h: #fffdc4;
     --text-color-h: #fdfff1;
-    --logo-color-h: #fffdc4;
-    --nav-primary-color: #fffdc4;
+    --logo-color-h: #525019;
+    --nav-primary-color: #525019;
     --base-color-h: #fdfff1;
   /*Footer*/
     --footer-base-background: rgba(255, 210, 0, 0.8);
@@ -95,8 +95,8 @@ body.genre-family{
     --background-h: #f4f4f474;
     --border-color-h: #ad7f00;
     --text-color-h: #ffbb00;
-    --logo-color-h: #ffbb00;
-    --nav-primary-color: #ffbb00;
+    --logo-color-h: #A67A02;
+    --nav-primary-color: #A67A02;
     --base-color-h: #ffbb00;
   /*Footer*/
     --footer-base-background: rgba(184, 141, 22, 0.8);
@@ -119,8 +119,8 @@ body.genre-action{
     --background-h: #f4f4f474;
     --border-color-h: #995a01;
     --text-color-h: #e38500;
-    --logo-color-h: #e38500;
-    --nav-primary-color: #e38500;
+    --logo-color-h: #8F5301;
+    --nav-primary-color: #8F5301;
     --base-color-h: #e38500;
   /*Footer*/
     --footer-base-background: rgba(128, 181, 231, 0.8);
@@ -144,8 +144,8 @@ body.genre-romance{
     --background-h: #f4f4f474;
     --border-color-h: #fffdc4;
     --text-color-h: #fdfff1;
-    --logo-color-h: #fffdc4;
-    --nav-primary-color: #fffdc4;
+    --logo-color-h: #000000;
+    --nav-primary-color: #000000;
     --base-color-h: #fdfff1;
   /*Footer*/
     --footer-base-background: rgba(216, 186, 229, 0.8);
