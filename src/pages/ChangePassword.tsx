@@ -72,7 +72,7 @@ export default function ChangePassword() {
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
 
-      <button onClick={handleSubmit}>Update Password</button>
+      <button onSubmit={handleSubmit}>Update Password</button>
     </div>
   );
 }
