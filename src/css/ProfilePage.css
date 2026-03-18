@@ -107,13 +107,22 @@
     background: #bcbfc1;
   }
 
+  .popup-restofpage {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+  }
+
   .main-popup {
     background-color: var(--dark-primary);
     border-radius: 12px;
     padding: 1.5rem;
     width: 100%;
     max-width: 24rem;
-    box-shadow: 0px 8px 10px 5px rgba(255, 255, 255, 0.655), 0px 0px 20px 4px rgba(255, 255, 255, 0.655) inset;
+    box-shadow: 0px 8px 10px 5px rgba(28, 28, 28, 0.655), 0px 0px 2px 4px var(--primary-subtext) inset;
   }
 
   .popup-title {
@@ -298,7 +307,6 @@
   .popup-restofpage {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -311,7 +319,7 @@
     padding: 1.5rem;
     width: 100%;
     max-width: 24rem;
-    box-shadow: 0px 8px 10px 5px rgba(255, 255, 255, 0.655), 0px 0px 20px 4px rgba(255, 255, 255, 0.655) inset;
+    box-shadow: 0px 8px 10px 5px rgba(28, 28, 28, 0.655), 0px 0px 2px 4px var(--primary-subtext) inset;
   }
 
   .popup-title {
