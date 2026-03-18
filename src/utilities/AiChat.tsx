@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import '../css/AiChat.css'
-import Logo from '../../public/robot.svg?react';
+import Logo from '../assets/robot.svg?react';
 import ReactMarkdown from 'react-markdown';
 
 interface Message {
