@@ -55,12 +55,14 @@ export default function ProfilePage() {
             <img
               src={user.profilePic}
               alt="Profile"
-              className="w-full h-full object-cover"
+              className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full object-cover opacity-70 mx-auto"
             />
           ) : (
-              <div className="no_image_text">
-              Ingen bild uppladdad ännu
-            </div>
+            <img
+              src="/ProfilePics/profile_pic_default.svg"
+              alt="Default profile"
+                className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full object-cover opacity-70 mx-auto"
+            />
           )}
         </div>
 
