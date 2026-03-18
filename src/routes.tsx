@@ -12,6 +12,7 @@ import TemaDagar from './pages/TemaDagar';
 import ConfirmBooking from './pages/ConfirmBooking';
 import PasswordRecovery from './pages/PasswordRecoveryPage';
 import ResetPassword from './pages/ResetPasswordPage';
+import ChangePassword from './pages/ChangePassword';
 
 
 interface Route {
@@ -33,7 +34,8 @@ const routes: Route[] = [
   { element: <TemaDagar />, path: '/themedays' },
   { element: <ConfirmBooking />, path: '/confirmbooking' },
   { element: <PasswordRecovery />, path: '/passwordrecovery' },
-  { element: <ResetPassword />, path: '/reset-password' }
+  { element: <ResetPassword />, path: '/reset-password' },
+  { element: <ChangePassword />, path: '/changepassword' }
 
 
 

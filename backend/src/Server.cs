@@ -18,6 +18,7 @@ public static class Server
     Session.Start();
     RecoverPassword.Start();
     RegisterRoutes.Start();
+    ChangePasswordRoutes.Start();
     BookingRoutes.Start();
     ProfileRoutes.Start();
     AiChatRoutes.Start();

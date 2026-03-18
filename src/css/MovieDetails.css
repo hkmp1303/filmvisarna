@@ -1,50 +1,41 @@
 @import "tailwindcss";
 
 .movie-details-container {
-    display: grid;
-    grid-template-columns: auto auto;
-    align-items: start;
+    @apply grid grid-cols-2 items-start gap-5 p-4 lg:p-10;
     margin-bottom: 3rem;
 
     .movie-title {
         grid-column: 1 / -1;
-        text-align: center;
-        margin-bottom: 2rem;
         color: var(--font-primary);
-        @apply text-shadow-lg/30;
+        @apply text-center text-shadow-lg/30 mb-4 lg:mb-6;
         h2 {
-            @apply text-5xl pt-6 pb-4;
+            @apply text-5xl p-6;
         }
-    }
-
-    .movie-info {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        max-width: 640px;
-        @apply mx-auto;
+        .movie-info {
+            max-width: 750px;
+            @apply flex flex-row mx-auto text-2xl justify-between;
+        }
     }
 
     .colum1-container,
     .colum2-container {
-        display: flex;
-        flex-direction: column;
+        @apply flex flex-col justify-evenly text-center gap-3 scroll-my-px;
         align-items: center;
-        text-align: center;
-        gap: 1.5rem;
     }
 
     .colum1-container {
         grid-column: 1;
 
         .trailer-container {
+            @apply p-1 mx-5;
             background-color: var(--second-bg);
-            @apply p-1;
             border-radius: 7px;
+            width: 100%;
 
             iframe {
-                width: 560px;
-                height: 315px;
+                width: 100%;
+                aspect-ratio: 3 / 2;
+                height: auto;
             }
         }
         .trailer-container:hover {
@@ -69,11 +60,11 @@
             border: 2px solid var(--font-primary);
         }
         .btn-booking {
+            @apply p-2;
             width: 85%;
             background: radial-gradient(circle, #5a2a7a 0%, #b527d81a 70%);
             border: 0cap solid #7a5a9a;
             color: var(--font-primary);
-            @apply p-2;
             border-radius: 18px;
             cursor: pointer;
             font-size: 0.85rem;
@@ -94,8 +85,9 @@
 
         .movie-description,
         .movie-cast {
+
             background-color: var(--second-bg);
-            width: 500px;
+            width: 100%;
             padding: 1rem;
             border-radius: 7px;
             border: 1px solid var(--border-primary);
@@ -104,80 +96,57 @@
             }
         }
     }
-
 }
 
 /*Mobile View*/
 @media (max-width: 768px) {
     .movie-details-container {
-        display: grid;
-        grid-template-columns: 1fr;
-        align-items: center;
+        @apply grid grid-cols-1 text-center gap-5;
         margin-bottom: 2rem;
 
         .movie-title {
             grid-column: 1;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .colum1-container,
-        .colum2-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 1.5rem;
+            @apply mb-1;
+            .movie-info {
+                @apply flex-col text-xl;
+                p {
+                    @apply pt-1;
+                }
+            }
         }
 
         .colum1-container {
             grid-column: 1;
+            align-items: center;
+            @apply text-center gap-1.5;
 
             .trailer-container {
                 background-color: var(--second-bg);
-                padding: 1rem;
-                max-width: 350px;
+                padding: 5px;
+                width: 80%;
 
                 iframe {
-                    width: 300px;
-                    height: 150px;
+                    width: 100%;
+                    aspect-ratio: 3 / 2;
+                    height: auto;
                 }
             }
-
-            .date-picker {
-                background-color: var(--second-bg);
-                padding: 1rem;
-                border: 1px solid black;
-                border-radius: 7px;
-            }
-
             .btn-booking {
-                width: 100%;
-                background: radial-gradient(circle, #5a2a7a 0%, #b527d81a 70%);
-                border: 0cap solid #7a5a9a;
-                color: white;
-                padding: 7px;
-                border-radius: 18px;
-                cursor: pointer;
-                font-size: 0.85rem;
-                font-size: 20px;
-
+                width: 75%;
             }
         }
 
         .colum2-container {
             grid-column: 1;
             align-items: center;
+            @apply text-center mx-auto;
+            width: 100%;
 
-            .movie-description {
-                background-color: var(--second-bg);
-                min-width: 200px;
-                padding: 1rem;
-            }
-
+            .movie-description,
             .movie-cast {
+                @apply inline-block float-none;
+                width: 80%;
                 background-color: var(--second-bg);
-                min-width: 200px;
                 padding: 1rem;
             }
         }

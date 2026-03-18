@@ -29,12 +29,12 @@ function App() {
 
 
   return (
-    <>
+    <div className="app-wrapper">
       <Header user={user} setUser={setUser} />
       <AiChat />
       <Main user={user} setUser={setUser} />
       <Footer user={user} setUser={setUser} />
-    </>
+    </div>
   );
 }
 
