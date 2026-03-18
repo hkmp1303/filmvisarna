@@ -1,0 +1,383 @@
+@import "tailwindcss";
+
+
+@media (max-width: 768px) {
+
+  .login-error-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    text-align: center;
+  }
+
+  .login-error-container h2 {
+    color: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .login-error-container p {
+    color: var(--primary-subtext);
+    margin-top: 0.25rem;
+  }
+
+  .loading-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    text-align: center;
+  }
+
+  .loading-profile p {
+    color: var(--primary-subtext);
+    font-size: 1.1rem;
+    margin-top: 0.25rem;
+  }
+
+  .profile-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 3.5rem 1.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-details {
+    margin-left: 0;
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+
+  .profile_booking_title {
+    color: var(--font-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .profile_no_bookings_titles {
+    font-size: 1rem;
+    font-weight: 500;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+
+  .profile-actions {
+    margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      position: static;
+  }
+
+  .logout-btn {
+    padding: 0.5rem 1.85rem;
+    border-radius: 8px;
+    background-color: var(--dark-primary);
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .logout-btn:hover {
+    background: #c9302c;
+  }
+
+  .change-password-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background-color: var(--vacant-seat);
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .change-password-btn:hover {
+    background: #bcbfc1;
+  }
+
+  .popup-restofpage {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+  }
+
+  .main-popup {
+    background-color: var(--dark-primary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 24rem;
+    box-shadow: 0px 8px 10px 5px rgba(28, 28, 28, 0.655), 0px 0px 2px 4px var(--primary-subtext) inset;
+  }
+
+  .popup-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--font-primary);
+  }
+
+  .subtitles-popup {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: var(--primary-subtext);
+  }
+
+  .popup-innerborder {
+    width: 100%;
+    border: 1px solid var(--font-primary);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    background-image: radial-gradient(#ffffff 1%, #fffdc4 100%);
+    color: var(--dark-primary);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease
+  }
+
+  .popup-cancelbutton {
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.304);
+    color: var(--font-primary);
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .popup-cancelbutton:hover {
+    background: rgba(0, 0, 0, 0.03);
+  }
+
+  .popup-updatebutton {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    background-color: #2563eb;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s ease, opacity 0.2s ease;
+    border: none;
+  }
+
+  .popup-updatebutton:hover {
+    background-color: var(--booked-blue-border);
+  }
+
+  .popup-updatebutton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* DESKTOP VIEW DOWN BELOW 
+========================== */
+
+
+
+
+@media (min-width: 769px) {
+
+  .login-error-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    text-align: center;
+  }
+
+  .login-error-container h2 {
+    color: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .login-error-container p {
+    color: var(--primary-subtext);
+    margin-top: 0.25rem;
+  }
+
+  .loading-profile {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 50vh;
+      text-align: center;
+    }
+  
+    .loading-profile p {
+      color: var(--primary-subtext);
+      font-size: 1.1rem;
+      margin-top: 0.25rem;
+  }
+
+  .profile-header {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(6px);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-details {
+    margin-left: 2rem;
+    font-size: 0.8rem;
+  }
+
+  .profile_booking_title {
+    color: var(--font-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .profile_no_bookings_titles {
+    font-size: 1rem;
+    font-weight: 500;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .profile-actions {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .logout-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background-color: var(--dark-primary);
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .logout-btn:hover {
+    background: #c9302c;
+  }
+
+  .change-password-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background-color: var(--vacant-seat);
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .change-password-btn:hover {
+    background: #bcbfc1;
+  }
+
+  .popup-restofpage {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+  }
+
+  .main-popup {
+    background-color: var(--dark-primary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 24rem;
+    box-shadow: 0px 8px 10px 5px rgba(28, 28, 28, 0.655), 0px 0px 2px 4px var(--primary-subtext) inset;
+  }
+
+  .popup-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--font-primary);
+  }
+
+  .subtitles-popup {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: var(--primary-subtext);
+  }
+
+  .popup-innerborder {
+    width: 100%;
+    border: 1px solid var(--font-primary);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    background-image: radial-gradient(#ffffff 1%, #fffdc4 100%);
+    color: var(--dark-primary);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease
+  }
+
+  .popup-cancelbutton {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.304);
+  color: var(--font-primary);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .popup-cancelbutton:hover {
+    background: rgba(0, 0, 0, 0.03);
+  }
+
+  .popup-updatebutton {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    background-color: #2563eb;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s ease, opacity 0.2s ease;
+    border: none;
+  }
+
+  .popup-updatebutton:hover {
+    background-color: var(--booked-blue-border);
+  }
+
+  .popup-updatebutton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

@@ -9,13 +9,32 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import type { User } from '../utilities/userInterface';
 
-export default function Footer() {
+interface HeaderProps {
+  user: User | null;
+  setUser: (user: User | null) => void;
+}
+
+export default function Footer({ user, setUser }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  /* TODO: We should replace this with our actual log in code, this is just a placeholder
-  that I put to try it out, ladies and gents ;) */
-  const userIsLoggedIn = false;
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/login', { method: 'DELETE' });
+      setUser(null);
+    }
+    catch (err) {
+      console.error("Logout failed", err);
+    }
+  };
 
   return (
     <footer className="footer">
@@ -24,8 +43,8 @@ export default function Footer() {
           Upptäck
         </Link>
 
-        {userIsLoggedIn ? (
-          <Link to="/account" className="footer-btn">
+        {user ? (
+          <Link to="/profile" className="footer-btn">
             Konto
           </Link>
         ) : (
@@ -45,14 +64,46 @@ export default function Footer() {
 
           {menuOpen && (
             <div className="footer-submenu">
-              <Link className='submenu-link' to="/themedays">Tema dagar</Link>
-              <Link className='submenu-link' to="/aboutus">Om oss</Link>
-              <Link className='submenu-link' to="/contact">Kontakt</Link>
-              <Link className='submenu-link' to="/kiosk">Kiosk</Link>
+              <button className="submenu-link" onClick={() => { scrollToTop(); setMenuOpen(false); }}>
+                Till toppen
+              </button>
+              <Link className='submenu-link' onClick={() => setMenuOpen(false)} to="/themedays">Tema dagar</Link>
+              <Link className='submenu-link' onClick={() => setMenuOpen(false)} to="/aboutus">Om oss</Link>
+              <Link className='submenu-link' onClick={() => setMenuOpen(false)} to="/contact">Kontakt</Link>
+              <Link className='submenu-link' onClick={() => setMenuOpen(false)} to="/kiosk">Kiosk</Link>
+              {user && (
+                <button className="submenu-link" onClick={() => { handleLogout(); setMenuOpen(false); }}>Logga ut ({user.firstname})</button>
+              )}
             </div>
           )}
         </div>
       </div>
+      {/*PC view*/}
+      <div className="footer-container-pc">
+        <div className="company-cr">
+          <h4>© 2026 Filmvisarna AB.</h4>
+          <p>All rights reserved</p>
+        </div>
+
+        <div className="footer-open-hours">
+          <h3 className='text-xl font-semibold text-center mb-0.5'>Öppettider:</h3>
+          <p className='text-l mb-0.5'>Måndag - Fredag: 13:00 - 23:00</p>
+          <p className='text-l'>Lördag - Söndag: 10:00 - 00:00</p>
+
+        </div>
+
+        <nav className="pc-nav">
+          <button className="back-to-top" onClick={scrollToTop}>
+            Till toppen
+          </button>
+          <Link to="/themedays">Temadagar</Link>
+          <Link to="/aboutus">Om oss</Link>
+          <Link to="/contact">Kontakt</Link>
+        </nav>
+      </div>
     </footer>
+
+
   );
 }
+//<Link to="/kiosk">Kiosk</Link>
