@@ -7,6 +7,7 @@ body {
   background-image: linear-gradient(to bottom, #660157, #4e023e);
   min-height: 100vh;
 }
+
 /*Header Pc and Tablet View*/
 header {
   width: 99%;
@@ -21,7 +22,7 @@ header {
   box-shadow: 0.2px 0.2px 20px 0.05px rgba(255, 255, 255, 0.551);
   padding: 10px;
 
-  h1{
+  h1 {
     font-family: Pattaya;
     color: #fdfff1;
     margin: 0;
@@ -54,93 +55,96 @@ header {
   justify-self: end;
   margin-top: 55px;
 
-  .nav-btn{
+  .nav-btn {
     padding: 10px 7px;
     color: var(--font-primary);
     text-decoration: none;
     transition: all 0.2s;
     font-size: 18px;
 
-    &:last-child{
+    &:last-child {
       margin-right: 20px;
     }
 
-    &:hover{
+    &:hover {
       background-color: rgba(255, 253, 196, 0.1);
       border-radius: 12px;
       color: rgba(65, 10, 77, 0.753);
     }
   }
 }
-  .nav-btn.active {
-  color: #660157;
-  }
 
-  /*Footer pc view*/
-@media(min-width: 1025px){
+.nav-btn.active {
+  color: #660157;
+}
+
+/*Footer pc view*/
+@media(min-width: 1025px) {
 
   .footer-container {
     display: none;
   }
-  
-    footer {
-      display: flex;
-      width: 100%;
-      /* background: var(--text-charcoal);  */
-      background: var(--footer-background);
-      bottom: 0;
-      left: 0;
-      z-index: 50;
-      margin-top: 6rem;
-      
+
+  footer {
+    display: flex;
+    width: 100%;
+    /* background: var(--text-charcoal);  */
+    background: var(--footer-background);
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    margin-top: 6rem;
+
+  }
+
+  .footer-container-pc {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-top: 2px solid #fffdc4;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0.2px 0.2px 20px 0.05px rgba(255, 255, 255, 0.551);
+    color: var(--font-primary);
+    Font-Weight: 600;
+  }
+
+  .company-cr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 3rem;
+
+    h4 {
+      margin-bottom: 14px;
     }
-  
-    .footer-container-pc {
-      display: flex;
-      width: 100%; 
-      margin: 0 auto;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      border-top: 2px solid #fffdc4;
-      border-radius: 12px 12px 0 0;
-      box-shadow: 0.2px 0.2px 20px 0.05px rgba(255, 255, 255, 0.551);
-      color: var(--font-primary);
-      Font-Weight: 600;
-    }
-  
-    .company-cr{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-left: 3rem;
-  
-      h4{
-        margin-bottom: 14px;
-      }
-    }
-  
-    .pc-nav{
-      display: grid;
-      grid-template-columns: repeat(2, auto);    background: none;
-      gap: 7px 40px;
-      border: none;
-      font-family: inherit;
-      font-size: 16px;
-      cursor: pointer;
-      padding-right: 3rem;
-      margin-left: 20px;
-      transition: opacity 0.2s;
-  
-      a, button{
-        margin: 5px 0;
-  
-      &:hover{
+  }
+
+  .pc-nav {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    background: none;
+    gap: 7px 40px;
+    border: none;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+    padding-right: 3rem;
+    margin-left: 20px;
+    transition: opacity 0.2s;
+
+    a,
+    button {
+      margin: 5px 0;
+
+      &:hover {
         cursor: pointer;
         color: var(--font-primary);
       }
-      }
-  
+    }
+
   }
 
 }
@@ -159,6 +163,7 @@ header {
     .header-logo {
       display: none;
     }
+
     nav {
       display: none;
     }
@@ -168,13 +173,13 @@ header {
 /*Footer Mobile and Tablet View*/
 @media (max-width: 1024px) {
 
-  body{
+  body {
     margin-bottom: 6rem;
   }
 
   footer {
     width: 100%;
-    background: #660157; 
+    background: #660157;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -182,20 +187,20 @@ header {
     margin-top: 16rem;
   }
 
-  .footer-container-pc{
-    display:none;
+  .footer-container-pc {
+    display: none;
   }
 
   .footer-container {
     display: flex;
-    width: 100%; 
+    width: 100%;
     margin: 0 auto;
     justify-content: space-around;
     align-items: center;
     padding: 10px;
     border-top: 2px solid #fffdc4;
     border-radius: 12px 12px 0 0;
-    background-color: var(--background-h); 
+    background-color: var(--background-h);
     box-shadow: 0.2px 0.2px 20px 0.05px rgba(255, 255, 255, 0.551);
   }
 
@@ -239,10 +244,20 @@ header {
     color: black;
     border-bottom: 1px solid #fffdc4;
     text-align: left;
-    
+
     &:hover {
       color: #660157;
     }
   }
 
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-wrapper>main {
+  flex: 1;
 }
