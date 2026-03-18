@@ -7,7 +7,7 @@ import type { SortOption } from "../utilities/types";
 import { sortViewerRating, type BriefFilm } from '../utilities/filmInterface';
 import '../css/LandingPage.css';
 import { displayVeiwerRating, displayGenre } from '../utilities/i18n';
-import { formatDateIso, formatDay, formatDayMonth } from '../utilities/formatDateTime';
+import { formatDateIso, formatDayMonth } from '../utilities/formatDateTime';
 import { ThemedayToggle } from '../utilities/ThemedayToggle';
 import { useEffect } from 'react';
 
@@ -49,11 +49,13 @@ export default function LandingPage() {
   if (!movies) {
     return <div style={{ color: 'white' }}>Laddar filmer...</div>;
   }
+
   const displayMovies = sortAndFilterMovies(movies, sortBy, searchQuery, selectedGenre, selectedRating, selectedScreeningDay);
 
-  const handleSortChange = (key: SortOption, label: string) => {
+  const handleSortChange = (e: any, key: SortOption) => {
     setSortBy(key);
-    setSortLabel(label);
+    setSortLabel(e.currentTarget.innerHTML);
+    closeDrop(e);
   };
 
   // extract movie genre from movie list
@@ -64,6 +66,14 @@ export default function LandingPage() {
   const uniqueRatings = Array.from(
     new Set(movies.map((m) => m.viewer_rating).filter(Boolean))
   ).sort(sortViewerRating);
+
+  const openDrop = (e: any) => e.currentTarget.open = true;
+  const closeDrop = (e: any) => {
+    if (e.currentTarget.open)
+      e.currentTarget.open = false;
+    if (e.currentTarget.parentElement.parentElement.open)
+      e.currentTarget.parentElement.parentElement.open = false;
+  }
 
   return (
     <div className="landing-page-container">
@@ -78,58 +88,58 @@ export default function LandingPage() {
         </div>
       </div>
       <div className="filter-section">
-        <div className="dropdown">
-          <button className="filter-btn dropdown-btn">
+        <details className="dropdown" onMouseEnter={openDrop} onMouseLeave={closeDrop}>
+          <summary className="filter-btn dropdown-btn">
             Sortera: {sortLabel} ▼
-          </button>
+          </summary>
           <div className="dropdown-content">
-            <a onClick={() => handleSortChange('title_asc', 'Titel (A-Ö)')}>Titel (A-Ö)</a>
-            <a onClick={() => handleSortChange('title_desc', 'Titel (Ö-A)')}>Titel (Ö-A)</a>
-            <a onClick={() => handleSortChange('newest', 'Premiär (Nyast)')}>Premiär (Nyast)</a>
-            <a onClick={() => handleSortChange('oldest', 'Premiär (Äldst)')}>Premiär (Äldst)</a>
-            <a onClick={() => handleSortChange('duration_asc', 'Speltid (Kortast)')}>Speltid (Kortast)</a>
-            <a onClick={() => handleSortChange('duration_desc', 'Speltid (Längst)')}>Speltid (Längst)</a>
+            <a onClick={(e: any) => handleSortChange(e, 'title_asc')}>Titel (A-Ö)</a>
+            <a onClick={(e: any) => handleSortChange(e, 'title_desc')}>Titel (Ö-A)</a>
+            <a onClick={(e: any) => handleSortChange(e, 'newest')}>Premiär (Nyast)</a>
+            <a onClick={(e: any) => handleSortChange(e, 'oldest')}>Premiär (Äldst)</a>
+            <a onClick={(e: any) => handleSortChange(e, 'duration_asc')}>Speltid (Kortast)</a>
+            <a onClick={(e: any) => handleSortChange(e, 'duration_desc')}>Speltid (Längst)</a>
           </div>
-        </div>
-        <div className="dropdown">
-          <button className="filter-btn dropdown-btn">
+        </details>
+        <details className="dropdown" onMouseEnter={openDrop} onMouseLeave={closeDrop}>
+          <summary className="filter-btn dropdown-btn">
             {selectedGenre === '' ? 'Alla Genrer' : displayGenre(selectedGenre)} ▼
-          </button>
+          </summary>
           <div className="dropdown-content">
-            <a onClick={() => setSelectedGenre('')}>Alla Genrer</a>
+            <a onClick={(e: any) => { setSelectedGenre(''); closeDrop(e) }}>Alla Genrer</a>
             {uniqueGenres.map((genre) => (
-              <a key={genre} onClick={() => setSelectedGenre(genre)}>
+              <a key={genre} onClick={(e: any) => { setSelectedGenre(genre); closeDrop(e); }}>
                 {displayGenre(genre)}
               </a>
             ))}
           </div>
-        </div>
-        <div className='dropdown'>
-          <button className='filter-btn dropdown-btn'>
+        </details>
+        <details className='dropdown' onMouseEnter={openDrop} onMouseLeave={closeDrop}>
+          <summary className='filter-btn dropdown-btn'>
             {selectedRating === '' ? 'Alla Åldrar' : displayVeiwerRating(selectedRating)} ▼
-          </button>
+          </summary>
           <div className='dropdown-content'>
-            <a onClick={() => setSelectedRating('')}>Alla Ålder</a>
+            <a onClick={(e: any) => { setSelectedRating(''); closeDrop(e) }}>Alla Ålder</a>
             {uniqueRatings.map((viewer_rating) => (
-              <a key={viewer_rating} onClick={() => setSelectedRating(viewer_rating)}>
+              <a key={viewer_rating} onClick={(e: any) => { setSelectedRating(viewer_rating); closeDrop(e); }}>
                 {displayVeiwerRating(viewer_rating)}
               </a>
             ))}
           </div>
-        </div>
-        <div className='dropdown'>
-          <button className='filter-btn dropdown-btn'>
+        </details>
+        <details className='dropdown' onMouseEnter={openDrop} onMouseLeave={closeDrop}>
+          <summary className='filter-btn dropdown-btn'>
             {selectedScreeningDay === '' ? 'Alla Datum' : formatDayMonth(selectedScreeningDay)} ▼
-          </button>
+          </summary>
           <div className='dropdown-content'>
-            <a onClick={() => setSelectedScreeningDay('')}>Alla Dagar</a>
+            <a onClick={(e: any) => { setSelectedScreeningDay(''); closeDrop(e) }}>Alla Dagar</a>
             {Object.keys(Week).map((start, index) => (
-              <a key={index} onClick={() => setSelectedScreeningDay(start)}>
+              <a key={index} onClick={(e: any) => { setSelectedScreeningDay(start); closeDrop(e); }}>
                 {formatDayMonth(start)}
               </a>
             ))}
           </div>
-        </div>
+        </details>
       </div>
       {/* Movie Grid */}
       <main className="movie-grid">
@@ -145,16 +155,11 @@ export default function LandingPage() {
                   <p>{movie.duration} min | {displayGenre(movie.genre)}| {movie.language}</p>
                 </div>
               </div>
-            </div>
-            <div className="card-info">
-              <p className="movie-name">{movie.title}</p>
-              <button
-                className="details-btn"
-                onClick={() => selectedMovieNavigation(movie.filmid)}
-              >
-                Detaljer
-              </button>
-            </div>
+              <div className="poster-overlay-text card-info">
+                <h3>{movie.title}</h3>
+                <p>{movie.duration} min | {displayGenre(movie.genre)} | {movie.language}</p>
+              </div>
+            </button>
           </div>
         ))}
       </main>
