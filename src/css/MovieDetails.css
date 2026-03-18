@@ -132,7 +132,7 @@
                 }
             }
             .btn-booking {
-                width: 100%;
+                width: 75%;
                 background: var(--btn-grad-backcolor);
                 border: 0cap solid #7a5a9a;
                 color: white;
