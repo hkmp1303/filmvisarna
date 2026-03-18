@@ -43,7 +43,7 @@
 .login-input input {
   @apply self-center mb-4 p-[7px] rounded-[18px] text-[20px] cursor-pointer outline-none transition-all;
   background: var(--input-light-bg);
-  border: 1px solid #000000;
+  border: 1px solid #c0b0d0;
   color: black;
 
   @media (min-width: 769px) {
