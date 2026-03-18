@@ -85,11 +85,11 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      <div className="login-big-text">
-        <h1>Logga In</h1>
-      </div>
 
       <form className="login-input" autoComplete="off">
+        <div className="login-big-text">
+          <h2>Logga in</h2>
+        </div>
         {error && <p className="error-message">{error}</p>}
 
         <div className="email-input">
@@ -113,7 +113,7 @@ export default function Login() {
         </div>
 
         <div className="confirm">
-          <button className="confirm-btn" onClick={handleLogin}>Logga In</button>
+          <button className="confirm-btn" onClick={handleLogin}>Logga in</button>
         </div>
 
         <div className="forgotten-password">
