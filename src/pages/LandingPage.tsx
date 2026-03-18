@@ -42,7 +42,7 @@ export default function LandingPage() {
   const handleSortChange = (e: any, key: SortOption) => {
     setSortBy(key);
     setSortLabel(e.currentTarget.innerHTML);
-    e.currentTarget.parentElement.parentElement.open = false;
+    closeDrop(e);
   };
 
   // extract movie genre from movie list
@@ -55,7 +55,12 @@ export default function LandingPage() {
   ).sort(sortViewerRating);
 
   const openDrop = (e: any) => e.currentTarget.open = true;
-  const closeDrop = (e: any) => e.currentTarget.open = false;
+  const closeDrop = (e: any) => {
+    if (e.currentTarget.open)
+      e.currentTarget.open = false;
+    if (e.currentTarget.parentElement.parentElement.open)
+      e.currentTarget.parentElement.parentElement.open = false;
+  }
 
   return (
     <div className="landing-page-container">
@@ -75,12 +80,12 @@ export default function LandingPage() {
             Sortera: {sortLabel} ▼
           </summary>
           <div className="dropdown-content">
-            <a onClick={(e:any) => handleSortChange(e, 'title_asc')}>Titel (A-Ö)</a>
-            <a onClick={(e:any) => handleSortChange(e, 'title_desc')}>Titel (Ö-A)</a>
-            <a onClick={(e:any) => handleSortChange(e, 'newest')}>Premiär (Nyast)</a>
-            <a onClick={(e:any) => handleSortChange(e, 'oldest')}>Premiär (Äldst)</a>
-            <a onClick={(e:any) => handleSortChange(e, 'duration_asc')}>Speltid (Kortast)</a>
-            <a onClick={(e:any) => handleSortChange(e, 'duration_desc')}>Speltid (Längst)</a>
+            <a onClick={(e: any) => handleSortChange(e, 'title_asc')}>Titel (A-Ö)</a>
+            <a onClick={(e: any) => handleSortChange(e, 'title_desc')}>Titel (Ö-A)</a>
+            <a onClick={(e: any) => handleSortChange(e, 'newest')}>Premiär (Nyast)</a>
+            <a onClick={(e: any) => handleSortChange(e, 'oldest')}>Premiär (Äldst)</a>
+            <a onClick={(e: any) => handleSortChange(e, 'duration_asc')}>Speltid (Kortast)</a>
+            <a onClick={(e: any) => handleSortChange(e, 'duration_desc')}>Speltid (Längst)</a>
           </div>
         </details>
         <details className="dropdown" onMouseEnter={openDrop} onMouseLeave={closeDrop}>
@@ -88,9 +93,9 @@ export default function LandingPage() {
             {selectedGenre === '' ? 'Alla Genrer' : displayGenre(selectedGenre)} ▼
           </summary>
           <div className="dropdown-content">
-            <a onClick={() => setSelectedGenre('')}>Alla Genrer</a>
+            <a onClick={(e: any) => { setSelectedGenre(''); closeDrop(e)}}>Alla Genrer</a>
             {uniqueGenres.map((genre) => (
-              <a key={genre} onClick={(e:any) => {setSelectedGenre(genre); e.currentTarget.parentElement.parentElement.open = false;}}>
+              <a key={genre} onClick={(e: any) => {setSelectedGenre(genre); closeDrop(e);}}>
                 {displayGenre(genre)}
               </a>
             ))}
@@ -101,9 +106,9 @@ export default function LandingPage() {
             {selectedRating === '' ? 'Alla Åldrar' : displayVeiwerRating(selectedRating)} ▼
           </summary>
           <div className='dropdown-content'>
-            <a onClick={() => setSelectedRating('')}>Alla Ålder</a>
+            <a onClick={(e: any) => { setSelectedRating(''); closeDrop(e)}}>Alla Ålder</a>
             {uniqueRatings.map((viewer_rating) => (
-              <a key={viewer_rating} onClick={(e:any) => {setSelectedRating(viewer_rating); e.currentTarget.parentElement.parentElement.open = false;}}>
+              <a key={viewer_rating} onClick={(e: any) => { setSelectedRating(viewer_rating); closeDrop(e); }}>
                 {displayVeiwerRating(viewer_rating)}
               </a>
             ))}
@@ -114,9 +119,9 @@ export default function LandingPage() {
             {selectedScreeningDay === '' ? 'Alla Datum' : formatDayMonth(selectedScreeningDay)} ▼
           </summary>
           <div className='dropdown-content'>
-            <a onClick={() => setSelectedScreeningDay('')}>Alla Dagar</a>
+            <a onClick={(e: any) => { setSelectedScreeningDay(''); closeDrop(e)}}>Alla Dagar</a>
             {Object.keys(Week).map((start, index) => (
-              <a key={index} onClick={(e:any) => {setSelectedScreeningDay(start); e.currentTarget.parentElement.parentElement.open = false;}}>
+              <a key={index} onClick={(e: any) => {setSelectedScreeningDay(start); closeDrop(e);}}>
                 {formatDayMonth(start)}
               </a>
             ))}
