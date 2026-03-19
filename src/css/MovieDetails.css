@@ -62,7 +62,7 @@
         .btn-booking {
             @apply p-2;
             width: 85%;
-            background: radial-gradient(circle, #5a2a7a 0%, #b527d81a 70%);
+            background: var(--btn-grad-backcolor);
             border: 0cap solid #7a5a9a;
             color: var(--font-primary);
             border-radius: 18px;

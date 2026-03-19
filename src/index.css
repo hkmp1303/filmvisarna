@@ -3,6 +3,7 @@
 
 
 :root {
+  /*Primary colors*/
   --primary-bg: linear-gradient(to bottom, #660157, #4e023e);
   --dark-primary: #660157;
   --second-bg: #c9b0d8;           /*penpot panel*/
@@ -29,6 +30,12 @@
 
   --third-bg: #ffffff99;
 
+    /*search and filter*/
+  --search-bar: rgba(65, 10, 77, 0.753);
+  --landing-drop-menu: #f9f9f9;
+  --landing-drop-btn: #c0b0d0;
+  --drop-btn-hover: #ddd;
+
   /*booking button */
   --btn-booking: radial-gradient(circle, var(--dark-primary) 0%, var(--border-primary) 70%);
   /*purple button*/
@@ -38,6 +45,8 @@
 
 
   --purpletext-h4: #550755;
+
+  /*Header*/
   --background-h: #f4f4f474;
   --profile-subtext: #6b7280;
 /*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

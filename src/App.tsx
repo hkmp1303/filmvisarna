@@ -5,6 +5,7 @@ import Footer from './partials/Footer';
 import AiChat from './utilities/AiChat';
 import type { User } from './utilities/userInterface';
 import './App.css';
+import { ThemedayToggle } from './utilities/ThemedayToggle';
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -23,6 +24,13 @@ function App() {
         console.log("Ingen användare inloggad");
       }
     })();
+  }, []);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('selectedTheme');
+    if (savedTheme) {
+      ThemedayToggle(savedTheme);
+    }
   }, []);
 
 

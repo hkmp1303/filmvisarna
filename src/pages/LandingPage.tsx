@@ -8,7 +8,8 @@ import { sortViewerRating, type BriefFilm } from '../utilities/filmInterface';
 import '../css/LandingPage.css';
 import { displayVeiwerRating, displayGenre } from '../utilities/i18n';
 import { formatDateIso, formatDayMonth } from '../utilities/formatDateTime';
-
+import { ThemedayToggle } from '../utilities/ThemedayToggle';
+import { useEffect } from 'react';
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -21,10 +22,22 @@ export default function LandingPage() {
   const [selectedScreeningDay, setSelectedScreeningDay] = useState('');
 
 
+  useEffect(() => {
+    const savedTheme = sessionStorage.getItem('savedTheme');
+    if (savedTheme) {
+      setSelectedGenre(savedTheme);
+      ThemedayToggle(savedTheme);
+    }
+  }, []);
+
+  useEffect(() => {
+    ThemedayToggle(selectedGenre);
+  }, [selectedGenre]);
+
   const Now = Math.floor(Date.now() / 1000); // Unix timestamp format
   const Week: Record<string, string> = {};
   for (let i = 0; i <= 7; i++) {
-    let tmp = new Date((Now + (i*60*60*24)) * 1000);
+    let tmp = new Date((Now + (i * 60 * 60 * 24)) * 1000);
     let key = formatDateIso(tmp.toISOString()); // date only from DateTime
     Week[key] = tmp.toISOString().substring(0, 19); // exclude milliseconds
   }
@@ -93,9 +106,9 @@ export default function LandingPage() {
             {selectedGenre === '' ? 'Alla Genrer' : displayGenre(selectedGenre)} ▼
           </summary>
           <div className="dropdown-content">
-            <a onClick={(e: any) => { setSelectedGenre(''); closeDrop(e)}}>Alla Genrer</a>
+            <a onClick={(e: any) => { setSelectedGenre(''); closeDrop(e) }}>Alla Genrer</a>
             {uniqueGenres.map((genre) => (
-              <a key={genre} onClick={(e: any) => {setSelectedGenre(genre); closeDrop(e);}}>
+              <a key={genre} onClick={(e: any) => { setSelectedGenre(genre); closeDrop(e); }}>
                 {displayGenre(genre)}
               </a>
             ))}
@@ -106,7 +119,7 @@ export default function LandingPage() {
             {selectedRating === '' ? 'Alla Åldrar' : displayVeiwerRating(selectedRating)} ▼
           </summary>
           <div className='dropdown-content'>
-            <a onClick={(e: any) => { setSelectedRating(''); closeDrop(e)}}>Alla Ålder</a>
+            <a onClick={(e: any) => { setSelectedRating(''); closeDrop(e) }}>Alla Ålder</a>
             {uniqueRatings.map((viewer_rating) => (
               <a key={viewer_rating} onClick={(e: any) => { setSelectedRating(viewer_rating); closeDrop(e); }}>
                 {displayVeiwerRating(viewer_rating)}
@@ -119,9 +132,9 @@ export default function LandingPage() {
             {selectedScreeningDay === '' ? 'Alla Datum' : formatDayMonth(selectedScreeningDay)} ▼
           </summary>
           <div className='dropdown-content'>
-            <a onClick={(e: any) => { setSelectedScreeningDay(''); closeDrop(e)}}>Alla Dagar</a>
+            <a onClick={(e: any) => { setSelectedScreeningDay(''); closeDrop(e) }}>Alla Dagar</a>
             {Object.keys(Week).map((start, index) => (
-              <a key={index} onClick={(e: any) => {setSelectedScreeningDay(start); closeDrop(e);}}>
+              <a key={index} onClick={(e: any) => { setSelectedScreeningDay(start); closeDrop(e); }}>
                 {formatDayMonth(start)}
               </a>
             ))}
@@ -139,7 +152,7 @@ export default function LandingPage() {
               <div className="poster-container">
                 <div
                   className="poster-placeholder"
-                  style={{ backgroundImage: `url(${movie.cover_image??''})` }}
+                  style={{ backgroundImage: `url(${movie.cover_image ?? ''})` }}
                 >
                 </div>
               </div>

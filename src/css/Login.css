@@ -37,13 +37,13 @@
 }
 
 .login-input p {
-  @apply m-0 text-sm font-bold text-[#c0b0d0];
+  @apply m-0 text-sm font-bold text-[#000000];
 }
 
 .login-input input {
   @apply self-center mb-4 p-[7px] rounded-[18px] text-[20px] cursor-pointer outline-none transition-all;
   background: var(--input-light-bg);
-  border: 1px solid #000000;
+  border: 1px solid #c0b0d0;
   color: black;
 
   @media (min-width: 769px) {
