@@ -6,9 +6,11 @@ public static class BookingRoutes
 {
     private static void SendBookingConfirmation(string email, string guid)
     {
-        EmailService.SendEmail(email, "Filmvisarna Bokningsbekräftelse",
-            $"Se din bokningsbekräftelse online <a href=\"http://localhost:5173/confirmbooking/{guid}\">här</a>."
-        );
+        try {
+            EmailService.SendEmail(email, "Filmvisarna Bokningsbekräftelse",
+                $"Se din bokningsbekräftelse online <a href=\"http://localhost:5173/confirmbooking/{guid}\">här</a>."
+            );
+        } catch {}
     }
     public static void Start()
     {
