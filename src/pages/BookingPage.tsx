@@ -15,6 +15,7 @@ export default function Booking() {
   const adultCnt = useRef<HTMLInputElement>(null);
   const seniorCnt = useRef<HTMLInputElement>(null);
   const childCnt = useRef<HTMLInputElement>(null);
+  const confirmDialog = useRef<HTMLDialogElement>(null)
   const loading = useRef<boolean>(false);
   const navigate = useNavigate();
   const [error, setError] = useState<any>();
@@ -120,10 +121,9 @@ export default function Booking() {
     if (ticketTotal == 0) {
       return alert("Du måste boka minst en biljett");
     }
-    const reqBody = getFormEntries(e.target.form);
-    console.log(reqBody);
+    const reqBody = getFormEntries(e.currentTarget.form);
     try {
-      fetch("/api/reserveSeatRes/" + id, {
+      fetch(`/api/reserveSeatRes/${id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -131,12 +131,20 @@ export default function Booking() {
         },
         body: reqBody
       }).then((res) => {
-        if (!res.ok) throw new Error("Kunde inte spara bokning.");
+        if (!res.ok) throw new Error("Kunde inte spara reservation.");
         return res.json();
       }).then((data) => {
-        alert("Bokningen har sparats");
+        //alert("Reservationen har sparats");
         setBookingGuid(data?.guid);
+        fetch(`/api/bookedSeatRes/${id}`).then((res) => {
+          if (!res.ok) throw new Error("res.error");
+          return res.json();
+        }).then((data) => {
+          setRes(data);
+        });
       });
+
+
     } catch (e:any) {
       alert(e.message)
     }
@@ -145,7 +153,21 @@ export default function Booking() {
 
   const handleBooking = (e: any) => {
     e.preventDefault();
-    navigate("/confirmbooking");
+    try {
+      fetch("/api/finalizeBooking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: 'application/json'
+        },
+        body: getFormEntries(e.currentTarget)
+      }).then((res) => {
+        if (!res.ok) throw new Error("Kunde inte slutföra bokning.");
+        navigate(`/confirmbooking/${bookingGuid}`);
+      });
+    } catch (e: any) {
+      alert(e.message);
+    }
   };
 
   return (!loading.current && (<>
@@ -248,14 +270,26 @@ export default function Booking() {
                 )}
               </div>
             </form>
-            <form className='text-center' onSubmit={handleBooking}>
-              <input type="hidden" name="total_cost" value={ticketTotal} />
-              <input type="hidden" name="guid" value={bookingGuid} />
-              <button className="book-seats-btn">Boka platser</button>
+            <form className='text-center' onSubmit={(e: any) => { e.preventDefault(); confirmDialog.current?.showModal(); }}>
+              {/*<input type="hidden" name="total_cost" value={ticketTotal} />
+              <input type="hidden" name="guid" value={bookingGuid} />*/}
+              <button value="book" name="action" className="book-seats-btn" disabled={bookingGuid.length === 0}>Boka platser</button>
             </form>
           </span>
         </fieldset>
       </section>
     </article>
+    <dialog id="confirm-dialog" ref={confirmDialog}>
+      <h3 className="confirm">Slutför Bokning</h3>
+      <form className="form" onSubmit={handleBooking}>
+        <input type="hidden" name="total_cost" value={ticketTotal} />
+        <input type="hidden" name="guid" value={bookingGuid} />
+        <label className="label">Bekräfta E-postadress:<br />
+          <input className="email" type="email" name="email" placeholder="E-post"/><br />
+        </label>
+        <button className="book-seats-btn">Bekräfta Bokning</button>
+        <button className="book-seats-btn" type="button" onClick={(e: any) => confirmDialog.current?.close()}>Avbryt</button>
+      </form>
+    </dialog>
   </>));
 }
