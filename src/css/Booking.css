@@ -178,6 +178,37 @@ h2.movie-title {
 .book-seats-btn:hover {
   border: 2px solid var(--font-primary)
 }
+#confirm-dialog {
+  min-width: 450px;
+  @apply fixed p-5 text-center;
+  border-radius: 18px;
+  background-color: var(--dark-primary);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .confirm {
+    @apply text-2xl;
+    color: var(--font-primary);
+  }
+  .form {
+    @apply text-center;
+  }
+  .label {
+    @apply: block text-left;
+    color: var(--second-bg);
+  }
+  .email {
+    @apply p-1 m-1 text-xl;
+    border-radius: 18px;
+    background-color: var(--input-light-bg);
+    color: var(--booked-blue-border);
+    border: 2px solid var(--booked-blue-border);
+  }
+  .book-seats-btn {
+    width: 40%;
+    @apply inline-block m-5;
+  }
+}
 
 /* Mobile view */
 @media (max-width: 768px) {
