@@ -10,237 +10,241 @@ body {
   background-color: var(--body-bg, #4e023e);
   transition: background 0.5s ease;
 
-  --genre-grad: linear-gradient(to bottom, rgba(102,1,87,0.55) 0%, rgba(78,2,62,1) 100%);
-  /* --genre-grad: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%); */
+  --genre-grad: linear-gradient(to bottom, rgba(102, 1, 87, 0.55) 0%, rgba(78, 2, 62, 1) 100%);
+  --genre-grad: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000 100%);
   --hero-url: url('/heroimages/movie_strip_v1.jpg');
 
-  h1{
+  h1 {
     /* font-family:  Notable; */
-    font-family:  Ultra;
+    font-family: Ultra;
   }
 
-  h2,h3,h4{
-    font-family:  Carter One;
+  h2,
+  h3,
+  h4 {
+    font-family: Carter One;
 
   }
-  p{
+
+  p {
     font-family: Gelasio;
   }
 }
 
-body::before{
+body::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: -1; 
-  
+  z-index: -1;
+
   background-image: var(--genre-grad), var(--hero-url);
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover, cover;
-  
+
   transition: background-image 0.8s ease-in-out;
 }
 
-body.genre-horror{
+body.genre-horror {
   /*Body*/
-    --genre-grad: linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%,rgba(22, 1, 1, 1) 100%);
-    --hero-url: url('/heroimages/Horror_background.jpeg');
-    --body-bg: rgba(22, 1, 1, 1);
-    --second-bg: #959e9e;
-    --search-bar: #783232;
-    --landing-drop-btn: #b35151FF;
-    --dark-primary: #000000;
-    --third-bg: #959e9e;
+  --genre-grad: linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%, rgba(22, 1, 1, 1) 100%);
+  --hero-url: url('/heroimages/Horror_background.jpeg');
+  --body-bg: rgba(22, 1, 1, 1);
+  --second-bg: #959e9e;
+  --search-bar: #783232;
+  --landing-drop-btn: #b35151FF;
+  --dark-primary: #000000;
+  --third-bg: #959e9e;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(121, 0, 0, 0.55) 40%,rgba(222, 38, 38, 0.19) 100%);
+  --btn-grad-backcolor: radial-gradient(circle, rgba(121, 0, 0, 0.55) 40%, rgba(222, 38, 38, 0.19) 100%);
   /*Header:*/
-    --background-h: #f4f4f474;
-    --border-color-h: #622f2f;
-    --text-color-h: #b35151;
-    --logo-color-h: #000000;
-    --nav-primary-color: #000000;
-    --base-color-h: #b35151;
+  --background-h: #f4f4f474;
+  --border-color-h: #622f2f;
+  --text-color-h: #b35151;
+  --logo-color-h: #000000;
+  --nav-primary-color: #000000;
+  --base-color-h: #b35151;
   /*Footer*/
-    --footer-base-background: rgba(0, 0, 0, 0.8);
-    --footer-background: #424242;
+  --footer-base-background: rgba(0, 0, 0, 0.8);
+  --footer-background: #424242;
 }
 
-body.genre-comedy{
+body.genre-comedy {
   /*Body*/
-    --genre-grad: linear-gradient(to bottom, rgba(255, 210, 0, 0.55) 0%,rgba(65, 77, 28, 1) 100%);
-    --hero-url: url('/heroimages/Comedy_V2.jpg');
-    --body-bg: rgba(65, 77, 28, 1);
-    --second-bg: #e6e377;
-    --search-bar: #a19c3b;
-    --landing-drop-btn: #e6e377;
-    --dark-primary: rgb(255,210,0);
-    --third-bg: #e6e377;
+  --genre-grad: linear-gradient(to bottom, rgba(255, 210, 0, 0.55) 0%, rgba(65, 77, 28, 1) 100%);
+  --hero-url: url('/heroimages/Comedy_V2.jpg');
+  --body-bg: rgba(65, 77, 28, 1);
+  --second-bg: #e6e377;
+  --search-bar: #a19c3b;
+  --landing-drop-btn: #e6e377;
+  --dark-primary: rgb(255, 210, 0);
+  --third-bg: #e6e377;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(111, 118, 117, 0.55) 0%,rgba(111, 118, 117, 0.19) 100%);
+  --btn-grad-backcolor: radial-gradient(circle, rgba(111, 118, 117, 0.55) 0%, rgba(111, 118, 117, 0.19) 100%);
   /*Header:*/
-    --background-h: #f4f4f474;
-    --border-color-h: #fffdc4;
-    --text-color-h: #fdfff1;
-    --logo-color-h: #525019;
-    --nav-primary-color: #525019;
-    --base-color-h: #fdfff1;
+  --background-h: #f4f4f474;
+  --border-color-h: #fffdc4;
+  --text-color-h: #fdfff1;
+  --logo-color-h: #525019;
+  --nav-primary-color: #525019;
+  --base-color-h: #fdfff1;
   /*Footer*/
-    --footer-base-background: rgba(255, 210, 0, 0.8);
-    --footer-background: #242B0E;
+  --footer-base-background: rgba(255, 210, 0, 0.8);
+  --footer-background: #242B0E;
 }
 
-body.genre-family{
+body.genre-family {
   /*Body*/
-    --genre-grad: linear-gradient(to bottom, rgba(0, 124, 234, 0.55) 0%,rgba(184, 141, 22, 1) 100%);
-    --hero-url: url('/heroimages/Family_V1.jpg');
-    --body-bg: rgba(184, 141, 22, 1);
-    --second-bg: #9ac1ed;
-    --search-bar: #cc9706;
-    --landing-drop-btn: #ffbb00FF;
-    --dark-primary: rgb(0,124,234);
-    --third-bg: #9ac1ed;
+  --genre-grad: linear-gradient(to bottom, rgba(0, 124, 234, 0.55) 0%, rgba(184, 141, 22, 1) 100%);
+  --hero-url: url('/heroimages/Family_V1.jpg');
+  --body-bg: rgba(184, 141, 22, 1);
+  --second-bg: #9ac1ed;
+  --search-bar: #cc9706;
+  --landing-drop-btn: #ffbb00FF;
+  --dark-primary: rgb(0, 124, 234);
+  --third-bg: #9ac1ed;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(255, 187, 0, 0.70) 0%,rgba(255, 187, 0, 0.49) 100%);
+  --btn-grad-backcolor: radial-gradient(circle, rgba(255, 187, 0, 0.70) 0%, rgba(255, 187, 0, 0.49) 100%);
   /*Header:*/
-    --background-h: #f4f4f474;
-    --border-color-h: #ad7f00;
-    --text-color-h: #ffbb00;
-    --logo-color-h: #A67A02;
-    --nav-primary-color: #A67A02;
-    --base-color-h: #ffbb00;
+  --background-h: #f4f4f474;
+  --border-color-h: #ad7f00;
+  --text-color-h: #ffbb00;
+  --logo-color-h: #A67A02;
+  --nav-primary-color: #A67A02;
+  --base-color-h: #ffbb00;
   /*Footer*/
-    --footer-base-background: rgba(184, 141, 22, 0.8);
-    --footer-background: #8A6911;
+  --footer-base-background: rgba(184, 141, 22, 0.8);
+  --footer-background: #8A6911;
 }
 
-body.genre-action{
+body.genre-action {
   /*Body*/
-    --genre-grad: linear-gradient(to bottom, rgba(128, 181, 231, 0.55) 0%,rgba(0, 0, 0, 1) 100%);
-    --hero-url: url('/heroimages/Action_V1.jpg');
-    --body-bg: rgba(0, 0, 0, 1);
-    --second-bg: #66abcc;
-    --search-bar: #bd7004;
-    --landing-drop-btn:#e38500FF;
-    --dark-primary: rgb(128,181,231);
-    --third-bg: #66abcc;
+  --genre-grad: linear-gradient(to bottom, rgba(128, 181, 231, 0.55) 0%, rgba(0, 0, 0, 1) 100%);
+  --hero-url: url('/heroimages/Action_V1.jpg');
+  --body-bg: rgba(0, 0, 0, 1);
+  --second-bg: #66abcc;
+  --search-bar: #bd7004;
+  --landing-drop-btn: #e38500FF;
+  --dark-primary: rgb(128, 181, 231);
+  --third-bg: #66abcc;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(227, 93, 0, 0.75) 60%,rgba(227, 133, 0, 0.45) 100%);
+  --btn-grad-backcolor: radial-gradient(circle, rgba(227, 93, 0, 0.75) 60%, rgba(227, 133, 0, 0.45) 100%);
   /*Header:*/
-    --background-h: #f4f4f474;
-    --border-color-h: #995a01;
-    --text-color-h: #e38500;
-    --logo-color-h: #8F5301;
-    --nav-primary-color: #8F5301;
-    --base-color-h: #e38500;
+  --background-h: #f4f4f474;
+  --border-color-h: #995a01;
+  --text-color-h: #e38500;
+  --logo-color-h: #8F5301;
+  --nav-primary-color: #8F5301;
+  --base-color-h: #e38500;
   /*Footer*/
-    --footer-base-background: rgba(128, 181, 231, 0.8);
-    --footer-background: #424242;
+  --footer-base-background: rgba(128, 181, 231, 0.8);
+  --footer-background: #424242;
 
 }
 
-body.genre-romance{
-  /*Body*/  
-    --genre-grad: linear-gradient(to bottom, rgba(216, 186, 229, 0.55) 0%,rgba(184, 78, 198, 1) 99%);
-    --hero-url: url('/heroimages/Romance_V1.jpg');
-    --body-bg: rgba(184, 78, 198, 1);
-    --second-bg: #c9b0d8;
-    --search-bar: #5a2a7a;
-    --landing-drop-btn:#ffffffFF;
-    --dark-primary: rgb(216,186,229);
-    --third-bg: #c9b0d8;
-  /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
-  /*Header:*/
-    --background-h: #f4f4f474;
-    --border-color-h: #fffdc4;
-    --text-color-h: #fdfff1;
-    --logo-color-h: #000000;
-    --nav-primary-color: #000000;
-    --base-color-h: #fdfff1;
-  /*Footer*/
-    --footer-base-background: rgba(216, 186, 229, 0.8);
-    --footer-background: #82358C;
-
-}
-
-body.genre-classic{
+body.genre-romance {
   /*Body*/
-    --genre-grad: linear-gradient(to bottom, rgba(45, 79, 43, 0.55) 0%,rgba(0, 0, 0, 1) 100%);
-    --hero-url: url('/heroimages/Classic_V7.jpg');
-    --body-bg: rgba(0, 0, 0, 1);
-    --second-bg: #5c9c4b;
-    --search-bar: #b5a476;
-    --landing-drop-btn: #fff1ca;
-    --dark-primary: rgb(45,79,43);
-    --third-bg: #5c9c4b;
+  --genre-grad: linear-gradient(to bottom, rgba(216, 186, 229, 0.55) 0%, rgba(184, 78, 198, 1) 99%);
+  --hero-url: url('/heroimages/Romance_V1.jpg');
+  --body-bg: rgba(184, 78, 198, 1);
+  --second-bg: #c9b0d8;
+  --search-bar: #5a2a7a;
+  --landing-drop-btn: #ffffffFF;
+  --dark-primary: rgb(216, 186, 229);
+  --third-bg: #c9b0d8;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(47, 71, 47, 0.55) 0%,rgba(255, 241, 202, 0.19) 100%);
+  --btn-grad-backcolor: radial-gradient(circle, #5a2a7a 40%, #b527d81a 100%);
   /*Header:*/
-    --background-h: #f4f4f474;
-    --border-color-h: #ffb823;
-    --text-color-h: #fff1ca;
-    --logo-color-h: #fff1ca;
-    --nav-primary-color: #fff1ca;
-    --base-color-h: #fff1ca;
+  --background-h: #f4f4f474;
+  --border-color-h: #fffdc4;
+  --text-color-h: #fdfff1;
+  --logo-color-h: #000000;
+  --nav-primary-color: #000000;
+  --base-color-h: #fdfff1;
   /*Footer*/
-    --footer-base-background: rgba(45, 79, 43, 0.8);
-    --footer-background: #424242;
+  --footer-base-background: rgba(216, 186, 229, 0.8);
+  --footer-background: #82358C;
 
 }
 
-body.genre-blackandwhite{
+body.genre-classic {
   /*Body*/
-    --genre-grad: linear-gradient(to bottom, rgba(63, 63, 63, 0.55) 0%,rgba(0, 0, 0, 1) 100%);
-    --hero-url: url('/heroimages/BlackWhite_V1.jpg');
-    --body-bg: rgba(0, 0, 0, 1);
-    --second-bg: #959e9e;
-    --search-bar: #959e9e;
-    --landing-drop-btn: #d3dad9FF;
-    --dark-primary: rgb(63,63,63);
-    --third-bg: #959e9e;
+  --genre-grad: linear-gradient(to bottom, rgba(45, 79, 43, 0.55) 0%, rgba(0, 0, 0, 1) 100%);
+  --hero-url: url('/heroimages/Classic_V7.jpg');
+  --body-bg: rgba(0, 0, 0, 1);
+  --second-bg: #5c9c4b;
+  --search-bar: #b5a476;
+  --landing-drop-btn: #fff1ca;
+  --dark-primary: rgb(45, 79, 43);
+  --third-bg: #5c9c4b;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(71, 78, 77, 0.85) 20%,rgba(31, 38, 37, 0.09) 100%);
+  --btn-grad-backcolor: radial-gradient(circle, rgba(47, 71, 47, 0.55) 0%, rgba(255, 241, 202, 0.19) 100%);
   /*Header:*/
-    --background-h: #f4f4f474;
-    --border-color-h: #fffdc4;
-    --text-color-h: #fdfff1;
-    --logo-color-h: #fffdc4;
-    --nav-primary-color: #fffdc4;
-    --base-color-h: #fdfff1;
+  --background-h: #f4f4f474;
+  --border-color-h: #ffb823;
+  --text-color-h: #fff1ca;
+  --logo-color-h: #fff1ca;
+  --nav-primary-color: #fff1ca;
+  --base-color-h: #fff1ca;
   /*Footer*/
-    --footer-base-background: rgba(63, 63, 63, 0.8);
-    --footer-background: #424242;
+  --footer-base-background: rgba(45, 79, 43, 0.8);
+  --footer-background: #424242;
 
 }
 
-body.genre-holiday{
+body.genre-blackandwhite {
   /*Body*/
-    --genre-grad: linear-gradient(to bottom, rgba(10, 77, 28, 0.55) 0%, rgba(139, 0, 0, 1) 100%);
-    --hero-url: url('/heroimages/Christmas_V1.jpg');
-    --body-bg: rgba(139, 0, 0, 1);
-    --second-bg: #2a7d1f;
-    --search-bar: #1c5414;
-    --landing-drop-btn: #2a7d1f;
-    --dark-primary: rgb(10,77,28);
-    --third-bg: #2a7d1f;
+  --genre-grad: linear-gradient(to bottom, rgba(63, 63, 63, 0.55) 0%, rgba(0, 0, 0, 1) 100%);
+  --hero-url: url('/heroimages/BlackWhite_V1.jpg');
+  --body-bg: rgba(0, 0, 0, 1);
+  --second-bg: #959e9e;
+  --search-bar: #959e9e;
+  --landing-drop-btn: #d3dad9FF;
+  --dark-primary: rgb(63, 63, 63);
+  --third-bg: #959e9e;
   /*Button*/
-    --btn-grad-backcolor: radial-gradient(circle, rgba(10, 77, 28, 0.95) 20%,rgba(222, 0, 0, 0.19) 100%);
+  --btn-grad-backcolor: radial-gradient(circle, rgba(71, 78, 77, 0.85) 20%, rgba(31, 38, 37, 0.09) 100%);
   /*Header:*/
-    --background-h: #f4f4f474;
-    --border-color-h: #fffdc4;
-    --text-color-h: #fdfff1;
-    --logo-color-h: #fffdc4;
-    --nav-primary-color: #fffdc4;
-    --base-color-h: #fdfff1;
+  --background-h: #f4f4f474;
+  --border-color-h: #fffdc4;
+  --text-color-h: #fdfff1;
+  --logo-color-h: #fffdc4;
+  --nav-primary-color: #fffdc4;
+  --base-color-h: #fdfff1;
   /*Footer*/
-    --footer-base-background: rgba(10, 77, 28, 0.8);
-    --footer-background: #630606;
+  --footer-base-background: rgba(63, 63, 63, 0.8);
+  --footer-background: #424242;
 
 }
+
+body.genre-holiday {
+  /*Body*/
+  --genre-grad: linear-gradient(to bottom, rgba(10, 77, 28, 0.55) 0%, rgba(139, 0, 0, 1) 100%);
+  --hero-url: url('/heroimages/Christmas_V1.jpg');
+  --body-bg: rgba(139, 0, 0, 1);
+  --second-bg: #2a7d1f;
+  --search-bar: #1c5414;
+  --landing-drop-btn: #2a7d1f;
+  --dark-primary: rgb(10, 77, 28);
+  --third-bg: #2a7d1f;
+  /*Button*/
+  --btn-grad-backcolor: radial-gradient(circle, rgba(10, 77, 28, 0.95) 20%, rgba(222, 0, 0, 0.19) 100%);
+  /*Header:*/
+  --background-h: #f4f4f474;
+  --border-color-h: #fffdc4;
+  --text-color-h: #fdfff1;
+  --logo-color-h: #fffdc4;
+  --nav-primary-color: #fffdc4;
+  --base-color-h: #fdfff1;
+  /*Footer*/
+  --footer-base-background: rgba(10, 77, 28, 0.8);
+  --footer-background: #630606;
+
+}
+
 /*Header Pc and Tablet View*/
 header {
   width: 99%;
