@@ -123,10 +123,13 @@ export default defineConfig([
 ```
 ## Authors
 This project was developed as a group asssignment.
-
-- Timoty Bengtsson
-- Oscar Kock
 - Heather Payne
+  - @hkmp1303
 - Mikael Renberg
+  - @M-Renberg
+- Oscar Kock
+  - @OscarK99Swe
+- Timoty Bengtsson
+  - @pyr0xd
 
 README authored by: Heather Payne
