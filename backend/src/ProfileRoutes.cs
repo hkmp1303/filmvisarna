@@ -43,28 +43,32 @@ public static class ProfileRoutes
           int userId = (int)user.userid;
 
           var active = SQLQuery(
-            @"SELECT id, userid, movieTitle, showtime, poster
-              FROM user_booking_view
-              WHERE userid = @userid
-                AND status = 'booked'
-                AND showtime >= NOW()
-              ORDER BY showtime ASC",
+            @"SELECT b.bookingid AS id, b.userid, b.guid, b.status,
+                     s.start AS showtime, f.title AS movieTitle, f.cover_image AS poster
+              FROM booking b
+              JOIN screening s ON b.screeningid = s.screeningid
+              JOIN film f ON s.filmid = f.filmid
+              WHERE b.userid = @userid
+                AND b.status != 'canceled'
+                AND s.start >= NOW()
+              ORDER BY s.start ASC",
           Obj(new { userid = userId }),
           context
-
           );
 
           var history = SQLQuery(
-             @"SELECT id, userid, movieTitle, showtime, poster
-               FROM user_booking_view
-              WHERE userid = @userid
-                AND status = 'booked'
-                AND showtime < NOW()
-              ORDER BY showtime DESC",
+            @"SELECT b.bookingid AS id, b.userid, b.guid, b.status,
+                     s.start AS showtime, f.title AS movieTitle, f.cover_image AS poster
+              FROM booking b
+              JOIN screening s ON b.screeningid = s.screeningid
+              JOIN film f ON s.filmid = f.filmid
+              WHERE b.userid = @userid
+                AND b.status != 'canceled'
+                AND s.start < NOW()
+              ORDER BY s.start DESC",
           Obj(new { userid = userId }),
           context
-         );
-
+          );
 
           return RestResult.Parse(context, Obj(new
           {

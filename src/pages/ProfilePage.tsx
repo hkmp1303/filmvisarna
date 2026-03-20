@@ -208,7 +208,13 @@ export default function ProfilePage() {
               return (
                 <div
                   key={b.id}
-                  className="flex items-center gap-4 border-b last:border-none pb-2 last:pb-0">
+                  className="flex items-center gap-4 border-b last:border-none pb-2 last:pb-0"
+                  onClick={async () => {
+                    const res = await fetch(`/api/booking/byid/${b.id}`);
+                    const data = await res.json();
+                    if (data?.guid) window.location.href = `/confirmbooking?guid=${data.guid}`;
+                  }}
+                  style={{ cursor: "pointer" }}>
                   
                   <img
                     src={b.poster}

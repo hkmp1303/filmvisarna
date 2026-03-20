@@ -4,11 +4,11 @@ import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import fetchJson from '../utilities/fetchJson';
 import '../css/Booking.css';
 import type { Film } from '../utilities/filmInterface';
-import type { BriefScreening, Screening } from '../utilities/screeningInterface';
+import type { Screening } from '../utilities/screeningInterface';
 import type { Salon, Res } from '../utilities/salonInterface';
 import { formatDateIso, formatDay, formatHourMin } from '../utilities/formatDateTime';
 import { displayGenre } from '../utilities/i18n';
-import { sumNumArray, csvToNumArray, getFormEntries } from '../utilities/tools';
+import { sumNumArray, csvToNumArray } from '../utilities/tools';
 import type { LoginContext } from './Login';
 
 export default function Booking() {
@@ -17,7 +17,7 @@ export default function Booking() {
   const childCnt = useRef<HTMLInputElement>(null);
   const loading = useRef<boolean>(false);
   const navigate = useNavigate();
-  const [error, setError] = useState<any>();
+  const [, setError] = useState<any>();
   //const [screeningid, setScreeningId] = useState<number>(); // to select screening, unreferenced
   //const [screenings, setScreenings] = useState<BriefScreening[]>([]);  // to select screening, unreferenced
   const [screening, setScreening] = useState<Screening>();
@@ -26,9 +26,14 @@ export default function Booking() {
   const [res, setRes] = useState<Res[]>([]);
   const [totalSeats, setSeats] = useState<number>(0);
   const [ticketTotal, setTicketTotal] = useState<number>(0);
-  const [ticketCount, setTicketCount] = useState<number>(0);
+  const [, setTicketCount] = useState<number>(0);
   const { user } = useOutletContext<LoginContext>();
-  const [bookingGuid, setBookingGuid] = useState<string>("");
+  const bookingGuid = useRef<string>(crypto.randomUUID());
+  const ticketTotalRef = useRef<number>(0);
+  const ticketCountRef = useRef<number>(0);
+  const selectedSeatsRef = useRef<number[]>([]);
+  const [selectedSeats, setSelectedSeats] = useState<number[]>([]);
+  const [emailInput, setEmailInput] = useState<string>("");
 
   const qs = new URLSearchParams(useLocation().search);
   const id = parseInt(qs.get("screeningid") as string, 10);
@@ -87,12 +92,16 @@ export default function Booking() {
     // calculate total vacant seats
     setSeats(salonTotalSeats - ticketCount - res.length);
     setTicketCount(ticketCount);
+    ticketCountRef.current = ticketCount;
     console.log(salonTotalSeats + " " + ticketCount + " " + res.length);
     // calculate total ticket price
     setTicketTotal(f["adult"].value * 140
       + f["senior"].value * 120
       + f["child"].value * 80
     );
+    ticketTotalRef.current = f["adult"].value * 140
+      + f["senior"].value * 120
+      + f["child"].value * 80;
   };
 
   const seatTaken = (index: number, row_index: number): boolean => {
@@ -115,37 +124,31 @@ export default function Booking() {
 
   const handleClick = () => navigate(`/movieDetails/${film?.filmid}`);
 
-  const handleClickSeat = (e: any) => {
+  const handleBooking = async (e: any) => {
     e.preventDefault();
-    if (ticketTotal == 0) {
-      return alert("Du måste boka minst en biljett");
+    if (!bookingGuid.current) {
+      return alert("Du måste välja platser innan du bokar.");
     }
-    const reqBody = getFormEntries(e.target.form);
-    console.log(reqBody);
-    try {
-      fetch("/api/reserveSeatRes/" + id, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: 'application/json'
-        },
-        body: reqBody
-      }).then((res) => {
-        if (!res.ok) throw new Error("Kunde inte spara bokning.");
-        return res.json();
-      }).then((data) => {
-        alert("Bokningen har sparats");
-        setBookingGuid(data?.guid);
-      });
-    } catch (e:any) {
-      alert(e.message)
+    if (ticketTotal === 0) {
+      return alert("Du måste boka minst en biljett.");
     }
-    //navigate(`/confirmBooking/${film?.filmid}`);
-  };
 
-  const handleBooking = (e: any) => {
-    e.preventDefault();
-    navigate("/confirmbooking");
+    const emailToUse = user?.email ?? emailInput;
+    if (!emailToUse) {
+      return alert("Ange din e-postadress för att slutföra bokningen.");
+    }
+
+    try {
+      const res = await fetch("/api/sendBookingEmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: emailToUse, guid: bookingGuid.current })
+      });
+      if (!res.ok) throw new Error("Kunde inte skicka bekräftelse.");
+      navigate(`/confirmbooking?guid=${bookingGuid.current}`);
+    } catch (e: any) {
+      alert(e.message);
+    }
   };
 
   return (!loading.current && (<>
@@ -226,23 +229,39 @@ export default function Booking() {
           <span>
             <form>
               <input type="hidden" name="total_cost" value={ticketTotal} />
-              <input type="hidden" name="guid" value={bookingGuid} />
+              <input type="hidden" name="guid" value={bookingGuid.current} />
               <div className='seating-arrangement'>
                 <p className="screen"> Filmduk</p>
                 {salon?.row_capacity.map((r: number, row_index) => {
-                  return <div key={"row-"+row_index}>{Array(r).fill(null).map((v,index) =>{
-                    return <label key={"seat-"+index}>
-                      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" >
-                        <rect width="20" height="20" rx="3" ry="3" className={seatTaken(index, row_index)?"booked": "vacant"} />
+                  return <div key={"row-"+row_index}>{Array(r).fill(null).map((_,index) =>{
+                    return <label key={"seat-"+index} onClick={() => {
+                      if (seatTaken(index, row_index)) return;
+                      if (ticketTotalRef.current === 0) return alert("Du måste välja antal biljetter först.");
+                      const seatNum = calcSeatNum(index, row_index);
+                      const current = selectedSeatsRef.current;
+                      const isSelected = current.includes(seatNum);
+                      if (!isSelected && current.length >= ticketCountRef.current) return alert("Du har redan valt det antal platser du bokat biljetter för.");
+                      const newSeats = isSelected
+                        ? current.filter(s => s !== seatNum)
+                        : [...current, seatNum];
+                      selectedSeatsRef.current = newSeats;
+                      setSelectedSeats([...newSeats]);
+                      fetch("/api/reserveSeatRes/" + id, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          total_cost: ticketTotalRef.current,
+                          guid: bookingGuid.current,
+                          seat: newSeats.map(s => Number(s))
+                        })
+                      }).then(r => r.json()).then(data => {
+                        if (data?.guid) bookingGuid.current = data.guid;
+                      }).catch(() => alert("Kunde inte spara bokning."));
+                    }}>
+                      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="20" height="20" rx="3" ry="3"
+                          className={seatTaken(index, row_index) ? "booked" : selectedSeats.includes(calcSeatNum(index, row_index)) ? "reserved" : "vacant"} />
                       </svg>
-                      <input type="checkbox" key={calcSeatNum(index, row_index)}
-                        name="seat[]"
-                        value={calcSeatNum(index, row_index)}
-                        checked={seatTaken(index, row_index)}
-                        onChange={handleClickSeat}
-                        data-row={row_index +1}
-                        disabled={seatTaken(index, row_index)} // ignored on submit, prevent changes to booked seats
-                      />
                     </label>}
                   )}</div>}
                 )}
@@ -250,7 +269,30 @@ export default function Booking() {
             </form>
             <form className='text-center' onSubmit={handleBooking}>
               <input type="hidden" name="total_cost" value={ticketTotal} />
-              <input type="hidden" name="guid" value={bookingGuid} />
+              <input type="hidden" name="guid" value={bookingGuid.current} />
+              {!user && (
+                <div className="items-center text-center" style={{ marginBottom: "1rem" }}>
+                  <label htmlFor="guestEmail" style={{ display: "block", marginBottom: "0.5rem" }}>
+                    Din e-postadress (för bokningsbekräftelse)
+                  </label>
+                  <input
+                    id="guestEmail"
+                    type="email"
+                    placeholder="din@epost.se"
+                    value={emailInput}
+                    onChange={(e) => setEmailInput(e.target.value)}
+                    style={{
+                      background: "var(--input-bg)",
+                      border: "2px solid var(--border-primary)",
+                      color: "var(--font-primary)",
+                      padding: "0.4rem 0.8rem",
+                      borderRadius: "6px",
+                      width: "80%",
+                      marginBottom: "0.5rem"
+                    }}
+                  />
+                </div>
+              )}
               <button className="book-seats-btn">Boka platser</button>
             </form>
           </span>
