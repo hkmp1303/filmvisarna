@@ -1,4 +1,8 @@
 ### Filmvisarna
+A project for the fictive company Filmvisarna AB which is a samll, local cinema. The project frontend is written in TypeScript, the backend in C# featuring session based authentication and MySQL data storage.
+
+The cinema offers showings four times a day in each of their two salons. The company's initial requests include displaying movie and screening information including screening dates, times and movie trailers. Site visitors can booking tickets online and recieve a confrimation which includes seat number and row, total cost and booking number.
+
 
 ## Technology stack
 - Frontend
