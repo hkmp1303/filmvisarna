@@ -1,20 +1,24 @@
 ### Filmvisarna
 
 ## Technology stack
-- TypeScript
-- Node.js
-- React Vite
-- MySQL
-- Postman (testing)
-- Session-based authentication
+- Frontend
+  - TypeScript
+  - Node.js
+  - React + Vite
+- Backend
+  - C# .Net
+  - MySQL
+  - Session-based authentication
+  - MailKit library
+- Tooling
+  - Postman (testing)
 
 ## Requirements
 ### **System Requirements**
 
 - Node.js v24.x
 - Git
-- A REST client (Ex. Bruno, Postman or Thunderclient)
-- Local MySQL server version 9.2.0
+- Developed on MySQL server version 8.0.41 or higher
 - Configured connection string
 
 ### **Functional Requirements**
@@ -22,15 +26,18 @@
 - [] Login authorization (User account)
 
 ## 🚀 How to Run
-
-```
+For inital setup
+```shell
 git clone git@github.com:hkmp1303/filmvisarna.git
 
 cd filmvisarna
 
-dotnet run
+npm install
 ```
-
+Once setup is complete
+```shell
+npm run dev
+```
 ## Configuration
 Configure the database connection string in
 
@@ -39,7 +46,7 @@ Configure the database connection string in
 ![EER Diagram](docs/Diagram75.png)
 
 ### Database Setup
-While in MySQLWorkbench, open the setup.sql, data.ddl and data.sql files from the project folder. Select "View all file types" to ensure the data.ddl file is visible. Run the SQL scripts in the aforementioned order: [setup.sql](setup.sql), [data.ddl](data.ddl), [data.sql](data.sql). The setup.sql file creates the database and user while the tables are created by the data.ddl file. Finally, running the SQL queries in the data.sql file will populate the tables with mock data. The data can also be populated through Postman by reseting the database through `delete /db` once the API is running.
+While in MySQLWorkbench, open the setup.sql, data.ddl and data.sql files from the project folder. Select "View all file types" to ensure the data.ddl file is visible. Run the SQL scripts in the order: [setup.sql](setup.sql), [backend/data.ddl](backend/data.ddl), [backend/data.sql](backend/data.sql), [backend/procedure.ddl](backend/procedure.ddl). The setup.sql file creates the database and user while the tables are created by the data.ddl file. Finally, running the SQL queries in the data.sql file will populate the tables with mock data. The data can also be populated through Postman by reseting the database through `delete /db` once the API is running.
 
 ## API Overview
 
