@@ -5,5 +5,10 @@
   "password": "your-password",
   "database": "your-database",
   "createTablesIfNotExist": true,
-  "seedDataIfEmpty": true
+  "seedDataIfEmpty": true,
+  "aiAccessToken": "",
+  "smtpServer": "smtp.gmail.com",
+  "smtpPort": 587,
+  "emailUsername": "email@example.com",
+  "emailPassword": "secretpass"
 }

@@ -62,10 +62,13 @@ The setup.sql file creates the database and user while the tables are created by
 
 ## API Overview
 
-The API will be available via HTTP protocal at
+The API will be available via HTTP protocal at `http://localhost:5001/api/*` after running the application. The correct port number will be displayed in the console output. Port configuration values are stored and can be changed in backend/Properties/launchSettings.json.
+
+Frontend requests with paths that start with `http://localhost:5173/api/*` will be forwarded to the backend. 
 
 ### Key Endpoints
 
+A Postman collection for this project can be found at this l[link](https://heather-p-4407471.postman.co/workspace/heather-p's-Workspace~1044ea2e-896e-41da-83f4-6e11bd4ffb6c/collection/50645716-e710b040-056e-417b-8351-df3e268012e1?action=share&creator=50645716). You may need to request permission to view the collection. 
 
 # React + TypeScript + Vite
 
@@ -140,6 +143,27 @@ export default defineConfig([
   },
 ])
 ```
+
+## Authentication
+
+Authentication is session based. After successful login, the user ID is stored in the browser session and used for subsequent responses.
+
+## Project Scope
+
+This project is intended for educational purposes. Error handling and security are simplified. In a production environment, the connection string would be moved to configuration files or environment variables.
+
+## Development Process
+
+The project was developed using an Agile approach. Group members recieved user stories prioritized from a product owner's perspective by our instructor. Requirements were then defined as a backlog and implemented iteratively. Core function was prioritized while additional features were planned but not fully implemented within the project timeframe. Task tracking was managed using Projects via Github. The Kanban board can be accessed [here](https://github.com/users/hkmp1303/projects/5/views/1).
+
+## Agile Artifacts
+
+As part of the Agile development process, the project includes the following artifacts:
+- Wireframe illustrating a simplified outline of the planned user interface
+- Mockups illustrating the planned graphical user interface
+
+These artifacts were developed in PetPot and are available in the [docs/agile](docs/agile) directory.
+
 ## Authors
 This project was developed as a group asssignment.
 - Heather
