@@ -148,6 +148,17 @@ export default defineConfig([
 
 Authentication is session based. After successful login, the user ID is stored in the browser session and used for subsequent responses.
 
+### Login Credentials
+
+username|password|
+|---|---|
+aspoonfull@sugar.com|m3dicin3|
+nromanoff@shield.gov|blackwid0w|
+avikander@film.se | exmachina
+nrapace@millennium.se | lisbeth
+sskarsgard@cinema.se | chern0byl
+mvonsydow@bergman.se | seventhseal
+
 ## Project Scope
 
 This project is intended for educational purposes. Error handling and security are simplified. In a production environment, the connection string would be moved to configuration files or environment variables.
