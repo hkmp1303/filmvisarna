@@ -136,6 +136,7 @@ public static class RestApi
       var result = SQLQuery(
         $@"SET FOREIGN_KEY_CHECKS = 0;
           DROP TABLE IF EXISTS
+            session,
             user,
             price,
             film,
