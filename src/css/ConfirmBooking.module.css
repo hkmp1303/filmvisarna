@@ -5,26 +5,27 @@
   width: 100%;
 }
 .section {
-  @apply inline-block p-4 m-4;
-  width: 75vw;
+  @apply inline-block py-1.5;
+  width: 65%;
   background-color: var(--second-bg);
   border: 1px solid var(--border-primary);
   border-radius: 7px;
 }
-
 .h2 {
-  @apply text-5xl text-shadow-lg/30;
+  @apply text-5xl text-shadow-lg/30 py-8;
   color: var(--font-primary);
 }
 .h3 {
-  @apply text-3xl;
+  @apply text-3xl pb-6 font-bold;
+  color: var(--text-charcoal);
 }
 .h4 {
-  @apply text-xl p-2;
+  @apply text-xl py-6 font-bold;
+  color: var(--text-charcoal);
 }
 .form {
-  @apply inline-block text-center p-10;
-  width: 40vw;
+  @apply inline-block text-center py-4;
+  width: 25vw;
 }
 .email {
   @apply p-1 m-1 text-2xl;
@@ -37,13 +38,48 @@
 }
 .qr {
 }
+.a {
+  @apply text-2xl px-2 text-emerald-950 hover:text-blue-800 visited:text-shadow-zinc-600;
+  border-bottom: 2px solid var(--dark-primary);
+}
 .button {
-  width: 75%;
+  width: 80%;
   background: radial-gradient(circle, var(--dark-primary) 0%, var(--border-primary) 70%);
   /*#701b85   #660157, #4e023e*/
   color: var(--font-primary);
-  @apply p-2 my-15 scroll-my-px inline-block;
+  @apply p-2 my-5 scroll-my-px inline-block;
   border-radius: 18px;
   cursor: pointer;
   border: 2px solid var(--booked-blue-border);
+  &:disabled {
+    background: radial-gradient(circle, var(--booked-blue-border) 0%, var(--booked-blue-back) 70%);
+    color: var(--input-bg);
+    border: 2px solid var(--dark-primary);
+    @apply text-shadow-lg/30;
+    cursor: initial;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .section {
+    width: 100%;
+  }
+  .ticket {
+    width: 95%;
+    @apply text-xl;
+  }
+  .qr {
+    height: auto;
+  }
+  .form {
+    width: 87%;
+    @apply my-0.5;
+  }
+  .button {
+    width: 100%;
+    @apply my-0.5;
+  }
+  .p {
+    @apply py-5;
+  }
 }

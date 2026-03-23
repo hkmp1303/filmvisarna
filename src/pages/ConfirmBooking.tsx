@@ -15,6 +15,7 @@ export default function ConfirmBooking() {
   const navigate = useNavigate();
   const { guid } = useParams();
   const loading = useRef<boolean>(false);
+  const cancelBtnRef = useRef<HTMLButtonElement>(null);
   const [booking, setBooking] = useState<BookingFull>();
   const [film, setFilm] = useState<Film>();
   const [screening, setScreening] = useState<Screening>();
@@ -69,6 +70,7 @@ export default function ConfirmBooking() {
   };
   const handleCancelBooking = (e: any) => {
     e.preventDefault();
+    if (cancelBtnRef.current) cancelBtnRef.current.disabled = true;
     fetch("/api/cancelBooking", {
       method: "POST",
       headers: {
@@ -80,22 +82,28 @@ export default function ConfirmBooking() {
       if (!res.ok) throw new Error("Kunde inte avbryta bokning.");
       return res.json();
     }).then((data) => {
-      data.message && alert(data.message);
+      data.message && alert(data.message)
+        || alert("Bokningen har avbokats.");
     });
   };
+
   return booking && (<article className={css.article}>
-    <h2 className={css.h2}>{film?.title}</h2>
     {booking.status == 'booked' && (<section className={css.section}>
+    <h2 className={css.h2}>{film?.title}</h2>
       <h3 className={css.h3}>Tack för din bokning!<br />Välkommen till oss {formatDateTime(screening?.start)}</h3>
-    </section>)}
-    <section className={css.section}>
-      <p>
-        <a href={"/confirmbooking/" + guid}>Länk till denna sidan</a>.
+      <p className={css.p}>
+        <a href={"/confirmbooking/" + guid} className={css.a}>Länk till denna sida</a>
       </p>
       <form onSubmit={handleResendBookingLink} className={css.form}>
         <input type="hidden" name="guid" value={guid} />
         <button className={css.button}>Skicka bokningslänk igen</button>
       </form>
+      {booking.status == 'booked' ? ( <form onSubmit={handleCancelBooking} className={css.form}>
+        <input type="hidden" name="guid" value={guid} />
+        <button className={css.button} ref={cancelBtnRef}>Avboka bokningen</button>
+      </form>) : (<h3 className={css.h3}>Bokningen är Avbokad.</h3>)}
+    </section>)}
+    <section className={css.section}>
     </section>
     {booking.status == 'booked' && (<section className={css.section}>
       <h4 className={css.h4}>Dina biljetter, visa vid dörren.</h4>
@@ -107,11 +115,6 @@ export default function ConfirmBooking() {
       </div>))}
     </section>)}
     <section className={css.section}>
-      {booking.status == 'booked' ? (
-        <form onSubmit={handleCancelBooking} className={css.form}>
-          <input type="hidden" name="guid" value={guid} />
-          <button className={css.button}>Avboka bokningen</button>
-        </form>) : (<h3 className={css.h3}>Bokningen är Avbokad.</h3>)}
     </section>
   </article>);
 }
