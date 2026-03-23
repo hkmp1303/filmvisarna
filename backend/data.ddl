@@ -10,12 +10,12 @@ CREATE TABLE IF NOT EXISTS `user` (
   `phone_consent` datetime DEFAULT NULL,
   `data_consent` datetime DEFAULT NULL,
   `request_delete` datetime DEFAULT NULL,
-  `request_pass` varchar(36) DEFAULT NULL,
+  `request_pass` char(36) DEFAULT NULL,
   `role` enum('visitor','staff','member') NOT NULL,
   PRIMARY KEY (`userid`)
 );
 CREATE TABLE IF NOT EXISTS `session` (
-  id VARCHAR(255) PRIMARY KEY NOT NULL,
+  id char(36) PRIMARY KEY NOT NULL,
   userid int unsigned NOT NULL,
   created DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   modified DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -81,10 +81,11 @@ CREATE TABLE IF NOT EXISTS `booking` (
   `bookingid` int unsigned NOT NULL AUTO_INCREMENT,
   `total_cost` decimal(10,2) NOT NULL,
   `date` timestamp NOT NULL,
-  `guid` varchar(36) NOT NULL,
+  `guid` char(36) NOT NULL,
   `status` enum('reserved','booked','canceled') NOT NULL,
   `screeningid` int unsigned NOT NULL,
   `userid` int unsigned DEFAULT NULL,
+  `tickets` JSON DEFAULT NULL,
   PRIMARY KEY (`bookingid`),
   KEY `book_screen_idx` (`screeningid`),
   KEY `book_user_idx` (`userid`),
