@@ -57,10 +57,9 @@ export default function Booking() {
         if (!screeningsRes) throw new Error("Kunde inte ladda visning");
         setScreenings(screeningsRes);
         */
-
-        const resRes = await fetchJson(`/api/bookedSeatRes/${id}`);
+        const resRes = await fetchJson(`/api/bookedSeatRes/${id}?guid=${bookingGuid}`);
         if (!resRes) throw new Error("Kunde inte ladda reserverade platser");
-        console.log(resRes);
+        //console.log(resRes);
         setRes(resRes);
         setSeats(sumNumArray(salonRes.row_capacity)-resRes.length);
 
@@ -95,7 +94,8 @@ export default function Booking() {
       + f["child"].value * 80
     );
   };
-
+  const getSeat = (index: number, row_index: number): Res | undefined =>
+    res.find((s: Res) => s.seat_number == calcSeatNum(index, row_index));
   const seatTaken = (index: number, row_index: number): boolean => {
     const currentSeatNum = calcSeatNum(index, row_index);
     return res.some(s => s.seat_number === currentSeatNum);
@@ -122,6 +122,7 @@ export default function Booking() {
       return alert("Du måste boka minst en biljett");
     }
     const reqBody = getFormEntries(e.currentTarget.form);
+    console.log(reqBody);
     try {
       fetch(`/api/reserveSeatRes/${id}`, {
         method: "POST",
@@ -136,7 +137,7 @@ export default function Booking() {
       }).then((data) => {
         //alert("Reservationen har sparats");
         setBookingGuid(data?.guid);
-        fetch(`/api/bookedSeatRes/${id}`).then((res) => {
+        fetch(`/api/bookedSeatRes/${id}?guid=${data?.guid}`).then((res) => {
           if (!res.ok) throw new Error("res.error");
           return res.json();
         }).then((data) => {
@@ -255,7 +256,7 @@ export default function Booking() {
                   return <div key={"row-"+row_index}>{Array(r).fill(null).map((v,index) =>{
                     return <label key={"seat-"+index}>
                       <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" >
-                        <rect width="20" height="20" rx="3" ry="3" className={seatTaken(index, row_index)?"booked": "vacant"} />
+                        <rect width="20" height="20" rx="3" ry="3" className={getSeat(index, row_index)?.status || 'vacant'} />
                       </svg>
                       <input type="checkbox" key={calcSeatNum(index, row_index)}
                         name="seat[]"
@@ -263,7 +264,7 @@ export default function Booking() {
                         checked={seatTaken(index, row_index)}
                         onChange={handleClickSeat}
                         data-row={row_index +1}
-                        disabled={seatTaken(index, row_index)} // ignored on submit, prevent changes to booked seats
+                        disabled={getSeat(index, row_index)?.status == 'booked'} // ignored on submit, prevent changes to booked seats
                       />
                     </label>}
                   )}</div>}

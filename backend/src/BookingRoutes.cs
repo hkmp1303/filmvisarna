@@ -45,13 +45,15 @@ public static class BookingRoutes
         });
 
         App.MapGet("/api/bookedSeatRes/{screeningid}", async (
-            HttpContext context, string screeningid
+            HttpContext context, string screeningid, string guid = ""
         ) =>
-            RestResult.Parse(context, SQLQuery(
+        {
+            Console.WriteLine("guid: " + guid);
+            return RestResult.Parse(context, SQLQuery(
                 $@"SELECT
                     `seat_number`,
                     `row_number`,
-                    `status`
+                    IF(`guid`=@guid AND `status`='reserved', `status`, 'booked') AS `status`
                 FROM booking
                     INNER JOIN reservation USING(bookingid)
                 WHERE screeningid = @screeningid
@@ -60,10 +62,10 @@ public static class BookingRoutes
                     )
                 ORDER BY `seat_number` ASC
                 ;",
-                ReqBodyParse("booking", Obj(new { screeningid })).body,
+                ReqBodyParse("booking", Obj(new { guid, screeningid })).body,
                 context
-            ))
-        );
+            ));
+        });
 
         App.MapPost("/api/finalizeBooking", async (
             HttpContext context, JsonElement bodyJson
@@ -118,7 +120,7 @@ public static class BookingRoutes
             dynamic oreturny = new Obj();
             body.screeningid = screeningid;
             var currUser = Session.Get(context, "user");
-            body.userid = currUser == null ? null : currUser.userid; // session check
+            body.userid = currUser != null && currUser.userid ? currUser.userid : null; // session check
             bool isFirstRes = string.IsNullOrEmpty(body.guid);
             if (isFirstRes == true)
             {
@@ -144,8 +146,8 @@ public static class BookingRoutes
 
             }
 
-
-            result = SQLQueryOne($@"SELECT bookingid, userid, salonid FROM booking
+            result = SQLQueryOne(
+                $@"SELECT bookingid, userid, salonid FROM booking
                     JOIN screening USING(screeningid)
                 WHERE screeningid=@screeningid AND `guid`=@guid AND `status`='reserved';",
                 Obj(new { screeningid = body.screeningid, guid = body.guid }),
@@ -181,53 +183,54 @@ public static class BookingRoutes
                 $@"SELECT seat_number, bookingid
                 FROM reservation
                     JOIN booking USING(bookingid)
-                WHERE screeningid = @screeningid;",
+                WHERE screeningid = @screeningid AND(`status` = 'booked'
+                    OR(`status` = 'reserved' /*AND DATE_ADD(`date`, INTERVAL 15 MINUTE) < NOW()*/)
+                );",
                 Obj(new { screeningid = body.screeningid }),
                 context
             );
             try
             {
-                var selectedSeats = body.seat as Arr;
-                body.selected_seat = (UInt32)selectedSeats[0];
-                Console.WriteLine("salonid " + body.salonid);
-                Console.WriteLine("selectedSeat " + selectedSeats.Count());
-                string seatFound = "";
-                Console.WriteLine("result " + result);
-                if (result.Length > 0)
-                {
-                    foreach (dynamic res in result)
+                var selectedSeats = new List<UInt32>(); // from ui
+                foreach (var seat in body.seat)
+                    selectedSeats.Add((UInt32)seat);
+                var reservedSeats = new List<UInt32>(); // from db
+                Console.WriteLine("count: "+selectedSeats.Count);
+                foreach (dynamic res in result) {
+                    if (res.bookingid == body.bookingid)
                     {
-                        Console.WriteLine(res.seat_number);
-                        if (selectedSeats.Contains(res.seat_number) && body.bookingid == res.bookingid)
-                        {
-                            seatFound = res.seat_number;
-                            continue;
-                        }
-
+                        reservedSeats.Add((UInt32)res.seat_number);
+                    }
+                    else if (selectedSeats.Contains((UInt32)res.seat_number))
+                    {
+                        return RestResult.Parse(context, Obj(new{ error = "Seat already taken" }));
                     }
                 }
-                if (seatFound.Length > 0)
+                Console.WriteLine("test");
+                var seatsNotFound = selectedSeats.Except(reservedSeats); // to insert
+                Console.WriteLine("test2");
+                var seatsFound = reservedSeats.Except(selectedSeats); // to delete
+
+                foreach (var seatNum in seatsFound)
                 {
                     SQLQueryOne(
-                        $@"DELETE FROM reservation WHERE seat_number = @seat_number ABD bookingid = @bookingid",
-                        Obj(new { seat_number = body.seat_number, bookingid = body.bookingid }),
+                        $@"DELETE FROM reservation WHERE seat_number = @seat_number AND bookingid = @bookingid",
+                        Obj(new { seat_number = seatNum, bookingid = body.bookingid }),
                         context
                     );
                 }
-                else
+                foreach (var seatNum in seatsNotFound)
                 {
-                    Console.WriteLine("selectedSeats " + selectedSeats[0]);
-                    result = SQLQueryOne(
+                    SQLQueryOne(
                         $@"INSERT INTO reservation (seat_number, `row_number`, bookingid) VALUES (
                             @seat_number,
                             0,
                             @bookingid
                         );
                         CALL calc_row_number(@salonid, @seat_number, LAST_INSERT_ID());",
-                        Obj(new { seat_number = body.selected_seat, body.salonid, bookingid = body.bookingid }),
+                        Obj(new { seat_number = seatNum, body.salonid, bookingid = body.bookingid }),
                         context
                     );
-                    Console.WriteLine("res " + result);
                 }
                 oreturny.guid = body.guid;
             }

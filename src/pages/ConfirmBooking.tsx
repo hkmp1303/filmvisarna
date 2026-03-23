@@ -11,7 +11,7 @@ import { formatDateIso, formatDay, formatHourMin } from '../utilities/formatDate
 import { displayGenre } from '../utilities/i18n';
 import { getFormEntries } from '../utilities/tools';
 
-export default function ConfirmBooking({user}) {
+export default function ConfirmBooking() {
   const navigate = useNavigate();
   const { guid } = useParams();
   const loading = useRef<boolean>(false);
@@ -19,7 +19,7 @@ export default function ConfirmBooking({user}) {
   const [film, setFilm] = useState<Film>();
   const [screening, setScreening] = useState<Screening>();
   const [status, setStatus] = useState<string>('');
-  const [res, setRes] = useState();
+  const [res, setRes] = useState<Res[]>([]);
   useEffect(() => {
     const getData = async () => {
       loading.current = true;
@@ -81,19 +81,23 @@ export default function ConfirmBooking({user}) {
       data.message ?? alert(data.message);
     });
   };
-  return booking ?? (<article className={css.article}>
+  return booking && (<article className={css.article}>
     <h2 className={css.h2}>{film?.title}</h2>
     <section className={css.section}>
-      <h3 className={css.h3}>Bokningen bekräftad, se e-post.</h3>
+      <h3 className={css.h3}>Tack för din bokning!</h3>
     </section>
-    {booking ?? (
+    {booking && (
       <section className={css.section}>
-      <form onSubmit={handleResendBookingLink} className={css.form}>
-        <input type="hidden" name="guid" value={guid} />
-        <button className={css.button}>Skicka bokningslänk igen</button>
+        <p>
+          <a href={"/confirmbooking/" + guid}>Länk till denna sidan</a>.
+        </p>
+        <form onSubmit={handleResendBookingLink} className={css.form}>
+          <input type="hidden" name="guid" value={guid} />
+          <button className={css.button}>Skicka bokningslänk igen</button>
         </form>
         <form onSubmit={handleCancelBooking} className={css.form}>
           <input type="hidden" name="guid" value={guid} />
+          <button className={css.button}>Avboka bokningen</button>
         </form>
     </section>)}
   </article>);
