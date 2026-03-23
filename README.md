@@ -133,8 +133,8 @@ These artifacts were developed in PetPot and are available in the [docs/agile](d
 ## Documentation
 
 - [Architecture](docs/architecture.md) 
-- [Technical Debt](docs/technical-debt.md)
-- [Planned Work](docs/planned-work.md)
+- [Technical Debt](docs/technical-debt-main.md)
+- [Planned Work](docs/planned-work-main.md)
 
 ## Authors
 This project was developed as a group asssignment.
