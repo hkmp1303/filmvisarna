@@ -48,10 +48,6 @@ public static class BookingRoutes
             HttpContext context, string screeningid, string guid = ""
         ) =>
         {
-<<<<<<< HEAD
-=======
-            Console.WriteLine("guid: " + guid);
->>>>>>> 96ac7f1e58d0474dbd7d2761a022ff9ffe55d5ab
             return RestResult.Parse(context, SQLQuery(
                 $@"SELECT
                     `seat_number`,
@@ -194,18 +190,11 @@ public static class BookingRoutes
             );
             try
             {
-<<<<<<< HEAD
-                // conver Arr<JsonElement> to List<UInt32>
-=======
->>>>>>> 96ac7f1e58d0474dbd7d2761a022ff9ffe55d5ab
+                // convert Arr<JsonElement> to List<UInt32>
                 var selectedSeats = new List<UInt32>(); // from ui
                 foreach (var seat in body.seat)
                     selectedSeats.Add((UInt32)seat);
                 var reservedSeats = new List<UInt32>(); // from db
-<<<<<<< HEAD
-=======
-                Console.WriteLine("count: "+selectedSeats.Count);
->>>>>>> 96ac7f1e58d0474dbd7d2761a022ff9ffe55d5ab
                 foreach (dynamic res in result) {
                     if (res.bookingid == body.bookingid)
                     {
