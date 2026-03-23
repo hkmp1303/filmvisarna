@@ -100,7 +100,8 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   `bookingid` int unsigned NOT NULL,
   PRIMARY KEY (`reservationid`),
   KEY `reservation_booking_idx` (`bookingid`),
-  CONSTRAINT `reservation_booking` FOREIGN KEY (`bookingid`) REFERENCES `booking` (`bookingid`)
+  CONSTRAINT `reservation_booking` FOREIGN KEY (`bookingid`) REFERENCES `booking` (`bookingid`),
+  UNIQUE INDEX `seat_number-bookingid_UNIQUE` (`seat_number`, `bookingid`)
 );
 
 SET FOREIGN_KEY_CHECKS = 1;
