@@ -13,22 +13,32 @@
 }
 
 .h2 {
-
+  @apply text-5xl text-shadow-lg/30;
+  color: var(--font-primary);
 }
 .h3 {
   @apply text-3xl;
+}
+.h4 {
+  @apply text-xl p-2;
 }
 .form {
   @apply inline-block text-center p-10;
   width: 40vw;
 }
 .email {
-  @apply p-1 m-1 text-xl;
+  @apply p-1 m-1 text-2xl;
   border-radius: 18px;
   background-color: var(--input-light-bg);
 }
+.ticket {
+  @apply inline-flex flex-row gap-3 text-2xl justify-center mx-auto pr-4;
+  border: 2px solid var(--dark-primary);
+}
+.qr {
+}
 .button {
-  width: 50%;
+  width: 75%;
   background: radial-gradient(circle, var(--dark-primary) 0%, var(--border-primary) 70%);
   /*#701b85   #660157, #4e023e*/
   color: var(--font-primary);

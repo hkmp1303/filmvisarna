@@ -91,7 +91,7 @@ public static class BookingRoutes
             var body = JSON.Parse(bodyJson.ToString());
             return RestResult.Parse(context,
                 SQLQueryOne(
-                    $@"UPDATE booking SET `status` = 'canceled', total_cost = @total_cost
+                    $@"UPDATE booking SET `status` = 'canceled'
                     WHERE `status` = 'booked' AND `guid` = @guid;",
                     Obj(new { guid = body.guid }),
                 context)

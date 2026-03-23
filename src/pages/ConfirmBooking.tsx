@@ -7,7 +7,7 @@ import type { Film } from '../utilities/filmInterface';
 import type { BriefScreening, Screening } from '../utilities/screeningInterface';
 import type { Salon, Res } from '../utilities/salonInterface';
 import type { BookingFull, Booking }  from '../utilities/bookingInterface';
-import { formatDateIso, formatDay, formatHourMin } from '../utilities/formatDateTime';
+import { formatDateIso, formatDateTime, formatDay, formatHourMin } from '../utilities/formatDateTime';
 import { displayGenre } from '../utilities/i18n';
 import { getFormEntries } from '../utilities/tools';
 
@@ -26,14 +26,16 @@ export default function ConfirmBooking() {
 
       const bookingRes = await fetchJson(`/api/bookingByGuid/${guid}`);
       if (bookingRes.error) throw new Error("Kunde inte ladda bokning.")
-      console.log(bookingRes);
-      //setBooking(bookingRes);
+      setBooking(bookingRes);
       setStatus(bookingRes.status);
 
       const screeningRes = await fetchJson(`/api/screening/${bookingRes.screeningid}`);
       if (screeningRes.error) throw new Error("Kunde inte ladda visning.");
       setScreening(screeningRes);
 
+      const filmRes = await fetchJson(`/api/film/${screeningRes.filmid}`);
+      if (filmRes.error) throw new Error("Kunde inte ladda film.");
+      setFilm(filmRes);
 
       const resRes = await fetchJson(`/api/reservedSeatRes/${guid}`);
       if (resRes.error) throw new Error("Kunde inte ladda reserverationer.");
@@ -78,27 +80,38 @@ export default function ConfirmBooking() {
       if (!res.ok) throw new Error("Kunde inte avbryta bokning.");
       return res.json();
     }).then((data) => {
-      data.message ?? alert(data.message);
+      data.message && alert(data.message);
     });
   };
   return booking && (<article className={css.article}>
     <h2 className={css.h2}>{film?.title}</h2>
+    {booking.status == 'booked' && (<section className={css.section}>
+      <h3 className={css.h3}>Tack för din bokning!<br />Välkommen till oss {formatDateTime(screening?.start)}</h3>
+    </section>)}
     <section className={css.section}>
-      <h3 className={css.h3}>Tack för din bokning!</h3>
+      <p>
+        <a href={"/confirmbooking/" + guid}>Länk till denna sidan</a>.
+      </p>
+      <form onSubmit={handleResendBookingLink} className={css.form}>
+        <input type="hidden" name="guid" value={guid} />
+        <button className={css.button}>Skicka bokningslänk igen</button>
+      </form>
     </section>
-    {booking && (
-      <section className={css.section}>
-        <p>
-          <a href={"/confirmbooking/" + guid}>Länk till denna sidan</a>.
-        </p>
-        <form onSubmit={handleResendBookingLink} className={css.form}>
-          <input type="hidden" name="guid" value={guid} />
-          <button className={css.button}>Skicka bokningslänk igen</button>
-        </form>
+    {booking.status == 'booked' && (<section className={css.section}>
+      <h4 className={css.h4}>Dina biljetter, visa vid dörren.</h4>
+      {res.map((r: Res) => (
+      <div className={css.ticket}>
+        <img src={"https://quickchart.io/qr?text=" + guid} alt="QR-kod" className={css.qr} />
+          <div><b>Plats:</b> {r.seat_number}, <b>Rad:</b> {r.row_number}<br />
+            <b>Bokningsnummer:</b><br />{guid}</div>
+      </div>))}
+    </section>)}
+    <section className={css.section}>
+      {booking.status == 'booked' ? (
         <form onSubmit={handleCancelBooking} className={css.form}>
           <input type="hidden" name="guid" value={guid} />
           <button className={css.button}>Avboka bokningen</button>
-        </form>
-    </section>)}
+        </form>) : (<h3 className={css.h3}>Bokningen är Avbokad.</h3>)}
+    </section>
   </article>);
 }
