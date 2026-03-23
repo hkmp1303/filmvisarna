@@ -1,11 +1,17 @@
 Set FOREIGN_KEY_CHECKS = 0;
 
 INSERT IGNORE INTO user (userid, firstname, lastname, email, password, phone, phone_consent, data_consent, request_delete, request_pass, role) VALUES
+/* pass:  */
 (1,'Mary','Poppins','aspoonfull@sugar.com','m3dicin3','+4670433223344','2026-01-12 09:14:00','2026-01-12 09:15:10',NULL,NULL,'member'),
+/* pass:  */
 (2,'Natasha','Romanoff','nromanoff@shield.gov','blackwid0w','+467045558899','2026-04-02 11:20:00','2026-04-02 11:20:00','2026-01-08 16:42:00',NULL,'member'),
+/* pass:  */
 (3,'Alicia','Vikander','avikander@film.se','exmachina','+46703334455','2026-01-28 14:03:00','2026-01-28 14:03:00',NULL,NULL,'member'),
+/* pass:  */
 (4,'Noomi','Rapace','nrapace@millennium.se','lisbeth','46701112233','2026-02-05 11:30:00','2026-02-05 11:30:00',NULL,NULL,'staff'),
+/* pass:  */
 (5,'Stellan','Skarsgard','sskarsgard@cinema.se','chern0byl','+46702223344','2026-02-18 08:55:00','2026-02-18 08:55:00',NULL,NULL,'staff'),
+/* pass:  */
 (6,'Max','vonSydow','mvonsydow@bergman.se','seventhseal','+46704445566','2026-03-01 10:00:00','2026-03-01 10:00:00',NULL,NULL,'staff');
 
 INSERT IGNORE INTO price (priceid, price, type) VALUES
