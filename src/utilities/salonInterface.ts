@@ -9,4 +9,5 @@ export interface Salon {
 export interface Res {
   seat_number: number;
   row_number: number;
+  status: 'booked' | 'reserved' | 'canceled' | string;
 }
