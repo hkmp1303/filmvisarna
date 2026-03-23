@@ -27,7 +27,30 @@ The cinema offers showings four times a day in each of their two salons. The com
 
 ### **Functional Requirements**
 
-- [] Login authorization (User account)
+- [x] wireframe - views/pages, headers, footers and menu system
+- [x] mockup - shows layout, color schema, font, click-results including pages/views via Figma or similar (mobile, web, tablet)
+- [x] Display seat configuration
+- [x] Update and display seat status for the user
+- [x] Display film details - image, trailer, summary, actors, director etc.
+- [x] Choose desired seats during booking
+- [x] Prevent double booking of seats
+- [x] Booking summary which includes - seat number, film title, date, time and unique booking number
+- [x] Booking summary sent to email
+- [ ] Persistent booking data available to staff for booking confirmation at admission
+- [x] Price variation for seniors, children and adults
+- [x] Filter film showings by date
+- [x] Filter films by viewer discretion rating
+- [x] Cancel a future booking
+- [x] Self registration for new accounts
+- [x] Login for registered accounts
+- [x] Current bookings and booking history for registered accounts
+- [x] Prototype with 5 films and at least 30 screenings for 2 salons
+- [x] All views have their own unquie URL/route - to allow for sharing and bookmarking links
+- [x] All information is in provided in Swedish, language and prices are formatted according to Swedish standards
+- [ ] Website is responsive and well functioning
+- [ ] Core functionality includes cookie usage tracking: login session cookie, favorite or sharing pages and consent by user
+- [x] AI assistent that can provide information including - open hours, price, kiosk, how to book, salons size, film screenings and help with website 	navigation
+
 
 ## � How to Run
 
