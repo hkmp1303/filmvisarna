@@ -71,7 +71,7 @@ export default function MovieDetails() {
                         //<label htmlFor="screening">Visning</label>
                         <select id="screening" value={screeningid} onChange={(e) => setDate(e.target.value)} required>
                             <option value="">Välj en tid</option>
-                            {screenings.map((s: BriefScreening, index) => (
+                            {screenings.map((s: BriefScreening, index: number) => (
                                 <option key={index} value={s.screeningid}>
                                     {formatDateTime(s.start)} - Salong {s.room_number}
                                 </option>
@@ -95,7 +95,7 @@ export default function MovieDetails() {
                         <p>{film.details.director}</p></>)}
                     {film.details && film.details.actor  && film.details.actor.length > 0 && (<>
                     <h3>Skådespelare:</h3>
-                        {film.details.actor.map((a: Actor) => (<p>{a.name}</p>))}</>)}
+                        {film.details.actor.map((a: Actor, index: number) => (<p key={'actor_'+index}>{a.name}</p>))}</>)}
                     <h3>Språk:</h3>
                     <p>{film.language}</p>
                     <h3>Undertext:</h3>
