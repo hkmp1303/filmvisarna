@@ -107,8 +107,8 @@ export default function ConfirmBooking() {
     </section>
     {booking.status == 'booked' && (<section className={css.section}>
       <h4 className={css.h4}>Dina biljetter, visa vid dörren.</h4>
-      {res.map((r: Res) => (
-      <div className={css.ticket}>
+      {res.map((r: Res, index: number) => (
+        <div key={"ticket_" + index} className={css.ticket}>
         <img src={"https://quickchart.io/qr?text=" + guid} alt="QR-kod" className={css.qr} />
           <div><b>Plats:</b> {r.seat_number}, <b>Rad:</b> {r.row_number}<br />
             <b>Bokningsnummer:</b><br />{guid}</div>

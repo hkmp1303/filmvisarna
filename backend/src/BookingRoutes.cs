@@ -119,7 +119,7 @@ public static class BookingRoutes
             dynamic oreturny = new Obj();
             body.screeningid = screeningid;
             var currUser = Session.Get(context, "user");
-            body.userid = currUser != null && currUser.userid ? currUser.userid : null; // session check
+            body.userid = currUser == null ? null : currUser.userid; // session check
             bool isFirstRes = string.IsNullOrEmpty(body.guid);
             if (isFirstRes == true)
             {
