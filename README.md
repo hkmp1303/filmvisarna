@@ -136,6 +136,14 @@ These artifacts were developed in PetPot and are available in the [docs/agile](d
 - [Technical Debt](docs/technical-debt-main.md)
 - [Planned Work](docs/planned-work-main.md)
 
+### Alternate versions
+
+Versions of the project which meets additional funtional requirements of the booking system can be accessed via the branches below.
+- Fully working booking system which was finalized after the project presentation.
+  - [bookingreservations](../bookingreservations)
+- AI solution generated from the code which was in the main branch at the time. 
+  - [trailsolo](../trailsolo)
+
 ## Authors
 This project was developed as a group asssignment.
 - Heather
