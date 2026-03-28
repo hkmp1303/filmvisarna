@@ -142,9 +142,9 @@ Documentation differs by branch (main, bookingreservations and trailsolo).
 
 Versions of the project which meet additional functional requirements of the booking system can be accessed via the branches below.
 - Fully working booking system which was finalized after the project presentation. Includes updated README and Documentation files.
-  - [bookingreservations](../bookingreservations)
+  - [bookingreservations](../../tree/bookingreservations)
 - AI solution generated from the code which was in the main branch at the time of the project presentation. 
-  - [trailsolo](../trailsolo)
+  - [trailsolo](../../tree/trailsolo)
 
 ## Authors
 This project was developed as a group assignment.
