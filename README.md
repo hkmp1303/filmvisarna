@@ -1,7 +1,7 @@
 ### Filmvisarna
-A project for the fictive company Filmvisarna AB which is a samll, local cinema. The project frontend is written in TypeScript, the backend in C# featuring session based authentication and MySQL data storage.
+A project for the fictive company Filmvisarna AB which is a small, local cinema. The project frontend is written in TypeScript, the backend in C# featuring session based authentication and MySQL data storage.
 
-The cinema offers showings four times a day in each of their two salons. The company's initial requests include displaying movie and screening information including screening dates, times and movie trailers. Site visitors can booking tickets online and recieve a confrimation which includes seat number and row, total cost and booking number.
+The cinema offers showings four times a day in each of their two salons. The company's initial requests include displaying movie and screening information such as screening dates, times and movie trailers. Site visitors can book tickets online and recieve a confrimation which includes seat and row number, total cost and booking number.
 
 
 ## Technology stack
@@ -75,7 +75,7 @@ Configure the database connection string in `backend/db-config.json`. For initia
 ![EER Diagram](docs/Diagram75.png)
 
 ### Database Setup
-While in MySQLWorkbench, open the setup.sql, data.ddl and data.sql files from the project folder. Select "View all file types" to ensure the data.ddl file is visible. Run the SQL scripts in the order:
+While in MySQLWorkbench, open the setup.sql, data.ddl and data.sql files from the project folder. Select "View all file types" to ensure the data.ddl file is visible. Run the SQL scripts in the following order:
 - [setup.sql](setup.sql)
 - [backend/data.ddl](backend/data.ddl)
 - [backend/data.sql](backend/data.sql)
@@ -92,8 +92,6 @@ Frontend requests with paths that start with `http://localhost:5173/api/*` will 
 ### Key Endpoints
 
 A Postman collection for this project can be found at this [link](https://heather-p-4407471.postman.co/workspace/heather-p's-Workspace~1044ea2e-896e-41da-83f4-6e11bd4ffb6c/collection/50645716-e710b040-056e-417b-8351-df3e268012e1?action=share&creator=50645716). You may need to request permission to view the collection.
-
-
 
 ## Authentication
 
@@ -118,7 +116,7 @@ This project is intended for educational purposes. Error handling and security a
 
 ## Development Process
 
-The project was developed using an Agile approach. Group members recieved user stories prioritized from a product owner's perspective by our instructor. Requirements were then defined as a backlog and implemented iteratively. Core function was prioritized while additional features were planned but not fully implemented within the project timeframe. Task tracking was managed using Projects via Github. The Kanban board can be accessed [here](https://github.com/users/hkmp1303/projects/5/views/1).
+The project was developed using an Agile approach. Group members recieved user stories prioritized from a product owner's perspective by our instructor. Requirements were then defined as backlog items and implemented iteratively. Core function was prioritized while additional features were planned but not fully implemented within the project timeframe. Task tracking was managed using Projects via Github. The Kanban board can be accessed [here](https://github.com/users/hkmp1303/projects/5/views/1).
 
 ## Agile Artifacts
 
@@ -133,6 +131,17 @@ These artifacts were developed in PetPot and are available in the [docs/agile](d
 - [Architecture](docs/architecture.md)
 - [Technical Debt](docs/technical-debt.md)
 - [Planned Work](docs/planned-work.md)
+
+Documentation differs by branch (main, bookingreservations and trailsolo).
+
+## Alternate versions
+
+Versions of the project which meet additional functional requirements of the booking system can be accessed via the branches below.
+
+- Fully working booking system which was finalized after the project presentation. Includes updated README and Documentation files.
+  - [bookingreservations](../../tree/bookingreservations)
+- AI solution generated from the code which was in the main branch at the time of the project presentation.
+  - [trailsolo](../../tree/trailsolo)
 
 ## Authors
 This project was developed as a group asssignment.
